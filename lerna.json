@@ -9,6 +9,9 @@
     },
     "bootstrap": {
       "hoist": true
+    },
+    "run": {
+      "npmClient": "yarn"
     }
   }
 }

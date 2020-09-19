@@ -2,7 +2,9 @@
   "name": "@muniz/cli",
   "version": "0.0.0",
   "description": "muniz脚手架,核心插件,命令行工具,可扩展插件模型",
-  "bin": "./bin/cli.js",
+  "bin": {
+    "muniz": "./dist/bin/cli.js"
+  },
   "keywords": [
     "@muniz/cli"
   ],
@@ -21,6 +23,13 @@
     "access": "public"
   },
   "scripts": {
+    "dev": "babel --root-mode upward src --out-dir dist",
     "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "@muniz/muniz-plugin-i18n": "^0.0.0"
+  },
+  "devDependencies": {
+    "@muniz/muniz-plugin-i18n": "^0.0.0"
   }
 }
