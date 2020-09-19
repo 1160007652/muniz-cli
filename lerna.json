@@ -1,0 +1,14 @@
+{
+  "version": "0.0.0",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "packages": ["packages/@muniz/cli*", "packages/@muniz/muniz-plugin*"],
+  "command": {
+    "publish": {
+      "ignoreChanges": ["ignored-file", "*.md"]
+    },
+    "bootstrap": {
+      "hoist": true
+    }
+  }
+}

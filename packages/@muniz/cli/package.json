@@ -1,0 +1,26 @@
+{
+  "name": "@muniz/cli",
+  "version": "0.0.0",
+  "description": "muniz脚手架,核心插件,命令行工具,可扩展插件模型",
+  "bin": "./bin/cli.js",
+  "keywords": [
+    "@muniz/cli"
+  ],
+  "author": "1160007652 <1160007652@qq.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/cli.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  }
+}
