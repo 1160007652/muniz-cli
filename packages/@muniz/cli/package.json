@@ -27,6 +27,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
+    "@muniz/muniz-plugin-create": "^0.0.0",
     "@muniz/muniz-plugin-i18n": "^0.0.0",
     "ink": "^3.0.6",
     "meow": "^7.1.1",
