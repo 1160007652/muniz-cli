@@ -5,3 +5,4 @@ module.exports = function (api) {
     plugins: ['@babel/plugin-transform-runtime'],
   };
 };
+// , '@babel/plugin-syntax-top-level-await'

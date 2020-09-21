@@ -31,9 +31,11 @@
     "@muniz/muniz-plugin-i18n": "^0.0.0",
     "ink": "^3.0.6",
     "meow": "^7.1.1",
-    "react": "^16.13.1"
+    "react": "^16.13.1",
+    "react-router": "^5.2.0"
   },
   "devDependencies": {
-    "@muniz/muniz-plugin-i18n": "^0.0.0"
+    "@muniz/muniz-plugin-i18n": "^0.0.0",
+    "minimist": "^1.2.5"
   }
 }

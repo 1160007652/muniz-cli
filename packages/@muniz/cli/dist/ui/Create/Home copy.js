@@ -7,9 +7,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _cliHelp = _interopRequireDefault(require("./cliHelp"));
+var _react = _interopRequireDefault(require("react"));
 
-var _default = {
-  cliHelp: _cliHelp["default"]
+var _ink = require("ink");
+
+var Home = function Home() {
+  return /*#__PURE__*/_react["default"].createElement(_ink.Text, null, "\u9996\u9875");
 };
+
+var _default = Home;
 exports["default"] = _default;

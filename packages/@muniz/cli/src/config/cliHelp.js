@@ -1,4 +1,4 @@
-export default {
+export const cliHelp = {
   header: 'muniz脚手架, 基于插件机制开发, 自成一套体系',
   footer: '底部描述',
   usages: [{ command: '$ muniz <command> [options] ', desc: '' }],
