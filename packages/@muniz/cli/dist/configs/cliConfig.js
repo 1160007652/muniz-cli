@@ -3,14 +3,15 @@
 Object.defineProperty(exports, '__esModule', {
   value: true,
 });
-exports.cliHelp = exports.cliOptions = void 0;
+exports.help = exports.options = void 0;
 
 /** 导出 cli 属性 */
-var cliOptions = {
-  name: {
-    type: 'string',
-    alias: 'n',
-    default: 'zhipan',
+var options = {
+  isGit: {
+    type: 'boolean',
+    alias: 'g',
+    default: true,
+    desc: '是否初始化Git',
   },
   isOpen: {
     type: 'boolean',
@@ -18,8 +19,8 @@ var cliOptions = {
 };
 /** 导出 cli 帮助文档 */
 
-exports.cliOptions = cliOptions;
-var cliHelp = {
+exports.options = options;
+var help = {
   header: 'muniz脚手架, 基于插件机制开发, 自成一套体系',
   footer: '底部描述',
   usages: [
@@ -36,12 +37,6 @@ var cliHelp = {
     {
       command: '$ add    <name> ',
       desc: '添加插件',
-    },
-  ],
-  options: [
-    {
-      command: '--name ',
-      desc: '属性',
     },
   ],
   otherOptions: [
@@ -61,4 +56,4 @@ var cliHelp = {
     },
   ],
 };
-exports.cliHelp = cliHelp;
+exports.help = help;

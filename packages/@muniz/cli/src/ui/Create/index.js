@@ -1,27 +1,36 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Text } from 'ink';
-import { MemoryRouter, StaticRouter, Route, Switch } from 'react-router';
+import { StaticRouter, Route, Switch } from 'react-router';
 
-import { default as Home } from './Home';
 import { default as Create1 } from './Create';
+import { default as UI_Help } from '../Help';
 
 const Create = (context) => {
-  const { program } = context;
+  const { program, help, isInternalCommand } = context;
   const { input, flags } = program;
-  console.log(flags);
+  let DynamicCommandUI = null;
 
-  const command = input.length > 0 ? input[0] : 'help';
+  let command = input.length > 0 ? input.join('/') : 'help';
 
+  if (flags?.help) {
+    command = 'help';
+  } else if (!isInternalCommand) {
+    DynamicCommandUI = require(`@muniz/muniz-plugin-${command.split('/')[0]}`).default[
+      input.length > 1 ? input[1] : 'default'
+    ];
+  }
   return (
     <StaticRouter location={{ pathname: command, state: flags }} context={context}>
       <Switch>
-        <Route exact path="help" component={Home} />
-        <Route path="create" component={Create1} />
+        <Route exact path="help">
+          <UI_Help data={help} />
+        </Route>
+        <Route path="add" component={Create1} />
+        <Route path={command}>{DynamicCommandUI && <DynamicCommandUI />}</Route>
       </Switch>
     </StaticRouter>
   );
-  // return <Text color="green">插件中</Text>;
 };
 
 Create.propTypes = {

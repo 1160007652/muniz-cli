@@ -38,6 +38,7 @@ const Help = ({ data }) => {
           <Text>{footer}</Text>
         </Box>
       )}
+      <Spacer />
     </Box>
   );
 };

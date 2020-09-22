@@ -7,8 +7,10 @@ import meow from 'meow';
 import minimist from 'minimist';
 
 import { command, installCommand } from '../constants/useCommand';
-import { config } from '../config';
+import { default as config } from '../configs';
+import { cleanOptions } from '../lib/cleanOptions';
 
+/** 导出模块, 方便 与 其他 plugin 插件 处理机制一致 */
 export default {
   config,
 };
@@ -21,29 +23,37 @@ const _argv = minimist(process.argv.slice(2));
 const isInternalCommand = [...command, undefined].includes(_argv._[0]);
 
 // 取 Cli 命令包
-const packagePath = isInternalCommand ? '@muniz/cli' : `@muniz/muniz-plugin-${_argv._[0]}`;
+let packagePath = '@muniz/cli';
 
-const packageConfig = isInternalCommand ? module.exports.default : require(packagePath).default;
+if (!isInternalCommand) {
+  const _tempPkgPath = `@muniz/muniz-plugin-${_argv._[0]}`;
+  try {
+    require(_tempPkgPath);
+    packagePath = _tempPkgPath;
+  } catch {
+    console.log('插件不存在');
+    process.exit();
+  }
+}
 
-console.log(packageConfig);
+const { config: packageConfig } = isInternalCommand ? module.exports.default : require(packagePath).default;
+
+// console.log(packageConfig);
+const { cliConfig } = packageConfig;
+
+// 重新生成帮助文档
+const help = { ...cliConfig.help, options: cleanOptions(cliConfig.options) };
 
 const program = meow({
-  flags: {
-    name: {
-      type: 'string',
-      alias: 'n',
-      default: 'zhipan',
-    },
-    isOpen: {
-      type: 'boolean',
-    },
-  },
+  flags: cliConfig.options,
   autoHelp: false,
   autoVersion: false,
 });
 
 const context = {
   program,
+  help,
+  isInternalCommand,
 };
 
 render(React.createElement(UI_Create, context));
