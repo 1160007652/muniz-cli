@@ -5,6 +5,7 @@ import { StaticRouter, Route, Switch } from 'react-router';
 
 import { default as UI_Add } from '../Add';
 import { default as UI_Help } from '../Help';
+import { default as UI_Version } from '../Version';
 
 const Create = (context) => {
   const { program, help, isInternalCommand } = context;
@@ -15,6 +16,8 @@ const Create = (context) => {
 
   if (flags?.help) {
     command = 'help';
+  } else if (flags?.version) {
+    command = 'version';
   } else if (!isInternalCommand) {
     DynamicCommandUI = require(`@muniz/muniz-plugin-${command.split('/')[0]}`).default[
       input.length > 1 ? input[1] : 'default'
@@ -25,6 +28,9 @@ const Create = (context) => {
       <Switch>
         <Route exact path="help">
           <UI_Help data={help} />
+        </Route>
+        <Route path="version">
+          <UI_Version data={{ version: '0.0.0' }}></UI_Version>
         </Route>
         <Route path="add" component={UI_Add} />
         <Route path={command}>{DynamicCommandUI && <DynamicCommandUI />}</Route>

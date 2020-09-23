@@ -5,5 +5,5 @@ import { default as update } from './ui/Update';
 export default {
   config,
   update,
-  default: create,
+  default: create, // 默认执行的命令
 };

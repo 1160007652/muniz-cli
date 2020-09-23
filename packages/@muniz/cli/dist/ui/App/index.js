@@ -21,6 +21,8 @@ var _Add = _interopRequireDefault(require("../Add"));
 
 var _Help = _interopRequireDefault(require("../Help"));
 
+var _Version = _interopRequireDefault(require("../Version"));
+
 var Create = function Create(context) {
   var program = context.program,
       help = context.help,
@@ -32,6 +34,8 @@ var Create = function Create(context) {
 
   if (flags === null || flags === void 0 ? void 0 : flags.help) {
     command = 'help';
+  } else if (flags === null || flags === void 0 ? void 0 : flags.version) {
+    command = 'version';
   } else if (!isInternalCommand) {
     DynamicCommandUI = require("@muniz/muniz-plugin-".concat(command.split('/')[0]))["default"][input.length > 1 ? input[1] : 'default'];
   }
@@ -47,6 +51,12 @@ var Create = function Create(context) {
     path: "help"
   }, /*#__PURE__*/_react["default"].createElement(_Help["default"], {
     data: help
+  })), /*#__PURE__*/_react["default"].createElement(_reactRouter.Route, {
+    path: "version"
+  }, /*#__PURE__*/_react["default"].createElement(_Version["default"], {
+    data: {
+      version: '0.0.0'
+    }
   })), /*#__PURE__*/_react["default"].createElement(_reactRouter.Route, {
     path: "add",
     component: _Add["default"]

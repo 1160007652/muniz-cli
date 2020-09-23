@@ -16,6 +16,7 @@ var _Update = _interopRequireDefault(require("./ui/Update"));
 var _default = {
   config: _configs["default"],
   update: _Update["default"],
-  "default": _Create["default"]
+  "default": _Create["default"] // 默认执行的命令
+
 };
 exports["default"] = _default;
