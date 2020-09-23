@@ -57,7 +57,7 @@ yarn link /* 执行link 功能, 挂载到 bin 执行环境中 */
 > 作用：通过执行以下命令，内部调用 nodemon 监听文件变化 实时转换代码。
 
 ```js
-lerna run dev /* 在 lerna 工程根目录运行 */
+yarn start /* 在 lerna 工程根目录运行 */
 ```
 
 ### 测试
