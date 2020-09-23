@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Text } from 'ink';
 import { StaticRouter, Route, Switch } from 'react-router';
 
-import { default as Create1 } from './Create';
+import { default as UI_Add } from '../Add';
 import { default as UI_Help } from '../Help';
 
 const Create = (context) => {
@@ -26,7 +26,7 @@ const Create = (context) => {
         <Route exact path="help">
           <UI_Help data={help} />
         </Route>
-        <Route path="add" component={Create1} />
+        <Route path="add" component={UI_Add} />
         <Route path={command}>{DynamicCommandUI && <DynamicCommandUI />}</Route>
       </Switch>
     </StaticRouter>

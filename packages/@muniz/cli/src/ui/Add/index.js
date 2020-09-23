@@ -9,7 +9,7 @@ const Home = () => {
   let match = useRouteMatch();
   console.log(location, params, match);
 
-  return <Text>首页</Text>;
+  return <Text>添加插件命令</Text>;
 };
 
 export default Home;

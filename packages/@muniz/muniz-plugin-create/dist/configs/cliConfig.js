@@ -28,10 +28,13 @@ var help = {
     command: '$ create <name> ',
     desc: '创建项目工程'
   }],
-  // otherOptions: [
-  //   { command: '-h, --help ', desc: '显示帮助文档' },
-  //   { command: '-v, --version ', desc: '显示版本号' },
-  // ],
+  otherOptions: [{
+    command: '-h, --help ',
+    desc: '显示帮助文档'
+  }, {
+    command: '-v, --version ',
+    desc: '显示版本号'
+  }],
   examples: [{
     command: '$ create pc_test ',
     desc: '创建一个 pc_test 项目工程 '

@@ -1,5 +1,5 @@
 'use strict';
 
 export default () => {
-  console.log('创建 项目工程');
+  console.log('被依赖的公用目录');
 };

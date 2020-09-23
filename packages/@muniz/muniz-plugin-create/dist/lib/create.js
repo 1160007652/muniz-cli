@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports["default"] = void 0;
 
 var _default = function _default() {
-  console.log('创建 项目工程');
+  console.log('被依赖的公用目录');
 };
 
 exports["default"] = _default;

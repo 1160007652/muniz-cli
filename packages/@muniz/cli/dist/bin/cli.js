@@ -20,13 +20,13 @@ var _meow = _interopRequireDefault(require("meow"));
 
 var _minimist = _interopRequireDefault(require("minimist"));
 
+var _ui = require("../ui");
+
 var _useCommand = require("../constants/useCommand");
 
 var _configs = _interopRequireDefault(require("../configs"));
 
 var _cleanOptions = require("../lib/cleanOptions");
-
-var _ui = require("../ui");
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -78,4 +78,4 @@ var context = {
   help: help,
   isInternalCommand: isInternalCommand
 };
-(0, _ink.render)( /*#__PURE__*/_react["default"].createElement(_ui.UI_Create, context));
+(0, _ink.render)( /*#__PURE__*/_react["default"].createElement(_ui.UI_APP, context));

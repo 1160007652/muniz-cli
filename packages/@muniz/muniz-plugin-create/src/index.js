@@ -1,10 +1,9 @@
 import { default as config } from './configs';
-import { default as create1 } from './ui/Create';
-import { default as ad } from './ui/Ad';
+import { default as create } from './ui/Create';
+import { default as update } from './ui/Update';
 
 export default {
   config,
-  ad,
-  create1,
-  default: ad,
+  update,
+  default: create,
 };

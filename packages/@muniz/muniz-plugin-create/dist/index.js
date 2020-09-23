@@ -11,12 +11,11 @@ var _configs = _interopRequireDefault(require("./configs"));
 
 var _Create = _interopRequireDefault(require("./ui/Create"));
 
-var _Ad = _interopRequireDefault(require("./ui/Ad"));
+var _Update = _interopRequireDefault(require("./ui/Update"));
 
 var _default = {
   config: _configs["default"],
-  ad: _Ad["default"],
-  create1: _Create["default"],
-  "default": _Ad["default"]
+  update: _Update["default"],
+  "default": _Create["default"]
 };
 exports["default"] = _default;

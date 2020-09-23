@@ -6,6 +6,7 @@ import { render } from 'ink';
 import meow from 'meow';
 import minimist from 'minimist';
 
+import { UI_APP } from '../ui';
 import { command, installCommand } from '../constants/useCommand';
 import { default as config } from '../configs';
 import { cleanOptions } from '../lib/cleanOptions';
@@ -14,8 +15,6 @@ import { cleanOptions } from '../lib/cleanOptions';
 export default {
   config,
 };
-
-import { UI_Create } from '../ui';
 
 const _argv = minimist(process.argv.slice(2));
 
@@ -56,4 +55,4 @@ const context = {
   isInternalCommand,
 };
 
-render(React.createElement(UI_Create, context));
+render(React.createElement(UI_APP, context));
