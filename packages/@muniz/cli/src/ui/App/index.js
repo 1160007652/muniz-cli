@@ -8,15 +8,15 @@ import { default as UI_Help } from '../Help';
 import { default as UI_Version } from '../Version';
 
 const Create = (context) => {
-  const { program, help, isInternalCommand } = context;
+  const { program, help, version, isInternalCommand } = context;
   const { input, flags } = program;
   let DynamicCommandUI = null;
 
   let command = input.length > 0 ? input.join('/') : 'help';
 
-  if (flags?.help) {
+  if (flags?.help || flags?.h) {
     command = 'help';
-  } else if (flags?.version) {
+  } else if (flags?.version || flags?.v) {
     command = 'version';
   } else if (!isInternalCommand) {
     DynamicCommandUI = require(`@muniz/muniz-plugin-${command.split('/')[0]}`).default[
@@ -30,7 +30,7 @@ const Create = (context) => {
           <UI_Help data={help} />
         </Route>
         <Route path="version">
-          <UI_Version data={{ version: '0.0.0' }}></UI_Version>
+          <UI_Version data={version} />
         </Route>
         <Route path="add" component={UI_Add} />
         <Route path={command}>{DynamicCommandUI && <DynamicCommandUI />}</Route>

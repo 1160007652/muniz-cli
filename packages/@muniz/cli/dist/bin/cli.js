@@ -43,31 +43,48 @@ var _argv = (0, _minimist["default"])(process.argv.slice(2)); // 是否是内置
 
 var isInternalCommand = [].concat((0, _toConsumableArray2["default"])(_useCommand.command), [undefined]).includes(_argv._[0]); // 取 Cli 命令包
 
-var packagePath = '@muniz/cli';
+var packageName = '@muniz/cli'; // 取 CLi 包的路径 ， 如 xxx/xxx/@muniz/cli  || xxx/xxx/@muniz/muniz-plugin-xxx
+
+var packageJsonPath = __filename.replace(new RegExp('(@muniz/cli)/.*$', 'ig'), function (_, c) {
+  return c;
+});
 
 if (!isInternalCommand) {
   var _tempPkgPath = "@muniz/muniz-plugin-".concat(_argv._[0]);
 
   try {
-    require(_tempPkgPath);
+    var _tempPkgJsonPath = require.resolve(_tempPkgPath);
 
-    packagePath = _tempPkgPath;
+    packageName = _tempPkgPath;
+    packageJsonPath = _tempPkgJsonPath.replace(new RegExp("(".concat(_tempPkgPath, ")/.*$"), 'ig'), function (_, c) {
+      return c;
+    });
   } catch (_unused) {
     console.log('插件不存在');
     process.exit();
   }
 }
 
-var _ref = isInternalCommand ? module.exports["default"] : require(packagePath)["default"],
+var _ref = isInternalCommand ? module.exports["default"] : require(packageName)["default"],
     packageConfig = _ref.config; // console.log(packageConfig);
 
 
-var cliConfig = packageConfig.cliConfig; // 重新生成帮助文档
+var cliConfig = packageConfig.cliConfig;
+
+var packageJsonInfo = require("".concat(packageJsonPath, "/package.json")); // 重新生成帮助文档
+
 
 var help = _objectSpread(_objectSpread({}, cliConfig.help), {}, {
   options: (0, _cleanOptions.cleanOptions)(cliConfig.options)
-});
+}); // 重新生成版本号
+//
 
+
+var version = {
+  version: packageJsonInfo.version,
+  author: packageJsonInfo.author,
+  name: packageJsonInfo.name
+};
 var program = (0, _meow["default"])({
   flags: cliConfig.options,
   autoHelp: false,
@@ -76,6 +93,9 @@ var program = (0, _meow["default"])({
 var context = {
   program: program,
   help: help,
-  isInternalCommand: isInternalCommand
+  version: version,
+  isInternalCommand: isInternalCommand,
+  packageJsonPath: packageJsonPath,
+  packageJsonInfo: packageJsonInfo
 };
 (0, _ink.render)( /*#__PURE__*/_react["default"].createElement(_ui.UI_APP, context));

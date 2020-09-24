@@ -22,26 +22,33 @@ const _argv = minimist(process.argv.slice(2));
 const isInternalCommand = [...command, undefined].includes(_argv._[0]);
 
 // 取 Cli 命令包
-let packagePath = '@muniz/cli';
+let packageName = '@muniz/cli';
+// 取 CLi 包的路径 ， 如 xxx/xxx/@muniz/cli  || xxx/xxx/@muniz/muniz-plugin-xxx
+let packageJsonPath = __filename.replace(new RegExp('(@muniz/cli)/.*$', 'ig'), (_, c) => c);
 
 if (!isInternalCommand) {
   const _tempPkgPath = `@muniz/muniz-plugin-${_argv._[0]}`;
+
   try {
-    require(_tempPkgPath);
-    packagePath = _tempPkgPath;
+    const _tempPkgJsonPath = require.resolve(_tempPkgPath);
+    packageName = _tempPkgPath;
+    packageJsonPath = _tempPkgJsonPath.replace(new RegExp(`(${_tempPkgPath})/.*$`, 'ig'), (_, c) => c);
   } catch {
     console.log('插件不存在');
     process.exit();
   }
 }
 
-const { config: packageConfig } = isInternalCommand ? module.exports.default : require(packagePath).default;
+const { config: packageConfig } = isInternalCommand ? module.exports.default : require(packageName).default;
 
 // console.log(packageConfig);
 const { cliConfig } = packageConfig;
-
+const packageJsonInfo = require(`${packageJsonPath}/package.json`);
 // 重新生成帮助文档
 const help = { ...cliConfig.help, options: cleanOptions(cliConfig.options) };
+// 重新生成版本号
+//
+const version = { version: packageJsonInfo.version, author: packageJsonInfo.author, name: packageJsonInfo.name };
 
 const program = meow({
   flags: cliConfig.options,
@@ -52,7 +59,10 @@ const program = meow({
 const context = {
   program,
   help,
+  version,
   isInternalCommand,
+  packageJsonPath,
+  packageJsonInfo,
 };
 
 render(React.createElement(UI_APP, context));

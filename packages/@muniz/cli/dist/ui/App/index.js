@@ -26,15 +26,16 @@ var _Version = _interopRequireDefault(require("../Version"));
 var Create = function Create(context) {
   var program = context.program,
       help = context.help,
+      version = context.version,
       isInternalCommand = context.isInternalCommand;
   var input = program.input,
       flags = program.flags;
   var DynamicCommandUI = null;
   var command = input.length > 0 ? input.join('/') : 'help';
 
-  if (flags === null || flags === void 0 ? void 0 : flags.help) {
+  if ((flags === null || flags === void 0 ? void 0 : flags.help) || (flags === null || flags === void 0 ? void 0 : flags.h)) {
     command = 'help';
-  } else if (flags === null || flags === void 0 ? void 0 : flags.version) {
+  } else if ((flags === null || flags === void 0 ? void 0 : flags.version) || (flags === null || flags === void 0 ? void 0 : flags.v)) {
     command = 'version';
   } else if (!isInternalCommand) {
     DynamicCommandUI = require("@muniz/muniz-plugin-".concat(command.split('/')[0]))["default"][input.length > 1 ? input[1] : 'default'];
@@ -54,9 +55,7 @@ var Create = function Create(context) {
   })), /*#__PURE__*/_react["default"].createElement(_reactRouter.Route, {
     path: "version"
   }, /*#__PURE__*/_react["default"].createElement(_Version["default"], {
-    data: {
-      version: '0.0.0'
-    }
+    data: version
   })), /*#__PURE__*/_react["default"].createElement(_reactRouter.Route, {
     path: "add",
     component: _Add["default"]
