@@ -1,39 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Text, useInput, useFocus, useFocusManager } from 'ink';
+import { Box, Text, useInput, useFocus, useFocusManager, useStdin } from 'ink';
 import { useLocation } from 'react-router';
 
-const Item = ({ label }) => {
-  const { focusPrevious, focusNext } = useFocusManager();
-  const { isFocused } = useFocus({ autoFocus: true });
-  const [desc, setDesc] = useState('');
-  useEffect(() => {
-    // focusPrevious();
-    focusNext();
-  }, []);
-  useInput((input, key) => {
-    setDesc(desc + input);
+const TextInput = ({ onChange, placeholder, value }) => {
+  const [desc, setDesc] = useState(value);
 
-    if (key.leftArrow) {
-      process.exit();
+  useInput((input, key) => {
+    if (!key.tab) {
+      setDesc(desc + input);
     }
   });
+
+  useEffect(() => {
+    onChange(desc);
+  }, [desc]);
+
+  return <Text color="green">{desc || placeholder}</Text>;
+};
+
+const Item = ({ label }) => {
+  const { isFocused } = useFocus();
+  const [value, setValue] = useState('');
   return (
     <Text>
-      {label} {isFocused && <Text color="green">{desc}</Text>}
+      {label} {isFocused ? <TextInput value={value} onChange={setValue} placeholder={label} /> : value}
     </Text>
   );
 };
 
 const Create = () => {
   let location = useLocation();
-  // console.log(location);
-  // const { isFocused } = useFocus();
-
-  // const { focusNext } = useFocusManager();
-
-  // useEffect(() => {
-  //   focusNext();
-  // }, []);
 
   return (
     <Box flexDirection="column">

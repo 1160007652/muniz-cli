@@ -17,47 +17,49 @@ var _ink = require("ink");
 
 var _reactRouter = require("react-router");
 
-var Item = function Item(_ref) {
-  var label = _ref.label;
+var TextInput = function TextInput(_ref) {
+  var onChange = _ref.onChange,
+      placeholder = _ref.placeholder,
+      value = _ref.value;
 
-  var _useFocusManager = (0, _ink.useFocusManager)(),
-      focusPrevious = _useFocusManager.focusPrevious,
-      focusNext = _useFocusManager.focusNext;
-
-  var _useFocus = (0, _ink.useFocus)({
-    autoFocus: true
-  }),
-      isFocused = _useFocus.isFocused;
-
-  var _useState = (0, _react.useState)(''),
+  var _useState = (0, _react.useState)(value),
       _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
       desc = _useState2[0],
       setDesc = _useState2[1];
 
-  (0, _react.useEffect)(function () {
-    // focusPrevious();
-    focusNext();
-  }, []);
   (0, _ink.useInput)(function (input, key) {
-    setDesc(desc + input);
-
-    if (key.leftArrow) {
-      process.exit();
+    if (!key.tab) {
+      setDesc(desc + input);
     }
   });
-  return /*#__PURE__*/_react["default"].createElement(_ink.Text, null, label, " ", isFocused && /*#__PURE__*/_react["default"].createElement(_ink.Text, {
+  (0, _react.useEffect)(function () {
+    onChange(desc);
+  }, [desc]);
+  return /*#__PURE__*/_react["default"].createElement(_ink.Text, {
     color: "green"
-  }, desc));
+  }, desc || placeholder);
+};
+
+var Item = function Item(_ref2) {
+  var label = _ref2.label;
+
+  var _useFocus = (0, _ink.useFocus)(),
+      isFocused = _useFocus.isFocused;
+
+  var _useState3 = (0, _react.useState)(''),
+      _useState4 = (0, _slicedToArray2["default"])(_useState3, 2),
+      value = _useState4[0],
+      setValue = _useState4[1];
+
+  return /*#__PURE__*/_react["default"].createElement(_ink.Text, null, label, " ", isFocused ? /*#__PURE__*/_react["default"].createElement(TextInput, {
+    value: value,
+    onChange: setValue,
+    placeholder: label
+  }) : value);
 };
 
 var Create = function Create() {
-  var location = (0, _reactRouter.useLocation)(); // console.log(location);
-  // const { isFocused } = useFocus();
-  // const { focusNext } = useFocusManager();
-  // useEffect(() => {
-  //   focusNext();
-  // }, []);
-
+  var location = (0, _reactRouter.useLocation)();
   return /*#__PURE__*/_react["default"].createElement(_ink.Box, {
     flexDirection: "column"
   }, /*#__PURE__*/_react["default"].createElement(Item, {

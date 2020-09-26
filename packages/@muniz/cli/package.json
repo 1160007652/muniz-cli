@@ -30,6 +30,7 @@
     "@muniz/muniz-plugin-create": "^0.0.0",
     "@muniz/muniz-plugin-i18n": "^0.0.0",
     "ink": "^3.0.6",
+    "ink-text-input": "^4.0.1",
     "meow": "^7.1.1",
     "react": "^16.13.1",
     "react-router": "^5.2.0"
