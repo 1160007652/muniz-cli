@@ -5,6 +5,7 @@ const Input = ({ onChange, placeholder, value, type }) => {
   const [desc, setDesc] = useState(value);
   const [position, setPosition] = useState(value.length);
   const { focusNext } = useFocusManager();
+
   useInput((input, key) => {
     if (key.return) {
       // 回车, 切换到下一个 焦点
@@ -34,8 +35,9 @@ const Input = ({ onChange, placeholder, value, type }) => {
       )
     ) {
       const str = desc.substring(0, position) + input + desc.substring(position, desc.length);
+
       setDesc(str);
-      setPosition(position + 1);
+      setPosition(position + input.length);
     }
   });
 

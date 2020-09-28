@@ -53,7 +53,7 @@ var Input = function Input(_ref) {
       var _str = desc.substring(0, position) + input + desc.substring(position, desc.length);
 
       setDesc(_str);
-      setPosition(position + 1);
+      setPosition(position + input.length);
     }
   });
   (0, _react.useEffect)(function () {
