@@ -3,7 +3,8 @@
   "private": true,
   "workspaces": [
     "packages/@muniz/cli*",
-    "packages/@muniz/muniz-plugin*"
+    "packages/@muniz/muniz-plugin*",
+    "packages/@muniz/ink*"
   ],
   "scripts": {
     "start": "nodemon --exec lerna run dev",
