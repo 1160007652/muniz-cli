@@ -20,10 +20,13 @@ var Create = function Create() {
     flexDirection: "column"
   }, /*#__PURE__*/_react["default"].createElement(_inkUi.TextInput, {
     label: "\u63CF\u8FF0\uFF1A",
-    placeHolder: "\u8BF7\u8F93\u5165\u63CF\u8FF0\u4FE1\u606F:"
+    placeHolder: "\u8BF7\u8F93\u5165\u63CF\u8FF0\u4FE1\u606F"
   }), /*#__PURE__*/_react["default"].createElement(_inkUi.TextInput, {
     label: "\u6A21\u7248\uFF1A",
-    placeHolder: "\u8BF7\u9009\u62E9\u521B\u5EFA\u6A21\u7248\u7C7B\u578B:",
+    placeHolder: "\u8BF7\u9009\u62E9\u521B\u5EFA\u6A21\u7248\u7C7B\u578B"
+  }), /*#__PURE__*/_react["default"].createElement(_inkUi.TextInput, {
+    label: "\u5BC6\u7801\uFF1A",
+    placeHolder: "\u8BF7\u8F93\u5165\u6A21\u7248\u5BC6\u7801",
     type: "password"
   }));
 };

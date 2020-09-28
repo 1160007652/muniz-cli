@@ -22,17 +22,7 @@ const Input = ({ onChange, placeholder, value, type }) => {
       // 右键
       setPosition(position < desc.length ? position + 1 : desc.length);
     } else if (
-      !(
-        key.escape ||
-        key.tab ||
-        key.downArrow ||
-        key.upArrow ||
-        key.pageDown ||
-        key.pageUp ||
-        key.ctrl ||
-        key.shift ||
-        key.meta
-      )
+      !(key.escape || key.tab || key.downArrow || key.upArrow || key.pageDown || key.pageUp || key.ctrl || key.meta)
     ) {
       const str = desc.substring(0, position) + input + desc.substring(position, desc.length);
 
