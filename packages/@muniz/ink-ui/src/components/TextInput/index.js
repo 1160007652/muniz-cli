@@ -1,80 +1,57 @@
-import React, { useState, useEffect } from 'react';
-import { Text, useInput, useFocus, useFocusManager } from 'ink';
+import React, { useState, useEffect, useRef, useImperativeHandle } from 'react';
+import PropTypes from 'prop-types';
+import { Box, Text, useInput, useFocus, useFocusManager } from 'ink';
+import { default as Input } from '../Input';
 
-const Input = ({ onChange, placeholder, value, type }) => {
-  const [desc, setDesc] = useState(value);
-  const [position, setPosition] = useState(value.length);
-  const { focusNext } = useFocusManager();
-
-  useInput((input, key) => {
-    if (key.return) {
-      // 回车, 切换到下一个 焦点
-      focusNext();
-    } else if (key.delete) {
-      // 删除, 从尾部依次删除输入的数据
-      const str = desc.substring(0, position - 1) + desc.substring(position, desc.length);
-      setDesc(str);
-      setPosition(position > 0 ? position - 1 : 0);
-    } else if (key.leftArrow) {
-      // 左键
-      setPosition(position > 0 ? position - 1 : 0);
-    } else if (key.rightArrow) {
-      // 右键
-      setPosition(position < desc.length ? position + 1 : desc.length);
-    } else if (
-      !(key.escape || key.tab || key.downArrow || key.upArrow || key.pageDown || key.pageUp || key.ctrl || key.meta)
-    ) {
-      const str = desc.substring(0, position) + input + desc.substring(position, desc.length);
-
-      setDesc(str);
-      setPosition(position + input.length);
-    }
-  });
-
-  useEffect(() => {
-    onChange(desc);
-  }, [desc]);
-
-  function renderValue(data) {
-    return data.map((item, index) => {
-      if (index === position) {
-        return (
-          <Text inverse key={index}>
-            {item}
-          </Text>
-        );
-      } else {
-        return item;
-      }
-    });
-  }
-
-  let showDesc = type === 'password' ? '*'.repeat(desc.length) : desc;
-  showDesc = showDesc + ' ';
-
-  if (desc) {
-    showDesc = renderValue(showDesc.split(''));
-  } else {
-    showDesc = <Text dimColor>{renderValue(placeholder.split(''))}</Text>;
-  }
-
-  return (
-    <Text color="green" cursor={3}>
-      {showDesc}
-    </Text>
-  );
-};
-
-const TextInput = ({ label, placeHolder, type }) => {
+const TextInput = ({ name, label, value, placeHolder, type, onChange, forwardRef }) => {
   const { isFocused } = useFocus({ autoFocus: true });
-  const [value, setValue] = useState('');
-  const showValue = type === 'password' ? '*'.repeat(value.length) : value;
+  const [_value, setValue] = useState(value);
+  const showValue = type === 'password' ? '*'.repeat(_value.length) : _value;
+  useEffect(() => {
+    onChange(_value);
+    // forwardRef.register({ name, _value });
+    // console.log(forwardRef);
+  }, [_value]);
+
+  const onBlur = () => {
+    console.log('失去焦点');
+  };
+  /** 暴露出去, 可以调用的ref */
+  // useImperativeHandle(forwardRef, () => ({
+  //   onChange,
+  //   value,
+  //   onBlur,
+  // }));
+
   return (
-    <Text>
-      {label}
-      {isFocused ? <Input value={value} onChange={setValue} type={type} placeholder={placeHolder} /> : showValue}
-    </Text>
+    <Box>
+      <Text>
+        {label}
+        {isFocused ? <Input value={_value} onChange={setValue} type={type} placeholder={placeHolder} /> : showValue}
+      </Text>
+    </Box>
   );
 };
+
+TextInput.propTypes = {
+  onChange: PropTypes.func,
+  type: PropTypes.string,
+  placeHolder: PropTypes.string,
+  value: PropTypes.string,
+  label: PropTypes.string,
+  name: PropTypes.string,
+};
+TextInput.defaultProps = {
+  onChange: () => {},
+  type: '',
+  placeHolder: '',
+  value: '',
+  label: '',
+  name: '',
+};
+
+// export default React.forwardRef((props, ref) => {
+//   return <TextInput {...props} forwardRef={ref} />;
+// });
 
 export default TextInput;
