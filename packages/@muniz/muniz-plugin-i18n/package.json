@@ -19,5 +19,9 @@
   "scripts": {
     "dev": "babel --root-mode upward src --out-dir dist",
     "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^0.1.1",
+    "yup": "^0.29.3"
   }
 }

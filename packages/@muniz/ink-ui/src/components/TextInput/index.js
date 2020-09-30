@@ -1,53 +1,66 @@
-import React, { useState, useEffect, useRef, useImperativeHandle } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Text, useInput, useFocus, useFocusManager } from 'ink';
 import { default as Input } from '../Input';
 
-const TextInput = ({ name, label, value, placeHolder, type, onChange, forwardRef }) => {
+const TextInput = ({ label, value, placeHolder, type, onChange, onBlur, error }) => {
   const { isFocused } = useFocus({ autoFocus: true });
   const [_value, setValue] = useState(value);
   const showValue = type === 'password' ? '*'.repeat(_value.length) : _value;
+
+  useEffect(() => {
+    setValue(value);
+  }, [value]);
+
   useEffect(() => {
     onChange(_value);
-    // forwardRef.register({ name, _value });
-    // console.log(forwardRef);
   }, [_value]);
 
-  const onBlur = () => {
-    console.log('失去焦点');
-  };
-  /** 暴露出去, 可以调用的ref */
-  // useImperativeHandle(forwardRef, () => ({
-  //   onChange,
-  //   value,
-  //   onBlur,
-  // }));
+  // 焦点监听
+  useEffect(() => {
+    // 失去焦点时触发
+    if (!isFocused) {
+      onBlur(_value);
+    }
+  }, [isFocused]);
 
   return (
-    <Box>
-      <Text>
-        {label}
-        {isFocused ? <Input value={_value} onChange={setValue} type={type} placeholder={placeHolder} /> : showValue}
-      </Text>
+    <Box flexDirection="column">
+      <Box>
+        <Text bold={isFocused}>
+          {label}
+          {isFocused ? <Input value={_value} onChange={setValue} type={type} placeholder={placeHolder} /> : showValue}
+        </Text>
+      </Box>
+
+      <Box>
+        <Text>
+          {error && <Text color="red">error: </Text>}
+          <Text dimColor>{error}</Text>
+        </Text>
+      </Box>
     </Box>
   );
 };
 
 TextInput.propTypes = {
   onChange: PropTypes.func,
+  onBlur: PropTypes.func,
   type: PropTypes.string,
   placeHolder: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   label: PropTypes.string,
-  name: PropTypes.string,
+  error: PropTypes.string,
 };
 TextInput.defaultProps = {
   onChange: () => {},
+  onBlur: () => {},
   type: '',
   placeHolder: '',
   value: '',
   label: '',
-  name: '',
+
+  error: '',
 };
 
 // export default React.forwardRef((props, ref) => {
