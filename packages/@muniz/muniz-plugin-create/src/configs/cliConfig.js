@@ -3,8 +3,8 @@ export const options = {
   name: {
     type: 'string',
     alias: 'n',
-    default: 'zhipan',
-    desc: '这是属性描述文案',
+    default: '',
+    desc: '项目名称',
   },
 };
 

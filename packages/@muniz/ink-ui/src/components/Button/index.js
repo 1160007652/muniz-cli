@@ -1,43 +1,46 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Text, useFocus } from 'ink';
+import { Box, Text, useInput, useFocus, useFocusManager } from 'ink';
+// import { debounce } from '@muniz/cli-shared-utils';
 
-const Button = ({ children, onBlur, interval, ...props }) => {
-  const { isFocused } = useFocus({ autoFocus: true });
-  const [time, setTime] = useState(Number(interval));
+const Button = ({ children, onBlur, wait, disabled, leftDisabled, rightDisabled, ...props }) => {
+  const { isFocused } = useFocus({ autoFocus: true, isActive: !disabled });
+  const { disableFocus, enableFocus, focusNext } = useFocusManager();
 
-  // 如果获得焦点，触发点击事件
-  useEffect(() => {
-    let timer = null;
-    if (isFocused) {
-      timer = setInterval(() => {
-        setTime((prevTime) => {
-          const curentTime = prevTime - 1;
-          if (curentTime === 0) {
-            clearInterval(timer);
-          }
-          return curentTime;
-        });
-      }, 1000);
+  // 防抖计时器
+  let timer = null;
+
+  // 是否激活焦点
+  function isFocus(flag) {
+    if (flag) {
+      disableFocus();
     } else {
-      setTime(Number(interval));
+      enableFocus();
     }
-    return () => {
-      clearInterval(timer);
-    };
-  }, [isFocused]);
+  }
 
-  useEffect(() => {
-    if (time === 0) {
-      onBlur();
+  useInput((_, key) => {
+    if (isFocused) {
+      if (key.return) {
+        if (timer) {
+          clearTimeout(timer);
+        }
+        timer = setTimeout(() => {
+          onBlur();
+          clearTimeout(timer);
+        }, wait);
+      } else if (key.tab) {
+        // 切换焦点后，结束 执行事件
+        clearTimeout(timer);
+        isFocus();
+      }
     }
-  }, [time]);
+  });
 
   return (
     <Box {...props}>
-      <Text inverse={isFocused}>
+      <Text inverse={isFocused} dimColor={disabled}>
         {children}
-        {isFocused && <Text>{`(${time}s)`}</Text>}
       </Text>
     </Box>
   );
@@ -45,11 +48,17 @@ const Button = ({ children, onBlur, interval, ...props }) => {
 
 Button.propTypes = {
   onBlur: PropTypes.func,
-  interval: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  wait: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  disabled: PropTypes.bool,
+  leftDisabled: PropTypes.bool,
+  rightDisabled: PropTypes.bool,
 };
 Button.defaultProps = {
   onBlur: () => {},
-  interval: 3,
+  wait: 600,
+  disabled: false,
+  leftDisabled: false,
+  rightDisabled: false,
 };
 
 export default Button;

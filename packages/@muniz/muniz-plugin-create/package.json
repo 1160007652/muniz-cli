@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^0.1.1",
+    "@muniz/cli-shared-utils": "^0.0.0",
     "yup": "^0.29.3"
   }
 }

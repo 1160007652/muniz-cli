@@ -1,7 +1,5 @@
 'use strict';
 
-var _interopRequireWildcard = require('@babel/runtime/helpers/interopRequireWildcard');
-
 var _interopRequireDefault = require('@babel/runtime/helpers/interopRequireDefault');
 
 Object.defineProperty(exports, '__esModule', {
@@ -9,66 +7,70 @@ Object.defineProperty(exports, '__esModule', {
 });
 exports['default'] = void 0;
 
-var _slicedToArray2 = _interopRequireDefault(require('@babel/runtime/helpers/slicedToArray'));
-
 var _objectWithoutProperties2 = _interopRequireDefault(require('@babel/runtime/helpers/objectWithoutProperties'));
 
-var _react = _interopRequireWildcard(require('react'));
+var _react = _interopRequireDefault(require('react'));
 
 var _propTypes = _interopRequireDefault(require('prop-types'));
 
 var _ink = require('ink');
 
+// import { debounce } from '@muniz/cli-shared-utils';
 var Button = function Button(_ref) {
   var children = _ref.children,
     onBlur = _ref.onBlur,
-    interval = _ref.interval,
-    props = (0, _objectWithoutProperties2['default'])(_ref, ['children', 'onBlur', 'interval']);
+    wait = _ref.wait,
+    disabled = _ref.disabled,
+    leftDisabled = _ref.leftDisabled,
+    rightDisabled = _ref.rightDisabled,
+    props = (0, _objectWithoutProperties2['default'])(_ref, [
+      'children',
+      'onBlur',
+      'wait',
+      'disabled',
+      'leftDisabled',
+      'rightDisabled',
+    ]);
 
   var _useFocus = (0, _ink.useFocus)({
       autoFocus: true,
+      isActive: !disabled,
     }),
     isFocused = _useFocus.isFocused;
 
-  var _useState = (0, _react.useState)(Number(interval)),
-    _useState2 = (0, _slicedToArray2['default'])(_useState, 2),
-    time = _useState2[0],
-    setTime = _useState2[1]; // 如果获得焦点，触发点击事件
+  var _useFocusManager = (0, _ink.useFocusManager)(),
+    disableFocus = _useFocusManager.disableFocus,
+    enableFocus = _useFocusManager.enableFocus,
+    focusNext = _useFocusManager.focusNext; // 防抖计时器
 
-  (0, _react.useEffect)(
-    function () {
-      var timer = null;
+  var timer = null; // 是否激活焦点
 
-      if (isFocused) {
-        timer = setInterval(function () {
-          setTime(function (prevTime) {
-            var curentTime = prevTime - 1;
+  function isFocus(flag) {
+    if (flag) {
+      disableFocus();
+    } else {
+      enableFocus();
+    }
+  }
 
-            if (curentTime === 0) {
-              clearInterval(timer);
-            }
+  (0, _ink.useInput)(function (_, key) {
+    if (isFocused) {
+      if (key['return']) {
+        if (timer) {
+          clearTimeout(timer);
+        }
 
-            return curentTime;
-          });
-        }, 1000);
-      } else {
-        setTime(Number(interval));
+        timer = setTimeout(function () {
+          onBlur();
+          clearTimeout(timer);
+        }, wait);
+      } else if (key.tab) {
+        // 切换焦点后，结束 执行事件
+        clearTimeout(timer);
+        isFocus();
       }
-
-      return function () {
-        clearInterval(timer);
-      };
-    },
-    [isFocused],
-  );
-  (0, _react.useEffect)(
-    function () {
-      if (time === 0) {
-        onBlur();
-      }
-    },
-    [time],
-  );
+    }
+  });
   return /*#__PURE__*/ _react['default'].createElement(
     _ink.Box,
     props,
@@ -76,20 +78,26 @@ var Button = function Button(_ref) {
       _ink.Text,
       {
         inverse: isFocused,
+        dimColor: disabled,
       },
       children,
-      isFocused && /*#__PURE__*/ _react['default'].createElement(_ink.Text, null, '('.concat(time, 's)')),
     ),
   );
 };
 
 Button.propTypes = {
   onBlur: _propTypes['default'].func,
-  interval: _propTypes['default'].oneOfType([_propTypes['default'].string, _propTypes['default'].number]),
+  wait: _propTypes['default'].oneOfType([_propTypes['default'].string, _propTypes['default'].number]),
+  disabled: _propTypes['default'].bool,
+  leftDisabled: _propTypes['default'].bool,
+  rightDisabled: _propTypes['default'].bool,
 };
 Button.defaultProps = {
   onBlur: function onBlur() {},
-  interval: 3,
+  wait: 600,
+  disabled: false,
+  leftDisabled: false,
+  rightDisabled: false,
 };
 var _default = Button;
 exports['default'] = _default;

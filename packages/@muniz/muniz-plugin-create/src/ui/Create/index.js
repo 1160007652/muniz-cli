@@ -1,33 +1,70 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Text, useInput, useFocus, useFocusManager, useStdin } from 'ink';
+import { Box, Text, useInput, useFocus, useApp, useFocusManager, useStdin } from 'ink';
 import { useLocation } from 'react-router';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
 import * as yup from 'yup';
 
-import { TextInput, Button } from '@muniz/ink-ui';
+import { TextInput, Button, ButtonGroup } from '@muniz/ink-ui';
 
 // 表单验证器规则
 const schema = yup.object().shape({
+  name: yup.string().required(),
   desc: yup.string().required(),
-  telmplate: yup.number('请输入数字').positive('必须是正整数').integer('数字').required('必填项'),
+  telmplate: yup.string().required(),
 });
-
-// 提交表单数据
-const onSubmit = (data) => console.log(data);
 
 // 创建指令
 const Create = () => {
   const { focusNext } = useFocusManager();
-
+  const { state: routerParams } = useLocation();
+  const { exit } = useApp();
+  // 执行步骤
+  const [step, setStep] = useState({
+    cloneGit: false,
+    help: false,
+  });
+  // 表单收集
   const { control, errors, reset, handleSubmit } = useForm({
     reValidateMode: 'onChange',
-    mode: 'onBlur',
+    mode: 'all',
     resolver: yupResolver(schema),
+    defaultValues: {
+      name: routerParams.name,
+    },
   });
+
+  // 提交表单数据
+  const onSubmit = (data) => {
+    setStep((state) => {
+      state.cloneGit = true;
+      state.help = true;
+      return state;
+    });
+    // exit();
+  };
 
   return (
     <Box flexDirection="column">
+      <Box marginBottom="1">
+        <Text color="green">Step-1: 收集用户输入信息</Text>
+      </Box>
+      <Controller
+        control={control}
+        name="name"
+        render={({ onChange, onBlur, value }) => {
+          return (
+            <TextInput
+              label="名称："
+              value={value}
+              placeHolder="请输入项目名称"
+              onChange={onChange}
+              onBlur={onBlur}
+              error={errors.name?.message}
+            />
+          );
+        }}
+      />
       <Controller
         control={control}
         name="desc"
@@ -63,32 +100,61 @@ const Create = () => {
           );
         }}
       />
+      {!step.cloneGit && (
+        <ButtonGroup marginTop="1">
+          <Button
+            marginRight="3"
+            disabled={Object.keys(errors).length > 0}
+            interval="2"
+            onBlur={handleSubmit(onSubmit)}
+          >
+            确认
+          </Button>
+          <Button
+            disabled
+            interval={2}
+            marginRight="3"
+            onBlur={() => {
+              process.exit();
+            }}
+          >
+            取消
+          </Button>
+          <Button
+            interval={2}
+            onBlur={() => {
+              reset();
+              setStep((state) => {
+                state.cloneGit = false;
+                return state;
+              });
+              setTimeout(() => {
+                focusNext();
+              }, 100);
+            }}
+          >
+            重置
+          </Button>
+        </ButtonGroup>
+      )}
 
-      <Box marginTop="1">
-        <Button marginRight="3" interval="2" onBlur={handleSubmit(onSubmit)}>
-          确认
-        </Button>
-        <Button
-          interval={2}
-          marginRight="3"
-          onBlur={() => {
-            process.exit();
-          }}
-        >
-          取消
-        </Button>
-        <Button
-          interval={2}
-          onBlur={() => {
-            reset();
-            setTimeout(() => {
-              focusNext();
-            }, 100);
-          }}
-        >
-          重置
-        </Button>
-      </Box>
+      {step.cloneGit && (
+        <Box marginTop="1" flexDirection="column">
+          <Text color="green">Step-2: 开始克隆模版工程</Text>
+
+          <Box>
+            <Text>克隆完毕：100%</Text>
+          </Box>
+        </Box>
+      )}
+
+      {step.help && (
+        <Box marginTop="1" flexDirection="column">
+          <Text color="green">Step-3: 使用帮助</Text>
+          <Text>进入项目: cd testProject</Text>
+          <Text>进入项目: npm install</Text>
+        </Box>
+      )}
     </Box>
   );
 };

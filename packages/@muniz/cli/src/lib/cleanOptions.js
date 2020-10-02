@@ -13,8 +13,8 @@ export const cleanOptions = (_options) => {
 
     return {
       command,
-      desc: _options[item]?.desc,
-      default: _options[item]?.default,
+      desc: _options[item]?.desc || '',
+      default: _options[item]?.default || '',
     };
   });
   return cliOptions;

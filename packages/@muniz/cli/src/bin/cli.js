@@ -6,7 +6,7 @@ import { render } from 'ink';
 import meow from 'meow';
 import minimist from 'minimist';
 
-import { UI_APP } from '../ui';
+import { UI_APP, UI_NotCommand } from '../ui';
 import { command, installCommand } from '../constants/useCommand';
 import { default as config } from '../configs';
 import { cleanOptions } from '../lib/cleanOptions';
@@ -34,7 +34,12 @@ if (!isInternalCommand) {
     packageName = _tempPkgPath;
     packageJsonPath = _tempPkgJsonPath.replace(new RegExp(`(${_tempPkgPath})/.*$`, 'ig'), (_, c) => c);
   } catch {
-    console.log('插件不存在');
+    const _notCommandData = {
+      isInternalCommand: !isInternalCommand,
+      packageName: _tempPkgPath,
+      command: _argv._[0],
+    };
+    render(React.createElement(UI_NotCommand, _notCommandData));
     process.exit();
   }
 }

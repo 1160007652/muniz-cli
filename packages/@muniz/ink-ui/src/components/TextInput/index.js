@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Box, Text, useInput, useFocus, useFocusManager } from 'ink';
+import { Box, Text, useFocus } from 'ink';
 import { default as Input } from '../Input';
 
 const TextInput = ({ label, value, placeHolder, type, onChange, onBlur, error }) => {

@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Box, Text, Spacer } from 'ink';
+import { Box, Text } from 'ink';
 
 import CommandTextList from '../Components/CommandTextList';
 
@@ -25,7 +24,6 @@ const Help = ({ data }) => {
           <Text>{footer}</Text>
         </Box>
       )}
-      {/* <Spacer /> */}
     </Box>
   );
 };
