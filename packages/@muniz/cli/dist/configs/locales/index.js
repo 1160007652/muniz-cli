@@ -7,15 +7,12 @@ Object.defineProperty(exports, '__esModule', {
 });
 exports['default'] = void 0;
 
-var _cliConfig = require('./cliConfig');
+var _enUS = _interopRequireDefault(require('./en-US'));
 
-var _locales = _interopRequireDefault(require('./locales'));
+var _zhCN = _interopRequireDefault(require('./zh-CN'));
 
 var _default = {
-  cliConfig: {
-    help: _cliConfig.help,
-    options: _cliConfig.options,
-  },
-  i18nLocales: _locales['default'],
+  enUS: _enUS['default'],
+  zhCN: _zhCN['default'],
 };
 exports['default'] = _default;

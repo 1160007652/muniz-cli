@@ -1,7 +1,10 @@
 import React from 'react';
 import { Box, Text } from 'ink';
+// import { default as pluginI18n } from '@muniz/muniz-plugin-i18n';
 
 import CommandTextList from '../Components/CommandTextList';
+
+// const i18n = pluginI18n.i18n();
 
 const Help = ({ data }) => {
   const { header, footer, usages = [], commands = [], options = [], otherOptions = [], examples = [] } = data;
@@ -19,11 +22,7 @@ const Help = ({ data }) => {
 
       {examples.length > 0 && <CommandTextList data={examples} label="Examples" labelColor="yellow" />}
 
-      {footer && (
-        <Box marginTop={1}>
-          <Text>{footer}</Text>
-        </Box>
-      )}
+      {footer && <Box marginTop={1}>{/* <Text>{i18n.get(footer)}</Text> */}</Box>}
     </Box>
   );
 };

@@ -11,6 +11,8 @@ var _react = _interopRequireDefault(require('react'));
 
 var _ink = require('ink');
 
+var _munizPluginI18n = require('@muniz/muniz-plugin-i18n');
+
 var NotCommand = function NotCommand(props) {
   var packageName = props.packageName,
     command = props.command,
@@ -37,6 +39,7 @@ var NotCommand = function NotCommand(props) {
           ),
           ' \u547D\u4EE4\u4E0D\u5728\u5185\u7F6E\u547D\u4EE4\u5F53\u4E2D\uFF0C\u5C5E\u4E8E\u63D2\u4EF6\u547D\u4EE4\u3002',
         ),
+        /*#__PURE__*/ _react['default'].createElement(_ink.Text, null, _munizPluginI18n.i18n.get('你好')),
         /*#__PURE__*/ _react['default'].createElement(
           _ink.Box,
           {

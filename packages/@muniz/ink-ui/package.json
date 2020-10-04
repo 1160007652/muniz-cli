@@ -37,6 +37,7 @@
     "ink": "^3.0.6",
     "react": "^16.13.1",
     "react-hook-form": "^6.8.6",
+    "react-intl-universal": "^2.4.1",
     "yup": "^0.29.3"
   }
 }

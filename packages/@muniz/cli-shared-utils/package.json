@@ -26,5 +26,8 @@
   },
   "bugs": {
     "url": "https://github.com/1160007652/muniz-cli/issues"
+  },
+  "dependencies": {
+    "react-intl-universal": "^2.4.1"
   }
 }

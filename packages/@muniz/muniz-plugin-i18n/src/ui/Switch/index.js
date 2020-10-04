@@ -15,7 +15,7 @@ const schema = yup.object().shape({
 });
 
 // 创建指令
-const Create = () => {
+const Switch = () => {
   const { focusNext } = useFocusManager();
   const { state: routerParams } = useLocation();
   const { exit } = useApp();
@@ -158,4 +158,4 @@ const Create = () => {
   );
 };
 
-export default Create;
+export default Switch;

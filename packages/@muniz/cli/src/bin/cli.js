@@ -10,6 +10,7 @@ import { UI_APP, UI_NotCommand } from '../ui';
 import { command, installCommand } from '../constants/useCommand';
 import { default as config } from '../configs';
 import { cleanOptions } from '../lib/cleanOptions';
+import { initI18nLocales, i18n } from '@muniz/muniz-plugin-i18n';
 
 /** 导出模块, 方便 与 其他 plugin 插件 处理机制一致 */
 export default {
@@ -34,6 +35,8 @@ if (!isInternalCommand) {
     packageName = _tempPkgPath;
     packageJsonPath = _tempPkgJsonPath.replace(new RegExp(`(${_tempPkgPath})/.*$`, 'ig'), (_, c) => c);
   } catch {
+    // 初始化多语言
+    initI18nLocales({ locales: config.i18nLocales, init: true });
     const _notCommandData = {
       isInternalCommand: !isInternalCommand,
       packageName: _tempPkgPath,
@@ -47,7 +50,11 @@ if (!isInternalCommand) {
 const { config: packageConfig } = isInternalCommand ? module.exports.default : require(packageName).default;
 
 // console.log(packageConfig);
-const { cliConfig } = packageConfig;
+const { cliConfig, i18nLocales } = packageConfig;
+
+// 初始化多语言
+initI18nLocales({ locales: i18nLocales, init: true });
+
 const packageJsonInfo = require(`${packageJsonPath}/package.json`);
 // 重新生成帮助文档
 const help = { ...cliConfig.help, options: cleanOptions(cliConfig.options) };

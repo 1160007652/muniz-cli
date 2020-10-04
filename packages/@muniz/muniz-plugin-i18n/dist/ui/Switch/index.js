@@ -32,7 +32,7 @@ var schema = yup.object().shape({
   telmplate: yup.string().required(),
 }); // 创建指令
 
-var Create = function Create() {
+var Switch = function Switch() {
   var _useFocusManager = (0, _ink.useFocusManager)(),
     focusNext = _useFocusManager.focusNext;
 
@@ -237,5 +237,5 @@ var Create = function Create() {
   );
 };
 
-var _default = Create;
+var _default = Switch;
 exports['default'] = _default;

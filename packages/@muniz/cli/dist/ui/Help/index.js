@@ -13,6 +13,8 @@ var _ink = require('ink');
 
 var _CommandTextList = _interopRequireDefault(require('../Components/CommandTextList'));
 
+// import { default as pluginI18n } from '@muniz/muniz-plugin-i18n';
+// const i18n = pluginI18n.i18n();
 var Help = function Help(_ref) {
   var data = _ref.data;
   var header = data.header,
@@ -65,13 +67,9 @@ var Help = function Help(_ref) {
         labelColor: 'yellow',
       }),
     footer &&
-      /*#__PURE__*/ _react['default'].createElement(
-        _ink.Box,
-        {
-          marginTop: 1,
-        },
-        /*#__PURE__*/ _react['default'].createElement(_ink.Text, null, footer),
-      ),
+      /*#__PURE__*/ _react['default'].createElement(_ink.Box, {
+        marginTop: 1,
+      }),
   );
 };
 

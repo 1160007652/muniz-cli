@@ -28,6 +28,8 @@ var _configs = _interopRequireDefault(require('../configs'));
 
 var _cleanOptions = require('../lib/cleanOptions');
 
+var _munizPluginI18n = require('@muniz/muniz-plugin-i18n');
+
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
   if (Object.getOwnPropertySymbols) {
@@ -88,6 +90,11 @@ if (!isInternalCommand) {
       return c;
     });
   } catch (_unused) {
+    // 初始化多语言
+    (0, _munizPluginI18n.initI18nLocales)({
+      locales: _configs['default'].i18nLocales,
+      init: true,
+    });
     var _notCommandData = {
       isInternalCommand: !isInternalCommand,
       packageName: _tempPkgPath,
@@ -101,7 +108,13 @@ if (!isInternalCommand) {
 var _ref = isInternalCommand ? module.exports['default'] : require(packageName)['default'],
   packageConfig = _ref.config; // console.log(packageConfig);
 
-var cliConfig = packageConfig.cliConfig;
+var cliConfig = packageConfig.cliConfig,
+  i18nLocales = packageConfig.i18nLocales; // 初始化多语言
+
+(0, _munizPluginI18n.initI18nLocales)({
+  locales: i18nLocales,
+  init: true,
+});
 
 var packageJsonInfo = require(''.concat(packageJsonPath, '/package.json')); // 重新生成帮助文档
 

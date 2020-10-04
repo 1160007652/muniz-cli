@@ -14,7 +14,7 @@ export const options = {
 /** 导出 cli 帮助文档 */
 export const help = {
   header: 'muniz脚手架, 基于插件机制开发, 自成一套体系',
-  footer: '底部描述',
+  footer: '你好',
   usages: [{ command: '$ muniz <command> [options]', desc: '' }],
   commands: [
     { command: '$ create <name>', desc: '创建项目工程' },

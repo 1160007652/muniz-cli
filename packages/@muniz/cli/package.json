@@ -36,6 +36,7 @@
     "ink-text-input": "^4.0.1",
     "meow": "^7.1.1",
     "react": "^16.13.1",
+    "react-intl-universal": "^2.4.1",
     "react-router": "^5.2.0",
     "yup": "^0.29.3"
   },

@@ -19,7 +19,7 @@ const Create = (context) => {
   } else if (flags?.version || flags?.v) {
     command = 'version';
   } else if (!isInternalCommand) {
-    DynamicCommandUI = require(`@muniz/muniz-plugin-${command.split('/')[0]}`).default[
+    DynamicCommandUI = require(`@muniz/muniz-plugin-${command.split('/')[0]}`).default.command[
       input.length > 1 ? input[1] : 'default'
     ];
   }
@@ -33,7 +33,7 @@ const Create = (context) => {
           <UI_Version data={version} />
         </Route>
         <Route path="add" component={UI_Add} />
-        <Route path={command}>{DynamicCommandUI && <DynamicCommandUI />}</Route>
+        <Route path={command}>{DynamicCommandUI ? <DynamicCommandUI /> : <Text>不存在该命令</Text>}</Route>
       </Switch>
     </StaticRouter>
   );

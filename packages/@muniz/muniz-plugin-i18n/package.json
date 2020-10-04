@@ -5,7 +5,7 @@
   "author": "1160007652 <1160007652@qq.com>",
   "homepage": "",
   "license": "ISC",
-  "main": "dist/lib/index.js",
+  "main": "dist/index.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -23,6 +23,7 @@
   "dependencies": {
     "@hookform/resolvers": "^0.1.1",
     "@muniz/cli-shared-utils": "^0.0.0",
+    "react-intl-universal": "^2.4.1",
     "yup": "^0.29.3"
   }
 }
