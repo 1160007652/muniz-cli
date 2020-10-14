@@ -1,2 +1,8 @@
 node_modules
 yarn.lock
+.DS_Store
+*.log
+.idea
+.cache
+.eslintcache
+package-lock.json
