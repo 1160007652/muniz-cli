@@ -28,6 +28,8 @@
     "url": "https://github.com/1160007652/muniz-cli/issues"
   },
   "dependencies": {
+    "@muniz/ink-ui": "^1.0.0",
+    "@muniz/muniz-plugin-i18n": "^1.0.0",
     "react-intl-universal": "^2.4.1"
   }
 }
