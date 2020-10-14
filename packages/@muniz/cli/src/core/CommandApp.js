@@ -2,7 +2,7 @@
  * 命令行中间件解析应用
  */
 
-class CommandApplication {
+class CommandApp {
   constructor({ argv = [] }) {
     this.context = {
       pkg: '运行包信息',
@@ -51,4 +51,4 @@ class CommandApplication {
   }
 }
 
-export default CommandApplication;
+export { CommandApp };

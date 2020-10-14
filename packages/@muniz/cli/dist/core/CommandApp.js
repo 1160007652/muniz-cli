@@ -5,7 +5,7 @@ var _interopRequireDefault = require('@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, '__esModule', {
   value: true,
 });
-exports['default'] = void 0;
+exports.CommandApp = void 0;
 
 var _regenerator = _interopRequireDefault(require('@babel/runtime/regenerator'));
 
@@ -18,11 +18,11 @@ var _createClass2 = _interopRequireDefault(require('@babel/runtime/helpers/creat
 /**
  * 命令行中间件解析应用
  */
-var CommandApplication = /*#__PURE__*/ (function () {
-  function CommandApplication(_ref) {
+var CommandApp = /*#__PURE__*/ (function () {
+  function CommandApp(_ref) {
     var _ref$argv = _ref.argv,
       argv = _ref$argv === void 0 ? [] : _ref$argv;
-    (0, _classCallCheck2['default'])(this, CommandApplication);
+    (0, _classCallCheck2['default'])(this, CommandApp);
     this.context = {
       pkg: '运行包信息',
       pathName: '运行路径',
@@ -37,7 +37,7 @@ var CommandApplication = /*#__PURE__*/ (function () {
    * @param {function} fn 中间件方法
    */
 
-  (0, _createClass2['default'])(CommandApplication, [
+  (0, _createClass2['default'])(CommandApp, [
     {
       key: 'use',
       value: function use(fn) {
@@ -102,8 +102,7 @@ var CommandApplication = /*#__PURE__*/ (function () {
       })(),
     },
   ]);
-  return CommandApplication;
+  return CommandApp;
 })();
 
-var _default = CommandApplication;
-exports['default'] = _default;
+exports.CommandApp = CommandApp;
