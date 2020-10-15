@@ -7,7 +7,7 @@
     "packages/@muniz/ink*"
   ],
   "scripts": {
-    "start": "nodemon --exec lerna run dev",
+    "dev": "nodemon --exec ./scripts/dev.sh",
     "commit": "git-cz"
   },
   "config": {

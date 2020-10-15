@@ -3,12 +3,13 @@
  */
 
 class CommandApp {
-  constructor({ argv = [] }) {
+  constructor({ argv = [], render = null, pkg = null }) {
     this.context = {
-      pkg: '运行包信息',
+      pkg,
       pathName: '运行路径',
       isUpdate: '是否有更新',
       argv, // 解析的运行命令参数
+      render,
     };
     // 中间件数组
     this.middleware = [];
@@ -52,3 +53,4 @@ class CommandApp {
 }
 
 export { CommandApp };
+export * from './middleWare';

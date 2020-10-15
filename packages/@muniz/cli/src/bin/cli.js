@@ -1,23 +1,28 @@
 #!/usr/bin/env node
 'use strict';
 
-import { CommandApp } from '../core/CommandApp';
+import React from 'react';
+import { render, Text } from 'ink';
+import { CommandApp, formatArgv } from '../core/CommandApp';
+// import { formatArgv } from '../core/middleWare/formatArgv';
+import pkg from '../../package.json';
 
-const commandApp = new CommandApp({ argv: process.argv.slice(2), i18n: '国际化', render: '命令行渲染库' });
+const commandApp = new CommandApp({ argv: process.argv.slice(2), pkg, i18n: '国际化', render });
 
-commandApp.use((ctx, next) => {
-  console.log('解析-命令参数格式');
-  next();
-});
-
-commandApp.use((ctx, next) => {
-  console.log('插件-命令 是否存在');
-  next();
-});
+// 使用格式化命令插件
+commandApp.use(formatArgv);
 
 commandApp.use((ctx, next) => {
-  console.log('生成帮助文档');
-  console.log(ctx);
+  const _tempPkgPath = `@muniz/muniz-plugin-${ctx.argv[0]}`;
+
+  try {
+    const _tempPkgJsonPath = require.resolve(_tempPkgPath);
+  } catch {
+    ctx.render(<Text>插件不存在</Text>);
+  }
+
+  console.log(ctx.argv);
+
   next();
 });
 

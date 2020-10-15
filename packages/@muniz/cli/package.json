@@ -23,7 +23,8 @@
     "access": "public"
   },
   "scripts": {
-    "dev": "babel --root-mode upward src --out-dir dist",
+    "dev": "babel --root-mode upward src -d dist",
+    "dev1": "babel-node --root-mode upward src/bin/cli.js",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
