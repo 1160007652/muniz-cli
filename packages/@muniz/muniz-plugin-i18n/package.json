@@ -22,8 +22,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^0.1.1",
-    "@muniz/cli-shared-utils": "^1.0.0",
-    "@muniz/ink-ui": "^1.0.0",
     "react-intl-universal": "^2.4.1",
     "yup": "^0.29.3"
   }
