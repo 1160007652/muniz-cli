@@ -23,6 +23,7 @@ var _middleWare = require('./middleWare');
 Object.keys(_middleWare).forEach(function (key) {
   if (key === 'default' || key === '__esModule') return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  if (key in exports && exports[key] === _middleWare[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function get() {
@@ -38,15 +39,22 @@ var CommandApp = /*#__PURE__*/ (function () {
   function CommandApp(_ref) {
     var _ref$argv = _ref.argv,
       argv = _ref$argv === void 0 ? [] : _ref$argv,
+      _ref$commands = _ref.commands,
+      commands = _ref$commands === void 0 ? [] : _ref$commands,
       _ref$render = _ref.render,
-      render = _ref$render === void 0 ? null : _ref$render,
-      _ref$pkg = _ref.pkg,
-      pkg = _ref$pkg === void 0 ? null : _ref$pkg;
+      render = _ref$render === void 0 ? null : _ref$render;
     (0, _classCallCheck2['default'])(this, CommandApp);
     this.context = {
-      pkg: pkg,
-      pathName: '运行路径',
-      isUpdate: '是否有更新',
+      commands: commands,
+      // 内置命令
+      pkg: {},
+      // 命令，所在的包信息
+      pkgName: '',
+      // 命令，所在的包名
+      pkgPath: '',
+      // 命令，所在的包路径
+      isUpdate: false,
+      // 命令，所在的包是否有更新
       argv: argv,
       // 解析的运行命令参数
       render: render,

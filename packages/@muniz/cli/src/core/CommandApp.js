@@ -3,11 +3,13 @@
  */
 
 class CommandApp {
-  constructor({ argv = [], render = null, pkg = null }) {
+  constructor({ argv = [], commands = [], render = null }) {
     this.context = {
-      pkg,
-      pathName: '运行路径',
-      isUpdate: '是否有更新',
+      commands, // 内置命令
+      pkg: {}, // 命令，所在的包信息
+      pkgName: '', // 命令，所在的包名
+      pkgPath: '', // 命令，所在的包路径
+      isUpdate: false, // 命令，所在的包是否有更新
       argv, // 解析的运行命令参数
       render,
     };

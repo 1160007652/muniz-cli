@@ -1,30 +1,21 @@
 #!/usr/bin/env node
 'use strict';
 
-import React from 'react';
-import { render, Text } from 'ink';
-import { CommandApp, formatArgv } from '../core/CommandApp';
-// import { formatArgv } from '../core/middleWare/formatArgv';
-import pkg from '../../package.json';
+import { render } from 'ink';
+import { commands, installCommands } from '../constants/useCommand';
+import { CommandApp, formatArgv, isCommand, runCommand } from '../core/CommandApp';
 
-const commandApp = new CommandApp({ argv: process.argv.slice(2), pkg, i18n: '国际化', render });
+// 初始化 命令行 框架
+const commandApp = new CommandApp({ argv: process.argv.slice(2), commands, render });
 
-// 使用格式化命令插件
+// 中间件 => 格式化命令
 commandApp.use(formatArgv);
 
-commandApp.use((ctx, next) => {
-  const _tempPkgPath = `@muniz/muniz-plugin-${ctx.argv[0]}`;
+// 中间件 => 判断是否存在命令
+commandApp.use(isCommand);
 
-  try {
-    const _tempPkgJsonPath = require.resolve(_tempPkgPath);
-  } catch {
-    ctx.render(<Text>插件不存在</Text>);
-  }
-
-  console.log(ctx.argv);
-
-  next();
-});
+// 中间件 => 执行命令
+commandApp.use(runCommand);
 
 // 启动
 commandApp.start();
