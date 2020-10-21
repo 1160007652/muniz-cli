@@ -2,7 +2,12 @@
   "version": "1.0.0",
   "npmClient": "yarn",
   "useWorkspaces": true,
-  "packages": ["packages/@muniz/cli*", "packages/@muniz/muniz-plugin*", "packages/@muniz/ink*"],
+  "packages": [
+    "packages/@muniz/cli*",
+    "packages/@muniz/muniz-plugin*",
+    "packages/@muniz/ink*",
+    "packages/@muniz/server*"
+  ],
   "command": {
     "publish": {
       "ignoreChanges": ["ignored-file", "*.md"]

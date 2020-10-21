@@ -23,7 +23,11 @@ var _Help = _interopRequireDefault(require("../Help"));
 
 var _Version = _interopRequireDefault(require("../Version"));
 
-var Create = function Create(context) {
+/**
+ * @muniz
+ * @description 这是入口命令
+ */
+var App = function App(context) {
   var program = context.program,
       help = context.help,
       version = context.version,
@@ -64,16 +68,16 @@ var Create = function Create(context) {
   }, DynamicCommandUI ? /*#__PURE__*/_react["default"].createElement(DynamicCommandUI, null) : /*#__PURE__*/_react["default"].createElement(_ink.Text, null, "\u4E0D\u5B58\u5728\u8BE5\u547D\u4EE4"))));
 };
 
-Create.propTypes = {
+App.propTypes = {
   /**
+   * @muniz
    * @description 描述组件
    * @alias i
    */
   input: _propTypes["default"].array,
-  //
   flags: _propTypes["default"].object
 };
-Create.defaultProps = {
+App.defaultProps = {
   input: [],
   flags: null
 }; // isGit: {
@@ -83,5 +87,5 @@ Create.defaultProps = {
 //   desc: '是否初始化Git',
 // },
 
-var _default = Create;
+var _default = App;
 exports["default"] = _default;

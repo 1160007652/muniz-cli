@@ -4,7 +4,8 @@
   "workspaces": [
     "packages/@muniz/cli*",
     "packages/@muniz/muniz-plugin*",
-    "packages/@muniz/ink*"
+    "packages/@muniz/ink*",
+    "packages/@muniz/server*"
   ],
   "scripts": {
     "dev": "nodemon --exec ./scripts/dev.sh",

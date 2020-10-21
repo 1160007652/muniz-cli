@@ -7,7 +7,11 @@ import { default as UI_Add } from '../Add';
 import { default as UI_Help } from '../Help';
 import { default as UI_Version } from '../Version';
 
-const Create = (context) => {
+/**
+ * @muniz
+ * @description 这是入口命令
+ */
+const App = (context) => {
   const { program, help, version, isInternalCommand } = context;
   const { input, flags } = program;
   let DynamicCommandUI = null;
@@ -39,16 +43,17 @@ const Create = (context) => {
   );
 };
 
-Create.propTypes = {
+App.propTypes = {
   /**
+   * @muniz
    * @description 描述组件
    * @alias i
    */
-  input: PropTypes.array, //
+  input: PropTypes.array,
   flags: PropTypes.object,
 };
 
-Create.defaultProps = {
+App.defaultProps = {
   input: [],
   flags: null,
 };
@@ -59,4 +64,4 @@ Create.defaultProps = {
 //   default: true,
 //   desc: '是否初始化Git',
 // },
-export default Create;
+export default App;
