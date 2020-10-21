@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, '__esModule', {
-  value: true,
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
 exports.installCommands = exports.commands = void 0;
 // 内置注册命令

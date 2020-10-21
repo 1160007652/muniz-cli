@@ -1,71 +1,71 @@
-'use strict';
+"use strict";
 
-var _interopRequireDefault = require('@babel/runtime/helpers/interopRequireDefault');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-Object.defineProperty(exports, '__esModule', {
-  value: true,
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
-exports['default'] = void 0;
+exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require('react'));
+var _react = _interopRequireDefault(require("react"));
 
-var _ink = require('ink');
+var _command = require("../../../command");
 
 /**
  * 是否是内置命令
  */
 var isCommand = function isCommand(ctx, next) {
   var commands = ctx.commands,
-    argv = ctx.argv,
-    render = ctx.render; // 如果 argv.input > 0, 表示输入了执行命令， 开始执行输入的命令
+      argv = ctx.argv,
+      render = ctx.render; // 初始化执行内置框架命令
+
+  ctx.pkgName = '@muniz/cli';
+  ctx.pkgPath = __filename.replace(new RegExp('(@muniz/cli)/.*$', 'ig'), function (_, c) {
+    return c;
+  });
+  ctx.pkg = require("".concat(ctx.pkgPath, "/package.json")); // 如果 argv.input > 0, 表示输入了执行命令， 开始执行输入的命令
 
   if (argv.input.length > 0) {
-    // 如果输入的命令是 内置命令， 那么执行内置框架命令
-    if (commands.includes(argv.input[0])) {
-      ctx.pkgName = '@muniz/cli';
-      ctx.pkgPath = __filename.replace(new RegExp('(@muniz/cli)/.*$', 'ig'), function (_, c) {
-        return c;
-      });
-      ctx.pkg = require(''.concat(ctx.pkgPath, '/package.json'));
-    } else {
+    // 执行 非内置命令 =》 插件命令
+    if (!commands.includes(argv.input[0])) {
+      ctx.env.command = 'plugin'; // 当前 运行环境 变更为 插件， 默认是 cli 主控制器环境
+
       try {
-        ctx.pkgName = '@muniz/muniz-plugin-'.concat(argv.input[0]);
+        ctx.pkgName = "@muniz/muniz-plugin-".concat(argv.input[0]);
 
         var _tempPkgPath = require.resolve(ctx.pkgName);
 
-        ctx.pkgPath = _tempPkgPath.replace(new RegExp('('.concat(ctx.pkgName, ')/.*$'), 'ig'), function (_, c) {
+        ctx.pkgPath = _tempPkgPath.replace(new RegExp("(".concat(ctx.pkgName, ")/.*$"), 'ig'), function (_, c) {
           return c;
         });
-        ctx.pkg = require(''.concat(ctx.pkgPath, '/package.json'));
+        ctx.pkg = require("".concat(ctx.pkgPath, "/package.json"));
       } catch (_unused) {
-        render(
-          /*#__PURE__*/ _react['default'].createElement(
-            _ink.Text,
-            null,
-            '\u6253\u5370 \u6267\u884C\u547D\u4EE4\u4E0D\u5B58\u5728',
-          ),
-        );
-        /**
-         * 可以在这里做 命令 推荐
-         */
-
+        ctx.pkgName = "@muniz/muniz-plugin-".concat(argv.input[0]);
+        ctx.pkgPath = '';
+        ctx.pkg = {};
+        render( /*#__PURE__*/_react["default"].createElement(_command.UI_NotCommand, ctx));
         process.exit();
       }
     }
 
     next();
   } else {
-    // 如果 argv.input === 0, 没有输入执行命令， 这种情况 打印“帮助”命令
-    render(
-      /*#__PURE__*/ _react['default'].createElement(
-        _ink.Text,
-        null,
-        '\u6253\u5370\u4E3B\u6846\u67B6\u5E2E\u52A9\u547D\u4EE4',
-      ),
-    );
-    process.exit();
+    var _argv$options;
+
+    /**
+     *
+     * 如果 argv.input === 0, 且 argv.options === 0 时, 置入 argv.options.help = true , 走 打印中间件 显示“帮助”命令
+     *
+     * 如果是 --version，-V 参数，放行 next()
+     *
+     */
+    if (Object.keys(argv.options).length >= 0 && !((_argv$options = argv.options) === null || _argv$options === void 0 ? void 0 : _argv$options.version)) {
+      argv.options['help'] = true;
+    }
+
+    next();
   }
 };
 
 var _default = isCommand;
-exports['default'] = _default;
+exports["default"] = _default;

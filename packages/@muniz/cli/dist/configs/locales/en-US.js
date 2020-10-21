@@ -1,11 +1,11 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, '__esModule', {
-  value: true,
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
-exports['default'] = void 0;
+exports["default"] = void 0;
 var enUS = {
-  你好: 'hello',
+  你好: 'hello'
 };
 var _default = enUS;
-exports['default'] = _default;
+exports["default"] = _default;

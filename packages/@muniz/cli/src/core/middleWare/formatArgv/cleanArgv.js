@@ -25,7 +25,12 @@ export default function cleanArgv(argv) {
       let temp = item.split('=');
       temp[0] = temp[0].replace(/^\-{1,2}/, '');
       temp[0] = temp[0].replace(/-(\w)/g, (_, c) => (c ? c.toUpperCase() : ''));
-      newArgv.options[temp[0]] = temp[1];
+
+      if (['help', 'version'].includes(temp[0])) {
+        newArgv.options[temp[0]] = true;
+      } else {
+        newArgv.options[temp[0]] = temp[1];
+      }
     }
   });
 

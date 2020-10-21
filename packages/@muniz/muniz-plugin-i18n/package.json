@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^0.1.1",
+    "react": "17.0.0-rc.3",
     "react-intl-universal": "^2.4.1",
     "yup": "^0.29.3"
   }

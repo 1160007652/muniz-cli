@@ -1,9 +1,9 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
-  value: true,
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
-exports['default'] = void 0;
+exports["default"] = void 0;
 
 function debounce(func, delay) {
   var timer;
@@ -25,4 +25,4 @@ function debounce(func, delay) {
 }
 
 var _default = debounce;
-exports['default'] = _default;
+exports["default"] = _default;

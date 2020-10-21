@@ -32,7 +32,7 @@
     "ink": "^3.0.6",
     "ink-text-input": "^4.0.1",
     "meow": "^7.1.1",
-    "react": "^16.13.1",
+    "react": "17.0.0-rc.3",
     "react-intl-universal": "^2.4.1",
     "react-router": "^5.2.0",
     "yup": "^0.29.3"

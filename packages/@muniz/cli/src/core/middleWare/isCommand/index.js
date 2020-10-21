@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text } from 'ink';
+
+import { UI_NotCommand } from '../../../command';
 
 /**
  * 是否是内置命令
@@ -7,34 +8,47 @@ import { Text } from 'ink';
 const isCommand = (ctx, next) => {
   const { commands, argv, render } = ctx;
 
+  // 初始化执行内置框架命令
+  ctx.pkgName = '@muniz/cli';
+  ctx.pkgPath = __filename.replace(new RegExp('(@muniz/cli)/.*$', 'ig'), (_, c) => c);
+  ctx.pkg = require(`${ctx.pkgPath}/package.json`);
+
   // 如果 argv.input > 0, 表示输入了执行命令， 开始执行输入的命令
   if (argv.input.length > 0) {
-    // 如果输入的命令是 内置命令， 那么执行内置框架命令
-    if (commands.includes(argv.input[0])) {
-      ctx.pkgName = '@muniz/cli';
-      ctx.pkgPath = __filename.replace(new RegExp('(@muniz/cli)/.*$', 'ig'), (_, c) => c);
-      ctx.pkg = require(`${ctx.pkgPath}/package.json`);
-    } else {
+    // 执行 非内置命令 =》 插件命令
+    if (!commands.includes(argv.input[0])) {
+      ctx.env.command = 'plugin'; // 当前 运行环境 变更为 插件， 默认是 cli 主控制器环境
       try {
         ctx.pkgName = `@muniz/muniz-plugin-${argv.input[0]}`;
         const _tempPkgPath = require.resolve(ctx.pkgName);
         ctx.pkgPath = _tempPkgPath.replace(new RegExp(`(${ctx.pkgName})/.*$`, 'ig'), (_, c) => c);
         ctx.pkg = require(`${ctx.pkgPath}/package.json`);
       } catch {
-        render(<Text>打印 执行命令不存在</Text>);
+        ctx.pkgName = `@muniz/muniz-plugin-${argv.input[0]}`;
+        ctx.pkgPath = '';
+        ctx.pkg = {};
 
-        /**
-         * 可以在这里做 命令 推荐
-         */
+        render(<UI_NotCommand {...ctx} />);
+
         process.exit();
       }
     }
 
     next();
   } else {
-    // 如果 argv.input === 0, 没有输入执行命令， 这种情况 打印“帮助”命令
-    render(<Text>打印主框架帮助命令</Text>);
-    process.exit();
+    /**
+     *
+     * 如果 argv.input === 0, 且 argv.options === 0 时, 置入 argv.options.help = true , 走 打印中间件 显示“帮助”命令
+     *
+     * 如果是 --version，-V 参数，放行 next()
+     *
+     */
+
+    if (Object.keys(argv.options).length >= 0 && !argv.options?.version) {
+      argv.options['help'] = true;
+    }
+
+    next();
   }
 };
 

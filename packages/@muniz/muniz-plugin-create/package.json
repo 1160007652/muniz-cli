@@ -34,7 +34,7 @@
     "@hookform/resolvers": "^0.1.1",
     "@muniz/ink-ui": "1.0.0",
     "ink": "^3.0.7",
-    "react": "^16.14.0",
+    "react": "17.0.0-rc.3",
     "react-intl-universal": "^2.4.1",
     "react-router": "^5.2.0",
     "yup": "^0.29.3"

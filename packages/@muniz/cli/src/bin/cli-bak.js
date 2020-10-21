@@ -6,7 +6,7 @@ import { render } from 'ink';
 import meow from 'meow';
 import minimist from 'minimist';
 
-import { UI_APP, UI_NotCommand } from '../ui';
+import { UI_APP, UI_NotCommand } from '../command';
 import { command, installCommand } from '../constants/useCommand';
 import { default as config } from '../configs';
 import { cleanOptions } from '../lib/cleanOptions';

@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, '__esModule', {
-  value: true,
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
-exports['default'] = cleanArgv;
+exports["default"] = cleanArgv;
 
 /**
  * 输入格式，如下
@@ -22,7 +22,7 @@ exports['default'] = cleanArgv;
 function cleanArgv(argv) {
   var newArgv = {
     input: [],
-    options: {},
+    options: {}
   };
   argv.forEach(function (item) {
     if (!/^\-{1,2}/.test(item)) {
@@ -33,7 +33,12 @@ function cleanArgv(argv) {
       temp[0] = temp[0].replace(/-(\w)/g, function (_, c) {
         return c ? c.toUpperCase() : '';
       });
-      newArgv.options[temp[0]] = temp[1];
+
+      if (['help', 'version'].includes(temp[0])) {
+        newArgv.options[temp[0]] = true;
+      } else {
+        newArgv.options[temp[0]] = temp[1];
+      }
     }
   });
   return newArgv;
