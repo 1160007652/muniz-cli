@@ -25,7 +25,7 @@ var CommandTextList = function CommandTextList(_ref) {
     var _item$key;
 
     console.log(item);
-    var len = item === null || item === void 0 ? void 0 : (_item$key = item.key) === null || _item$key === void 0 ? void 0 : _item$key.length;
+    var len = (item === null || item === void 0 ? void 0 : (_item$key = item.key) === null || _item$key === void 0 ? void 0 : _item$key.length) || 0;
 
     if (item === null || item === void 0 ? void 0 : item.alias) {
       len += ", -".concat(item.alias).length;

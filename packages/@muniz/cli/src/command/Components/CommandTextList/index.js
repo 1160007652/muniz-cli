@@ -8,10 +8,11 @@ const CommandTextList = ({ data, labelColor, label }) => {
     null,
     data.map((item) => {
       console.log(item);
-      let len = item?.key?.length;
+      let len = item?.key?.length || 0;
       if (item?.alias) {
         len += `, -${item.alias}`.length;
       }
+
       return len + 5;
     }),
   );
