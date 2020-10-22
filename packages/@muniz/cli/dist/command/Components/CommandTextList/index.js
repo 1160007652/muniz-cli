@@ -24,6 +24,7 @@ var CommandTextList = function CommandTextList(_ref) {
   var commandWidth = Math.max.apply(null, data.map(function (item) {
     var _item$key;
 
+    console.log(item);
     var len = item === null || item === void 0 ? void 0 : (_item$key = item.key) === null || _item$key === void 0 ? void 0 : _item$key.length;
 
     if (item === null || item === void 0 ? void 0 : item.alias) {
