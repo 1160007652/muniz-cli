@@ -43,11 +43,9 @@ const isCommand = (ctx, next) => {
      * 如果是 --version，-V 参数，放行 next()
      *
      */
-
-    if (Object.keys(argv.options).length >= 0 && !argv.options?.version) {
+    if (Object.keys(argv.options).length >= 0 && !(argv.options?.version || argv.options?.v)) {
       argv.options['help'] = true;
     }
-
     next();
   }
 };

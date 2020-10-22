@@ -34,7 +34,7 @@ function cleanArgv(argv) {
         return c ? c.toUpperCase() : '';
       });
 
-      if (['help', 'version'].includes(temp[0])) {
+      if (['help', 'version', 'h', 'v'].includes(temp[0])) {
         newArgv.options[temp[0]] = true;
       } else {
         newArgv.options[temp[0]] = temp[1];

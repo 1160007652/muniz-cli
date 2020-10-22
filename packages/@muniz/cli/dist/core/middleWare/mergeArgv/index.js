@@ -43,8 +43,8 @@ var mergeArgv = /*#__PURE__*/function () {
 
           case 6:
             result = _context.sent;
-            console.log(ctx);
 
+            // console.log(ctx);
             if (argv.input.length === 0) {// next();
             } else if (argv.input.length === 1) {
               result = result.filter(function (item) {
@@ -97,7 +97,7 @@ var mergeArgv = /*#__PURE__*/function () {
             argv.options = newOptions;
             next();
 
-          case 12:
+          case 11:
           case "end":
             return _context.stop();
         }

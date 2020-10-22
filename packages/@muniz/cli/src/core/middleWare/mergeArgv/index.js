@@ -18,7 +18,7 @@ const mergeArgv = async (ctx, next) => {
   const { cliConfig, i18nLocales } = ctx.currentModule;
   let result = await generateCommand(`${pkgPath}/src/command`, `${pkgPath}/src/command`);
 
-  console.log(ctx);
+  // console.log(ctx);
 
   if (argv.input.length === 0) {
     // next();

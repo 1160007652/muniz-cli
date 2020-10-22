@@ -7,7 +7,6 @@ const CommandTextList = ({ data, labelColor, label }) => {
   const commandWidth = Math.max.apply(
     null,
     data.map((item) => {
-      console.log(item);
       let len = item?.key?.length || 0;
       if (item?.alias) {
         len += `, -${item.alias}`.length;

@@ -50,7 +50,7 @@ var isCommand = function isCommand(ctx, next) {
 
     next();
   } else {
-    var _argv$options;
+    var _argv$options, _argv$options2;
 
     /**
      *
@@ -59,7 +59,7 @@ var isCommand = function isCommand(ctx, next) {
      * 如果是 --version，-V 参数，放行 next()
      *
      */
-    if (Object.keys(argv.options).length >= 0 && !((_argv$options = argv.options) === null || _argv$options === void 0 ? void 0 : _argv$options.version)) {
+    if (Object.keys(argv.options).length >= 0 && !(((_argv$options = argv.options) === null || _argv$options === void 0 ? void 0 : _argv$options.version) || ((_argv$options2 = argv.options) === null || _argv$options2 === void 0 ? void 0 : _argv$options2.v))) {
       argv.options['help'] = true;
     }
 

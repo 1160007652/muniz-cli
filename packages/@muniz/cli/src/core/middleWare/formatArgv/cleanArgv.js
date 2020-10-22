@@ -26,7 +26,7 @@ export default function cleanArgv(argv) {
       temp[0] = temp[0].replace(/^\-{1,2}/, '');
       temp[0] = temp[0].replace(/-(\w)/g, (_, c) => (c ? c.toUpperCase() : ''));
 
-      if (['help', 'version'].includes(temp[0])) {
+      if (['help', 'version', 'h', 'v'].includes(temp[0])) {
         newArgv.options[temp[0]] = true;
       } else {
         newArgv.options[temp[0]] = temp[1];
