@@ -14,7 +14,7 @@ const helpCommand = async (ctx, next) => {
     // console.log(ctx);
     let result = await generateCommand(`${pkgPath}/src/command`, `${pkgPath}/src/command`);
 
-    if (argv.input.length === 1) {
+    if ([0, 1].includes(argv.input.length)) {
       render(<UI_Help data={result} show="command" usage={`$ muniz <command> [options]`} />);
     }
 

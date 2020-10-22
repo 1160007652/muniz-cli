@@ -44,7 +44,7 @@ var helpCommand = /*#__PURE__*/function () {
           case 4:
             result = _context.sent;
 
-            if (argv.input.length === 1) {
+            if ([0, 1].includes(argv.input.length)) {
               render( /*#__PURE__*/_react["default"].createElement(_command.UI_Help, {
                 data: result,
                 show: "command",

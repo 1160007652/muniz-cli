@@ -22,7 +22,9 @@ var CommandTextList = function CommandTextList(_ref) {
       labelColor = _ref.labelColor,
       label = _ref.label;
   var commandWidth = Math.max.apply(null, data.map(function (item) {
-    var len = item.key.length;
+    var _item$key;
+
+    var len = item === null || item === void 0 ? void 0 : (_item$key = item.key) === null || _item$key === void 0 ? void 0 : _item$key.length;
 
     if (item === null || item === void 0 ? void 0 : item.alias) {
       len += ", -".concat(item.alias).length;

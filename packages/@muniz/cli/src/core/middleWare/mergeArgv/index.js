@@ -16,11 +16,13 @@ const mergeArgv = async (ctx, next) => {
   }
 
   const { cliConfig, i18nLocales } = ctx.currentModule;
-
   let result = await generateCommand(`${pkgPath}/src/command`, `${pkgPath}/src/command`);
 
-  if (argv.input.length < 2) {
-    // argv.input.push(argv.input[0]);
+  console.log(ctx);
+
+  if (argv.input.length === 0) {
+    // next();
+  } else if (argv.input.length === 1) {
     result = result.filter((item) => item.key === argv.input[0])[0];
   } else {
     result = result.filter((item) => item.key === argv.input[1])[0];
@@ -39,7 +41,7 @@ const mergeArgv = async (ctx, next) => {
 
       let aliasName = item;
       // 整合 短名称参数，如果有该参数，未设值 那么 取预设的默认值
-      result.options.forEach((_options) => {
+      result?.options?.forEach((_options) => {
         if ([_options.alias, _options.key].includes(item)) {
           newOptions[_options.key] = argv.options[item] || _options.default;
           aliasName = _options.key;
@@ -55,8 +57,10 @@ const mergeArgv = async (ctx, next) => {
     });
   } else {
     // 如果没有参数, 那么全部取预设的数据
-    result.options.forEach((_options) => {
-      newOptions[_options.key] = _options.default;
+    result?.options?.forEach((_options) => {
+      if (_options?.key) {
+        newOptions[_options.key] = _options.default;
+      }
     });
   }
 

@@ -24,7 +24,7 @@ var _servers = require("@muniz/servers");
  */
 var mergeArgv = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(ctx, next) {
-    var pkgName, argv, env, pkgPath, newOptions, _ctx$currentModule, cliConfig, i18nLocales, result;
+    var pkgName, argv, env, pkgPath, newOptions, _ctx$currentModule, cliConfig, i18nLocales, result, _result2, _result2$options;
 
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
@@ -43,9 +43,10 @@ var mergeArgv = /*#__PURE__*/function () {
 
           case 6:
             result = _context.sent;
+            console.log(ctx);
 
-            if (argv.input.length < 2) {
-              // argv.input.push(argv.input[0]);
+            if (argv.input.length === 0) {// next();
+            } else if (argv.input.length === 1) {
               result = result.filter(function (item) {
                 return item.key === argv.input[0];
               })[0];
@@ -57,6 +58,8 @@ var mergeArgv = /*#__PURE__*/function () {
 
             if (Object.keys(argv.options).length > 0) {
               Object.keys(argv.options).forEach(function (item) {
+                var _result, _result$options;
+
                 // 合并 --help, -h 参数
                 if (['h', 'help'].includes(item)) {
                   newOptions['help'] = true;
@@ -69,7 +72,7 @@ var mergeArgv = /*#__PURE__*/function () {
 
                 var aliasName = item; // 整合 短名称参数，如果有该参数，未设值 那么 取预设的默认值
 
-                result.options.forEach(function (_options) {
+                (_result = result) === null || _result === void 0 ? void 0 : (_result$options = _result.options) === null || _result$options === void 0 ? void 0 : _result$options.forEach(function (_options) {
                   if ([_options.alias, _options.key].includes(item)) {
                     newOptions[_options.key] = argv.options[item] || _options["default"];
                     aliasName = _options.key;
@@ -84,15 +87,17 @@ var mergeArgv = /*#__PURE__*/function () {
               });
             } else {
               // 如果没有参数, 那么全部取预设的数据
-              result.options.forEach(function (_options) {
-                newOptions[_options.key] = _options["default"];
+              (_result2 = result) === null || _result2 === void 0 ? void 0 : (_result2$options = _result2.options) === null || _result2$options === void 0 ? void 0 : _result2$options.forEach(function (_options) {
+                if (_options === null || _options === void 0 ? void 0 : _options.key) {
+                  newOptions[_options.key] = _options["default"];
+                }
               });
             }
 
             argv.options = newOptions;
             next();
 
-          case 11:
+          case 12:
           case "end":
             return _context.stop();
         }

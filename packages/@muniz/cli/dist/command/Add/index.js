@@ -13,11 +13,15 @@ var _ink = require("ink");
 
 var _reactRouter = require("react-router");
 
-var Home = function Home() {
+/**
+ * @muniz
+ * @description 添加插件
+ */
+var Add = function Add() {
   var location = (0, _reactRouter.useLocation)();
   console.log(location);
   return /*#__PURE__*/_react["default"].createElement(_ink.Text, null, "\u6DFB\u52A0\u63D2\u4EF6\u547D\u4EE4");
 };
 
-var _default = Home;
+var _default = Add;
 exports["default"] = _default;
