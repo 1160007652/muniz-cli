@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Box, Text, useApp, useFocusManager } from 'ink';
 import { useLocation } from 'react-router';
 import { useForm, Controller } from 'react-hook-form';
@@ -156,6 +157,32 @@ const Create = () => {
       )}
     </Box>
   );
+};
+
+Create.propTypes = {
+  /**
+   * @muniz
+   * @description 描述组件
+   * @alias i
+   */
+  inputa: PropTypes.string.isRequired,
+  /**
+   * @muniz
+   * @positionsArgs 1
+   */
+  flags: PropTypes.string,
+  /**
+   * @muniz
+   * @description 生成项目的名称
+   * @alias n
+   */
+  isGit: PropTypes.bool,
+};
+
+Create.defaultProps = {
+  inputa: 'ssss',
+  flags: 'wowowoowqqqqqqq',
+  isGit: false,
 };
 
 export default Create;

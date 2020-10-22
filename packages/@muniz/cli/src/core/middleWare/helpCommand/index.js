@@ -1,18 +1,30 @@
 import React from 'react';
 import { Text } from 'ink';
+import { UI_Help } from '../../../command';
 
-import { commandjx } from '@muniz/servers';
+import { generateCommand } from '@muniz/servers';
 
 /**
  * 使用帮助命令
  */
-const helpCommand = (ctx, next) => {
+const helpCommand = async (ctx, next) => {
   const { commands, argv, render, pkgPath } = ctx;
 
   if (argv.options?.help) {
     // console.log(ctx);
-    commandjx(`${pkgPath}/src/command/App/index.js`);
-    console.log('显示 使用帮助');
+    let result = await generateCommand(`${pkgPath}/src/command`, `${pkgPath}/src/command`);
+
+    if (argv.input.length === 1) {
+      render(<UI_Help data={result} show="command" usage={`$ muniz <command> [options]`} />);
+    }
+
+    if (argv.input.length === 2) {
+      result = result.filter((item) => item.key === argv.input[1])[0];
+      render(<UI_Help data={result} show="options" usage={`$ muniz ${argv.input[1]} [options]`} />);
+    }
+
+    // console.log('显示 使用帮助\n', result.options);
+
     process.exit();
   }
   next();

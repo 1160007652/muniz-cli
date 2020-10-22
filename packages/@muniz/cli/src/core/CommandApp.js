@@ -53,7 +53,7 @@ class CommandApp {
   }
 
   async start() {
-    const _fn = this.compose(this.middleware);
+    const _fn = await this.compose(this.middleware);
     await _fn(this.context);
   }
 }

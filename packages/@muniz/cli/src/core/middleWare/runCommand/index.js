@@ -7,7 +7,7 @@ import { Text } from 'ink';
 const runCommand = (ctx, next) => {
   const { commands, argv, render, currentModule } = ctx;
   const { cliConfig, i18nLocales } = currentModule;
-  console.log(currentModule);
+  console.log(ctx);
   next();
 };
 

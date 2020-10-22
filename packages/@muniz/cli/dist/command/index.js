@@ -23,9 +23,17 @@ Object.defineProperty(exports, "UI_Version", {
     return _Version["default"];
   }
 });
+Object.defineProperty(exports, "UI_Help", {
+  enumerable: true,
+  get: function get() {
+    return _Help["default"];
+  }
+});
 
 var _App = _interopRequireDefault(require("./App"));
 
 var _NotCommand = _interopRequireDefault(require("./NotCommand"));
 
 var _Version = _interopRequireDefault(require("./Version"));
+
+var _Help = _interopRequireDefault(require("./Help"));

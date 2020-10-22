@@ -74,18 +74,24 @@ App.propTypes = {
    * @description 描述组件
    * @alias i
    */
-  input: _propTypes["default"].array,
-  flags: _propTypes["default"].object
+  input: _propTypes["default"].string.isRequired,
+
+  /**
+   * @muniz
+   */
+  flags: _propTypes["default"].object,
+
+  /**
+   * @muniz
+   * @description 生成项目的名称
+   * @alias n
+   */
+  isGit: _propTypes["default"].bool
 };
 App.defaultProps = {
-  input: [],
-  flags: null
-}; // isGit: {
-//   type: 'boolean',
-//   alias: 'g',
-//   default: true,
-//   desc: '是否初始化Git',
-// },
-
+  input: 'ssss',
+  flags: null,
+  isGit: false
+};
 var _default = App;
 exports["default"] = _default;

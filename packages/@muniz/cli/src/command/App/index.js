@@ -49,19 +49,23 @@ App.propTypes = {
    * @description 描述组件
    * @alias i
    */
-  input: PropTypes.array,
+  input: PropTypes.string.isRequired,
+  /**
+   * @muniz
+   */
   flags: PropTypes.object,
+  /**
+   * @muniz
+   * @description 生成项目的名称
+   * @alias n
+   */
+  isGit: PropTypes.bool,
 };
 
 App.defaultProps = {
-  input: [],
+  input: 'ssss',
   flags: null,
+  isGit: false,
 };
 
-// isGit: {
-//   type: 'boolean',
-//   alias: 'g',
-//   default: true,
-//   desc: '是否初始化Git',
-// },
 export default App;

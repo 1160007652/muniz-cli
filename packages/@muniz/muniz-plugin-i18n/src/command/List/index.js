@@ -11,6 +11,10 @@ const Item = ({ label }) => {
   );
 };
 
+/**
+ * @muniz
+ * @description 更新 多语言
+ */
 const Update = () => {
   const params = useLocation();
   // console.log(params);

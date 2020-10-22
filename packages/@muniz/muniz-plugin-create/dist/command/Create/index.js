@@ -13,6 +13,8 @@ var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/sli
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
 var _ink = require("ink");
 
 var _reactRouter = require("react-router");
@@ -175,5 +177,31 @@ var Create = function Create() {
   }, "Step-3: \u4F7F\u7528\u5E2E\u52A9"), /*#__PURE__*/_react["default"].createElement(_ink.Text, null, "\u8FDB\u5165\u9879\u76EE: cd testProject"), /*#__PURE__*/_react["default"].createElement(_ink.Text, null, "\u8FDB\u5165\u9879\u76EE: npm install")));
 };
 
+Create.propTypes = {
+  /**
+   * @muniz
+   * @description 描述组件
+   * @alias i
+   */
+  inputa: _propTypes["default"].string.isRequired,
+
+  /**
+   * @muniz
+   * @positionsArgs 1
+   */
+  flags: _propTypes["default"].string,
+
+  /**
+   * @muniz
+   * @description 生成项目的名称
+   * @alias n
+   */
+  isGit: _propTypes["default"].bool
+};
+Create.defaultProps = {
+  inputa: 'ssss',
+  flags: 'wowowoowqqqqqqq',
+  isGit: false
+};
 var _default = Create;
 exports["default"] = _default;

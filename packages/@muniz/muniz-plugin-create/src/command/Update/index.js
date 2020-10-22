@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Text, Box, useFocus } from 'ink';
 import { useLocation, useHistory, useParams, useRouteMatch } from 'react-router';
 
@@ -11,6 +12,10 @@ const Item = ({ label }) => {
   );
 };
 
+/**
+ * @muniz
+ * @description 更新模版命令
+ */
 const Update = () => {
   const params = useLocation();
   // console.log(params);
@@ -25,6 +30,32 @@ const Update = () => {
       <Item label="Third" />
     </Box>
   );
+};
+
+Update.propTypes = {
+  /**
+   * @muniz
+   * @description 描述组件
+   * @alias i
+   */
+  inputa: PropTypes.string.isRequired,
+  /**
+   * @muniz
+   * @positionsArgs 1
+   */
+  flags: PropTypes.string,
+  /**
+   * @muniz
+   * @description 生成项目的名称
+   * @alias n
+   */
+  isGit: PropTypes.bool,
+};
+
+Update.defaultProps = {
+  inputa: 'ssss',
+  flags: 'wowowoowqqqqqqq',
+  isGit: false,
 };
 
 export default Update;

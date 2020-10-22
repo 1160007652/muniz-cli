@@ -1,2 +1,1 @@
-export { default as commandjx } from './commandjx';
-export { default as lib } from './lib';
+export { default as generateCommand } from './generateCommand';

@@ -21,9 +21,9 @@ exports["default"] = void 0;
 
 var _configs = _interopRequireDefault(require("./configs"));
 
-var _Switch = _interopRequireDefault(require("./ui/Switch"));
+var _Switch = _interopRequireDefault(require("./command/Switch"));
 
-var _List = _interopRequireDefault(require("./ui/List"));
+var _List = _interopRequireDefault(require("./command/List"));
 
 var _i18n = require("./lib/i18n");
 

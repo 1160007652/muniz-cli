@@ -23,6 +23,11 @@ var Item = function Item(_ref) {
     color: "green"
   }, "(focused)"));
 };
+/**
+ * @muniz
+ * @description 更新 多语言
+ */
+
 
 var Update = function Update() {
   var params = (0, _reactRouter.useLocation)(); // console.log(params);

@@ -5,11 +5,19 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = void 0;
+exports.parseCommand = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
+var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
+
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
@@ -27,6 +35,8 @@ var traverse = require('@babel/traverse')["default"];
 
 var types = require('@babel/types');
 
+var propTypes = ['array', 'bool', 'number', 'string']; // 只解析 jsDoc 中 包含 @muniz 标志的信息 目前包括(@description, @alias)
+
 var parseJsDoc = function parseJsDoc(flag, comments) {
   if (!Array.isArray(comments)) {
     return '';
@@ -35,13 +45,21 @@ var parseJsDoc = function parseJsDoc(flag, comments) {
   return comments.filter(function (comment) {
     return comment.value.includes('@muniz');
   }).map(function (comment) {
-    return comment.value.match(new RegExp("@".concat(flag, "\\s{1,}(.*?)\\s"), 'i'))[1].trim();
+    var result = comment.value.match(new RegExp("@".concat(flag, "\\s{1,}(.*?)\\s"), 'i'));
+
+    if (result && result.length > 1) {
+      return result[1].trim();
+    } else {
+      return '';
+    }
   }).join(' ');
-};
+}; // 解析属性 options - argv。options 详细信息 (长名称 key，短名称 alias，描述 description，类型 type，默认值 defaultValue)
+
 
 var parsePropType = function parsePropType(property) {
   var key = property.key.name;
   var description = parseJsDoc('description', property.leadingComments);
+  var alias = parseJsDoc('alias', property.leadingComments);
   var type = 'string';
   var isRequired = false;
 
@@ -55,13 +73,13 @@ var parsePropType = function parsePropType(property) {
         if (node.property.name === 'isRequired') {
           isRequired = true;
         }
-      } // Need to walk the whole node recursively to catch all types of `PropTypes.a.b.c` chain
-      // like `isRequired`, e.g. `PropTypes.string.isRequired`
+      } // 需要递归遍历整个节点以捕获所有类型的`PropTypes.a.b.c`链
+      // 例如ʻisRequired`，例如 PropTypes.string.isRequired
 
 
       walk(node.object);
-    } // If child node of `PropTypes...` chain is a call expression, it must be a
-    // prop type like `arrayOf`, e.g. `PropTypes.arrayOf(PropTypes.string)`
+    } // 如果 `PropTypes ...` 链的子节点是调用表达式，则它必须是
+    // prop类型，例如ʻarrayOf`，例如 PropTypes.arrayOf（PropTypes.string）
 
 
     if (types.isCallExpression(node)) {
@@ -71,7 +89,7 @@ var parsePropType = function parsePropType(property) {
     }
   };
 
-  walk(property.value); // Rename `bool` type to `boolean` for yargs to correctly recognize the type
+  walk(property.value); // 将`bool`类型重命名为`boolean`以使yargs正确识别该类型
 
   if (type === 'bool') {
     type = 'boolean';
@@ -81,9 +99,11 @@ var parsePropType = function parsePropType(property) {
     key: key,
     type: type,
     description: description,
+    alias: alias,
     isRequired: isRequired
   };
-};
+}; // 提取 属性
+
 
 var parsePropTypes = function parsePropTypes(node) {
   if (!types.isObjectExpression(node)) {
@@ -91,6 +111,19 @@ var parsePropTypes = function parsePropTypes(node) {
   }
 
   var propTypes = [];
+  node.properties.forEach(function (property) {
+    propTypes.push(parsePropType(property));
+  });
+  return propTypes;
+}; // 提取 默认值
+
+
+var parseDefaultProps = function parseDefaultProps(node) {
+  if (!types.isObjectExpression(node)) {
+    return {};
+  }
+
+  var defaultProps = {};
 
   var _iterator = _createForOfIteratorHelper(node.properties),
       _step;
@@ -98,7 +131,33 @@ var parsePropTypes = function parsePropTypes(node) {
   try {
     for (_iterator.s(); !(_step = _iterator.n()).done;) {
       var property = _step.value;
-      propTypes.push(parsePropType(property));
+
+      if (types.isArrayExpression(property.value)) {
+        var defaultValue = [];
+
+        var _iterator2 = _createForOfIteratorHelper(property.value.elements),
+            _step2;
+
+        try {
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            var element = _step2.value;
+
+            if (types.isLiteral(element)) {
+              defaultValue.push(element.value);
+            }
+          }
+        } catch (err) {
+          _iterator2.e(err);
+        } finally {
+          _iterator2.f();
+        }
+
+        defaultProps[property.key.name] = defaultValue;
+      }
+
+      if (types.isLiteral(property.value)) {
+        defaultProps[property.key.name] = property.value.value;
+      }
     }
   } catch (err) {
     _iterator.e(err);
@@ -106,25 +165,25 @@ var parsePropTypes = function parsePropTypes(node) {
     _iterator.f();
   }
 
-  return propTypes;
+  return defaultProps;
 };
 
-var commandjx = /*#__PURE__*/function () {
-  var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(path) {
-    var content, ast, componentName, description;
+var parseCommand = /*#__PURE__*/function () {
+  var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(filePath) {
+    var content, ast, componentName, description, defaultProps, args, command;
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            console.log('解析'); // 读取文件内容
-
-            content = fs.readFileSync(path, 'utf-8');
+            // 读取文件内容
+            content = fs.readFileSync(filePath, 'utf-8');
             ast = parser.parse(content, {
               sourceType: 'module',
               plugins: ['typescript', 'jsx', 'classProperties']
             });
             componentName = '';
-            description = '';
+            description = ''; // 遍历命令（名称、描述）
+
             traverse(ast, {
               ExportDefaultDeclaration: function ExportDefaultDeclaration(_ref2) {
                 var node = _ref2.node;
@@ -149,7 +208,11 @@ var commandjx = /*#__PURE__*/function () {
                 componentName = node.declaration.loc.identifierName;
               }
             });
+            defaultProps = {};
+            args = []; // 遍历命令 属性 options prop-types（名称、描述）
+
             traverse(ast, {
+              // 支持箭头功能组件，例如 const MyComponent =（）=> {}
               VariableDeclaration: function VariableDeclaration(_ref3) {
                 var node = _ref3.node;
 
@@ -157,7 +220,7 @@ var commandjx = /*#__PURE__*/function () {
                   description = parseJsDoc('description', node.leadingComments);
                 }
               },
-              // Support for named function components, e.g. function MyComponent {}
+              // 支持命名功能组件，例如 函数MyComponent {}
               FunctionDeclaration: function FunctionDeclaration(_ref4) {
                 var node = _ref4.node;
 
@@ -167,7 +230,7 @@ var commandjx = /*#__PURE__*/function () {
                   }
                 }
               },
-              // Support for class components, e.g. class MyComponent extends React.Component {}
+              // 支持类组件，例如 类MyComponent扩展了React.Component {}
               ClassDeclaration: function ClassDeclaration(_ref5) {
                 var node = _ref5.node;
 
@@ -177,38 +240,63 @@ var commandjx = /*#__PURE__*/function () {
                   }
                 }
               },
+              // 支持静态类道具，例如 类MyComponent {静态propTypes = ...}
               ClassProperty: function ClassProperty(_ref6) {
                 var node = _ref6.node;
-                console.log(node);
 
                 if (node.key.name === 'propTypes') {
-                  console.log(node.value); // args.push(...parsePropTypes(node.value));
+                  args.push.apply(args, (0, _toConsumableArray2["default"])(parsePropTypes(node.value)));
                 }
 
                 if (node.key.name === 'defaultProps') {
-                  console.log(node.value); // defaultProps = parseDefaultProps(node.value);
+                  defaultProps = parseDefaultProps(node.value);
+                }
+              },
+              // 支持功能组件的静态道具，例如 MyComponent.propTypes = ...
+              AssignmentExpression: function AssignmentExpression(_ref7) {
+                var node = _ref7.node;
+
+                if (node.operator !== '=') {
+                  return;
                 }
 
-                if (node.key.name === 'aliases') {
-                  console.log(node.value); // mergeAliases(aliases, parseAliases(node.value));
+                if (!node.left.object || !node.left.object.name) {
+                  return;
                 }
 
-                if (node.key.name === 'shortFlags') {
-                  console.log(node.value); // mergeAliases(aliases, parseAliases(node.value));
+                if (node.left.object.name !== componentName) {
+                  return;
                 }
 
-                if (node.key.name === 'positionalArgs') {
-                  console.log(node.value); // positionalArgs = parsePositionalArgs(node.value);
+                if (node.left.property.name === 'propTypes') {
+                  args.push.apply(args, (0, _toConsumableArray2["default"])(parsePropTypes(node.right)));
+                }
+
+                if (node.left.object.name === componentName) {
+                  if (!description) {
+                    description = parseJsDoc('alias', node.leadingComments);
+                  }
+                }
+
+                if (node.left.property.name === 'defaultProps') {
+                  defaultProps = parseDefaultProps(node.right);
                 }
               }
             });
-            console.log('\n');
-            console.log('命令:', componentName);
-            console.log('命令描述:', description); // 打印信息
+            command = {
+              key: String(componentName).replace(/^(.)/i, function (_, c) {
+                return String(c).toLocaleLowerCase();
+              }),
+              description: description,
+              options: args.map(function (arg) {
+                return _objectSpread(_objectSpread({}, arg), {}, {
+                  "default": defaultProps[arg.key]
+                });
+              })
+            };
+            return _context.abrupt("return", command);
 
-            console.log('\n');
-
-          case 11:
+          case 10:
           case "end":
             return _context.stop();
         }
@@ -216,10 +304,9 @@ var commandjx = /*#__PURE__*/function () {
     }, _callee);
   }));
 
-  return function commandjx(_x) {
+  return function parseCommand(_x) {
     return _ref.apply(this, arguments);
   };
 }();
 
-var _default = commandjx;
-exports["default"] = _default;
+exports.parseCommand = parseCommand;

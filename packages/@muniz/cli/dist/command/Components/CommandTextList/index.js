@@ -21,11 +21,29 @@ var CommandTextList = function CommandTextList(_ref) {
   var data = _ref.data,
       labelColor = _ref.labelColor,
       label = _ref.label;
-  var autoWidth = Math.max.apply(null, data.map(function (item) {
-    var len = item.command.length;
+  var commandWidth = Math.max.apply(null, data.map(function (item) {
+    var len = item.key.length;
+
+    if (item === null || item === void 0 ? void 0 : item.alias) {
+      len += ", -".concat(item.alias).length;
+    }
+
+    return len + 5;
+  }));
+  var defaultWidth = Math.max.apply(null, data.map(function (item) {
+    var len = 0;
 
     if (['Options', 'Other Options'].includes(label)) {
       len += (item === null || item === void 0 ? void 0 : item["default"]) ? "Default: ".concat(item["default"], " ").length : 0;
+    }
+
+    return len + 5;
+  }));
+  var typeWidth = Math.max.apply(null, data.map(function (item) {
+    var len = 0;
+
+    if (['Options', 'Other Options'].includes(label)) {
+      len += (item === null || item === void 0 ? void 0 : item.type) ? "Type: ".concat(item.type, " ").length : 0;
     }
 
     return len + 5;
@@ -39,7 +57,10 @@ var CommandTextList = function CommandTextList(_ref) {
     return /*#__PURE__*/_react["default"].createElement(_CommandText["default"], {
       key: index,
       data: item,
-      width: autoWidth
+      commandWidth: commandWidth,
+      defaultWidth: defaultWidth,
+      typeWidth: typeWidth,
+      label: label
     });
   }));
 };

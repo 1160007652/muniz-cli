@@ -21,7 +21,7 @@ var runCommand = function runCommand(ctx, next) {
       currentModule = ctx.currentModule;
   var cliConfig = currentModule.cliConfig,
       i18nLocales = currentModule.i18nLocales;
-  console.log(currentModule);
+  console.log(ctx);
   next();
 };
 

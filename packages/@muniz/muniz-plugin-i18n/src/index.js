@@ -1,6 +1,6 @@
 import { default as config } from './configs';
-import { default as _switch } from './ui/Switch';
-import { default as list } from './ui/List';
+import { default as _switch } from './command/Switch';
+import { default as list } from './command/List';
 
 export { i18n, initI18nLocales } from './lib/i18n';
 

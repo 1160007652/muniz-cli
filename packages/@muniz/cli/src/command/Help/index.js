@@ -3,26 +3,50 @@ import { Box, Text } from 'ink';
 // import { default as pluginI18n } from '@muniz/muniz-plugin-i18n';
 
 import CommandTextList from '../Components/CommandTextList';
+import CommandLabel from '../Components/CommandLabel';
 
 // const i18n = pluginI18n.i18n();
 
-const Help = ({ data }) => {
-  const { header, footer, usages = [], commands = [], options = [], otherOptions = [], examples = [] } = data;
+const Help = ({ data, usage, show }) => {
+  const usages = [{ key: usage, description: '' }];
+  const otherOptions = [
+    {
+      key: 'help',
+      alias: 'h',
+      description: '显示帮助文档',
+    },
+    {
+      key: 'version',
+      alias: 'v',
+      description: '显示版本号',
+    },
+  ];
   return (
     <Box flexDirection="column" paddingTop={1}>
-      {header && <Text>{header}</Text>}
+      {show === 'options' && (
+        <Box marginLeft={2} flexDirection="column">
+          {/* <CommandLabel color="blue">Info</CommandLabel> */}
+          <Text>{data.description}</Text>
+        </Box>
+      )}
 
-      {usages.length > 0 && <CommandTextList data={usages} label="Usage" labelColor="blue" />}
+      <CommandTextList data={usages} label="Usage" labelColor="blue" />
 
-      {commands.length > 0 && <CommandTextList data={commands} label="Command" labelColor="blue" />}
+      {show === 'command' && data.length > 0 && <CommandTextList data={data} label="Command" labelColor="blue" />}
 
-      {options.length > 0 && <CommandTextList data={options} label="Options" labelColor="#FF8C00" />}
+      {show === 'options' && data?.options?.length > 0 && (
+        <CommandTextList data={data.options} label="Options" labelColor="#FF8C00" />
+      )}
 
-      {otherOptions.length > 0 && <CommandTextList data={otherOptions} label="Other Options" labelColor="#FF8C00" />}
+      {<CommandTextList data={otherOptions} label="Other Options" labelColor="#FF8C00" />}
+      <Box marginBottom={1} />
+      {/* {examples.length > 0 && <CommandTextList data={examples} label="Examples" labelColor="yellow" />} */}
 
-      {examples.length > 0 && <CommandTextList data={examples} label="Examples" labelColor="yellow" />}
-
-      {footer && <Box marginTop={1}>{/* <Text>{i18n.get(footer)}</Text> */}</Box>}
+      {/* {footer && (
+        <Box marginTop={1}>
+          <Text>{i18n.get(footer)}</Text>
+        </Box>
+      )} */}
     </Box>
   );
 };

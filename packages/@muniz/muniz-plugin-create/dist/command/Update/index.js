@@ -9,6 +9,8 @@ exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
 var _ink = require("ink");
 
 var _reactRouter = require("react-router");
@@ -23,6 +25,11 @@ var Item = function Item(_ref) {
     color: "green"
   }, "(focused)"));
 };
+/**
+ * @muniz
+ * @description 更新模版命令
+ */
+
 
 var Update = function Update() {
   var params = (0, _reactRouter.useLocation)(); // console.log(params);
@@ -42,5 +49,31 @@ var Update = function Update() {
   }));
 };
 
+Update.propTypes = {
+  /**
+   * @muniz
+   * @description 描述组件
+   * @alias i
+   */
+  inputa: _propTypes["default"].string.isRequired,
+
+  /**
+   * @muniz
+   * @positionsArgs 1
+   */
+  flags: _propTypes["default"].string,
+
+  /**
+   * @muniz
+   * @description 生成项目的名称
+   * @alias n
+   */
+  isGit: _propTypes["default"].bool
+};
+Update.defaultProps = {
+  inputa: 'ssss',
+  flags: 'wowowoowqqqqqqq',
+  isGit: false
+};
 var _default = Update;
 exports["default"] = _default;
