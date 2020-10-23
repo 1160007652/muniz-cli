@@ -1,5 +1,5 @@
 import React from 'react';
-import { UI_Version } from '../../../command';
+import { Version } from '@muniz/ink-ui';
 
 /**
  * 显示帮助命令
@@ -7,7 +7,7 @@ import { UI_Version } from '../../../command';
 const versionCommand = (ctx, next) => {
   const { pkg, argv, render } = ctx;
   if (argv.options?.version) {
-    render(<UI_Version pkg={pkg} />);
+    render(<Version pkg={pkg} />);
     process.exit();
   }
   next();

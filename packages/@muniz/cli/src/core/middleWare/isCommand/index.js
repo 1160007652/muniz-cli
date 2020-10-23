@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { UI_NotCommand } from '../../../command';
+import { NotCommand } from '@muniz/ink-ui';
 
 /**
  * 是否是内置命令
@@ -28,7 +28,7 @@ const isCommand = (ctx, next) => {
         ctx.pkgPath = '';
         ctx.pkg = {};
 
-        render(<UI_NotCommand {...ctx} />);
+        render(<NotCommand {...ctx} />);
 
         process.exit();
       }

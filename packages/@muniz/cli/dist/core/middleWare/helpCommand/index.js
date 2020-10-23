@@ -13,9 +13,7 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _react = _interopRequireDefault(require("react"));
 
-var _ink = require("ink");
-
-var _command = require("../../../command");
+var _inkUi = require("@muniz/ink-ui");
 
 var _servers = require("@muniz/servers");
 
@@ -45,7 +43,7 @@ var helpCommand = /*#__PURE__*/function () {
             result = _context.sent;
 
             if ([0, 1].includes(argv.input.length)) {
-              render( /*#__PURE__*/_react["default"].createElement(_command.UI_Help, {
+              render( /*#__PURE__*/_react["default"].createElement(_inkUi.Help, {
                 data: result,
                 show: "command",
                 usage: "$ muniz <command> [options]"
@@ -56,7 +54,7 @@ var helpCommand = /*#__PURE__*/function () {
               result = result.filter(function (item) {
                 return item.key === argv.input[1];
               })[0];
-              render( /*#__PURE__*/_react["default"].createElement(_command.UI_Help, {
+              render( /*#__PURE__*/_react["default"].createElement(_inkUi.Help, {
                 data: result,
                 show: "options",
                 usage: "$ muniz ".concat(argv.input[1], " [options]")

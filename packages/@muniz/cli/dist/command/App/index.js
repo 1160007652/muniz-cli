@@ -17,11 +17,12 @@ var _ink = require("ink");
 
 var _reactRouter = require("react-router");
 
+var _inkUi = require("@muniz/ink-ui");
+
 var _Add = _interopRequireDefault(require("../Add"));
 
-var _Help = _interopRequireDefault(require("../Help"));
-
-var _Version = _interopRequireDefault(require("../Version"));
+// import { default as UI_Help } from '../Help';
+// import { default as UI_Version } from '../Version';
 
 /**
  * @muniz
@@ -54,11 +55,11 @@ var App = function App(context) {
   }, /*#__PURE__*/_react["default"].createElement(_reactRouter.Switch, null, /*#__PURE__*/_react["default"].createElement(_reactRouter.Route, {
     exact: true,
     path: "help"
-  }, /*#__PURE__*/_react["default"].createElement(_Help["default"], {
+  }, /*#__PURE__*/_react["default"].createElement(_inkUi.Help, {
     data: help
   })), /*#__PURE__*/_react["default"].createElement(_reactRouter.Route, {
     path: "version"
-  }, /*#__PURE__*/_react["default"].createElement(_Version["default"], {
+  }, /*#__PURE__*/_react["default"].createElement(_inkUi.Version, {
     data: version
   })), /*#__PURE__*/_react["default"].createElement(_reactRouter.Route, {
     path: "add",

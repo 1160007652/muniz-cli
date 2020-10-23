@@ -9,7 +9,7 @@ exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _command = require("../../../command");
+var _inkUi = require("@muniz/ink-ui");
 
 /**
  * 是否是内置命令
@@ -43,7 +43,7 @@ var isCommand = function isCommand(ctx, next) {
         ctx.pkgName = "@muniz/muniz-plugin-".concat(argv.input[0]);
         ctx.pkgPath = '';
         ctx.pkg = {};
-        render( /*#__PURE__*/_react["default"].createElement(_command.UI_NotCommand, ctx));
+        render( /*#__PURE__*/_react["default"].createElement(_inkUi.NotCommand, ctx));
         process.exit();
       }
     }

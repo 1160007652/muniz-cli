@@ -6,3 +6,4 @@ yarn.lock
 .cache
 .eslintcache
 package-lock.json
+dist

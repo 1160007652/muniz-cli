@@ -11,29 +11,13 @@ Object.defineProperty(exports, "UI_APP", {
     return _App["default"];
   }
 });
-Object.defineProperty(exports, "UI_NotCommand", {
+Object.defineProperty(exports, "UI_Add", {
   enumerable: true,
   get: function get() {
-    return _NotCommand["default"];
-  }
-});
-Object.defineProperty(exports, "UI_Version", {
-  enumerable: true,
-  get: function get() {
-    return _Version["default"];
-  }
-});
-Object.defineProperty(exports, "UI_Help", {
-  enumerable: true,
-  get: function get() {
-    return _Help["default"];
+    return _Add["default"];
   }
 });
 
 var _App = _interopRequireDefault(require("./App"));
 
-var _NotCommand = _interopRequireDefault(require("./NotCommand"));
-
-var _Version = _interopRequireDefault(require("./Version"));
-
-var _Help = _interopRequireDefault(require("./Help"));
+var _Add = _interopRequireDefault(require("./Add"));

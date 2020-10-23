@@ -2,10 +2,10 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Text } from 'ink';
 import { StaticRouter, Route, Switch } from 'react-router';
-
+import { Help, Version } from '@muniz/ink-ui';
 import { default as UI_Add } from '../Add';
-import { default as UI_Help } from '../Help';
-import { default as UI_Version } from '../Version';
+// import { default as UI_Help } from '../Help';
+// import { default as UI_Version } from '../Version';
 
 /**
  * @muniz
@@ -31,10 +31,10 @@ const App = (context) => {
     <StaticRouter location={{ pathname: command, state: flags }} context={context}>
       <Switch>
         <Route exact path="help">
-          <UI_Help data={help} />
+          <Help data={help} />
         </Route>
         <Route path="version">
-          <UI_Version data={version} />
+          <Version data={version} />
         </Route>
         <Route path="add" component={UI_Add} />
         <Route path={command}>{DynamicCommandUI ? <DynamicCommandUI /> : <Text>不存在该命令</Text>}</Route>

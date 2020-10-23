@@ -3,7 +3,6 @@ import { Box, Text } from 'ink';
 // import { default as pluginI18n } from '@muniz/muniz-plugin-i18n';
 
 import CommandTextList from '../Components/CommandTextList';
-import CommandLabel from '../Components/CommandLabel';
 
 // const i18n = pluginI18n.i18n();
 
@@ -25,7 +24,6 @@ const Help = ({ data, usage, show }) => {
     <Box flexDirection="column" paddingTop={1}>
       {show === 'options' && (
         <Box marginLeft={2} flexDirection="column">
-          {/* <CommandLabel color="blue">Info</CommandLabel> */}
           <Text>{data.description}</Text>
         </Box>
       )}
@@ -41,12 +39,6 @@ const Help = ({ data, usage, show }) => {
       {<CommandTextList data={otherOptions} label="Other Options" labelColor="#FF8C00" />}
       <Box marginBottom={1} />
       {/* {examples.length > 0 && <CommandTextList data={examples} label="Examples" labelColor="yellow" />} */}
-
-      {/* {footer && (
-        <Box marginTop={1}>
-          <Text>{i18n.get(footer)}</Text>
-        </Box>
-      )} */}
     </Box>
   );
 };
