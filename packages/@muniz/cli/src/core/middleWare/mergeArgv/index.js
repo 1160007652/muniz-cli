@@ -1,3 +1,4 @@
+import React from 'react';
 import { generateCommand } from '@muniz/servers';
 
 /**
@@ -5,10 +6,9 @@ import { generateCommand } from '@muniz/servers';
  * - 将（alias）别名转化为全量的名称；
  * - 转化options类型(type)；
  * - 赋值默认值， 将给定的参数进行默认值赋值；
- *
  */
 const mergeArgv = async (ctx, next) => {
-  const { pkgName, argv, env, pkgPath } = ctx;
+  const { pkgName, argv, env, pkgPath, render } = ctx;
   let newOptions = {};
 
   if (env.command === 'plugin') {
@@ -16,30 +16,42 @@ const mergeArgv = async (ctx, next) => {
   }
 
   const { cliConfig, i18nLocales } = ctx.currentModule;
+
   let result = await generateCommand(`${pkgPath}/src/command`, `${pkgPath}/src/command`);
 
-  // console.log(ctx);
-
-  if (argv.input.length === 0) {
-    // next();
-  } else if (argv.input.length === 1) {
-    result = result.filter((item) => item.key === argv.input[0])[0];
-  } else {
-    result = result.filter((item) => item.key === argv.input[1])[0];
+  switch (argv.input.length) {
+    case 0: {
+      break;
+    }
+    case 1: {
+      if (ctx.env.command === 'cli') {
+        argv.input.push(argv.input[0]);
+      } else {
+        result = result.filter((item) => item.key === argv.input[0])[0];
+      }
+      break;
+    }
+    default: {
+      result = result.filter((item) => item.key === argv.input[1])[0];
+      break;
+    }
   }
 
   if (Object.keys(argv.options).length > 0) {
     Object.keys(argv.options).forEach((item) => {
+      let aliasName = item;
+
       // 合并 --help, -h 参数
       if (['h', 'help'].includes(item)) {
         newOptions['help'] = true;
+        aliasName = 'help';
       }
       // 合并 --version, -v 参数
       if (['v', 'version'].includes(item)) {
         newOptions['version'] = true;
+        aliasName = 'version';
       }
 
-      let aliasName = item;
       // 整合 短名称参数，如果有该参数，未设值 那么 取预设的默认值
       result?.options?.forEach((_options) => {
         if ([_options.alias, _options.key].includes(item)) {

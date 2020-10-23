@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, Box, useFocus } from 'ink';
-import { useLocation, useHistory, useParams, useRouteMatch } from 'react-router';
+// import { useLocation, useHistory, useParams, useRouteMatch } from 'react-router';
 
 const Item = ({ label }) => {
   const { isFocused } = useFocus();
@@ -17,7 +17,7 @@ const Item = ({ label }) => {
  * @description 更新模版命令
  */
 const Update = () => {
-  const params = useLocation();
+  // const params = useLocation();
   // console.log(params);
   // return <Text>更新 Create 插件 命令 </Text>;
   return (

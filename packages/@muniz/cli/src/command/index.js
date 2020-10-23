@@ -1,2 +1,7 @@
-export { default as UI_APP } from './App';
-export { default as UI_Add } from './Add';
+import { default as add } from './add';
+
+export default {
+  command: {
+    add,
+  },
+};

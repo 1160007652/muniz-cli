@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Text, useApp, useFocusManager } from 'ink';
-import { useLocation } from 'react-router';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
 import * as yup from 'yup';
@@ -18,7 +17,6 @@ const schema = yup.object().shape({
 // 创建指令
 const Create = () => {
   const { focusNext } = useFocusManager();
-  const { state: routerParams } = useLocation();
   const { exit } = useApp();
   // 执行步骤
   const [step, setStep] = useState({
@@ -30,9 +28,6 @@ const Create = () => {
     reValidateMode: 'onChange',
     mode: 'all',
     resolver: yupResolver(schema),
-    defaultValues: {
-      name: routerParams.name,
-    },
   });
 
   // 提交表单数据
@@ -53,6 +48,7 @@ const Create = () => {
       <Controller
         control={control}
         name="name"
+        defaultValue=""
         render={({ onChange, onBlur, value }) => {
           return (
             <TextInput

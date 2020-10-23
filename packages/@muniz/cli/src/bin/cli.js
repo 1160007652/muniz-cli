@@ -3,6 +3,7 @@
 
 import { render } from 'ink';
 import { commands, installCommands } from '../constants/useCommand';
+
 import {
   CommandApp,
   formatArgv,
@@ -14,6 +15,7 @@ import {
 } from '../core/CommandApp';
 
 import { default as config } from '../configs';
+
 /** 导出模块, 方便 与 其他 plugin 插件 处理机制一致 */
 
 // 初始化 命令行 框架
