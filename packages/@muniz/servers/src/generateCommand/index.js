@@ -24,7 +24,7 @@ const generateCommand = async (commandsPath, dirPath) => {
         ...indexCommand,
         isIndex: false,
         name: path,
-        subCommands: [],
+        // subCommands: subCommands.filter((command) => !command.isIndex),
       });
     }
 
@@ -38,7 +38,7 @@ const generateCommand = async (commandsPath, dirPath) => {
         isIndex,
         name: isIndex ? '*' : name,
         path: relative(commandsPath, fullPath),
-        subCommands: [],
+        // subCommands: [],
       });
     }
   });

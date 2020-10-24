@@ -3,13 +3,12 @@
  */
 
 class CommandApp {
-  constructor({ argv = [], commands = [], render = null, currentModule = null }) {
+  constructor({ argv = [], render = null }) {
     this.context = {
       env: {
         command: 'cli', // cli: 主框架环境，plugin：插件环境
       },
-      currentModule, // 运行时 命令所在的 module
-      commands, // 内置命令
+      astCommands: [], // AST 解析出的命令、命令信息
       pkg: {}, // 命令，所在的包信息
       pkgName: '', // 命令，所在的包名
       pkgPath: '', // 命令，所在的包路径

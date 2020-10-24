@@ -14,13 +14,18 @@
  */
 export default function cleanArgv(argv) {
   const newArgv = {
+    command: [],
     input: [],
     options: {},
   };
 
-  argv.forEach((item) => {
+  argv.forEach((item, index) => {
     if (!/^\-{1,2}/.test(item)) {
-      newArgv.input.push(item);
+      if (index < 2) {
+        newArgv.command.push(item);
+      } else {
+        newArgv.input.push(item);
+      }
     } else {
       let temp = item.split('=');
       temp[0] = temp[0].replace(/^\-{1,2}/, '');
