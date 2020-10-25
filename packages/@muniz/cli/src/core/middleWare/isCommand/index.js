@@ -8,7 +8,6 @@ import { generateCommand } from '@muniz/servers';
  */
 const isCommand = async (ctx, next) => {
   const { argv, render } = ctx;
-
   // 初始化执行内置框架命令
   ctx.pkgName = '@muniz/cli';
   ctx.pkgPath = __filename.replace(new RegExp('(@muniz/cli)/.*$', 'ig'), (_, c) => c);
@@ -37,7 +36,7 @@ const isCommand = async (ctx, next) => {
         const pluginConfig = require(`${ctx.pkgPath}/dist/index.js`).default(1);
         if (argv.command.length < 2) {
           if (pluginConfig?.defaultCommand && !['', 'function', 'undefined'].includes(pluginConfig?.defaultCommand)) {
-            argv.command.push(pluginConfig.defaultCommand);
+            // argv.command.push(pluginConfig.defaultCommand);
           } else {
             argv.options['help'] = true;
           }

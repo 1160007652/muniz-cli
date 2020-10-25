@@ -42,14 +42,9 @@ const helpCommand = (ctx, next) => {
         break;
       }
       default: {
-        const pluginConfig = require(`${ctx.pkgPath}/dist/index.js`).default(1);
-        if (pluginConfig?.defaultCommand && !['', 'function', 'undefined'].includes(pluginConfig?.defaultCommand)) {
-          render(<Help data={helpData} show="command" usage={``} />);
-        } else {
-          helpData.commands = astCommands.filter((item) => item.key === argv.command[1])[0];
-          helpData.usage = { key: `$ muniz ${argv.command[1]} [options]`, description: '' };
-          render(<Help data={helpData} show="options" />);
-        }
+        helpData.commands = astCommands.filter((item) => item.key === argv.command[1])[0];
+        helpData.usage = { key: `$ muniz ${argv.command[1]} [options]`, description: '' };
+        render(<Help data={helpData} show="options" />);
         break;
       }
     }

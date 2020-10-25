@@ -15,7 +15,8 @@ const schema = yup.object().shape({
 });
 
 // 创建指令
-const Create = () => {
+const Create = (props) => {
+  console.log(props);
   const { focusNext } = useFocusManager();
   const { exit } = useApp();
   // 执行步骤
@@ -24,7 +25,7 @@ const Create = () => {
     help: false,
   });
   // 表单收集
-  const { control, errors, reset, handleSubmit } = useForm({
+  const { control, errors, reset, handleSubmit, getValues, setValue } = useForm({
     reValidateMode: 'onChange',
     mode: 'all',
     resolver: yupResolver(schema),
@@ -50,6 +51,7 @@ const Create = () => {
         name="name"
         defaultValue=""
         render={({ onChange, onBlur, value }) => {
+          console.log(value, getValues());
           return (
             <TextInput
               label="名称："
@@ -158,15 +160,14 @@ const Create = () => {
 Create.propTypes = {
   /**
    * @muniz
-   * @description 描述组件
-   * @alias i
-   */
-  inputa: PropTypes.string.isRequired,
-  /**
-   * @muniz
-   * @positionsArgs 1
+   * @description falgs哈哈
    */
   flags: PropTypes.string,
+  /**
+   * @muniz
+   * @description Number类型转换
+   */
+  count: PropTypes.number,
   /**
    * @muniz
    * @description 生成项目的名称
@@ -176,9 +177,9 @@ Create.propTypes = {
 };
 
 Create.defaultProps = {
-  inputa: 'ssss',
   flags: 'wowowoowqqqqqqq',
   isGit: false,
+  count: 1,
 };
 
 export default Create;

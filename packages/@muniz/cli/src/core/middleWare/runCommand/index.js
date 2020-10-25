@@ -11,14 +11,25 @@ const runCommand = async (ctx, next) => {
   if (env.command === 'cli') {
     _astCommands = astCommands.filter((item) => item.key === argv.command[0]);
   } else {
-    _astCommands = astCommands.filter((item) => item.key === argv.command[1]);
+    const pluginConfig = require(`${ctx.pkgPath}/dist/index.js`).default(1);
+    if (argv.command.length < 2) {
+      if (pluginConfig?.defaultCommand && !['', 'function', 'undefined'].includes(pluginConfig?.defaultCommand)) {
+        _astCommands = astCommands.filter((item) => item.key === pluginConfig.defaultCommand);
+      }
+    } else {
+      _astCommands = astCommands.filter((item) => item.key === argv.command[1]);
+    }
   }
 
   if (_astCommands.length === 0) {
     render(<NotCommand {...ctx} isExistPlugin />);
   } else {
     const commandModule = require(`${ctx.pkgPath}/dist/command/${_astCommands[0].path}`).default;
-    render(React.createElement(commandModule, { ...argv }));
+    const commandModuleProps = {
+      ...argv.options,
+      input: argv.input,
+    };
+    render(React.createElement(commandModule, commandModuleProps));
   }
 
   next();

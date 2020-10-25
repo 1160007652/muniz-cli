@@ -11,7 +11,14 @@ const mergeArgv = async (ctx, next) => {
   if (env.command === 'cli') {
     _astCommands = astCommands.filter((item) => item.key === argv.command[0]);
   } else {
-    _astCommands = astCommands.filter((item) => item.key === argv.command[1]);
+    const pluginConfig = require(`${ctx.pkgPath}/dist/index.js`).default(1);
+    if (argv.command.length < 2) {
+      if (pluginConfig?.defaultCommand && !['', 'function', 'undefined'].includes(pluginConfig?.defaultCommand)) {
+        _astCommands = astCommands.filter((item) => item.key === pluginConfig.defaultCommand);
+      }
+    } else {
+      _astCommands = astCommands.filter((item) => item.key === argv.command[1]);
+    }
   }
 
   if (Object.keys(argv.options).length > 0) {
@@ -32,7 +39,14 @@ const mergeArgv = async (ctx, next) => {
       // 整合 短名称参数，如果有该参数，未设值 那么 取预设的默认值
       _astCommands[0]?.options?.forEach((_options) => {
         if ([_options.alias, _options.key].includes(item)) {
-          newOptions[_options.key] = argv.options[item] || _options.default;
+          const optionsValue = argv.options[item] || _options.default;
+          if (_options.type === 'boolean') {
+            newOptions[_options.key] = true; // 如果逻辑型参数，那么只要输入就表示 True 否则默认不输入 为 False
+          } else if (_options.type === 'number') {
+            newOptions[_options.key] = Number(optionsValue);
+          } else {
+            newOptions[_options.key] = optionsValue;
+          }
           aliasName = _options.key;
         }
       });
