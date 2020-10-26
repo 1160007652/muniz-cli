@@ -33,7 +33,6 @@
   },
   "dependencies": {
     "@babel/parser": "^7.12.3",
-    "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/traverse": "^7.12.1",
     "@babel/types": "^7.12.1"
   },

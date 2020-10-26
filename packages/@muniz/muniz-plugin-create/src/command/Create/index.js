@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import { InkUI, React, Ink } from '@muniz/common';
 import PropTypes from 'prop-types';
-import { Box, Text, useApp, useFocusManager } from 'ink';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
 import * as yup from 'yup';
 
-import { TextInput, Button, ButtonGroup } from '@muniz/ink-ui';
+const { TextInput, Button, ButtonGroup } = InkUI;
+const { Box, Text, useApp, useFocusManager } = Ink;
+const { useState } = React;
 
 // 表单验证器规则
 const schema = yup.object().shape({
@@ -16,7 +17,6 @@ const schema = yup.object().shape({
 
 // 创建指令
 const Create = (props) => {
-  console.log(props);
   const { focusNext } = useFocusManager();
   const { exit } = useApp();
   // 执行步骤
@@ -51,7 +51,6 @@ const Create = (props) => {
         name="name"
         defaultValue=""
         render={({ onChange, onBlur, value }) => {
-          console.log(value, getValues());
           return (
             <TextInput
               label="名称："

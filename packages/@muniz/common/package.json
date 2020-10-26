@@ -38,5 +38,9 @@
     "react": "^17.0.1",
     "react-intl-universal": "^2.4.1"
   },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "ink": ">=3.0.8"
+  },
   "gitHead": "391b557ac73fcecb98af872ed0f0d642eb9ae60e"
 }

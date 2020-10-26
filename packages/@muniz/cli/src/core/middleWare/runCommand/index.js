@@ -1,5 +1,5 @@
-import React from 'react';
-import { NotCommand } from '@muniz/ink-ui';
+import { InkUI, React } from '@muniz/common';
+const { NotCommand } = InkUI;
 
 /**
  * 执行 命令
