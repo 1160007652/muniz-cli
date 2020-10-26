@@ -40,5 +40,6 @@
   },
   "devDependencies": {
     "minimist": "^1.2.5"
-  }
+  },
+  "gitHead": "391b557ac73fcecb98af872ed0f0d642eb9ae60e"
 }

@@ -19,7 +19,7 @@
     "dist"
   ],
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "access": "public"
   },
   "repository": {
     "type": "git",
@@ -37,5 +37,6 @@
     "ink": "^3.0.8",
     "react": "^17.0.1",
     "react-intl-universal": "^2.4.1"
-  }
+  },
+  "gitHead": "391b557ac73fcecb98af872ed0f0d642eb9ae60e"
 }

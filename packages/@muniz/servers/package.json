@@ -36,5 +36,6 @@
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/traverse": "^7.12.1",
     "@babel/types": "^7.12.1"
-  }
+  },
+  "gitHead": "391b557ac73fcecb98af872ed0f0d642eb9ae60e"
 }
