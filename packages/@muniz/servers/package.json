@@ -1,6 +1,6 @@
 {
   "name": "@muniz/servers",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "muniz 脚手架运行服务,负责编译解析,执行构建",
   "keywords": [
     "@muniz/cli",

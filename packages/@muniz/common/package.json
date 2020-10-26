@@ -1,6 +1,6 @@
 {
   "name": "@muniz/common",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "提供muniz宿主环境使用的统一依赖库，保证资源库一致, 包含（@muniz/ink-ui、 react、ink）",
   "keywords": [
     "react",
@@ -33,14 +33,14 @@
     "url": "https://github.com/1160007652/muniz-cli/issues"
   },
   "dependencies": {
-    "@muniz/ink-ui": "^1.0.2",
+    "@muniz/ink-ui": "^1.0.3",
     "ink": "^3.0.8",
     "react": "^17.0.1",
     "react-intl-universal": "^2.4.1"
   },
   "peerDependencies": {
-    "react": ">=16.8.0",
-    "ink": ">=3.0.8"
+    "ink": ">=3.0.8",
+    "react": ">=16.8.0"
   },
   "gitHead": "391b557ac73fcecb98af872ed0f0d642eb9ae60e"
 }
