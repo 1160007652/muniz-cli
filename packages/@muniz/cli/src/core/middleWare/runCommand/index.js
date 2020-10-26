@@ -1,3 +1,4 @@
+const path = require('path');
 import { InkUI, React } from '@muniz/common';
 const { NotCommand } = InkUI;
 
@@ -11,7 +12,7 @@ const runCommand = async (ctx, next) => {
   if (env.command === 'cli') {
     _astCommands = astCommands.filter((item) => item.key === argv.command[0]);
   } else {
-    const pluginConfig = require(`${ctx.pkgPath}/dist/index.js`).default(1);
+    const pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js')).default(1);
     if (argv.command.length < 2) {
       if (pluginConfig?.defaultCommand && !['', 'function', 'undefined'].includes(pluginConfig?.defaultCommand)) {
         _astCommands = astCommands.filter((item) => item.key === pluginConfig.defaultCommand);

@@ -21,6 +21,8 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
+var path = require('path');
+
 var NotCommand = _common.InkUI.NotCommand;
 /**
  * 执行 命令
@@ -42,7 +44,7 @@ var runCommand = /*#__PURE__*/function () {
                 return item.key === argv.command[0];
               });
             } else {
-              pluginConfig = require("".concat(ctx.pkgPath, "/dist/index.js"))["default"](1);
+              pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js'))["default"](1);
 
               if (argv.command.length < 2) {
                 if ((pluginConfig === null || pluginConfig === void 0 ? void 0 : pluginConfig.defaultCommand) && !['', 'function', 'undefined'].includes(pluginConfig === null || pluginConfig === void 0 ? void 0 : pluginConfig.defaultCommand)) {

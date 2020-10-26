@@ -1,3 +1,4 @@
+const path = require('path');
 import { InkUI, React } from '@muniz/common';
 import { generateCommand } from '@muniz/servers';
 const { NotCommand } = InkUI;
@@ -9,11 +10,14 @@ const isCommand = async (ctx, next) => {
   const { argv, render } = ctx;
   // 初始化执行内置框架命令
   ctx.pkgName = '@muniz/cli';
-  ctx.pkgPath = __filename.replace(new RegExp('(@muniz/cli)/.*$', 'ig'), (_, c) => c);
+  ctx.pkgPath = __filename.replace(new RegExp('@muniz(.*?)$', 'ig'), (_, c) => path.join(ctx.pkgName));
   ctx.pkg = require(`${ctx.pkgPath}/package.json`);
 
   // 读取命令AST信息
-  ctx.astCommands = await generateCommand(`${ctx.pkgPath}/src/command`, `${ctx.pkgPath}/src/command`);
+  ctx.astCommands = await generateCommand(
+    path.join(ctx.pkgPath, '/src/command'),
+    path.join(ctx.pkgPath, '/src/command'),
+  );
 
   // 如果 argv.input > 0, 表示输入了执行命令， 开始执行输入的命令
   if (argv.command.length > 0) {
@@ -33,13 +37,16 @@ const isCommand = async (ctx, next) => {
         } else {
           ctx.pkgName = `@muniz/muniz-plugin-${argv.command[0]}`;
           const _tempPkgPath = require.resolve(ctx.pkgName);
-          ctx.pkgPath = _tempPkgPath.replace(new RegExp(`(${ctx.pkgName})/.*$`, 'ig'), (_, c) => c);
+          ctx.pkgPath = _tempPkgPath.replace(new RegExp('@muniz(.*?)$', 'ig'), (_, c) => path.join(ctx.pkgName));
         }
         ctx.pkg = require(`${ctx.pkgPath}/package.json`);
         // 读取命令AST信息
-        ctx.astCommands = await generateCommand(`${ctx.pkgPath}/src/command`, `${ctx.pkgPath}/src/command`);
+        ctx.astCommands = await generateCommand(
+          path.join(ctx.pkgPath, '/src/command'),
+          path.join(ctx.pkgPath, '/src/command'),
+        );
         // 读取插件配置信息
-        const pluginConfig = require(`${ctx.pkgPath}/dist/index.js`).default(1);
+        const pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js')).default(1);
         if (argv.command.length < 2) {
           if (pluginConfig?.defaultCommand && !['', 'function', 'undefined'].includes(pluginConfig?.defaultCommand)) {
             // argv.command.push(pluginConfig.defaultCommand);

@@ -13,12 +13,15 @@ var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
+var path = require('path');
 /**
  * 合并 argv 中的 options 对象数据, 实现如下几点：
  * - 将（alias）别名转化为全量的名称；
  * - 转化options类型(type)；
  * - 赋值默认值， 将给定的参数进行默认值赋值；
  */
+
+
 var mergeArgv = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(ctx, next) {
     var argv, astCommands, env, newOptions, _astCommands, pluginConfig, _astCommands$2, _astCommands$2$option;
@@ -35,7 +38,7 @@ var mergeArgv = /*#__PURE__*/function () {
                 return item.key === argv.command[0];
               });
             } else {
-              pluginConfig = require("".concat(ctx.pkgPath, "/dist/index.js"))["default"](1);
+              pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js'))["default"](1);
 
               if (argv.command.length < 2) {
                 if ((pluginConfig === null || pluginConfig === void 0 ? void 0 : pluginConfig.defaultCommand) && !['', 'function', 'undefined'].includes(pluginConfig === null || pluginConfig === void 0 ? void 0 : pluginConfig.defaultCommand)) {

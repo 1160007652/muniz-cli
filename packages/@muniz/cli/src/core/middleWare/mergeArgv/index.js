@@ -1,3 +1,4 @@
+const path = require('path');
 /**
  * 合并 argv 中的 options 对象数据, 实现如下几点：
  * - 将（alias）别名转化为全量的名称；
@@ -11,7 +12,7 @@ const mergeArgv = async (ctx, next) => {
   if (env.command === 'cli') {
     _astCommands = astCommands.filter((item) => item.key === argv.command[0]);
   } else {
-    const pluginConfig = require(`${ctx.pkgPath}/dist/index.js`).default(1);
+    const pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js')).default(1);
     if (argv.command.length < 2) {
       if (pluginConfig?.defaultCommand && !['', 'function', 'undefined'].includes(pluginConfig?.defaultCommand)) {
         _astCommands = astCommands.filter((item) => item.key === pluginConfig.defaultCommand);

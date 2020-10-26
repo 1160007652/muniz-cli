@@ -15,6 +15,8 @@ var _common = require("@muniz/common");
 
 var _servers = require("@muniz/servers");
 
+var path = require('path');
+
 var NotCommand = _common.InkUI.NotCommand;
 /**
  * 是否是内置命令
@@ -31,13 +33,13 @@ var isCommand = /*#__PURE__*/function () {
             argv = ctx.argv, render = ctx.render; // 初始化执行内置框架命令
 
             ctx.pkgName = '@muniz/cli';
-            ctx.pkgPath = __filename.replace(new RegExp('(@muniz/cli)/.*$', 'ig'), function (_, c) {
-              return c;
+            ctx.pkgPath = __filename.replace(new RegExp('@muniz(.*?)$', 'ig'), function (_, c) {
+              return path.join(ctx.pkgName);
             });
             ctx.pkg = require("".concat(ctx.pkgPath, "/package.json")); // 读取命令AST信息
 
             _context.next = 6;
-            return (0, _servers.generateCommand)("".concat(ctx.pkgPath, "/src/command"), "".concat(ctx.pkgPath, "/src/command"));
+            return (0, _servers.generateCommand)(path.join(ctx.pkgPath, '/src/command'), path.join(ctx.pkgPath, '/src/command'));
 
           case 6:
             ctx.astCommands = _context.sent;
@@ -70,20 +72,20 @@ var isCommand = /*#__PURE__*/function () {
             } else {
               ctx.pkgName = "@muniz/muniz-plugin-".concat(argv.command[0]);
               _tempPkgPath = require.resolve(ctx.pkgName);
-              ctx.pkgPath = _tempPkgPath.replace(new RegExp("(".concat(ctx.pkgName, ")/.*$"), 'ig'), function (_, c) {
-                return c;
+              ctx.pkgPath = _tempPkgPath.replace(new RegExp('@muniz(.*?)$', 'ig'), function (_, c) {
+                return path.join(ctx.pkgName);
               });
             }
 
             ctx.pkg = require("".concat(ctx.pkgPath, "/package.json")); // 读取命令AST信息
 
             _context.next = 17;
-            return (0, _servers.generateCommand)("".concat(ctx.pkgPath, "/src/command"), "".concat(ctx.pkgPath, "/src/command"));
+            return (0, _servers.generateCommand)(path.join(ctx.pkgPath, '/src/command'), path.join(ctx.pkgPath, '/src/command'));
 
           case 17:
             ctx.astCommands = _context.sent;
             // 读取插件配置信息
-            pluginConfig = require("".concat(ctx.pkgPath, "/dist/index.js"))["default"](1);
+            pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js'))["default"](1);
 
             if (argv.command.length < 2) {
               if ((pluginConfig === null || pluginConfig === void 0 ? void 0 : pluginConfig.defaultCommand) && !['', 'function', 'undefined'].includes(pluginConfig === null || pluginConfig === void 0 ? void 0 : pluginConfig.defaultCommand)) {// argv.command.push(pluginConfig.defaultCommand);
