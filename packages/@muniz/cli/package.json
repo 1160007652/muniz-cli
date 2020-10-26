@@ -30,7 +30,7 @@
   "dependencies": {
     "@hookform/resolvers": "^0.1.1",
     "@muniz/servers": "1.0.0",
-    "ink": "^3.0.6",
+    "ink": "^3.0.8",
     "ink-text-input": "^4.0.1",
     "meow": "^7.1.1",
     "react": "^17.0.1",

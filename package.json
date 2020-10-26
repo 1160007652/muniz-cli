@@ -3,6 +3,7 @@
   "private": true,
   "workspaces": [
     "packages/@muniz/cli*",
+    "packages/@muniz/common*",
     "packages/@muniz/muniz-plugin*",
     "packages/@muniz/ink*",
     "packages/@muniz/server*"
@@ -31,6 +32,12 @@
     ]
   },
   "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/node": "^7.10.5",
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
     "@babel/plugin-syntax-top-level-await": "^7.10.4",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
@@ -49,7 +56,8 @@
     "lint-staged": "^10.4.0",
     "prettier": "^2.1.2",
     "prop-types": "^15.7.2",
-    "standard": "^14.3.4"
+    "standard": "^14.3.4",
+    "nodemon": "^2.0.4"
   },
   "publishConfig": {
     "access": "public"
@@ -64,13 +72,5 @@
       "**/src/**/*.js"
     ]
   },
-  "dependencies": {
-    "@babel/cli": "^7.11.6",
-    "@babel/core": "^7.11.6",
-    "@babel/node": "^7.10.5",
-    "@babel/plugin-transform-runtime": "^7.11.5",
-    "@babel/preset-env": "^7.11.5",
-    "@babel/preset-react": "^7.10.4",
-    "nodemon": "^2.0.4"
-  }
+  "dependencies": {}
 }

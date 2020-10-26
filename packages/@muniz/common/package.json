@@ -1,7 +1,12 @@
 {
-  "name": "@muniz/cli-shared-utils",
+  "name": "@muniz/common",
   "version": "1.0.0",
-  "description": "> TODO: description",
+  "description": "提供muniz宿主环境使用的统一依赖库，保证资源库一致, 包含（@muniz/ink-ui、 react、ink）",
+  "keywords": [
+    "react",
+    "@muniz/ink-ui",
+    "ink"
+  ],
   "author": "muniz <1160007652@qq.com>",
   "homepage": "https://github.com/1160007652/muniz-cli#readme",
   "license": "ISC",
@@ -28,6 +33,9 @@
     "url": "https://github.com/1160007652/muniz-cli/issues"
   },
   "dependencies": {
+    "@muniz/ink-ui": "1.0.0",
+    "ink": "^3.0.8",
+    "react": "^17.0.1",
     "react-intl-universal": "^2.4.1"
   }
 }

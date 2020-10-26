@@ -6,8 +6,8 @@
  */
 const mergeArgv = async (ctx, next) => {
   const { argv, astCommands, env } = ctx;
-  let newOptions = {};
-  let _astCommands = [];
+  let newOptions = {},
+    _astCommands = [];
   if (env.command === 'cli') {
     _astCommands = astCommands.filter((item) => item.key === argv.command[0]);
   } else {

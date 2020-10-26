@@ -4,6 +4,7 @@
   "useWorkspaces": true,
   "packages": [
     "packages/@muniz/cli*",
+    "packages/@muniz/common*",
     "packages/@muniz/muniz-plugin*",
     "packages/@muniz/ink*",
     "packages/@muniz/server*"

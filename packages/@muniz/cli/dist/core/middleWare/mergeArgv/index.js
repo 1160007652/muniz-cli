@@ -29,8 +29,7 @@ var mergeArgv = /*#__PURE__*/ (function () {
           switch ((_context.prev = _context.next)) {
             case 0:
               (argv = ctx.argv), (astCommands = ctx.astCommands), (env = ctx.env);
-              newOptions = {};
-              _astCommands = [];
+              (newOptions = {}), (_astCommands = []);
 
               if (env.command === 'cli') {
                 _astCommands = astCommands.filter(function (item) {
@@ -115,7 +114,7 @@ var mergeArgv = /*#__PURE__*/ (function () {
               argv.options = newOptions;
               next();
 
-            case 7:
+            case 6:
             case 'end':
               return _context.stop();
           }

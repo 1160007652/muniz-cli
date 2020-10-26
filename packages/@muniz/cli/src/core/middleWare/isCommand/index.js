@@ -26,9 +26,16 @@ const isCommand = async (ctx, next) => {
       ctx.env.command = 'plugin'; // 当前 运行环境 变更为 插件， 默认是 cli 主控制器环境
 
       try {
-        ctx.pkgName = `@muniz/muniz-plugin-${argv.command[0]}`;
-        const _tempPkgPath = require.resolve(ctx.pkgName);
-        ctx.pkgPath = _tempPkgPath.replace(new RegExp(`(${ctx.pkgName})/.*$`, 'ig'), (_, c) => c);
+        const isDev = false;
+        if (isDev) {
+          // console.log(process.cwd());
+          require.resolve(process.cwd());
+          ctx.pkgPath = process.cwd();
+        } else {
+          ctx.pkgName = `@muniz/muniz-plugin-${argv.command[0]}`;
+          const _tempPkgPath = require.resolve(ctx.pkgName);
+          ctx.pkgPath = _tempPkgPath.replace(new RegExp(`(${ctx.pkgName})/.*$`, 'ig'), (_, c) => c);
+        }
         ctx.pkg = require(`${ctx.pkgPath}/package.json`);
         // 读取命令AST信息
         ctx.astCommands = await generateCommand(`${ctx.pkgPath}/src/command`, `${ctx.pkgPath}/src/command`);
@@ -45,12 +52,12 @@ const isCommand = async (ctx, next) => {
         ctx.pkgName = `@muniz/muniz-plugin-${argv.command[0]}`;
         ctx.pkgPath = '';
         ctx.pkg = {};
+
         render(<NotCommand {...ctx} />);
 
         process.exit();
       }
     }
-
     next();
   } else {
     /**

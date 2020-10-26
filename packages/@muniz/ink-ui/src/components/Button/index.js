@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, Text, useInput, useFocus, useFocusManager } from 'ink';
-// import { debounce } from '@muniz/cli-shared-utils';
 
 const Button = ({ children, onBlur, wait, disabled, leftDisabled, rightDisabled, ...props }) => {
   const { isFocused } = useFocus({ autoFocus: true, isActive: !disabled });

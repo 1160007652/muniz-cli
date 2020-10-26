@@ -23,7 +23,7 @@ var _servers = require('@muniz/servers');
 var isCommand = /*#__PURE__*/ (function () {
   var _ref = (0, _asyncToGenerator2['default'])(
     /*#__PURE__*/ _regenerator['default'].mark(function _callee(ctx, next) {
-      var argv, render, isCliCommand, _tempPkgPath, pluginConfig, _argv$options, _argv$options2;
+      var argv, render, isCliCommand, isDev, _tempPkgPath, pluginConfig, _argv$options, _argv$options2;
 
       return _regenerator['default'].wrap(
         function _callee$(_context) {
@@ -48,7 +48,7 @@ var isCommand = /*#__PURE__*/ (function () {
                 ctx.astCommands = _context.sent;
 
                 if (!(argv.command.length > 0)) {
-                  _context.next = 33;
+                  _context.next = 32;
                   break;
                 }
 
@@ -58,27 +58,40 @@ var isCommand = /*#__PURE__*/ (function () {
                 }); // 执行 非内置命令 =》 插件命令
 
                 if (isCliCommand) {
-                  _context.next = 30;
+                  _context.next = 29;
                   break;
                 }
 
                 ctx.env.command = 'plugin'; // 当前 运行环境 变更为 插件， 默认是 cli 主控制器环境
 
                 _context.prev = 11;
-                ctx.pkgName = '@muniz/muniz-plugin-'.concat(argv.command[0]);
-                _tempPkgPath = require.resolve(ctx.pkgName);
-                ctx.pkgPath = _tempPkgPath.replace(new RegExp('('.concat(ctx.pkgName, ')/.*$'), 'ig'), function (_, c) {
-                  return c;
-                });
+                isDev = false;
+
+                if (isDev) {
+                  // console.log(process.cwd());
+                  require.resolve(process.cwd());
+
+                  ctx.pkgPath = process.cwd();
+                } else {
+                  ctx.pkgName = '@muniz/muniz-plugin-'.concat(argv.command[0]);
+                  _tempPkgPath = require.resolve(ctx.pkgName);
+                  ctx.pkgPath = _tempPkgPath.replace(new RegExp('('.concat(ctx.pkgName, ')/.*$'), 'ig'), function (
+                    _,
+                    c,
+                  ) {
+                    return c;
+                  });
+                }
+
                 ctx.pkg = require(''.concat(ctx.pkgPath, '/package.json')); // 读取命令AST信息
 
-                _context.next = 18;
+                _context.next = 17;
                 return (0, _servers.generateCommand)(
                   ''.concat(ctx.pkgPath, '/src/command'),
                   ''.concat(ctx.pkgPath, '/src/command'),
                 );
 
-              case 18:
+              case 17:
                 ctx.astCommands = _context.sent;
                 // 读取插件配置信息
                 pluginConfig = require(''.concat(ctx.pkgPath, '/dist/index.js'))['default'](1);
@@ -96,11 +109,11 @@ var isCommand = /*#__PURE__*/ (function () {
                   }
                 }
 
-                _context.next = 30;
+                _context.next = 29;
                 break;
 
-              case 23:
-                _context.prev = 23;
+              case 22:
+                _context.prev = 22;
                 _context.t0 = _context['catch'](11);
                 ctx.pkgName = '@muniz/muniz-plugin-'.concat(argv.command[0]);
                 ctx.pkgPath = '';
@@ -108,12 +121,12 @@ var isCommand = /*#__PURE__*/ (function () {
                 render(/*#__PURE__*/ _react['default'].createElement(_inkUi.NotCommand, ctx));
                 process.exit();
 
-              case 30:
+              case 29:
                 next();
-                _context.next = 35;
+                _context.next = 34;
                 break;
 
-              case 33:
+              case 32:
                 /**
                  *
                  * 如果 argv.input === 0, 且 argv.options === 0 时, 置入 argv.options.help = true , 走 打印中间件 显示“帮助”命令
@@ -135,7 +148,7 @@ var isCommand = /*#__PURE__*/ (function () {
 
                 next();
 
-              case 35:
+              case 34:
               case 'end':
                 return _context.stop();
             }
@@ -143,7 +156,7 @@ var isCommand = /*#__PURE__*/ (function () {
         },
         _callee,
         null,
-        [[11, 23]],
+        [[11, 22]],
       );
     }),
   );
