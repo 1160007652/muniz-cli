@@ -29,29 +29,42 @@ var isCommand = /*#__PURE__*/ (function () {
     /*#__PURE__*/ _regenerator['default'].mark(function _callee(ctx, next) {
       var argv, render, isCliCommand, isDev, _tempPkgPath, pluginConfig, _argv$options, _argv$options2, _argv$options3;
 
-      return _regenerator['default'].wrap(function _callee$(_context) {
-        while (1) {
-          switch ((_context.prev = _context.next)) {
-            case 0:
-              (argv = ctx.argv), (render = ctx.render); // 初始化执行内置框架命令
+      return _regenerator['default'].wrap(
+        function _callee$(_context) {
+          while (1) {
+            switch ((_context.prev = _context.next)) {
+              case 0:
+                (argv = ctx.argv), (render = ctx.render); // 初始化执行内置框架命令
 
-              ctx.pkgName = '@muniz/cli';
-              ctx.pkgPath = __filename.replace(new RegExp('@muniz(.*?)$', 'ig'), function (_, c) {
-                return path.join(ctx.pkgName);
-              });
-              ctx.pkg = require(''.concat(ctx.pkgPath, '/package.json')); // 读取命令AST信息
+                ctx.pkgName = '@muniz/cli';
+                ctx.pkgPath = __filename.replace(new RegExp('@muniz(.*?)$', 'ig'), function (_, c) {
+                  return path.join(ctx.pkgName);
+                });
+                ctx.pkg = require(path.join(ctx.pkgPath, '/package.json')); // 读取命令AST信息
 
-              _context.next = 6;
-              return (0, _servers.generateCommand)(
-                path.join(ctx.pkgPath, '/src/command'),
-                path.join(ctx.pkgPath, '/src/command'),
-              );
+                _context.prev = 4;
+                ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/configs/commandHelp.json'));
+                _context.next = 13;
+                break;
 
-            case 6:
-              ctx.astCommands = _context.sent;
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context['catch'](4);
+                _context.next = 12;
+                return (0, _servers.generateCommand)(
+                  path.join(ctx.pkgPath, '/src/command'),
+                  path.join(ctx.pkgPath, '/src/command'),
+                );
 
-              // 如果 argv.input > 0, 表示输入了执行命令， 开始执行输入的命令
-              if (argv.command.length > 0) {
+              case 12:
+                ctx.astCommands = _context.sent;
+
+              case 13:
+                if (!(argv.command.length > 0)) {
+                  _context.next = 45;
+                  break;
+                }
+
                 // 设置当前的开发环境, 是什么模式 由 用户的 命令行输入决定
                 if ('mode' in argv.options) {
                   delete argv.options.mode;
@@ -61,58 +74,83 @@ var isCommand = /*#__PURE__*/ (function () {
                   return item.key === argv.command[0];
                 }); // 执行 非内置命令 =》 插件命令
 
-                if (!isCliCommand) {
-                  ctx.env.command = 'plugin'; // 当前 运行环境 变更为 插件， 默认是 cli 主控制器环境
+                if (isCliCommand) {
+                  _context.next = 42;
+                  break;
+                }
 
-                  try {
-                    isDev = false;
+                ctx.env.command = 'plugin'; // 当前 运行环境 变更为 插件， 默认是 cli 主控制器环境
 
-                    if (isDev) {
-                      // console.log(process.cwd());
-                      require.resolve(process.cwd());
+                _context.prev = 18;
+                isDev = false;
 
-                      ctx.pkgPath = process.cwd();
-                    } else {
-                      ctx.pkgName = '@muniz/muniz-plugin-'.concat(argv.command[0]);
-                      _tempPkgPath = require.resolve(ctx.pkgName);
-                      ctx.pkgPath = _tempPkgPath.replace(new RegExp('@muniz(.*?)$', 'ig'), function (_, c) {
-                        return path.join(ctx.pkgName);
-                      });
-                    }
+                if (isDev) {
+                  // console.log(process.cwd());
+                  require.resolve(process.cwd());
 
-                    ctx.pkg = require(path.join(ctx.pkgPath, '/package.json')); // 读取命令AST信息
+                  ctx.pkgPath = process.cwd();
+                } else {
+                  ctx.pkgName = '@muniz/muniz-plugin-'.concat(argv.command[0]);
+                  _tempPkgPath = require.resolve(ctx.pkgName);
+                  ctx.pkgPath = _tempPkgPath.replace(new RegExp('@muniz(.*?)$', 'ig'), function (_, c) {
+                    return path.join(ctx.pkgName);
+                  });
+                }
 
-                    ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/command/commandHelp.json')); // await generateCommand(
-                    //   path.join(ctx.pkgPath, '/src/command'),
-                    //   path.join(ctx.pkgPath, '/src/command'),
-                    // );
-                    // 读取插件配置信息
+                ctx.pkg = require(path.join(ctx.pkgPath, '/package.json')); // 读取命令AST信息
 
-                    pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js'))['default'](1);
+                _context.prev = 22;
+                ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/configs/commandHelp.json'));
+                _context.next = 31;
+                break;
 
-                    if (argv.command.length < 2) {
-                      if (
-                        (pluginConfig === null || pluginConfig === void 0 ? void 0 : pluginConfig.defaultCommand) &&
-                        !['', 'function', 'undefined'].includes(
-                          pluginConfig === null || pluginConfig === void 0 ? void 0 : pluginConfig.defaultCommand,
-                        )
-                      ) {
-                        // argv.command.push(pluginConfig.defaultCommand);
-                      } else {
-                        argv.options['help'] = true;
-                      }
-                    }
-                  } catch (_unused) {
-                    ctx.pkgName = '@muniz/muniz-plugin-'.concat(argv.command[0]);
-                    ctx.pkgPath = '';
-                    ctx.pkg = {};
-                    render(/*#__PURE__*/ _common.React.createElement(NotCommand, ctx));
-                    process.exit();
+              case 26:
+                _context.prev = 26;
+                _context.t1 = _context['catch'](22);
+                _context.next = 30;
+                return (0, _servers.generateCommand)(
+                  path.join(ctx.pkgPath, '/src/command'),
+                  path.join(ctx.pkgPath, '/src/command'),
+                );
+
+              case 30:
+                ctx.astCommands = _context.sent;
+
+              case 31:
+                // 读取插件配置信息
+                pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js'))['default'](1);
+
+                if (argv.command.length < 2) {
+                  if (
+                    (pluginConfig === null || pluginConfig === void 0 ? void 0 : pluginConfig.defaultCommand) &&
+                    !['', 'function', 'undefined'].includes(
+                      pluginConfig === null || pluginConfig === void 0 ? void 0 : pluginConfig.defaultCommand,
+                    )
+                  ) {
+                    // argv.command.push(pluginConfig.defaultCommand);
+                  } else {
+                    argv.options['help'] = true;
                   }
                 }
 
+                _context.next = 42;
+                break;
+
+              case 35:
+                _context.prev = 35;
+                _context.t2 = _context['catch'](18);
+                ctx.pkgName = '@muniz/muniz-plugin-'.concat(argv.command[0]);
+                ctx.pkgPath = '';
+                ctx.pkg = {};
+                render(/*#__PURE__*/ _common.React.createElement(NotCommand, ctx));
+                process.exit();
+
+              case 42:
                 next();
-              } else {
+                _context.next = 47;
+                break;
+
+              case 45:
                 /**
                  *
                  * 如果 argv.input === 0, 且 argv.options === 0 时, 置入 argv.options.help = true , 走 打印中间件 显示“帮助”命令
@@ -138,14 +176,21 @@ var isCommand = /*#__PURE__*/ (function () {
                 }
 
                 next();
-              }
 
-            case 8:
-            case 'end':
-              return _context.stop();
+              case 47:
+              case 'end':
+                return _context.stop();
+            }
           }
-        }
-      }, _callee);
+        },
+        _callee,
+        null,
+        [
+          [4, 8],
+          [18, 35],
+          [22, 26],
+        ],
+      );
     }),
   );
 

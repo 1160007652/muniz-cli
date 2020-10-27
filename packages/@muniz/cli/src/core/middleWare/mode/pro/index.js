@@ -5,7 +5,6 @@ import { generateCommand } from '@muniz/servers';
 
 const pro = async ({ argv, pkgPath }) => {
   console.log('主muniz控制器 生产者模式');
-
   if (argv.options?.type === 'desc') {
     const descPath = path.join(pkgPath, '/src/command');
 

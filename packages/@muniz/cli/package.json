@@ -25,7 +25,7 @@
   },
   "scripts": {
     "dev": "babel --root-mode upward src -d dist",
-    "generateCommandDesc": "muniz --mode=pro --type=desc /src/command /dist/configs",
+    "generateCommandDesc": "muniz --mode=pro --type=desc",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
