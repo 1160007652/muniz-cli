@@ -10,6 +10,7 @@
   ],
   "scripts": {
     "dev": "nodemon --exec ./scripts/dev.sh",
+    "build": "./scripts/build.sh",
     "commit": "git-cz"
   },
   "config": {
