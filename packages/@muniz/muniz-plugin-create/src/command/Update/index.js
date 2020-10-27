@@ -1,7 +1,6 @@
-import React from 'react';
+import { InkUI, React, Ink } from '@muniz/common';
 import PropTypes from 'prop-types';
-import { Text, Box, useFocus } from 'ink';
-// import { useLocation, useHistory, useParams, useRouteMatch } from 'react-router';
+const { Text, Box, useFocus } = Ink;
 
 const Item = ({ label }) => {
   const { isFocused } = useFocus();
@@ -17,9 +16,6 @@ const Item = ({ label }) => {
  * @description 更新模版命令
  */
 const Update = () => {
-  // const params = useLocation();
-  // console.log(params);
-  // return <Text>更新 Create 插件 命令 </Text>;
   return (
     <Box flexDirection="column" padding={1}>
       <Box marginBottom={1}>

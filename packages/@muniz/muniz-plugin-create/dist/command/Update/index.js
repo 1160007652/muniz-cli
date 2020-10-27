@@ -7,20 +7,21 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _common = require("@muniz/common");
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _ink = require("ink");
+var Text = _common.Ink.Text,
+    Box = _common.Ink.Box,
+    useFocus = _common.Ink.useFocus;
 
-// import { useLocation, useHistory, useParams, useRouteMatch } from 'react-router';
 var Item = function Item(_ref) {
   var label = _ref.label;
 
-  var _useFocus = (0, _ink.useFocus)(),
+  var _useFocus = useFocus(),
       isFocused = _useFocus.isFocused;
 
-  return /*#__PURE__*/_react["default"].createElement(_ink.Text, null, label, " ", isFocused && /*#__PURE__*/_react["default"].createElement(_ink.Text, {
+  return /*#__PURE__*/_common.React.createElement(Text, null, label, " ", isFocused && /*#__PURE__*/_common.React.createElement(Text, {
     color: "green"
   }, "(focused)"));
 };
@@ -31,19 +32,16 @@ var Item = function Item(_ref) {
 
 
 var Update = function Update() {
-  // const params = useLocation();
-  // console.log(params);
-  // return <Text>更新 Create 插件 命令 </Text>;
-  return /*#__PURE__*/_react["default"].createElement(_ink.Box, {
+  return /*#__PURE__*/_common.React.createElement(Box, {
     flexDirection: "column",
     padding: 1
-  }, /*#__PURE__*/_react["default"].createElement(_ink.Box, {
+  }, /*#__PURE__*/_common.React.createElement(Box, {
     marginBottom: 1
-  }, /*#__PURE__*/_react["default"].createElement(_ink.Text, null, "Press Tab to focus next element, Shift+Tab to focus previous element, Esc to reset focus.")), /*#__PURE__*/_react["default"].createElement(Item, {
+  }, /*#__PURE__*/_common.React.createElement(Text, null, "Press Tab to focus next element, Shift+Tab to focus previous element, Esc to reset focus.")), /*#__PURE__*/_common.React.createElement(Item, {
     label: "First"
-  }), /*#__PURE__*/_react["default"].createElement(Item, {
+  }), /*#__PURE__*/_common.React.createElement(Item, {
     label: "Second"
-  }), /*#__PURE__*/_react["default"].createElement(Item, {
+  }), /*#__PURE__*/_common.React.createElement(Item, {
     label: "Third"
   }));
 };
