@@ -32,11 +32,8 @@
     "url": "https://github.com/1160007652/muniz-cli/issues"
   },
   "dependencies": {
-    "@hookform/resolvers": "^0.1.1",
     "ink": "^3.0.8",
-    "react-hook-form": "^6.8.6",
-    "react-intl-universal": "^2.4.1",
-    "yup": "^0.29.3"
+    "react-intl-universal": "^2.4.1"
   },
   "peerDependencies": {
     "react": ">=16.8.0"
