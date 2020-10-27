@@ -4,6 +4,7 @@ import { InkUI, React } from '@muniz/common';
 import { generateCommand } from '@muniz/servers';
 const { NotCommand } = InkUI;
 
+const MunizConfig = require(path.resolve(__filename, '../../../../configs/system.json'));
 /**
  * 是否是内置命令
  */
@@ -15,13 +16,13 @@ const isCommand = async (ctx, next) => {
   ctx.pkg = require(path.join(ctx.pkgPath, '/package.json'));
 
   // 读取命令AST信息
-  try {
-    ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/configs/commandHelp.json'));
-  } catch {
+  if (MunizConfig.MUNIZ_CLI_DEBUG) {
     ctx.astCommands = await generateCommand(
       path.join(ctx.pkgPath, '/src/command'),
       path.join(ctx.pkgPath, '/src/command'),
     );
+  } else {
+    ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/configs/commandHelp.json'));
   }
 
   // 如果 argv.input > 0, 表示输入了执行命令， 开始执行输入的命令
@@ -39,26 +40,20 @@ const isCommand = async (ctx, next) => {
       ctx.env.command = 'plugin'; // 当前 运行环境 变更为 插件， 默认是 cli 主控制器环境
 
       try {
-        const isDev = false;
-        if (isDev) {
-          // console.log(process.cwd());
-          require.resolve(process.cwd());
-          ctx.pkgPath = process.cwd();
-        } else {
-          ctx.pkgName = `@muniz/muniz-plugin-${argv.command[0]}`;
-          const _tempPkgPath = require.resolve(ctx.pkgName);
-          ctx.pkgPath = _tempPkgPath.replace(new RegExp('@muniz(.*?)$', 'ig'), (_, c) => path.join(ctx.pkgName));
-        }
+        ctx.pkgName = `@muniz/muniz-plugin-${argv.command[0]}`;
+        const _tempPkgPath = require.resolve(ctx.pkgName);
+        ctx.pkgPath = _tempPkgPath.replace(new RegExp('@muniz(.*?)$', 'ig'), (_, c) => path.join(ctx.pkgName));
+
         ctx.pkg = require(path.join(ctx.pkgPath, '/package.json'));
 
         // 读取命令AST信息
-        try {
-          ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/configs/commandHelp.json'));
-        } catch {
+        if (MunizConfig.MUNIZ_CLI_DEBUG) {
           ctx.astCommands = await generateCommand(
             path.join(ctx.pkgPath, '/src/command'),
             path.join(ctx.pkgPath, '/src/command'),
           );
+        } else {
+          ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/configs/commandHelp.json'));
         }
 
         // 读取插件配置信息
@@ -78,6 +73,10 @@ const isCommand = async (ctx, next) => {
         render(<NotCommand {...ctx} />);
 
         process.exit();
+      }
+    } else {
+      if (argv.command.length > 1) {
+        argv.input.unshift(argv.command.pop());
       }
     }
     next();

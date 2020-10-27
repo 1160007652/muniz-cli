@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 'use strict';
 
-import { render } from 'ink';
-
+import { Ink } from '@muniz/common';
+const { render } = Ink;
 import {
   CommandApp,
   formatArgv,
@@ -13,8 +13,6 @@ import {
   runCommand,
   mode,
 } from '../core/CommandApp';
-
-/** 导出模块, 方便 与 其他 plugin 插件 处理机制一致 */
 
 // 初始化 命令行 框架
 const commandApp = new CommandApp({ argv: process.argv.slice(2), render });

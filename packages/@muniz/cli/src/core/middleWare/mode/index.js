@@ -6,7 +6,7 @@ const { Version } = InkUI;
 /**
  * 开发模式命令
  */
-const modePro = (ctx, next) => {
+const modePro = async (ctx, next) => {
   const { pkg, argv, render } = ctx;
   const { options } = argv;
   if ('mode' in argv.options) {
@@ -17,7 +17,7 @@ const modePro = (ctx, next) => {
     if (options.mode in _mode) {
       argv.input = argv.input.concat(argv.command);
       argv.command = [];
-      _mode[options.mode]({ argv, pkgPath: process.cwd() });
+      await _mode[options.mode]({ argv, pkgPath: process.cwd() });
     } else {
       console.log('muniz 脚手架模式切换');
       console.log('支持 dev（开发模式）pro（生产模式）');
