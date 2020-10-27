@@ -4,3 +4,4 @@ export { default as mergeArgv } from './mergeArgv';
 export { default as helpCommand } from './helpCommand';
 export { default as versionCommand } from './versionCommand';
 export { default as runCommand } from './runCommand';
+export { default as mode } from './mode';

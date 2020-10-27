@@ -18,7 +18,6 @@ export default function cleanArgv(argv) {
     input: [],
     options: {},
   };
-
   argv.forEach((item, index) => {
     if (!/^\-{1,2}/.test(item)) {
       if (index < 2) {

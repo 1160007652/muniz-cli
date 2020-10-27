@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs-extra');
 import { InkUI, React } from '@muniz/common';
 import { generateCommand } from '@muniz/servers';
 const { NotCommand } = InkUI;
@@ -21,6 +22,11 @@ const isCommand = async (ctx, next) => {
 
   // 如果 argv.input > 0, 表示输入了执行命令， 开始执行输入的命令
   if (argv.command.length > 0) {
+    // 设置当前的开发环境, 是什么模式 由 用户的 命令行输入决定
+    if ('mode' in argv.options) {
+      delete argv.options.mode;
+    }
+
     // 检查是否是内置的CLI 命令
     const isCliCommand = ctx.astCommands.some((item) => item.key === argv.command[0]);
 
@@ -39,12 +45,13 @@ const isCommand = async (ctx, next) => {
           const _tempPkgPath = require.resolve(ctx.pkgName);
           ctx.pkgPath = _tempPkgPath.replace(new RegExp('@muniz(.*?)$', 'ig'), (_, c) => path.join(ctx.pkgName));
         }
-        ctx.pkg = require(`${ctx.pkgPath}/package.json`);
+        ctx.pkg = require(path.join(ctx.pkgPath, '/package.json'));
         // 读取命令AST信息
-        ctx.astCommands = await generateCommand(
-          path.join(ctx.pkgPath, '/src/command'),
-          path.join(ctx.pkgPath, '/src/command'),
-        );
+        ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/command/commandHelp.json'));
+        // await generateCommand(
+        //   path.join(ctx.pkgPath, '/src/command'),
+        //   path.join(ctx.pkgPath, '/src/command'),
+        // );
         // 读取插件配置信息
         const pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js')).default(1);
         if (argv.command.length < 2) {
@@ -73,7 +80,7 @@ const isCommand = async (ctx, next) => {
      * 如果是 --version，-V 参数，放行 next()
      *
      */
-    if (Object.keys(argv.options).length >= 0 && !(argv.options?.version || argv.options?.v)) {
+    if (Object.keys(argv.options).length >= 0 && !(argv.options?.version || argv.options?.v || argv.options?.mode)) {
       argv.options['help'] = true;
     }
     next();

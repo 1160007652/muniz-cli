@@ -1,6 +1,6 @@
 {
   "name": "@muniz/servers",
-  "version": "1.0.3",
+  "version": "1.0.2",
   "description": "muniz 脚手架运行服务,负责编译解析,执行构建",
   "keywords": [
     "@muniz/cli",
@@ -34,7 +34,8 @@
   "dependencies": {
     "@babel/parser": "^7.12.3",
     "@babel/traverse": "^7.12.1",
-    "@babel/types": "^7.12.1"
+    "@babel/types": "^7.12.1",
+    "fs-extra": "^9.0.1"
   },
   "gitHead": "391b557ac73fcecb98af872ed0f0d642eb9ae60e"
 }
