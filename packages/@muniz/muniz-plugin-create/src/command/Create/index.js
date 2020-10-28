@@ -1,7 +1,7 @@
 import { InkUI, React, Ink } from '@muniz/common';
 import PropTypes from 'prop-types';
 import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers';
+// import { yupResolver } from '@hookform/resolvers';
 import * as yup from 'yup';
 
 const { TextInput, Button, ButtonGroup } = InkUI;
@@ -28,7 +28,7 @@ const Create = (props) => {
   const { control, errors, reset, handleSubmit, getValues, setValue } = useForm({
     reValidateMode: 'onChange',
     mode: 'all',
-    resolver: yupResolver(schema),
+    // resolver: yupResolver(schema),
   });
 
   // 提交表单数据

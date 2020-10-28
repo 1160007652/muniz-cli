@@ -32,11 +32,15 @@
     "url": "https://github.com/1160007652/muniz-cli/issues"
   },
   "dependencies": {
-    "ink": "^3.0.8",
     "react-intl-universal": "^2.4.1"
   },
+  "devDependencies": {
+    "ink": "^3.0.8"
+  },
   "peerDependencies": {
-    "react": ">=16.8.0"
+    "react": ">=16.8.0",
+    "ink": "^2.1.1",
+    "prop-types": "^15.7.2"
   },
   "gitHead": "391b557ac73fcecb98af872ed0f0d642eb9ae60e"
 }
