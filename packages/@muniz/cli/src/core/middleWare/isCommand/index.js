@@ -40,10 +40,21 @@ const isCommand = async (ctx, next) => {
       ctx.env.command = 'plugin'; // 当前 运行环境 变更为 插件， 默认是 cli 主控制器环境
 
       try {
+        /**
+         * 这一块的插件名称，要根据 一定的规则去执行
+         *
+         * 在创建插件时，和安装插件时，要与 脚手架提供的插件 短命令 指令名称 进行比较，不允许使用 脚手架保留昵称；
+         *
+         * 使用插件时，需要进行 数据库查询，查找已安装的插件， 根据唯一的短指令昵称去匹配 全量包名；
+         * 并且外部开发的插件不支持 scope 形式， 如 scope/muniz-plugin-xxx
+         * 只支持外部 muniz-plugin-xxx 插件形式
+         */
         ctx.pkgName = `@muniz/muniz-plugin-${argv.command[0]}`;
         const _tempPkgPath = require.resolve(ctx.pkgName);
-        ctx.pkgPath = _tempPkgPath.replace(new RegExp('@muniz(.*?)$', 'ig'), (_, c) => path.join(ctx.pkgName));
 
+        ctx.pkgPath = _tempPkgPath.replace(new RegExp(`${path.join(ctx.pkgName)}(.*?)$`, 'ig'), (_, c) => ctx.pkgName);
+
+        console.log(ctx.pkgPath);
         ctx.pkg = require(path.join(ctx.pkgPath, '/package.json'));
 
         // 读取命令AST信息
