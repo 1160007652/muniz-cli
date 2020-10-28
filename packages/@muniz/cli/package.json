@@ -1,6 +1,6 @@
 {
   "name": "@muniz/cli",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "muniz脚手架,核心插件,命令行工具,可扩展插件模型",
   "footer": "底部描述信息",
   "bin": {
@@ -29,7 +29,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@muniz/common": "^1.0.3",
+    "@muniz/common": "^1.0.7",
     "@muniz/servers": "^1.0.3",
     "fs-extra": "^9.0.1"
   },

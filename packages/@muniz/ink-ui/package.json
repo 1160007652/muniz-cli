@@ -1,6 +1,6 @@
 {
   "name": "@muniz/ink-ui",
-  "version": "1.0.3",
+  "version": "1.0.7",
   "description": "ink 组件库, 适用于ink cli 渲染",
   "keywords": [
     "ink",
@@ -38,9 +38,9 @@
     "ink": "^3.0.8"
   },
   "peerDependencies": {
-    "react": ">=16.8.0",
     "ink": "^2.1.1",
-    "prop-types": "^15.7.2"
+    "prop-types": "^15.7.2",
+    "react": ">=16.8.0"
   },
   "gitHead": "391b557ac73fcecb98af872ed0f0d642eb9ae60e"
 }
