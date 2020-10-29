@@ -7,21 +7,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _common = require("@muniz/common");
+var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var Text = _common.Ink.Text,
-    Box = _common.Ink.Box,
-    useFocus = _common.Ink.useFocus;
+var _ink = require("ink");
 
 var Item = function Item(_ref) {
   var label = _ref.label;
 
-  var _useFocus = useFocus(),
+  var _useFocus = (0, _ink.useFocus)(),
       isFocused = _useFocus.isFocused;
 
-  return /*#__PURE__*/_common.React.createElement(Text, null, label, " ", isFocused && /*#__PURE__*/_common.React.createElement(Text, {
+  return /*#__PURE__*/_react["default"].createElement(_ink.Text, null, label, " ", isFocused && /*#__PURE__*/_react["default"].createElement(_ink.Text, {
     color: "green"
   }, "(focused)"));
 };
@@ -32,16 +30,16 @@ var Item = function Item(_ref) {
 
 
 var Update = function Update() {
-  return /*#__PURE__*/_common.React.createElement(Box, {
+  return /*#__PURE__*/_react["default"].createElement(_ink.Box, {
     flexDirection: "column",
     padding: 1
-  }, /*#__PURE__*/_common.React.createElement(Box, {
+  }, /*#__PURE__*/_react["default"].createElement(_ink.Box, {
     marginBottom: 1
-  }, /*#__PURE__*/_common.React.createElement(Text, null, "Press Tab to focus next element, Shift+Tab to focus previous element, Esc to reset focus.")), /*#__PURE__*/_common.React.createElement(Item, {
+  }, /*#__PURE__*/_react["default"].createElement(_ink.Text, null, "Press Tab to focus next element, Shift+Tab to focus previous element, Esc to reset focus.")), /*#__PURE__*/_react["default"].createElement(Item, {
     label: "First"
-  }), /*#__PURE__*/_common.React.createElement(Item, {
+  }), /*#__PURE__*/_react["default"].createElement(Item, {
     label: "Second"
-  }), /*#__PURE__*/_common.React.createElement(Item, {
+  }), /*#__PURE__*/_react["default"].createElement(Item, {
     label: "Third"
   }));
 };

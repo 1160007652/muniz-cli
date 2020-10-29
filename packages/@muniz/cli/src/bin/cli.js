@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-import { Ink } from '@muniz/common';
-const { render } = Ink;
+import { render } from 'ink';
 import {
   CommandApp,
   formatArgv,

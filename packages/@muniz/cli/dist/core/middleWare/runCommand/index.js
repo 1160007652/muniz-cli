@@ -15,7 +15,9 @@ var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends")
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
-var _common = require("@muniz/common");
+var _react = _interopRequireDefault(require("react"));
+
+var _inkUi = require("@muniz/ink-ui");
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -23,11 +25,9 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 var path = require('path');
 
-var NotCommand = _common.InkUI.NotCommand;
 /**
  * 执行 命令
  */
-
 var runCommand = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(ctx, next) {
     var argv, astCommands, render, env, _astCommands, pluginConfig, commandModule, commandModuleProps;
@@ -60,15 +60,16 @@ var runCommand = /*#__PURE__*/function () {
             }
 
             if (_astCommands.length === 0) {
-              render( /*#__PURE__*/_common.React.createElement(NotCommand, (0, _extends2["default"])({}, ctx, {
+              render( /*#__PURE__*/_react["default"].createElement(_inkUi.NotCommand, (0, _extends2["default"])({}, ctx, {
                 isExistPlugin: true
               })));
             } else {
-              commandModule = require("".concat(ctx.pkgPath, "/dist/command/").concat(_astCommands[0].path))["default"];
+              commandModule = require("".concat(ctx.pkgPath, "/dist/command/").concat(_astCommands[0].path))["default"]; // const { commandModule } = require(`${ctx.pkgName}`);
+
               commandModuleProps = _objectSpread(_objectSpread({}, argv.options), {}, {
                 input: argv.input
               });
-              render(_common.React.createElement(commandModule, commandModuleProps));
+              render( /*#__PURE__*/_react["default"].createElement(commandModule, commandModuleProps));
             }
 
             next();

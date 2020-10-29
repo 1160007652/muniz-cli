@@ -1,8 +1,8 @@
 const path = require('path');
 const fs = require('fs-extra');
-import { InkUI, React } from '@muniz/common';
+import React from 'react';
+import { NotCommand } from '@muniz/ink-ui';
 import { generateCommand } from '@muniz/servers';
-const { NotCommand } = InkUI;
 
 const MunizConfig = require(path.resolve(__filename, '../../../../configs/system.json'));
 /**
@@ -54,7 +54,7 @@ const isCommand = async (ctx, next) => {
 
         ctx.pkgPath = _tempPkgPath.replace(new RegExp(`${path.join(ctx.pkgName)}(.*?)$`, 'ig'), (_, c) => ctx.pkgName);
 
-        console.log(ctx.pkgPath);
+        // console.log(ctx.pkgPath);
         ctx.pkg = require(path.join(ctx.pkgPath, '/package.json'));
 
         // 读取命令AST信息

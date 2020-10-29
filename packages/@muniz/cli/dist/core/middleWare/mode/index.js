@@ -11,17 +11,13 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
-var _common = require("@muniz/common");
-
 var _pro = _interopRequireDefault(require("./pro"));
 
 var _dev = _interopRequireDefault(require("./dev"));
 
-var Version = _common.InkUI.Version;
 /**
  * 开发模式命令
  */
-
 var modePro = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(ctx, next) {
     var pkg, argv, render, options, _mode;

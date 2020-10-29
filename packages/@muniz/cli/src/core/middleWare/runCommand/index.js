@@ -1,6 +1,6 @@
 const path = require('path');
-import { InkUI, React } from '@muniz/common';
-const { NotCommand } = InkUI;
+import React from 'react';
+import { NotCommand } from '@muniz/ink-ui';
 
 /**
  * 执行 命令
@@ -26,6 +26,8 @@ const runCommand = async (ctx, next) => {
     render(<NotCommand {...ctx} isExistPlugin />);
   } else {
     const commandModule = require(`${ctx.pkgPath}/dist/command/${_astCommands[0].path}`).default;
+
+    // const { commandModule } = require(`${ctx.pkgName}`);
     const commandModuleProps = {
       ...argv.options,
       input: argv.input,

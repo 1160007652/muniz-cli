@@ -1,12 +1,10 @@
-import { InkUI, React, Ink } from '@muniz/common';
+import React, { useState } from 'react';
+import { TextInput, Button, ButtonGroup } from '@muniz/ink-ui';
+import { Box, Text, useApp, useFocusManager } from 'ink';
 import PropTypes from 'prop-types';
 import { useForm, Controller } from 'react-hook-form';
 // import { yupResolver } from '@hookform/resolvers';
 import * as yup from 'yup';
-
-const { TextInput, Button, ButtonGroup } = InkUI;
-const { Box, Text, useApp, useFocusManager } = Ink;
-const { useState } = React;
 
 // 表单验证器规则
 const schema = yup.object().shape({

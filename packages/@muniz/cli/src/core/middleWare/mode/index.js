@@ -1,7 +1,5 @@
-import { InkUI, React } from '@muniz/common';
 import { default as pro } from './pro';
 import { default as dev } from './dev';
-const { Version } = InkUI;
 
 /**
  * 开发模式命令

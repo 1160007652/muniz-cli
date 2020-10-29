@@ -1,5 +1,5 @@
-import { InkUI, React } from '@muniz/common';
-const { Help } = InkUI;
+import React from 'react';
+import { Help } from '@muniz/ink-ui';
 /**
  * 使用帮助命令
  */

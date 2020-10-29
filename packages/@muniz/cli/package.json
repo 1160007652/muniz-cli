@@ -29,9 +29,12 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@muniz/common": "^1.0.7",
-    "@muniz/servers": "^1.0.3",
-    "fs-extra": "^9.0.1"
+    "@muniz/ink-ui": "^1.0.7",
+    "@muniz/servers": "^1.0.5",
+    "camelcase-keys": "^6.2.2",
+    "fs-extra": "^9.0.1",
+    "ink": "^3.0.8",
+    "react": "^17.0.1"
   },
   "gitHead": "391b557ac73fcecb98af872ed0f0d642eb9ae60e"
 }

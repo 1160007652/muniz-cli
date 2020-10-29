@@ -1,6 +1,6 @@
-import { InkUI, React, Ink } from '@muniz/common';
+import React from 'react';
 import PropTypes from 'prop-types';
-const { Text, Box, useFocus } = Ink;
+import { Text, Box, useFocus } from 'ink';
 
 const Item = ({ label }) => {
   const { isFocused } = useFocus();

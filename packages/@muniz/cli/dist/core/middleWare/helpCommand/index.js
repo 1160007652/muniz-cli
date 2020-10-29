@@ -1,17 +1,19 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
 
-var _common = require("@muniz/common");
+var _react = _interopRequireDefault(require("react"));
 
-var Help = _common.InkUI.Help;
+var _inkUi = require("@muniz/ink-ui");
+
 /**
  * 使用帮助命令
  */
-
 var helpCommand = function helpCommand(ctx, next) {
   var _argv$options;
 
@@ -41,7 +43,7 @@ var helpCommand = function helpCommand(ctx, next) {
     switch (argv.command.length) {
       case 0:
         {
-          render( /*#__PURE__*/_common.React.createElement(Help, {
+          render( /*#__PURE__*/_react["default"].createElement(_inkUi.Help, {
             data: helpData,
             show: "command",
             usage: ""
@@ -59,12 +61,12 @@ var helpCommand = function helpCommand(ctx, next) {
               key: "$ muniz ".concat(argv.command[0], " [options]"),
               description: ''
             };
-            render( /*#__PURE__*/_common.React.createElement(Help, {
+            render( /*#__PURE__*/_react["default"].createElement(_inkUi.Help, {
               data: helpData,
               show: "options"
             }));
           } else {
-            render( /*#__PURE__*/_common.React.createElement(Help, {
+            render( /*#__PURE__*/_react["default"].createElement(_inkUi.Help, {
               data: helpData,
               show: "command",
               usage: ""
@@ -83,7 +85,7 @@ var helpCommand = function helpCommand(ctx, next) {
             key: "$ muniz ".concat(argv.command[1], " [options]"),
             description: ''
           };
-          render( /*#__PURE__*/_common.React.createElement(Help, {
+          render( /*#__PURE__*/_react["default"].createElement(_inkUi.Help, {
             data: helpData,
             show: "options"
           }));
