@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { TextInput, Button, ButtonGroup } from '@muniz/ink-ui';
 import { Box, Text, useApp, useFocusManager } from 'ink';
-import PropTypes from 'prop-types';
 import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers';
+import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 // 表单验证器规则
@@ -36,7 +36,6 @@ const Create = (props) => {
       state.help = true;
       return state;
     });
-    // exit();
   };
 
   return (
