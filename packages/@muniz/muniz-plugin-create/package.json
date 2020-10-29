@@ -1,6 +1,6 @@
 {
   "name": "@muniz/muniz-plugin-create",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "创建项目工程模版插件",
   "keywords": [
     "@muniz/muniz-plugin-create"
@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^1.0.0",
-    "@muniz/ink-ui": "^1.0.7",
+    "@muniz/ink-ui": "^1.0.8",
     "ink": "^3.0.8",
     "react": "^17.0.1",
     "react-hook-form": "^6.9.6",
