@@ -33,8 +33,14 @@ const runCommand = async (ctx, next) => {
       const commandModule = require(`${ctx.pkgPath}/dist/command/${_astCommands[0].path}`).default;
       render(React.createElement(commandModule, commandModuleProps));
     } else {
-      const { pluginCommand } = require(`${ctx.pkgName}`);
-      pluginCommand({ commandPath: _astCommands[0].path, data: commandModuleProps });
+      const isPluginDev = false;
+      if (isPluginDev) {
+        const { pluginCommand } = require(path.join(ctx.pkgPath, '/dist/index.js'));
+        pluginCommand({ commandPath: _astCommands[0].path, data: commandModuleProps });
+      } else {
+        const { pluginCommand } = require(`${ctx.pkgName}`);
+        pluginCommand({ commandPath: _astCommands[0].path, data: commandModuleProps });
+      }
     }
   }
 

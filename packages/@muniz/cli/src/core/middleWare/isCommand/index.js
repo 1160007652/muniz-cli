@@ -50,13 +50,19 @@ const isCommand = async (ctx, next) => {
          * 只支持外部 muniz-plugin-xxx 插件形式
          */
         ctx.pkgName = `@muniz/muniz-plugin-${argv.command[0]}`;
-        const _tempPkgPath = require.resolve(ctx.pkgName);
+        // 是否是开发状态的 通道
+        const isPluginDev = false;
+        if (isPluginDev) {
+          ctx.pkgPath = process.cwd();
+        } else {
+          const _tempPkgPath = require.resolve(ctx.pkgName);
+          ctx.pkgPath = _tempPkgPath.replace(
+            new RegExp(`${path.join(ctx.pkgName)}(.*?)$`, 'ig'),
+            (_, c) => ctx.pkgName,
+          );
+        }
 
-        ctx.pkgPath = _tempPkgPath.replace(new RegExp(`${path.join(ctx.pkgName)}(.*?)$`, 'ig'), (_, c) => ctx.pkgName);
-
-        // console.log(ctx.pkgPath);
         ctx.pkg = require(path.join(ctx.pkgPath, '/package.json'));
-
         // 读取命令AST信息
         if (MunizConfig.MUNIZ_CLI_DEBUG) {
           ctx.astCommands = await generateCommand(
@@ -68,7 +74,9 @@ const isCommand = async (ctx, next) => {
         }
 
         // 读取插件配置信息
+
         const pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js')).default(1);
+
         if (argv.command.length < 2) {
           if (pluginConfig?.defaultCommand && !['', 'function', 'undefined'].includes(pluginConfig?.defaultCommand)) {
             // argv.command.push(pluginConfig.defaultCommand);
@@ -80,7 +88,6 @@ const isCommand = async (ctx, next) => {
         ctx.pkgName = `@muniz/muniz-plugin-${argv.command[0]}`;
         ctx.pkgPath = '';
         ctx.pkg = {};
-
         render(<NotCommand {...ctx} />);
 
         process.exit();

@@ -10,7 +10,7 @@
     "@muniz/cli"
   ],
   "author": "1160007652 <1160007652@qq.com>",
-  "homepage": "",
+  "homepage": "https://github.com/1160007652/muniz-cli#readme",
   "license": "ISC",
   "main": "lib/cli.js",
   "directories": {
