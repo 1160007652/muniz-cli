@@ -1,3 +1,5 @@
 {
-  "MUNIZ_CLI_DEBUG": true
+  "MUNIZ_CLI_DEBUG": true,
+  "MUNIZ_PLUGIN_DEV": true,
+  "plugins": []
 }

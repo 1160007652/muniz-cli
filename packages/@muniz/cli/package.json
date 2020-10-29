@@ -23,6 +23,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": ">=10.22.1"
+  },
   "scripts": {
     "dev": "babel --root-mode upward src -d dist",
     "generateCommandDesc": "muniz --mode=pro --type=desc",
@@ -33,7 +36,9 @@
     "@muniz/servers": "^1.0.10",
     "fs-extra": "^9.0.1",
     "ink": "^3.0.8",
-    "react": "^17.0.1"
+    "lowdb": "^1.0.0",
+    "react": "^17.0.1",
+    "semver": "^7.3.2"
   },
   "gitHead": "391b557ac73fcecb98af872ed0f0d642eb9ae60e"
 }

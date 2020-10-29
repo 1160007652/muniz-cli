@@ -1,14 +1,39 @@
 #!/usr/bin/env node
 'use strict';
 
-var _ink = require("ink");
+var _ink = require('ink');
 
-var _CommandApp = require("../core/CommandApp");
+var _CommandApp = require('../core/CommandApp');
 
-// 初始化 命令行 框架
+var semver = require('semver');
+
+var requiredVersion = require('../../package.json').engines.node;
+
+/**
+ *
+ * @param {String} wanted 设定的最小兼容版本号
+ * @param {String} id npm包名称
+ * @description 强制检查 脚手架版本依赖是否大于给定的值
+ * @returns 条件成立继续执行,否则退出
+ *
+ */
+function checkNodeVersion(wanted, id) {
+  if (!semver.satisfies(process.version, wanted)) {
+    console.log(
+      'You are using Node '
+        .concat(process.version, ' , but this version of ')
+        .concat(id, 'requires Node ')
+        .concat(wanted, '.\nPlease upgrade your Node version.'),
+    );
+    process.exit(1);
+  }
+}
+
+checkNodeVersion(requiredVersion, '@muniz/cli'); // 初始化 命令行 框架
+
 var commandApp = new _CommandApp.CommandApp({
   argv: process.argv.slice(2),
-  render: _ink.render
+  render: _ink.render,
 }); // 中间件 => 格式化命令
 
 commandApp.use(_CommandApp.formatArgv); // 中间件 => 判断是否存在命令
