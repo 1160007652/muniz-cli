@@ -1,6 +1,6 @@
 {
   "name": "@muniz/muniz-plugin-create",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "创建项目工程模版插件",
   "keywords": [
     "@muniz/muniz-plugin-create"
