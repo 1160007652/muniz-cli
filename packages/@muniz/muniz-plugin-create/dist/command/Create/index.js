@@ -21,9 +21,10 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _reactHookForm = require("react-hook-form");
 
+var _resolvers = require("@hookform/resolvers");
+
 var yup = _interopRequireWildcard(require("yup"));
 
-// import { yupResolver } from '@hookform/resolvers';
 // 表单验证器规则
 var schema = yup.object().shape({
   name: yup.string().required(),
@@ -50,8 +51,8 @@ var Create = function Create(props) {
 
   var _useForm = (0, _reactHookForm.useForm)({
     reValidateMode: 'onChange',
-    mode: 'all' // resolver: yupResolver(schema),
-
+    mode: 'all',
+    resolver: (0, _resolvers.yupResolver)(schema)
   }),
       control = _useForm.control,
       errors = _useForm.errors,

@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 Object.defineProperty(exports, "__esModule", {
@@ -7,7 +9,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
+
+var _react = _interopRequireWildcard(require("react"));
 
 var _ink = require("ink");
 
@@ -18,7 +22,12 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
  * @description 添加插件
  */
 var Add = function Add(props) {
-  return /*#__PURE__*/_react["default"].createElement(_ink.Text, null, "\u6DFB\u52A0\u63D2\u4EF6\u547D\u4EE4");
+  var _useState = (0, _react.useState)(1),
+      _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
+      count = _useState2[0],
+      setCount = _useState2[1];
+
+  return /*#__PURE__*/_react["default"].createElement(_ink.Text, null, "\u6DFB\u52A0\u63D2\u4EF6\u547D\u4EE4-", count);
 };
 
 Add.propTypes = {

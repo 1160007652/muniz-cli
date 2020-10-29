@@ -3,7 +3,7 @@ import { TextInput, Button, ButtonGroup } from '@muniz/ink-ui';
 import { Box, Text, useApp, useFocusManager } from 'ink';
 import PropTypes from 'prop-types';
 import { useForm, Controller } from 'react-hook-form';
-// import { yupResolver } from '@hookform/resolvers';
+import { yupResolver } from '@hookform/resolvers';
 import * as yup from 'yup';
 
 // 表单验证器规则
@@ -26,7 +26,7 @@ const Create = (props) => {
   const { control, errors, reset, handleSubmit, getValues, setValue } = useForm({
     reValidateMode: 'onChange',
     mode: 'all',
-    // resolver: yupResolver(schema),
+    resolver: yupResolver(schema),
   });
 
   // 提交表单数据

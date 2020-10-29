@@ -30,7 +30,7 @@ var path = require('path');
  */
 var runCommand = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(ctx, next) {
-    var argv, astCommands, render, env, _astCommands, pluginConfig, commandModule, commandModuleProps;
+    var argv, astCommands, render, env, _astCommands, pluginConfig, commandModuleProps, commandModule, _require, pluginCommand;
 
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
@@ -64,12 +64,20 @@ var runCommand = /*#__PURE__*/function () {
                 isExistPlugin: true
               })));
             } else {
-              commandModule = require("".concat(ctx.pkgPath, "/dist/command/").concat(_astCommands[0].path))["default"]; // const { commandModule } = require(`${ctx.pkgName}`);
-
               commandModuleProps = _objectSpread(_objectSpread({}, argv.options), {}, {
                 input: argv.input
               });
-              render( /*#__PURE__*/_react["default"].createElement(commandModule, commandModuleProps));
+
+              if (env.command === 'cli') {
+                commandModule = require("".concat(ctx.pkgPath, "/dist/command/").concat(_astCommands[0].path))["default"];
+                render( /*#__PURE__*/_react["default"].createElement(commandModule, commandModuleProps));
+              } else {
+                _require = require("".concat(ctx.pkgName)), pluginCommand = _require.pluginCommand;
+                pluginCommand({
+                  commandPath: _astCommands[0].path,
+                  data: commandModuleProps
+                });
+              }
             }
 
             next();

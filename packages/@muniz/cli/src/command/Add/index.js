@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text } from 'ink';
 import PropTypes from 'prop-types';
 
@@ -7,7 +7,8 @@ import PropTypes from 'prop-types';
  * @description 添加插件
  */
 const Add = (props) => {
-  return <Text>添加插件命令</Text>;
+  const [count, setCount] = useState(1);
+  return <Text>添加插件命令-{count}</Text>;
 };
 
 Add.propTypes = {

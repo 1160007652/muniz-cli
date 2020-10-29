@@ -5,11 +5,17 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = void 0;
+exports.pluginCommand = exports["default"] = void 0;
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+
+var _ink = require("ink");
+
+var _react = _interopRequireDefault(require("react"));
+
+var path = require('path');
 
 var Life = /*#__PURE__*/function () {
   function Life() {
@@ -38,5 +44,24 @@ var Life = /*#__PURE__*/function () {
 var _default = function _default(props) {
   return new Life();
 };
+/**
+ * muniz 脚手架（宿主环境）通过此通道执行插件命令
+ * @param {object} param
+ * @param {string} param.commandPath 执行命令路径
+ * @param {object} param.data 插件命令数据
+ *
+ */
+
 
 exports["default"] = _default;
+
+var pluginCommand = function pluginCommand(_ref) {
+  var commandPath = _ref.commandPath,
+      data = _ref.data;
+
+  var _command = require("./command/".concat(commandPath))["default"];
+
+  (0, _ink.render)( /*#__PURE__*/_react["default"].createElement(_command, data));
+};
+
+exports.pluginCommand = pluginCommand;

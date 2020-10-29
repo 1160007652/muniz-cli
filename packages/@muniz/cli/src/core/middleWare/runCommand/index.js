@@ -25,14 +25,17 @@ const runCommand = async (ctx, next) => {
   if (_astCommands.length === 0) {
     render(<NotCommand {...ctx} isExistPlugin />);
   } else {
-    const commandModule = require(`${ctx.pkgPath}/dist/command/${_astCommands[0].path}`).default;
-
-    // const { commandModule } = require(`${ctx.pkgName}`);
     const commandModuleProps = {
       ...argv.options,
       input: argv.input,
     };
-    render(React.createElement(commandModule, commandModuleProps));
+    if (env.command === 'cli') {
+      const commandModule = require(`${ctx.pkgPath}/dist/command/${_astCommands[0].path}`).default;
+      render(React.createElement(commandModule, commandModuleProps));
+    } else {
+      const { pluginCommand } = require(`${ctx.pkgName}`);
+      pluginCommand({ commandPath: _astCommands[0].path, data: commandModuleProps });
+    }
   }
 
   next();
