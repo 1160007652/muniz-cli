@@ -1,6 +1,6 @@
 {
   "name": "@muniz/cli",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "muniz脚手架,核心插件,命令行工具,可扩展插件模型",
   "footer": "底部描述信息",
   "bin": {
@@ -29,7 +29,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@muniz/ink-ui": "^1.0.13",
+    "@muniz/ink-ui": "^1.0.14",
     "@muniz/servers": "^1.0.10",
     "fs-extra": "^9.0.1",
     "ink": "^3.0.8",
