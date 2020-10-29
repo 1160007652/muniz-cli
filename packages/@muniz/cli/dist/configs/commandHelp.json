@@ -1,5 +1,21 @@
 [
   {
+    "key": "list",
+    "description": "插件列表",
+    "options": [],
+    "isIndex": false,
+    "name": "List",
+    "path": "List/index.js"
+  },
+  {
+    "key": "remove",
+    "description": "删除插件",
+    "options": [],
+    "isIndex": false,
+    "name": "Remove",
+    "path": "Remove/index.js"
+  },
+  {
     "key": "add",
     "description": "添加插件",
     "options": [
@@ -23,21 +39,5 @@
     "isIndex": false,
     "name": "Add",
     "path": "Add/index.js"
-  },
-  {
-    "key": "list",
-    "description": "插件列表",
-    "options": [],
-    "isIndex": false,
-    "name": "List",
-    "path": "List/index.js"
-  },
-  {
-    "key": "remove",
-    "description": "删除插件",
-    "options": [],
-    "isIndex": false,
-    "name": "Remove",
-    "path": "Remove/index.js"
   }
 ]
