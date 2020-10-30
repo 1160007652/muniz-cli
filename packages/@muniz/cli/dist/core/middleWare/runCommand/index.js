@@ -52,9 +52,11 @@ function _objectSpread(target) {
 
 var path = require('path');
 
+var MunizConfig = require(path.resolve(__filename, '../../../../configs/system.json'));
 /**
  * 执行 命令
  */
+
 var runCommand = /*#__PURE__*/ (function () {
   var _ref = (0, _asyncToGenerator2['default'])(
     /*#__PURE__*/ _regenerator['default'].mark(function _callee(ctx, next) {
@@ -66,7 +68,6 @@ var runCommand = /*#__PURE__*/ (function () {
         pluginConfig,
         commandModuleProps,
         commandModule,
-        isPluginDev,
         _require,
         pluginCommand,
         _require2,
@@ -128,9 +129,8 @@ var runCommand = /*#__PURE__*/ (function () {
                   ];
                   render(/*#__PURE__*/ _react['default'].createElement(commandModule, commandModuleProps));
                 } else {
-                  isPluginDev = false;
-
-                  if (isPluginDev) {
+                  // 当前执行插件是否是 走 开发状态 通道
+                  if (MunizConfig.MUNIZ_PLUGIN_DEV) {
                     (_require = require(path.join(ctx.pkgPath, '/dist/index.js'))),
                       (pluginCommand = _require.pluginCommand);
                     pluginCommand({

@@ -2,6 +2,7 @@ const path = require('path');
 import React from 'react';
 import { NotCommand } from '@muniz/ink-ui';
 
+const MunizConfig = require(path.resolve(__filename, '../../../../configs/system.json'));
 /**
  * 执行 命令
  */
@@ -33,8 +34,8 @@ const runCommand = async (ctx, next) => {
       const commandModule = require(`${ctx.pkgPath}/dist/command/${_astCommands[0].path}`).default;
       render(React.createElement(commandModule, commandModuleProps));
     } else {
-      const isPluginDev = false;
-      if (isPluginDev) {
+      // 当前执行插件是否是 走 开发状态 通道
+      if (MunizConfig.MUNIZ_PLUGIN_DEV) {
         const { pluginCommand } = require(path.join(ctx.pkgPath, '/dist/index.js'));
         pluginCommand({ commandPath: _astCommands[0].path, data: commandModuleProps });
       } else {

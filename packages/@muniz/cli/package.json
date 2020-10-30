@@ -24,7 +24,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=10.22.1"
+    "node": ">=10.22.0"
   },
   "scripts": {
     "dev": "babel --root-mode upward src -d dist",
@@ -34,8 +34,10 @@
   "dependencies": {
     "@muniz/ink-ui": "^1.0.14",
     "@muniz/servers": "^1.0.10",
+    "execa": "^4.1.0",
     "fs-extra": "^9.0.1",
     "ink": "^3.0.8",
+    "inquirer": "^7.3.3",
     "lowdb": "^1.0.0",
     "react": "^17.0.1",
     "semver": "^7.3.2"
