@@ -121,6 +121,7 @@ const parseCommand = async (filePath) => {
 
   let componentName = '';
   let description = '';
+  let commandType = '';
 
   // 遍历命令（名称、描述）
   traverse(ast, {
@@ -139,6 +140,7 @@ const parseCommand = async (filePath) => {
 
       if (types.isArrowFunctionExpression(node.declaration)) {
         description = parseJsDoc('description', node.leadingComments);
+
         return;
       }
 
@@ -155,6 +157,7 @@ const parseCommand = async (filePath) => {
     VariableDeclaration({ node }) {
       if (node.declarations[0].id.name === componentName) {
         description = parseJsDoc('description', node.leadingComments);
+        commandType = parseJsDoc('type', node.leadingComments);
       }
     },
     // 支持命名功能组件，例如 函数MyComponent {}
@@ -162,6 +165,7 @@ const parseCommand = async (filePath) => {
       if (node.id.name === componentName) {
         if (!description) {
           description = parseJsDoc('description', node.leadingComments);
+          commandType = parseJsDoc('type', node.leadingComments);
         }
       }
     },
@@ -170,6 +174,7 @@ const parseCommand = async (filePath) => {
       if (node.id.name === componentName) {
         if (!description) {
           description = parseJsDoc('description', node.leadingComments);
+          commandType = parseJsDoc('type', node.leadingComments);
         }
       }
     },
@@ -215,6 +220,7 @@ const parseCommand = async (filePath) => {
 
   const command = {
     key: String(componentName).replace(/^(.)/i, (_, c) => String(c).toLocaleLowerCase()),
+    commandType: commandType || 'react',
     description,
     options: args.map((arg) => {
       return {

@@ -127,7 +127,12 @@ var runCommand = /*#__PURE__*/ (function () {
                   commandModule = require(''.concat(ctx.pkgPath, '/dist/command/').concat(_astCommands[0].path))[
                     'default'
                   ];
-                  render(/*#__PURE__*/ _react['default'].createElement(commandModule, commandModuleProps));
+
+                  if (_astCommands[0].commandType === 'function') {
+                    commandModule(commandModuleProps);
+                  } else {
+                    render(/*#__PURE__*/ _react['default'].createElement(commandModule, commandModuleProps));
+                  }
                 } else {
                   // 当前执行插件是否是 走 开发状态 通道
                   if (MunizConfig.MUNIZ_PLUGIN_DEV) {

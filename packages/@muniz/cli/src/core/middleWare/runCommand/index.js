@@ -32,7 +32,12 @@ const runCommand = async (ctx, next) => {
     };
     if (env.command === 'cli') {
       const commandModule = require(`${ctx.pkgPath}/dist/command/${_astCommands[0].path}`).default;
-      render(React.createElement(commandModule, commandModuleProps));
+
+      if (_astCommands[0].commandType === 'function') {
+        commandModule(commandModuleProps);
+      } else {
+        render(React.createElement(commandModule, commandModuleProps));
+      }
     } else {
       // 当前执行插件是否是 走 开发状态 通道
       if (MunizConfig.MUNIZ_PLUGIN_DEV) {

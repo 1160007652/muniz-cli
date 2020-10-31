@@ -7,6 +7,8 @@ Object.defineProperty(exports, '__esModule', {
 });
 exports.lowdb = exports.lowdbAction = void 0;
 
+var _toConsumableArray2 = _interopRequireDefault(require('@babel/runtime/helpers/toConsumableArray'));
+
 var _regenerator = _interopRequireDefault(require('@babel/runtime/regenerator'));
 
 var _defineProperty2 = _interopRequireDefault(require('@babel/runtime/helpers/defineProperty'));
@@ -142,6 +144,61 @@ var lowdbAction = {
         }, _callee);
       }),
     )();
+  },
+
+  /**
+   *
+   * @param {obejct} param
+   * @param {string} param.shortName 插件短名称，执行命令 取自 [scope]/muniz-plugin-(.*?) 匹配
+   * @param {string} param.pkgName 插件包名称，如 [scope]/muniz-plugin-xxx
+   */
+  addPluginPkg: function addPluginPkg(_ref2) {
+    var shortName = _ref2.shortName,
+      pkgName = _ref2.pkgName;
+    // 先根据 全量 pkg 包名删除
+    lowdb
+      .get('plugins')
+      .remove({
+        pkgName: pkgName,
+      })
+      .write(); // 删除完，再进行安装
+
+    lowdb
+      .get('plugins')
+      .push({
+        shortName: shortName,
+        pkgName: pkgName,
+      })
+      .write();
+  },
+
+  /**
+   *
+   * @description 获取插件已安装的插件列表
+   * @returns 返回插件列表
+   */
+  getPluginPkgList: function getPluginPkgList() {
+    var result = lowdb
+      .get('plugins')
+      .map(function (item, index) {
+        return [index + 1].concat((0, _toConsumableArray2['default'])(Object.values(item)));
+      })
+      .value();
+    return result;
+  },
+
+  /**
+   * @description 删除插件
+   */
+  removePluginPkg: function removePluginPkg(_ref3) {
+    var shortName = _ref3.shortName,
+      pkgName = _ref3.pkgName;
+    lowdb
+      .get('plugins')
+      .remove({
+        pkgName: pkgName,
+      })
+      .write();
   },
 };
 exports.lowdbAction = lowdbAction;

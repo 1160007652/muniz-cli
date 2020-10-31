@@ -1,55 +1,71 @@
-"use strict";
+'use strict';
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+var _interopRequireDefault = require('@babel/runtime/helpers/interopRequireDefault');
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
+Object.defineProperty(exports, '__esModule', {
+  value: true,
 });
-Object.defineProperty(exports, "TextInput", {
+Object.defineProperty(exports, 'TextInput', {
   enumerable: true,
   get: function get() {
-    return _TextInput["default"];
-  }
+    return _TextInput['default'];
+  },
 });
-Object.defineProperty(exports, "Button", {
+Object.defineProperty(exports, 'Button', {
   enumerable: true,
   get: function get() {
-    return _Button["default"];
-  }
+    return _Button['default'];
+  },
 });
-Object.defineProperty(exports, "ButtonGroup", {
+Object.defineProperty(exports, 'ButtonGroup', {
   enumerable: true,
   get: function get() {
-    return _ButtonGroup["default"];
-  }
+    return _ButtonGroup['default'];
+  },
 });
-Object.defineProperty(exports, "Help", {
+Object.defineProperty(exports, 'Spinner', {
   enumerable: true,
   get: function get() {
-    return _Help["default"];
-  }
+    return _Spinner['default'];
+  },
 });
-Object.defineProperty(exports, "Version", {
+Object.defineProperty(exports, 'Table', {
   enumerable: true,
   get: function get() {
-    return _Version["default"];
-  }
+    return _Table['default'];
+  },
 });
-Object.defineProperty(exports, "NotCommand", {
+Object.defineProperty(exports, 'Help', {
   enumerable: true,
   get: function get() {
-    return _NotCommand["default"];
-  }
+    return _Help['default'];
+  },
+});
+Object.defineProperty(exports, 'Version', {
+  enumerable: true,
+  get: function get() {
+    return _Version['default'];
+  },
+});
+Object.defineProperty(exports, 'NotCommand', {
+  enumerable: true,
+  get: function get() {
+    return _NotCommand['default'];
+  },
 });
 
-var _TextInput = _interopRequireDefault(require("./components/TextInput"));
+var _TextInput = _interopRequireDefault(require('./components/TextInput'));
 
-var _Button = _interopRequireDefault(require("./components/Button"));
+var _Button = _interopRequireDefault(require('./components/Button'));
 
-var _ButtonGroup = _interopRequireDefault(require("./components/ButtonGroup"));
+var _ButtonGroup = _interopRequireDefault(require('./components/ButtonGroup'));
 
-var _Help = _interopRequireDefault(require("./Help"));
+var _Spinner = _interopRequireDefault(require('./components/Spinner'));
 
-var _Version = _interopRequireDefault(require("./Version"));
+var _Table = _interopRequireDefault(require('./components/Table'));
 
-var _NotCommand = _interopRequireDefault(require("./NotCommand"));
+var _Help = _interopRequireDefault(require('./Help'));
+
+var _Version = _interopRequireDefault(require('./Version'));
+
+var _NotCommand = _interopRequireDefault(require('./NotCommand'));

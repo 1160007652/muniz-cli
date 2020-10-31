@@ -63,6 +63,36 @@ const lowdbAction = {
       return answers.pkgName;
     }
   },
+  /**
+   *
+   * @param {obejct} param
+   * @param {string} param.shortName 插件短名称，执行命令 取自 [scope]/muniz-plugin-(.*?) 匹配
+   * @param {string} param.pkgName 插件包名称，如 [scope]/muniz-plugin-xxx
+   */
+  addPluginPkg({ shortName, pkgName }) {
+    // 先根据 全量 pkg 包名删除
+    lowdb.get('plugins').remove({ pkgName: pkgName }).write();
+    // 删除完，再进行安装
+    lowdb.get('plugins').push({ shortName, pkgName }).write();
+  },
+  /**
+   *
+   * @description 获取插件已安装的插件列表
+   * @returns 返回插件列表
+   */
+  getPluginPkgList() {
+    const result = lowdb
+      .get('plugins')
+      .map((item, index) => [index + 1, ...Object.values(item)])
+      .value();
+    return result;
+  },
+  /**
+   * @description 删除插件
+   */
+  removePluginPkg({ shortName, pkgName }) {
+    lowdb.get('plugins').remove({ pkgName }).write();
+  },
 };
 
 export { lowdbAction, lowdb };
