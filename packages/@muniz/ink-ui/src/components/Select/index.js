@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, Text, useInput, useFocus, useFocusManager } from 'ink';
 
-const Button = ({ children, onBlur, wait, disabled, leftDisabled, rightDisabled, ...props }) => {
+const Select = ({ children, onBlur, wait, disabled, ...props }) => {
   const { isFocused } = useFocus({ autoFocus: true, isActive: !disabled });
   const { disableFocus, enableFocus, focusNext } = useFocusManager();
 
@@ -35,19 +35,15 @@ const Button = ({ children, onBlur, wait, disabled, leftDisabled, rightDisabled,
   );
 };
 
-Button.propTypes = {
+Select.propTypes = {
   onBlur: PropTypes.func,
   wait: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   disabled: PropTypes.bool,
-  leftDisabled: PropTypes.bool,
-  rightDisabled: PropTypes.bool,
 };
-Button.defaultProps = {
+Select.defaultProps = {
   onBlur: () => {},
   wait: 600,
   disabled: false,
-  leftDisabled: false,
-  rightDisabled: false,
 };
 
-export default Button;
+export default Select;

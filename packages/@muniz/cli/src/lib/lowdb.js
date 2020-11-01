@@ -23,7 +23,7 @@ const lowdbAction = {
    * @param {string} param.shortName 插件短名称，执行命令 取自 [scope]/muniz-plugin-(.*?) 匹配
    *
    */
-  async getPluginPkgName({ shortName }) {
+  async getPluginPkgName({ shortName, isReact = false }) {
     const pkgNameList = lowdb
       .get('plugins')
       .filter({ shortName })
@@ -35,6 +35,10 @@ const lowdbAction = {
       })
       .value();
 
+    // 如果是react 交互， 直接返回
+    if (isReact) {
+      return pkgNameList;
+    }
     // 如果 = 0 表示 没有这个 插件
     if (pkgNameList.length === 0) {
       return '';
@@ -47,6 +51,7 @@ const lowdbAction = {
     }
     // 如果 > 1 表示 只安装了 多个 插件, 需要用户进行交互选择
     if (pkgNameList.length > 1) {
+      // 非react 交互
       const promptList = [
         {
           type: 'list',

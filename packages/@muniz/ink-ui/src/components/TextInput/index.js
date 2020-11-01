@@ -59,7 +59,6 @@ TextInput.defaultProps = {
   placeHolder: '',
   value: '',
   label: '',
-
   error: '',
 };
 

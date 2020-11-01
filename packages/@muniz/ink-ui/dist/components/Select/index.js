@@ -15,21 +15,12 @@ var _propTypes = _interopRequireDefault(require('prop-types'));
 
 var _ink = require('ink');
 
-var Button = function Button(_ref) {
+var Select = function Select(_ref) {
   var children = _ref.children,
     onBlur = _ref.onBlur,
     wait = _ref.wait,
     disabled = _ref.disabled,
-    leftDisabled = _ref.leftDisabled,
-    rightDisabled = _ref.rightDisabled,
-    props = (0, _objectWithoutProperties2['default'])(_ref, [
-      'children',
-      'onBlur',
-      'wait',
-      'disabled',
-      'leftDisabled',
-      'rightDisabled',
-    ]);
+    props = (0, _objectWithoutProperties2['default'])(_ref, ['children', 'onBlur', 'wait', 'disabled']);
 
   var _useFocus = (0, _ink.useFocus)({
       autoFocus: true,
@@ -74,19 +65,15 @@ var Button = function Button(_ref) {
   );
 };
 
-Button.propTypes = {
+Select.propTypes = {
   onBlur: _propTypes['default'].func,
   wait: _propTypes['default'].oneOfType([_propTypes['default'].string, _propTypes['default'].number]),
   disabled: _propTypes['default'].bool,
-  leftDisabled: _propTypes['default'].bool,
-  rightDisabled: _propTypes['default'].bool,
 };
-Button.defaultProps = {
+Select.defaultProps = {
   onBlur: function onBlur() {},
   wait: 600,
   disabled: false,
-  leftDisabled: false,
-  rightDisabled: false,
 };
-var _default = Button;
+var _default = Select;
 exports['default'] = _default;

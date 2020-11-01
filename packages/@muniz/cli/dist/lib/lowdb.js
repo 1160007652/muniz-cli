@@ -74,12 +74,15 @@ var lowdbAction = {
   getPluginPkgName: function getPluginPkgName(_ref) {
     return (0, _asyncToGenerator2['default'])(
       /*#__PURE__*/ _regenerator['default'].mark(function _callee() {
-        var shortName, pkgNameList, promptList, answers;
+        var shortName, _ref$isReact, isReact, pkgNameList, promptList, answers;
+
         return _regenerator['default'].wrap(function _callee$(_context) {
           while (1) {
             switch ((_context.prev = _context.next)) {
               case 0:
-                shortName = _ref.shortName;
+                (shortName = _ref.shortName),
+                  (_ref$isReact = _ref.isReact),
+                  (isReact = _ref$isReact === void 0 ? false : _ref$isReact);
                 pkgNameList = lowdb
                   .get('plugins')
                   .filter({
@@ -93,18 +96,26 @@ var lowdbAction = {
                       item,
                     );
                   })
-                  .value(); // 如果 = 0 表示 没有这个 插件
+                  .value(); // 如果是react 交互， 直接返回
 
-                if (!(pkgNameList.length === 0)) {
+                if (!isReact) {
                   _context.next = 4;
+                  break;
+                }
+
+                return _context.abrupt('return', pkgNameList);
+
+              case 4:
+                if (!(pkgNameList.length === 0)) {
+                  _context.next = 6;
                   break;
                 }
 
                 return _context.abrupt('return', '');
 
-              case 4:
+              case 6:
                 if (!(pkgNameList.length === 1)) {
-                  _context.next = 7;
+                  _context.next = 9;
                   break;
                 }
 
@@ -112,12 +123,13 @@ var lowdbAction = {
                 console.clear();
                 return _context.abrupt('return', pkgNameList[0].pkgName);
 
-              case 7:
+              case 9:
                 if (!(pkgNameList.length > 1)) {
-                  _context.next = 14;
+                  _context.next = 16;
                   break;
                 }
 
+                // 非react 交互
                 promptList = [
                   {
                     type: 'list',
@@ -127,16 +139,16 @@ var lowdbAction = {
                     choices: pkgNameList,
                   },
                 ];
-                _context.next = 11;
+                _context.next = 13;
                 return inquirer.prompt(promptList);
 
-              case 11:
+              case 13:
                 answers = _context.sent;
                 // 清除控制台内容
                 console.clear();
                 return _context.abrupt('return', answers.pkgName);
 
-              case 14:
+              case 16:
               case 'end':
                 return _context.stop();
             }

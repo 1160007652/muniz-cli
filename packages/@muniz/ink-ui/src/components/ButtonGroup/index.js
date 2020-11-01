@@ -5,7 +5,7 @@ const ButtonGroup = ({ children, ...props }) => {
   return (
     <Box flexDirection="column" {...props}>
       <Box>
-        <Text color="yellow">操作：按下 ◄ ► 键 切换，Enter 键 执行</Text>
+        <Text color="yellow">操作：按下 tab 键 切换，Enter 键 执行</Text>
       </Box>
       <Box>{children}</Box>
     </Box>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Box, Text, useApp, useFocusManager } from 'ink';
 import PropTypes from 'prop-types';
 import { TextInput, Button, ButtonGroup, Spinner } from '@muniz/ink-ui';
@@ -12,7 +12,7 @@ const execa = require('execa');
  */
 const Add = (props) => {
   const { input } = props;
-  const [pkgList, setPkgList] = useState([]);
+  const [pkgList, setPkgList] = useState();
   const [error, setError] = useState('不能为空');
   const [installFlag, setInstallFlag] = useState('');
   const { exit } = useApp();
@@ -24,30 +24,17 @@ const Add = (props) => {
   });
 
   function handleOnChnagePkg(data) {
-    const _pkgList = data.split(' ').filter((item) => item !== '');
-    if (_pkgList.length === 0) {
-      setError('不能为空');
-    }
-    _pkgList.forEach((item) => {
-      // 提取短名称 @muniz/muniz-plugin-create => create
-      let shortName = String(item).match(/.*?muniz-plugin-(.*?)$/);
+    if (String(data).trim()) {
+      let shortName = String(data.trim()).match(/.*?muniz-plugin-(.*?)$/);
       shortName = shortName?.length > 1 ? shortName[1] : '';
       if (!shortName) {
-        setError(`${item} : 不是「 Muniz 」 脚手架插件`);
+        setError(`${data.trim()} : 不是「 Muniz 」 脚手架插件`);
       } else {
         setError('');
+        setPkgList({ shortName, pkgName: data.trim() });
       }
-    });
-  }
-
-  function handleOnBlurPkg(data) {
-    const _pkgList = data.split(' ').filter((item) => item !== '');
-    if (_pkgList.length > 0) {
-      _pkgList.forEach((item) => {
-        let shortName = String(item).match(/.*?muniz-plugin-(.*?)$/);
-        shortName = shortName[1];
-        setPkgList((state) => [...state, { shortName, pkgName: item }]);
-      });
+    } else {
+      setError('不能为空');
     }
   }
 
@@ -58,20 +45,29 @@ const Add = (props) => {
     });
 
     // 调用安装命令
-    const _pkgList = pkgList.map((item) => item.pkgName).join(' ');
-
     execa
-      .command(`npm install -g ${_pkgList}`)
+      .command(`npm install -g ${pkgList.pkgName}`)
       .then(() => {
         // 向系统配置文件中，保存安装插件记录
-        pkgList.forEach((item) => {
-          lowdbAction.addPluginPkg(item);
-        });
+        lowdbAction.addPluginPkg(pkgList);
         setInstallFlag('安装成功');
         setStep((state) => {
           return { ...state, help: true, spinnerFlag: false };
         });
+        const pluginModule = require(pkgList.pkgName).default();
 
+        if (pluginModule.isStart) {
+          //生成自启动脚本
+          const osascriptContent = `
+            tell application "Terminal"
+              activate
+              do script "muniz ${pkgList.shortName}"
+            end tell
+          `;
+          execa.commandSync(`osascript -e '${osascriptContent}'`, {
+            shell: true,
+          });
+        }
         setTimeout(() => {
           exit();
         }, 200);
@@ -95,9 +91,9 @@ const Add = (props) => {
       </Box>
       <TextInput
         label="插件名称："
-        placeHolder="请输入插件名称（多个用空格隔开）"
+        placeHolder="请输入插件名称（每次只能安装一个插件）"
         onChange={handleOnChnagePkg}
-        onBlur={handleOnBlurPkg}
+        value={input.length > 0 ? input[0] : ''}
         error={error}
       />
       {!step.install && (

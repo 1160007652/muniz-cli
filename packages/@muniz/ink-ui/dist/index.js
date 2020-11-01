@@ -35,6 +35,12 @@ Object.defineProperty(exports, 'Table', {
     return _Table['default'];
   },
 });
+Object.defineProperty(exports, 'Select', {
+  enumerable: true,
+  get: function get() {
+    return _Select['default'];
+  },
+});
 Object.defineProperty(exports, 'Help', {
   enumerable: true,
   get: function get() {
@@ -63,6 +69,8 @@ var _ButtonGroup = _interopRequireDefault(require('./components/ButtonGroup'));
 var _Spinner = _interopRequireDefault(require('./components/Spinner'));
 
 var _Table = _interopRequireDefault(require('./components/Table'));
+
+var _Select = _interopRequireDefault(require('./components/Select'));
 
 var _Help = _interopRequireDefault(require('./Help'));
 
