@@ -59,6 +59,8 @@ function _objectSpread(target) {
 }
 
 var execa = require('execa');
+
+var os = require('os');
 /**
  * @muniz
  * @type react
@@ -153,19 +155,21 @@ var Add = function Add(props) {
                           spinnerFlag: false,
                         },
                       );
-                    });
+                    }); // 只在 MAC 系统下 启动（插件立即执行）功能
 
-                    var pluginModule = require(pkgList.pkgName)['default']();
+                    if (os.type === 'Darwin') {
+                      var pluginModule = require(pkgList.pkgName)['default']();
 
-                    if (pluginModule.isStart) {
-                      //生成自启动脚本
-                      var osascriptContent = '\n            tell application "Terminal"\n              activate\n              do script "muniz '.concat(
-                        pkgList.shortName,
-                        '"\n            end tell\n          ',
-                      );
-                      execa.commandSync("osascript -e '".concat(osascriptContent, "'"), {
-                        shell: true,
-                      });
+                      if (pluginModule.isStart) {
+                        //生成自启动脚本
+                        var osascriptContent = '\n            tell application "Terminal"\n              activate\n              do script "muniz '.concat(
+                          pkgList.shortName,
+                          '"\n            end tell\n          ',
+                        );
+                        execa.commandSync("osascript -e '".concat(osascriptContent, "'"), {
+                          shell: true,
+                        });
+                      }
                     }
 
                     setTimeout(function () {

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { TextInput, Button, ButtonGroup, Spinner } from '@muniz/ink-ui';
 import { lowdbAction } from '../../lib/lowdb.js';
 const execa = require('execa');
+const os = require('os');
 
 /**
  * @muniz
@@ -54,19 +55,23 @@ const Add = (props) => {
         setStep((state) => {
           return { ...state, help: true, spinnerFlag: false };
         });
-        const pluginModule = require(pkgList.pkgName).default();
 
-        if (pluginModule.isStart) {
-          //生成自启动脚本
-          const osascriptContent = `
+        // 只在 MAC 系统下 启动（插件立即执行）功能
+        if (os.type === 'Darwin') {
+          const pluginModule = require(pkgList.pkgName).default();
+
+          if (pluginModule.isStart) {
+            //生成自启动脚本
+            const osascriptContent = `
             tell application "Terminal"
               activate
               do script "muniz ${pkgList.shortName}"
             end tell
           `;
-          execa.commandSync(`osascript -e '${osascriptContent}'`, {
-            shell: true,
-          });
+            execa.commandSync(`osascript -e '${osascriptContent}'`, {
+              shell: true,
+            });
+          }
         }
         setTimeout(() => {
           exit();
