@@ -1,8 +1,9 @@
 import React from 'react';
 import { Box, Text, useApp } from 'ink';
-import PropTypes from 'prop-types';
 import { Select } from '@muniz/ink-ui';
 import { lowdbAction } from '../../lib/lowdb.js';
+
+const MunizConfig = require('../../configs/system.json');
 
 /**
  * @muniz
@@ -11,7 +12,6 @@ import { lowdbAction } from '../../lib/lowdb.js';
  */
 const Locale = (props) => {
   const { exit } = useApp();
-
   /**
    * 多语言选中事件
    */

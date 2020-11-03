@@ -1,0 +1,146 @@
+{
+  "enUS": [
+    {
+      "key": "add",
+      "commandType": "react",
+      "description": "add plugin",
+      "options": [
+        {
+          "key": "mode",
+          "type": "string",
+          "description": "falgs哈哈",
+          "alias": "",
+          "isRequired": false,
+          "default": "dev"
+        },
+        {
+          "key": "isGit",
+          "type": "boolean",
+          "description": "生成项目的名称",
+          "alias": "n",
+          "isRequired": false,
+          "default": false
+        }
+      ],
+      "isIndex": false,
+      "name": "Add",
+      "path": "Add/index.js"
+    },
+    {
+      "key": "list",
+      "commandType": "react",
+      "description": "插件列表",
+      "options": [],
+      "isIndex": false,
+      "name": "List",
+      "path": "List/index.js"
+    },
+    {
+      "key": "remove",
+      "commandType": "react",
+      "description": "删除插件",
+      "options": [
+        {
+          "key": "mode",
+          "type": "string",
+          "description": "falgs哈哈",
+          "alias": "",
+          "isRequired": false,
+          "default": "dev"
+        },
+        {
+          "key": "isGit",
+          "type": "boolean",
+          "description": "生成项目的名称",
+          "alias": "n",
+          "isRequired": false,
+          "default": false
+        }
+      ],
+      "isIndex": false,
+      "name": "Remove",
+      "path": "Remove/index.js"
+    },
+    {
+      "key": "locale",
+      "commandType": "react",
+      "description": "切换多语言",
+      "options": [],
+      "isIndex": false,
+      "name": "locale",
+      "path": "locale/index.js"
+    }
+  ],
+  "zhCN": [
+    {
+      "key": "add",
+      "commandType": "react",
+      "description": "添加插件",
+      "options": [
+        {
+          "key": "mode",
+          "type": "string",
+          "description": "falgs哈哈",
+          "alias": "",
+          "isRequired": false,
+          "default": "dev"
+        },
+        {
+          "key": "isGit",
+          "type": "boolean",
+          "description": "生成项目的名称",
+          "alias": "n",
+          "isRequired": false,
+          "default": false
+        }
+      ],
+      "isIndex": false,
+      "name": "Add",
+      "path": "Add/index.js"
+    },
+    {
+      "key": "list",
+      "commandType": "react",
+      "description": "插件列表",
+      "options": [],
+      "isIndex": false,
+      "name": "List",
+      "path": "List/index.js"
+    },
+    {
+      "key": "remove",
+      "commandType": "react",
+      "description": "删除插件",
+      "options": [
+        {
+          "key": "mode",
+          "type": "string",
+          "description": "falgs哈哈",
+          "alias": "",
+          "isRequired": false,
+          "default": "dev"
+        },
+        {
+          "key": "isGit",
+          "type": "boolean",
+          "description": "生成项目的名称",
+          "alias": "n",
+          "isRequired": false,
+          "default": false
+        }
+      ],
+      "isIndex": false,
+      "name": "Remove",
+      "path": "Remove/index.js"
+    },
+    {
+      "key": "locale",
+      "commandType": "react",
+      "description": "切换多语言",
+      "options": [],
+      "isIndex": false,
+      "name": "locale",
+      "path": "locale/index.js"
+    }
+  ]
+}

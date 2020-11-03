@@ -1,5 +1,5 @@
 const zhCN = {
-  你好: '你好',
+  help_add_desc: '添加插件',
 };
 
 export default zhCN;

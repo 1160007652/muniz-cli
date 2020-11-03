@@ -1,5 +1,5 @@
 const enUS = {
-  你好: 'hello',
+  help_add_desc: 'add plugin',
 };
 
 export default enUS;

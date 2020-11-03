@@ -52,14 +52,13 @@ var path = require('path');
 
 var fs = require('fs-extra');
 
-var language = _lowdb.lowdbAction.getLanguageLocale();
-
+// import { lowdbAction } from '../../../../lib/lowdb.js';
 var pro = /*#__PURE__*/ (function () {
   var _ref2 = (0, _asyncToGenerator2['default'])(
     /*#__PURE__*/ _regenerator['default'].mark(function _callee(_ref) {
       var _argv$options, _argv$options2;
 
-      var argv, pkgPath, pluginLifeModule, localesPath, descPath, astCommands, astCommandsLanguages;
+      var argv, pkgPath, localesModule, descPath, astCommands, languageList, astCommandsLanguages;
       return _regenerator['default'].wrap(function _callee$(_context) {
         while (1) {
           switch ((_context.prev = _context.next)) {
@@ -77,28 +76,33 @@ var pro = /*#__PURE__*/ (function () {
                 break;
               }
 
-              pluginLifeModule = require(path.join(pkgPath, '/dist/index.js'))['default'](1);
-              localesPath = path.join(pkgPath, '/dist/configs/locales');
+              localesModule = require(path.join(pkgPath, '/dist/configs/locales/index.js'))['default'];
               descPath = path.join(pkgPath, '/src/command');
-              _context.next = 7;
+              _context.next = 6;
               return (0, _servers.generateCommand)(descPath, descPath);
 
-            case 7:
+            case 6:
               astCommands = _context.sent;
+              languageList = Object.keys(localesModule); // 遍历出 keys
               // 生成 多语言 国际化 帮助文档
+
               astCommandsLanguages = {};
-              pluginLifeModule.locales.forEach(function (language) {
+              languageList.forEach(function (language) {
                 var _astCommands = astCommands.map(function (item) {
-                  var description = item.description,
-                    options = item.options;
-                  options.map(function (_options) {
-                    return (_options.description = ''.concat(_options.description, '++++'));
+                  var options = item.options.map(function (_options) {
+                    return _objectSpread(
+                      _objectSpread({}, _options),
+                      {},
+                      {
+                        description: localesModule[language][_options.description] || _options.description,
+                      },
+                    );
                   });
                   return _objectSpread(
                     _objectSpread({}, item),
                     {},
                     {
-                      description: ''.concat(description, '---'),
+                      description: localesModule[language][item.description] || item.description,
                       options: options,
                     },
                   );
@@ -106,7 +110,7 @@ var pro = /*#__PURE__*/ (function () {
 
                 astCommandsLanguages[language] = _astCommands;
               });
-              fs.writeJSONSync(path.join(pkgPath, '/dist/configs/commandHelp.json'), astCommandsLanguages)[language];
+              fs.writeJSONSync(path.join(pkgPath, '/dist/configs/commandHelp.json'), astCommandsLanguages);
               _context.next = 14;
               break;
 

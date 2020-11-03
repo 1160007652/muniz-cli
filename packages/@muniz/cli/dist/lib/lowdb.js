@@ -227,7 +227,7 @@ var lowdbAction = {
    * 返回当前的国际化语言标识
    */
   getLanguageLocale: function getLanguageLocale() {
-    lowdb.get('languageLocale').vlaue();
+    return lowdb.get('languageLocale').values();
   },
 };
 exports.lowdbAction = lowdbAction;

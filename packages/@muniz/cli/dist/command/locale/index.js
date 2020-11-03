@@ -11,17 +11,17 @@ var _react = _interopRequireDefault(require('react'));
 
 var _ink = require('ink');
 
-var _propTypes = _interopRequireDefault(require('prop-types'));
-
 var _inkUi = require('@muniz/ink-ui');
 
 var _lowdb = require('../../lib/lowdb.js');
 
+var MunizConfig = require('../../configs/system.json');
 /**
  * @muniz
  * @type react
  * @description 切换多语言
  */
+
 var Locale = function Locale(props) {
   var _useApp = (0, _ink.useApp)(),
     exit = _useApp.exit;

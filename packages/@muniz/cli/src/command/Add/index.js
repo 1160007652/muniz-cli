@@ -9,7 +9,7 @@ const os = require('os');
 /**
  * @muniz
  * @type react
- * @description 添加插件
+ * @description help_add_desc
  */
 const Add = (props) => {
   const { input } = props;
