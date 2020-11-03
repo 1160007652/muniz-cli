@@ -33,9 +33,11 @@ var isCommand = /*#__PURE__*/ (function () {
     /*#__PURE__*/ _regenerator['default'].mark(function _callee(ctx, next) {
       var argv,
         render,
+        language,
         isCliCommand,
         pluginPkgName,
         _tempPkgPath,
+        _language,
         pluginConfig,
         _argv$options,
         _argv$options2,
@@ -66,15 +68,16 @@ var isCommand = /*#__PURE__*/ (function () {
 
             case 7:
               ctx.astCommands = _context.sent;
-              _context.next = 11;
+              _context.next = 12;
               break;
 
             case 10:
-              ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/configs/commandHelp.json'));
+              language = _lowdb.lowdbAction.getLanguageLocale();
+              ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/configs/commandHelp.json'))[language];
 
-            case 11:
+            case 12:
               if (!(argv.command.length > 0)) {
-                _context.next = 43;
+                _context.next = 45;
                 break;
               }
 
@@ -88,7 +91,7 @@ var isCommand = /*#__PURE__*/ (function () {
               }); // 执行 非内置命令 =》 插件命令
 
               if (isCliCommand) {
-                _context.next = 39;
+                _context.next = 41;
                 break;
               }
 
@@ -105,24 +108,24 @@ var isCommand = /*#__PURE__*/ (function () {
               // 如果是 插件开发状态，返回 空字符串， 否则 进行插件库 判断
 
               if (!MunizConfig.MUNIZ_PLUGIN_DEV) {
-                _context.next = 20;
+                _context.next = 21;
                 break;
               }
 
               _context.t0 = '';
-              _context.next = 23;
+              _context.next = 24;
               break;
 
-            case 20:
-              _context.next = 22;
+            case 21:
+              _context.next = 23;
               return _lowdb.lowdbAction.getPluginPkgName({
                 shortName: argv.command[0],
               });
 
-            case 22:
+            case 23:
               _context.t0 = _context.sent;
 
-            case 23:
+            case 24:
               pluginPkgName = _context.t0;
 
               /**
@@ -141,37 +144,45 @@ var isCommand = /*#__PURE__*/ (function () {
               if (MunizConfig.MUNIZ_PLUGIN_DEV) {
                 ctx.pkgPath = process.cwd();
               } else {
-                _tempPkgPath = require.resolve(ctx.pkgName);
-                ctx.pkgPath = _tempPkgPath.replace(
-                  new RegExp(''.concat(path.join(ctx.pkgName), '(.*?)$'), 'ig'),
-                  function (_, c) {
-                    return ctx.pkgName;
-                  },
-                );
+                try {
+                  _tempPkgPath = require.resolve(ctx.pkgName);
+                  ctx.pkgPath = _tempPkgPath.replace(
+                    new RegExp(''.concat(path.join(ctx.pkgName), '(.*?)$'), 'ig'),
+                    function (_, c) {
+                      return ctx.pkgName;
+                    },
+                  );
+                } catch (_unused) {
+                  ctx.pkgPath = '';
+                  ctx.pkg = {};
+                  render(/*#__PURE__*/ _react['default'].createElement(_inkUi.NotCommand, ctx));
+                  process.exit();
+                }
               }
 
               ctx.pkg = require(path.join(ctx.pkgPath, '/package.json')); // 读取命令AST信息
 
               if (!MunizConfig.MUNIZ_CLI_DEBUG) {
-                _context.next = 34;
+                _context.next = 35;
                 break;
               }
 
-              _context.next = 31;
+              _context.next = 32;
               return (0, _servers.generateCommand)(
                 path.join(ctx.pkgPath, '/src/command'),
                 path.join(ctx.pkgPath, '/src/command'),
               );
 
-            case 31:
+            case 32:
               ctx.astCommands = _context.sent;
-              _context.next = 35;
+              _context.next = 37;
               break;
 
-            case 34:
-              ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/configs/commandHelp.json'));
-
             case 35:
+              _language = _lowdb.lowdbAction.getLanguageLocale();
+              ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/configs/commandHelp.json'))[_language];
+
+            case 37:
               // 读取插件配置信息
               pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js'))['default'](1);
 
@@ -188,20 +199,20 @@ var isCommand = /*#__PURE__*/ (function () {
                 }
               }
 
-              _context.next = 40;
+              _context.next = 42;
               break;
 
-            case 39:
+            case 41:
               if (argv.command.length > 1) {
                 argv.input.unshift(argv.command.pop());
               }
 
-            case 40:
+            case 42:
               next();
-              _context.next = 45;
+              _context.next = 47;
               break;
 
-            case 43:
+            case 45:
               /**
                *
                * 如果 argv.input === 0, 且 argv.options === 0 时, 置入 argv.options.help = true , 走 打印中间件 显示“帮助”命令
@@ -224,7 +235,7 @@ var isCommand = /*#__PURE__*/ (function () {
 
               next();
 
-            case 45:
+            case 47:
             case 'end':
               return _context.stop();
           }

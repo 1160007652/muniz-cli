@@ -6,6 +6,7 @@ import { generateCommand } from '@muniz/servers';
 
 const MunizConfig = require(path.resolve(__filename, '../../../../configs/system.json'));
 import { lowdbAction } from '../../../lib/lowdb.js';
+
 /**
  * 是否是内置命令
  */
@@ -23,7 +24,8 @@ const isCommand = async (ctx, next) => {
       path.join(ctx.pkgPath, '/src/command'),
     );
   } else {
-    ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/configs/commandHelp.json'));
+    const language = lowdbAction.getLanguageLocale();
+    ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/configs/commandHelp.json'))[language];
   }
 
   // 如果 argv.input > 0, 表示输入了执行命令， 开始执行输入的命令
@@ -72,8 +74,19 @@ const isCommand = async (ctx, next) => {
       if (MunizConfig.MUNIZ_PLUGIN_DEV) {
         ctx.pkgPath = process.cwd();
       } else {
-        const _tempPkgPath = require.resolve(ctx.pkgName);
-        ctx.pkgPath = _tempPkgPath.replace(new RegExp(`${path.join(ctx.pkgName)}(.*?)$`, 'ig'), (_, c) => ctx.pkgName);
+        try {
+          const _tempPkgPath = require.resolve(ctx.pkgName);
+          ctx.pkgPath = _tempPkgPath.replace(
+            new RegExp(`${path.join(ctx.pkgName)}(.*?)$`, 'ig'),
+            (_, c) => ctx.pkgName,
+          );
+        } catch {
+          ctx.pkgPath = '';
+          ctx.pkg = {};
+          render(<NotCommand {...ctx} />);
+
+          process.exit();
+        }
       }
 
       ctx.pkg = require(path.join(ctx.pkgPath, '/package.json'));
@@ -84,7 +97,8 @@ const isCommand = async (ctx, next) => {
           path.join(ctx.pkgPath, '/src/command'),
         );
       } else {
-        ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/configs/commandHelp.json'));
+        const language = lowdbAction.getLanguageLocale();
+        ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/configs/commandHelp.json'))[language];
       }
 
       // 读取插件配置信息

@@ -20,7 +20,7 @@ const List = (props) => {
     <Box flexDirection="column" marginTop="1">
       <Box marginBottom="1">
         <Text>
-          🎉 - Muniz 脚手架，已安装<Text color="green"> {pkgList.length - 1} </Text>个插件
+          Muniz 脚手架，已安装<Text color="green"> {pkgList.length - 1} </Text>个插件
         </Text>
       </Box>
 

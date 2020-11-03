@@ -51,7 +51,7 @@ var List = function List(props) {
       /*#__PURE__*/ _react['default'].createElement(
         _ink.Text,
         null,
-        '\uD83C\uDF89 - Muniz \u811A\u624B\u67B6\uFF0C\u5DF2\u5B89\u88C5',
+        'Muniz \u811A\u624B\u67B6\uFF0C\u5DF2\u5B89\u88C5',
         /*#__PURE__*/ _react['default'].createElement(
           _ink.Text,
           {

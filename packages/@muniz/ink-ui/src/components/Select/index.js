@@ -28,7 +28,10 @@ const Select = ({ children, onBlur, wait, disabled, ...props }) => {
 
   return (
     <Box {...props}>
-      <Text inverse={isFocused} dimColor={disabled}>
+      <Box width="2">
+        <Text>{isFocused ? '●' : '○'}</Text>
+      </Box>
+      <Text inverse={isFocused} bold={isFocused} dimColor={disabled}>
         {children}
       </Text>
     </Box>

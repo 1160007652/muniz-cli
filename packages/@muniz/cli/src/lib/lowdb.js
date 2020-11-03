@@ -98,6 +98,20 @@ const lowdbAction = {
   removePluginPkg({ shortName, pkgName }) {
     lowdb.get('plugins').remove({ pkgName }).write();
   },
+  /**
+   *
+   * @param {obejct} param
+   * @param {string} param.language 设置脚手架语言
+   */
+  setLanguageLocale({ language }) {
+    lowdb.set('languageLocale', language).write();
+  },
+  /**
+   * 返回当前的国际化语言标识
+   */
+  getLanguageLocale() {
+    lowdb.get('languageLocale').vlaue();
+  },
 };
 
 export { lowdbAction, lowdb };

@@ -212,5 +212,22 @@ var lowdbAction = {
       })
       .write();
   },
+
+  /**
+   *
+   * @param {obejct} param
+   * @param {string} param.language 设置脚手架语言
+   */
+  setLanguageLocale: function setLanguageLocale(_ref4) {
+    var language = _ref4.language;
+    lowdb.set('languageLocale', language).write();
+  },
+
+  /**
+   * 返回当前的国际化语言标识
+   */
+  getLanguageLocale: function getLanguageLocale() {
+    lowdb.get('languageLocale').vlaue();
+  },
 };
 exports.lowdbAction = lowdbAction;

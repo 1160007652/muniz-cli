@@ -55,9 +55,17 @@ var Select = function Select(_ref) {
     _ink.Box,
     props,
     /*#__PURE__*/ _react['default'].createElement(
+      _ink.Box,
+      {
+        width: '2',
+      },
+      /*#__PURE__*/ _react['default'].createElement(_ink.Text, null, isFocused ? '●' : '○'),
+    ),
+    /*#__PURE__*/ _react['default'].createElement(
       _ink.Text,
       {
         inverse: isFocused,
+        bold: isFocused,
         dimColor: disabled,
       },
       children,
