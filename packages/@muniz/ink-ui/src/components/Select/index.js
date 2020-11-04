@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Text, useInput, useFocus, useFocusManager } from 'ink';
 
 const Select = ({ children, onBlur, wait, disabled, ...props }) => {
-  const { isFocused } = useFocus({ autoFocus: true, isActive: !disabled });
+  let { isFocused } = useFocus({ autoFocus: true, isActive: !disabled });
   const { disableFocus, enableFocus, focusNext } = useFocusManager();
 
   // 防抖计时器
