@@ -13,7 +13,11 @@ const schema = yup.object().shape({
   telmplate: yup.string().required(),
 });
 
-// 创建指令
+/**
+ * @muniz
+ * @type react
+ * @description 创建指令
+ * */
 const Create = (props) => {
   const { focusNext } = useFocusManager();
   const { exit } = useApp();

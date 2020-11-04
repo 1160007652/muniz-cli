@@ -381,7 +381,8 @@ var parseCommand = /*#__PURE__*/ (function () {
                 key: String(componentName).replace(/^(.)/i, function (_, c) {
                   return String(c).toLocaleLowerCase();
                 }),
-                commandType: commandType || 'react',
+                commandType: commandType || 'function',
+                // 当不配置 @type 时默认执行 function 函数命令
                 description: description,
                 options: args.map(function (arg) {
                   return _objectSpread(

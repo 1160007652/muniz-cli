@@ -30,7 +30,12 @@ var schema = yup.object().shape({
   name: yup.string().required(),
   desc: yup.string().required(),
   telmplate: yup.string().required(),
-}); // 创建指令
+});
+/**
+ * @muniz
+ * @type react
+ * @description 创建指令
+ * */
 
 var Create = function Create(props) {
   var _useFocusManager = (0, _ink.useFocusManager)(),

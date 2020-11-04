@@ -220,7 +220,7 @@ const parseCommand = async (filePath) => {
 
   const command = {
     key: String(componentName).replace(/^(.)/i, (_, c) => String(c).toLocaleLowerCase()),
-    commandType: commandType || 'react',
+    commandType: commandType || 'function', // 当不配置 @type 时默认执行 function 函数命令
     description,
     options: args.map((arg) => {
       return {

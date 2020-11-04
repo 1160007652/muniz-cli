@@ -17,6 +17,7 @@ var _cliI18n = _interopRequireDefault(require('@muniz/cli-i18n'));
 
 /**
  * @muniz
+ * @type react
  * @description 更新模版命令
  */
 var Update = function Update() {

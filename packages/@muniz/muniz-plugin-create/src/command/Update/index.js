@@ -5,6 +5,7 @@ import i18n from '@muniz/cli-i18n';
 
 /**
  * @muniz
+ * @type react
  * @description 更新模版命令
  */
 const Update = () => {
