@@ -15,6 +15,8 @@ var _defineProperty2 = _interopRequireDefault(require('@babel/runtime/helpers/de
 
 var _asyncToGenerator2 = _interopRequireDefault(require('@babel/runtime/helpers/asyncToGenerator'));
 
+var _cliI18n = _interopRequireDefault(require('@muniz/cli-i18n'));
+
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
   if (Object.getOwnPropertySymbols) {
@@ -133,7 +135,7 @@ var lowdbAction = {
                 promptList = [
                   {
                     type: 'list',
-                    message: '检查到多个指令，请问执行哪一个',
+                    message: _cliI18n['default'].getLocale('run_command_select_tips'),
                     name: 'pkgName',
                     default: '',
                     choices: pkgNameList,
@@ -221,13 +223,6 @@ var lowdbAction = {
   setLanguageLocale: function setLanguageLocale(_ref4) {
     var language = _ref4.language;
     lowdb.set('languageLocale', language).write();
-  },
-
-  /**
-   * 返回当前的国际化语言标识
-   */
-  getLanguageLocale: function getLanguageLocale() {
-    lowdb.get('languageLocale').vlaue();
   },
 };
 exports.lowdbAction = lowdbAction;

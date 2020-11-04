@@ -1,5 +1,5 @@
 const zhCN = {
-  你好: '你好 word',
+  command_update_title: '更新模版',
 };
 
 export default zhCN;

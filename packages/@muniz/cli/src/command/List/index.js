@@ -6,7 +6,7 @@ import { lowdbAction } from '../../lib/lowdb.js';
 /**
  * @muniz
  * @type react
- * @description 插件列表
+ * @description help_list_desc
  */
 const List = (props) => {
   const [pkgList, setPkgList] = useState([['序号', '命令', '插件名称']]);

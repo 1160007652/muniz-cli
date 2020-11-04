@@ -22,7 +22,7 @@ var _lowdb = require('../../lib/lowdb.js');
 /**
  * @muniz
  * @type react
- * @description 插件列表
+ * @description help_list_desc
  */
 var List = function List(props) {
   var _useState = (0, _react.useState)([['序号', '命令', '插件名称']]),

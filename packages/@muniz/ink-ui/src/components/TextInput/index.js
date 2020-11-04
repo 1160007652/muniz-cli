@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Text, useFocus } from 'ink';
-import { default as Input } from '../Input';
+import Input from '../Input';
 
 const TextInput = ({ label, value, placeHolder, type, onChange, onBlur, error }) => {
   const { isFocused } = useFocus({ autoFocus: true });

@@ -62,7 +62,7 @@ var execa = require('execa');
 /**
  * @muniz
  * @type react
- * @description 删除插件
+ * @description help_remove_desc
  */
 
 var Remove = function Remove(props) {

@@ -1,0 +1,35 @@
+{
+  "name": "@muniz/cli-i18n",
+  "version": "1.0.16",
+  "description": "muniz脚手架，国际化解决模块",
+  "keywords": [
+    "@muniz/cli-i18n",
+    "muniz",
+    "@muniz/cli"
+  ],
+  "author": "muniz <1160007652@qq.com>",
+  "homepage": "https://github.com/1160007652/muniz-cli#readme",
+  "license": "ISC",
+  "main": "./dist/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1160007652/muniz-cli.git"
+  },
+  "scripts": {
+    "dev": "babel --root-mode upward src -d dist",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/1160007652/muniz-cli/issues"
+  }
+}

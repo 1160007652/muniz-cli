@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, Text } from 'ink';
 import CommandText from '../CommandText';
 import CommandLabel from '../CommandLabel';
+import i18n from '@muniz/cli-i18n';
 
 const CommandTextList = ({ data, labelColor, label }) => {
   const commandWidth = Math.max.apply(
@@ -19,7 +20,7 @@ const CommandTextList = ({ data, labelColor, label }) => {
     null,
     data.map((item) => {
       let len = 0;
-      if (['Options', 'Other Options'].includes(label)) {
+      if (['help_options', 'help_other_options'].includes(label)) {
         len += item?.default ? `Default: ${item.default} `.length : 0;
       }
       return len + 5;
@@ -30,7 +31,7 @@ const CommandTextList = ({ data, labelColor, label }) => {
     null,
     data.map((item) => {
       let len = 0;
-      if (['Options', 'Other Options'].includes(label)) {
+      if (['help_options', 'help_other_options'].includes(label)) {
         len += item?.type ? `Type: ${item.type} `.length : 0;
       }
       return len + 5;
@@ -39,7 +40,7 @@ const CommandTextList = ({ data, labelColor, label }) => {
 
   return (
     <Box marginLeft={2} flexDirection="column">
-      <CommandLabel color={labelColor}>{label}</CommandLabel>
+      <CommandLabel color={labelColor}>{i18n.getLocale(label)}</CommandLabel>
       {data.map((item, index) => {
         return (
           <CommandText

@@ -1,15 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, Box, useFocus } from 'ink';
-
-const Item = ({ label }) => {
-  const { isFocused } = useFocus();
-  return (
-    <Text>
-      {label} {isFocused && <Text color="green">(focused)</Text>}
-    </Text>
-  );
-};
+import i18n from '@muniz/cli-i18n';
 
 /**
  * @muniz
@@ -18,12 +10,7 @@ const Item = ({ label }) => {
 const Update = () => {
   return (
     <Box flexDirection="column" padding={1}>
-      <Box marginBottom={1}>
-        <Text>Press Tab to focus next element, Shift+Tab to focus previous element, Esc to reset focus.</Text>
-      </Box>
-      <Item label="First" />
-      <Item label="Second" />
-      <Item label="Third" />
+      <Text>{i18n.getLocale('command_update_title')}</Text>
     </Box>
   );
 };

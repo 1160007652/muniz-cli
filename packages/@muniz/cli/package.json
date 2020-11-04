@@ -12,7 +12,6 @@
   "author": "1160007652 <1160007652@qq.com>",
   "homepage": "https://github.com/1160007652/muniz-cli#readme",
   "license": "ISC",
-  "main": "lib/cli.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -32,6 +31,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
+    "@muniz/cli-i18n": "1.0.16",
     "@muniz/ink-ui": "^1.0.15",
     "@muniz/servers": "^1.0.15",
     "execa": "^4.1.0",

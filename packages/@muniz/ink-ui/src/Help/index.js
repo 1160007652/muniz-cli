@@ -1,10 +1,13 @@
 import React from 'react';
 import { Box, Text, Newline } from 'ink';
-
+import i18n from '@muniz/cli-i18n';
 import CommandTextList from '../Components/CommandTextList';
+import languages from '../configs/locales';
 
-const Help = ({ data, show }) => {
+const Help = ({ data, show, locale = 'zhCN' }) => {
   const { usage, commands, otherOptions, footer } = data;
+  i18n.setLocale({ locale });
+  i18n.setlanguages({ languages });
 
   return (
     <Box flexDirection="column" paddingTop={1}>
@@ -14,17 +17,17 @@ const Help = ({ data, show }) => {
         </Box>
       )}
 
-      <CommandTextList data={[usage]} label="Usage" labelColor="blue" />
+      <CommandTextList data={[usage]} label="help_usage" labelColor="blue" />
 
       {show === 'command' && commands.length > 0 && (
-        <CommandTextList data={commands} label="Command" labelColor="blue" />
+        <CommandTextList data={commands} label="help_command" labelColor="blue" />
       )}
 
       {show === 'options' && commands?.options?.length > 0 && (
-        <CommandTextList data={commands.options} label="Options" labelColor="#FF8C00" />
+        <CommandTextList data={commands.options} label="help_options" labelColor="#73C991" />
       )}
 
-      <CommandTextList data={otherOptions} label="Other Options" labelColor="#FF8C00" />
+      <CommandTextList data={otherOptions} label="help_other_options" labelColor="#73C991" />
       <Box marginBottom={1} />
     </Box>
   );

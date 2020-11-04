@@ -1,11 +1,15 @@
 'use strict';
 
+var _interopRequireDefault = require('@babel/runtime/helpers/interopRequireDefault');
+
 Object.defineProperty(exports, '__esModule', {
   value: true,
 });
 exports['default'] = void 0;
 
 var _lowdb = require('../../../../lib/lowdb.js');
+
+var _cliI18n = _interopRequireDefault(require('@muniz/cli-i18n'));
 
 var dev = function dev(_ref) {
   var _argv$options;
@@ -18,9 +22,9 @@ var dev = function dev(_ref) {
   ) {
     _lowdb.lowdb.set('MUNIZ_PLUGIN_DEV', true).write();
 
-    console.log('\n「 脚手架插件 」开发者模式 - 开启成功');
+    console.log('\n '.concat(_cliI18n['default'].getLocale('mode_dev_plugin_tips')));
   } else {
-    console.log('主muniz控制器 开发者模式');
+    console.log(_cliI18n['default'].getLocale('mode_dev_tips'));
   }
 };
 

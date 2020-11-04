@@ -2,9 +2,8 @@ const path = require('path');
 const inquirer = require('inquirer');
 const DataSource = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
-
+import i18n from '@muniz/cli-i18n';
 const adapter = new FileSync(path.resolve(__dirname, '../configs/system.json'));
-
 const lowdb = DataSource(adapter);
 
 // 默认脚手架 配置数据
@@ -55,7 +54,7 @@ const lowdbAction = {
       const promptList = [
         {
           type: 'list',
-          message: '检查到多个指令，请问执行哪一个',
+          message: i18n.getLocale('run_command_select_tips'),
           name: 'pkgName',
           default: '',
           choices: pkgNameList,
@@ -105,12 +104,6 @@ const lowdbAction = {
    */
   setLanguageLocale({ language }) {
     lowdb.set('languageLocale', language).write();
-  },
-  /**
-   * 返回当前的国际化语言标识
-   */
-  getLanguageLocale() {
-    lowdb.get('languageLocale').vlaue();
   },
 };
 

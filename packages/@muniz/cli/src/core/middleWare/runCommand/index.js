@@ -1,8 +1,7 @@
 const path = require('path');
 import React from 'react';
 import { NotCommand } from '@muniz/ink-ui';
-
-const MunizConfig = require(path.resolve(__filename, '../../../../configs/system.json'));
+const MunizConfig = require('../../../configs/system.json');
 /**
  * 执行 命令
  */
@@ -13,7 +12,9 @@ const runCommand = async (ctx, next) => {
   if (env.command === 'cli') {
     _astCommands = astCommands.filter((item) => item.key === argv.command[0]);
   } else {
-    const pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js')).default(1);
+    const pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js')).default({
+      locale: MunizConfig.languageLocale,
+    });
     if (argv.command.length < 2) {
       if (pluginConfig?.defaultCommand && !['', 'function', 'undefined'].includes(pluginConfig?.defaultCommand)) {
         _astCommands = astCommands.filter((item) => item.key === pluginConfig.defaultCommand);
@@ -24,7 +25,7 @@ const runCommand = async (ctx, next) => {
   }
 
   if (_astCommands.length === 0) {
-    render(<NotCommand {...ctx} isExistPlugin />);
+    render(<NotCommand {...ctx} isExistPlugin locale={MunizConfig.languageLocale} />);
   } else {
     const commandModuleProps = {
       ...argv.options,

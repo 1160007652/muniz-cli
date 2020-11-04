@@ -8,7 +8,7 @@ const execa = require('execa');
 /**
  * @muniz
  * @type react
- * @description 删除插件
+ * @description help_remove_desc
  */
 const Remove = (props) => {
   const { input } = props;

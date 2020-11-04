@@ -1,5 +1,5 @@
 const enUS = {
-  你好: 'hello word',
+  command_update_title: 'update template',
 };
 
 export default enUS;

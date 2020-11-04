@@ -1,5 +1,6 @@
-import { default as pro } from './pro';
-import { default as dev } from './dev';
+import pro from './pro';
+import dev from './dev';
+import i18n from '@muniz/cli-i18n';
 
 /**
  * 开发模式命令
@@ -17,8 +18,8 @@ const modePro = async (ctx, next) => {
       argv.command = [];
       await _mode[options.mode]({ argv, pkgPath: process.cwd() });
     } else {
-      console.log('muniz 脚手架模式切换');
-      console.log('支持 dev（开发模式）pro（生产模式）');
+      console.log(i18n.getLocale('mode_switch_tips'));
+      console.log(i18n.getLocale('mode_switch_supported'));
     }
 
     process.exit();

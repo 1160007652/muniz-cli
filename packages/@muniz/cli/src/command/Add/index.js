@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Text, useApp, useFocusManager } from 'ink';
+import { Box, Text, useApp } from 'ink';
 import PropTypes from 'prop-types';
 import { TextInput, Button, ButtonGroup, Spinner } from '@muniz/ink-ui';
 import { lowdbAction } from '../../lib/lowdb.js';
@@ -9,7 +9,7 @@ const os = require('os');
 /**
  * @muniz
  * @type react
- * @description 添加插件
+ * @description help_add_desc
  */
 const Add = (props) => {
   const { input } = props;

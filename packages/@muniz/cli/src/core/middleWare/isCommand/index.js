@@ -3,8 +3,7 @@ const fs = require('fs-extra');
 import React from 'react';
 import { NotCommand } from '@muniz/ink-ui';
 import { generateCommand } from '@muniz/servers';
-
-const MunizConfig = require(path.resolve(__filename, '../../../../configs/system.json'));
+const MunizConfig = require('../../../configs/system.json');
 import { lowdbAction } from '../../../lib/lowdb.js';
 
 /**
@@ -24,8 +23,9 @@ const isCommand = async (ctx, next) => {
       path.join(ctx.pkgPath, '/src/command'),
     );
   } else {
-    const language = lowdbAction.getLanguageLocale();
-    ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/configs/commandHelp.json'))[language];
+    ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/configs/commandHelp.json'))[
+      MunizConfig.languageLocale
+    ];
   }
 
   // 如果 argv.input > 0, 表示输入了执行命令， 开始执行输入的命令
@@ -63,7 +63,7 @@ const isCommand = async (ctx, next) => {
       if (pluginPkgName === '' && !MunizConfig.MUNIZ_PLUGIN_DEV) {
         ctx.pkgPath = '';
         ctx.pkg = {};
-        render(<NotCommand {...ctx} />);
+        render(<NotCommand {...ctx} locale={MunizConfig.languageLocale} />);
 
         process.exit();
       }
@@ -83,7 +83,7 @@ const isCommand = async (ctx, next) => {
         } catch {
           ctx.pkgPath = '';
           ctx.pkg = {};
-          render(<NotCommand {...ctx} />);
+          render(<NotCommand {...ctx} locale={MunizConfig.languageLocale} />);
 
           process.exit();
         }
@@ -97,13 +97,15 @@ const isCommand = async (ctx, next) => {
           path.join(ctx.pkgPath, '/src/command'),
         );
       } else {
-        const language = lowdbAction.getLanguageLocale();
-        ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/configs/commandHelp.json'))[language];
+        ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/configs/commandHelp.json'))[
+          MunizConfig.languageLocale
+        ];
       }
 
       // 读取插件配置信息
-
-      const pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js')).default(1);
+      const pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js')).default({
+        locale: MunizConfig.languageLocale,
+      });
 
       if (argv.command.length < 2) {
         if (pluginConfig?.defaultCommand && !['', 'function', 'undefined'].includes(pluginConfig?.defaultCommand)) {

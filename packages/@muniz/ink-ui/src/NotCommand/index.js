@@ -1,8 +1,12 @@
 import React from 'react';
 import { Box, Text } from 'ink';
+import languages from '../configs/locales';
+import i18n from '@muniz/cli-i18n';
 
 const NotCommand = (props) => {
-  const { pkgName, argv, env, isExistPlugin = false } = props;
+  const { argv, env, isExistPlugin = false, locale = 'zhCN' } = props;
+  i18n.setLocale({ locale });
+  i18n.setlanguages({ languages });
 
   /**
    * 可以在这里做 命令 推荐
@@ -11,14 +15,15 @@ const NotCommand = (props) => {
   const cliNotCommand = () => {
     return (
       <Box flexDirection="column" paddingTop={1}>
-        <Text>
-          该 <Text color="green">{argv.command[0]}</Text> 命令不在内置命令当中，属于插件命令。
-        </Text>
+        <Text>{i18n.getLocale('not_command_cli_title', { command: argv.command[0] })}</Text>
         <Box marginTop="1" marginBottom="1">
-          <Text>提示: 可以尝试执行以下命令进行修复</Text>
+          <Text>{i18n.getLocale('not_command_tips')}</Text>
+        </Box>
+        <Box marginBottom="1">
+          <Text color="green">{i18n.getLocale('not_command_doctor_tips')}</Text>
         </Box>
 
-        <Text color="green">{`命令: muniz add ${pkgName}`}</Text>
+        <Text color="green">{`${i18n.getLocale('not_command_name')}: muniz add xxx`}</Text>
       </Box>
     );
   };
@@ -29,20 +34,27 @@ const NotCommand = (props) => {
         <Text>
           {isExistPlugin ? (
             <Text>
-              该 <Text color="green">{argv.command[0]}</Text> 插件中, 不存在<Text color="green">{argv.command[1]}</Text>
-              命令。
+              {i18n.getLocale('not_command_plugin_sub_title', {
+                plugin: argv.command[0],
+                command: argv.command[1],
+              })}
             </Text>
           ) : (
             <Text>
-              该 <Text color="green">{argv.command[0]}</Text> 命令，有可能是一个插件提供的，不在「 CLI 」内置命令当中。
+              {i18n.getLocale('not_command_plugin_title', {
+                plugin: argv.command[0],
+              })}
             </Text>
           )}
         </Text>
         <Box marginTop="1" marginBottom="1">
-          <Text>提示: 可以尝试执行以下命令进行修复</Text>
+          <Text>{i18n.getLocale('not_command_tips')}</Text>
+        </Box>
+        <Box marginBottom="1">
+          <Text color="green">{i18n.getLocale('not_command_doctor_tips')}</Text>
         </Box>
 
-        <Text color="green">{`命令: muniz add ${pkgName}`}</Text>
+        <Text color="green">{`${i18n.getLocale('not_command_name')}: muniz add xxx`}</Text>
       </Box>
     );
   };

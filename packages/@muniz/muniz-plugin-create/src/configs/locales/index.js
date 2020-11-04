@@ -1,5 +1,5 @@
-import { default as enUS } from './en-US';
-import { default as zhCN } from './zh-CN';
+import enUS from './en-US';
+import zhCN from './zh-CN';
 
 export default {
   enUS,

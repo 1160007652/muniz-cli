@@ -1,14 +1,29 @@
 #!/usr/bin/env node
 'use strict';
 
+var _interopRequireDefault = require('@babel/runtime/helpers/interopRequireDefault');
+
 var _ink = require('ink');
 
 var _CommandApp = require('../core/CommandApp');
+
+var _locales = _interopRequireDefault(require('../configs/locales'));
+
+var _cliI18n = _interopRequireDefault(require('@muniz/cli-i18n'));
 
 var semver = require('semver');
 
 var requiredVersion = require('../../package.json').engines.node;
 
+var MunizConfig = require('../configs/system.json');
+
+_cliI18n['default'].setLocale({
+  locale: MunizConfig.languageLocale,
+});
+
+_cliI18n['default'].setlanguages({
+  languages: _locales['default'],
+});
 /**
  *
  * @param {String} wanted 设定的最小兼容版本号
@@ -17,13 +32,15 @@ var requiredVersion = require('../../package.json').engines.node;
  * @returns 条件成立继续执行,否则退出
  *
  */
+
 function checkNodeVersion(wanted, id) {
   if (!semver.satisfies(process.version, wanted)) {
     console.log(
-      'You are using Node '
-        .concat(process.version, ' , but this version of ')
-        .concat(id, 'requires Node ')
-        .concat(wanted, '.\nPlease upgrade your Node version.'),
+      _cliI18n['default'].getLocale('check_node_version_tips', {
+        version: process.version,
+        id: id,
+        wanted: wanted,
+      }),
     );
     process.exit(1);
   }

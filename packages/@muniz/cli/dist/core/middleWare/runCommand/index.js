@@ -52,7 +52,7 @@ function _objectSpread(target) {
 
 var path = require('path');
 
-var MunizConfig = require(path.resolve(__filename, '../../../../configs/system.json'));
+var MunizConfig = require('../../../configs/system.json');
 /**
  * 执行 命令
  */
@@ -85,7 +85,9 @@ var runCommand = /*#__PURE__*/ (function () {
                   return item.key === argv.command[0];
                 });
               } else {
-                pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js'))['default'](1);
+                pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js'))['default']({
+                  locale: MunizConfig.languageLocale,
+                });
 
                 if (argv.command.length < 2) {
                   if (
@@ -111,6 +113,7 @@ var runCommand = /*#__PURE__*/ (function () {
                     _inkUi.NotCommand,
                     (0, _extends2['default'])({}, ctx, {
                       isExistPlugin: true,
+                      locale: MunizConfig.languageLocale,
                     }),
                   ),
                 );

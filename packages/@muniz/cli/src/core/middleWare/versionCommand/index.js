@@ -1,5 +1,6 @@
 import React from 'react';
 import { Version } from '@muniz/ink-ui';
+import i18n from '@muniz/cli-i18n';
 
 /**
  * 显示帮助命令
@@ -7,7 +8,7 @@ import { Version } from '@muniz/ink-ui';
 const versionCommand = (ctx, next) => {
   const { pkg, argv, render } = ctx;
   if (argv.options?.version) {
-    render(<Version pkg={pkg} />);
+    render(<Version pkg={pkg} locale={i18n.locale} />);
     process.exit();
   } else {
     next();

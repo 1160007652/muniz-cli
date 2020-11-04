@@ -16,6 +16,13 @@ import {
   mode,
 } from '../core/CommandApp';
 
+const MunizConfig = require('../configs/system.json');
+import languages from '../configs/locales';
+import i18n from '@muniz/cli-i18n';
+
+i18n.setLocale({ locale: MunizConfig.languageLocale });
+i18n.setlanguages({ languages });
+
 /**
  *
  * @param {String} wanted 设定的最小兼容版本号
@@ -26,9 +33,7 @@ import {
  */
 function checkNodeVersion(wanted, id) {
   if (!semver.satisfies(process.version, wanted)) {
-    console.log(
-      `You are using Node ${process.version} , but this version of ${id}requires Node ${wanted}.\nPlease upgrade your Node version.`,
-    );
+    console.log(i18n.getLocale('check_node_version_tips', { version: process.version, id, wanted }));
     process.exit(1);
   }
 }

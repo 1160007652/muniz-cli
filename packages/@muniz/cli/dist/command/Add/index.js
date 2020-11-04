@@ -64,7 +64,7 @@ var os = require('os');
 /**
  * @muniz
  * @type react
- * @description 添加插件
+ * @description help_add_desc
  */
 
 var Add = function Add(props) {

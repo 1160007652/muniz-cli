@@ -7,93 +7,75 @@ Object.defineProperty(exports, '__esModule', {
 });
 exports['default'] = void 0;
 
-var _react = _interopRequireDefault(require('react'));
+var _regenerator = _interopRequireDefault(require('@babel/runtime/regenerator'));
 
-var _ink = require('ink');
-
-var _propTypes = _interopRequireDefault(require('prop-types'));
-
-var _inkUi = require('@muniz/ink-ui');
+var _asyncToGenerator2 = _interopRequireDefault(require('@babel/runtime/helpers/asyncToGenerator'));
 
 var _lowdb = require('../../lib/lowdb.js');
 
+var _cliI18n = _interopRequireDefault(require('@muniz/cli-i18n'));
+
+var inquirer = require('inquirer');
+
+var MunizConfig = require('../../configs/system.json');
+
 /**
  * @muniz
- * @type react
- * @description 切换多语言
+ * @type function
+ * @description help_locale_desc
  */
-var Locale = function Locale(props) {
-  var _useApp = (0, _ink.useApp)(),
-    exit = _useApp.exit;
-  /**
-   * 多语言选中事件
-   */
+var Locale = /*#__PURE__*/ (function () {
+  var _ref = (0, _asyncToGenerator2['default'])(
+    /*#__PURE__*/ _regenerator['default'].mark(function _callee(props) {
+      var promptList, answers;
+      return _regenerator['default'].wrap(function _callee$(_context) {
+        while (1) {
+          switch ((_context.prev = _context.next)) {
+            case 0:
+              // 非react 交互
+              promptList = [
+                {
+                  type: 'list',
+                  message: _cliI18n['default'].getLocale('command_locale_tips', {
+                    count: 2,
+                  }),
+                  name: 'language',
+                  default: MunizConfig.languageLocale,
+                  choices: [
+                    {
+                      value: 'zhCN',
+                      name: _cliI18n['default'].getLocale('zh_cn'),
+                    },
+                    {
+                      value: 'enUS',
+                      name: _cliI18n['default'].getLocale('en_us'),
+                    },
+                  ],
+                },
+              ];
+              _context.next = 3;
+              return inquirer.prompt(promptList);
 
-  var handleOnBlur = function handleOnBlur(language) {
-    _lowdb.lowdbAction.setLanguageLocale({
-      language: language,
-    });
+            case 3:
+              answers = _context.sent;
 
-    setTimeout(function () {
-      exit();
-    }, 100);
-  };
+              _lowdb.lowdbAction.setLanguageLocale({
+                language: answers.language,
+              });
 
-  return /*#__PURE__*/ _react['default'].createElement(
-    _ink.Box,
-    {
-      flexDirection: 'column',
-      marginBottom: '1',
-    },
-    /*#__PURE__*/ _react['default'].createElement(
-      _ink.Box,
-      {
-        marginTop: '1',
-        flexDirection: 'column',
-      },
-      /*#__PURE__*/ _react['default'].createElement(
-        _ink.Text,
-        {
-          color: 'green',
-        },
-        '\u76EE\u524D\u652F\u6301 2 \u79CD\u591A\u8BED\u8A00\uFF1A',
-      ),
-      /*#__PURE__*/ _react['default'].createElement(
-        _ink.Box,
-        {
-          flexDirection: 'column',
-          marginTop: '1',
-          marginBottom: '1',
-        },
-        /*#__PURE__*/ _react['default'].createElement(
-          _inkUi.Select,
-          {
-            onBlur: function onBlur() {
-              handleOnBlur('zhCN');
-            },
-          },
-          /*#__PURE__*/ _react['default'].createElement(_ink.Text, null, '\u4E2D\u6587'),
-        ),
-        /*#__PURE__*/ _react['default'].createElement(
-          _inkUi.Select,
-          {
-            onBlur: function onBlur() {
-              handleOnBlur('enUS');
-            },
-          },
-          /*#__PURE__*/ _react['default'].createElement(_ink.Text, null, '\u82F1\u6587'),
-        ),
-      ),
-      /*#__PURE__*/ _react['default'].createElement(
-        _ink.Text,
-        {
-          color: 'yellow',
-        },
-        '\u64CD\u4F5C\uFF1A\u6309\u4E0B tab \u952E \u5207\u6362\uFF0CEnter \u952E \u6267\u884C',
-      ),
-    ),
+            case 5:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }),
   );
-};
+
+  return function Locale(_x) {
+    return _ref.apply(this, arguments);
+  };
+})();
 
 var _default = Locale;
 exports['default'] = _default;

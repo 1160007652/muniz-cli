@@ -32,6 +32,7 @@
     "url": "https://github.com/1160007652/muniz-cli/issues"
   },
   "dependencies": {
+    "@muniz/cli-i18n": "1.0.16",
     "cli-spinners": "^2.5.0",
     "react": "^17.0.1",
     "react-intl-universal": "^2.4.1",

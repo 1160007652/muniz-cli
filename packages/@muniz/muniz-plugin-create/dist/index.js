@@ -9,40 +9,32 @@ exports.pluginCommand = exports['default'] = void 0;
 
 var _classCallCheck2 = _interopRequireDefault(require('@babel/runtime/helpers/classCallCheck'));
 
-var _createClass2 = _interopRequireDefault(require('@babel/runtime/helpers/createClass'));
-
 var _ink = require('ink');
 
 var _react = _interopRequireDefault(require('react'));
 
-var Life = /*#__PURE__*/ (function () {
-  function Life() {
-    (0, _classCallCheck2['default'])(this, Life);
-    this.isStart = true; // 安装成功后是否立即执行
+var _cliI18n = _interopRequireDefault(require('@muniz/cli-i18n'));
 
-    this.locales = ['zh', 'cn']; // 插件支持的国际化语言
+var _locales = _interopRequireDefault(require('./configs/locales'));
 
-    this.defaultCommand = 'create'; // 插件默认执行命令, 以 muniz 插件名 运行时，执行那条命令，无配置 为 cli 打印 help 命令
-  }
+var Life = function Life() {
+  (0, _classCallCheck2['default'])(this, Life);
+  this.isStart = true; // 安装成功后是否立即执行
 
-  (0, _createClass2['default'])(Life, [
-    {
-      key: 'footer',
-      value: function footer() {
-        return '我是帮助文档底部描述信息';
-      },
-    },
-    {
-      key: 'header',
-      value: function header() {
-        return '我是帮助文档顶部描述信息';
-      },
-    },
-  ]);
-  return Life;
-})();
+  this.defaultCommand = 'create'; // 插件默认执行命令, 以 muniz 插件名 运行时，执行那条命令，无配置 为 cli 打印 help 命令
+};
 
 var _default = function _default(props) {
+  var locale = props.locale; // 初始化多语言
+
+  _cliI18n['default'].setLocale({
+    locale: locale,
+  });
+
+  _cliI18n['default'].setlanguages({
+    languages: _locales['default'],
+  });
+
   return new Life();
 };
 /**

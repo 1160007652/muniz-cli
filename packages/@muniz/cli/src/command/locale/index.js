@@ -1,51 +1,37 @@
-import React from 'react';
-import { Box, Text, useApp } from 'ink';
-import PropTypes from 'prop-types';
-import { Select } from '@muniz/ink-ui';
+const inquirer = require('inquirer');
+const MunizConfig = require('../../configs/system.json');
 import { lowdbAction } from '../../lib/lowdb.js';
+import i18n from '@muniz/cli-i18n';
 
 /**
  * @muniz
- * @type react
- * @description 切换多语言
+ * @type function
+ * @description help_locale_desc
  */
-const Locale = (props) => {
-  const { exit } = useApp();
+const Locale = async (props) => {
+  // 非react 交互
+  const promptList = [
+    {
+      type: 'list',
+      message: i18n.getLocale('command_locale_tips', { count: 2 }),
+      name: 'language',
+      default: MunizConfig.languageLocale,
+      choices: [
+        {
+          value: 'zhCN',
+          name: i18n.getLocale('zh_cn'),
+        },
+        {
+          value: 'enUS',
+          name: i18n.getLocale('en_us'),
+        },
+      ],
+    },
+  ];
 
-  /**
-   * 多语言选中事件
-   */
-  const handleOnBlur = (language) => {
-    lowdbAction.setLanguageLocale({ language });
-    setTimeout(() => {
-      exit();
-    }, 100);
-  };
-  return (
-    <Box flexDirection="column" marginBottom="1">
-      <Box marginTop="1" flexDirection="column">
-        <Text color="green">目前支持 2 种多语言：</Text>
+  const answers = await inquirer.prompt(promptList);
 
-        <Box flexDirection="column" marginTop="1" marginBottom="1">
-          <Select
-            onBlur={() => {
-              handleOnBlur('zhCN');
-            }}
-          >
-            <Text>中文</Text>
-          </Select>
-          <Select
-            onBlur={() => {
-              handleOnBlur('enUS');
-            }}
-          >
-            <Text>英文</Text>
-          </Select>
-        </Box>
-        <Text color="yellow">操作：按下 tab 键 切换，Enter 键 执行</Text>
-      </Box>
-    </Box>
-  );
+  lowdbAction.setLanguageLocale({ language: answers.language });
 };
 
 export default Locale;

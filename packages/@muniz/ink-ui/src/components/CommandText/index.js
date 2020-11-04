@@ -4,7 +4,7 @@ import { Box, Text } from 'ink';
 const CommandText = ({ data, commandWidth, defaultWidth, typeWidth, label }) => {
   return (
     <Box marginLeft={2} flexDirection="row">
-      {['Options', 'Other Options'].includes(label) ? (
+      {['help_options', 'help_other_options'].includes(label) ? (
         <Box>
           <Box width={commandWidth}>
             <Text>{`--${data.key}`}</Text>
