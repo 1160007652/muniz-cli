@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, '__esModule', {
-  value: true,
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
-exports['default'] = void 0;
+exports["default"] = void 0;
 var enUS = {
   zh_cn: 'Chinese',
   en_us: 'English',
@@ -19,11 +19,10 @@ var enUS = {
   mode_dev_plugin_tips: '「 Scaffolding Plug-in 」 Developer Mode-Successfully opened',
   mode_pro_plugin_tips: '「 Scaffolding Plug-in 」 Production Mode-Successfully opened',
   command_locale_tips: 'Multi-language switching, currently only {count} languages',
-  check_node_version_tips:
-    'You are using Node {version} , but this version of {id}requires Node {wanted}.\nPlease upgrade your Node version.',
+  check_node_version_tips: 'You are using Node {version} , but this version of {id}requires Node {wanted}.\nPlease upgrade your Node version.',
   command_options_help_tips: 'Show helps',
   command_options_version_tips: 'Show Version',
-  run_command_select_tips: 'Check multiple instructions, which one to execute',
+  run_command_select_tips: 'Check multiple instructions, which one to execute'
 };
 var _default = enUS;
-exports['default'] = _default;
+exports["default"] = _default;

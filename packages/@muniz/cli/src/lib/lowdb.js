@@ -22,7 +22,7 @@ const lowdbAction = {
    * @param {string} param.shortName 插件短名称，执行命令 取自 [scope]/muniz-plugin-(.*?) 匹配
    *
    */
-  async getPluginPkgName({ shortName, isReact = false }) {
+  async getPluginPkgName({ shortName }) {
     const pkgNameList = lowdb
       .get('plugins')
       .filter({ shortName })
@@ -34,10 +34,6 @@ const lowdbAction = {
       })
       .value();
 
-    // 如果是react 交互， 直接返回
-    if (isReact) {
-      return pkgNameList;
-    }
     // 如果 = 0 表示 没有这个 插件
     if (pkgNameList.length === 0) {
       return '';

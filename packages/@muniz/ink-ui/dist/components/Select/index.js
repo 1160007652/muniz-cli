@@ -1,44 +1,45 @@
-'use strict';
+"use strict";
 
-var _interopRequireWildcard = require('@babel/runtime/helpers/interopRequireWildcard');
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
-var _interopRequireDefault = require('@babel/runtime/helpers/interopRequireDefault');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-Object.defineProperty(exports, '__esModule', {
-  value: true,
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
-exports['default'] = void 0;
+exports["default"] = void 0;
 
-var _objectWithoutProperties2 = _interopRequireDefault(require('@babel/runtime/helpers/objectWithoutProperties'));
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
 
-var _react = _interopRequireWildcard(require('react'));
+var _react = _interopRequireWildcard(require("react"));
 
-var _propTypes = _interopRequireDefault(require('prop-types'));
+var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _ink = require('ink');
+var _ink = require("ink");
 
 var Select = function Select(_ref) {
   var children = _ref.children,
-    onBlur = _ref.onBlur,
-    wait = _ref.wait,
-    disabled = _ref.disabled,
-    props = (0, _objectWithoutProperties2['default'])(_ref, ['children', 'onBlur', 'wait', 'disabled']);
+      onBlur = _ref.onBlur,
+      wait = _ref.wait,
+      disabled = _ref.disabled,
+      props = (0, _objectWithoutProperties2["default"])(_ref, ["children", "onBlur", "wait", "disabled"]);
 
   var _useFocus = (0, _ink.useFocus)({
-      autoFocus: true,
-      isActive: !disabled,
-    }),
-    isFocused = _useFocus.isFocused;
+    autoFocus: true,
+    isActive: !disabled
+  }),
+      isFocused = _useFocus.isFocused;
 
   var _useFocusManager = (0, _ink.useFocusManager)(),
-    disableFocus = _useFocusManager.disableFocus,
-    enableFocus = _useFocusManager.enableFocus,
-    focusNext = _useFocusManager.focusNext; // 防抖计时器
+      disableFocus = _useFocusManager.disableFocus,
+      enableFocus = _useFocusManager.enableFocus,
+      focusNext = _useFocusManager.focusNext; // 防抖计时器
+
 
   var timer = null;
   (0, _ink.useInput)(function (_, key) {
     if (isFocused) {
-      if (key['return']) {
+      if (key["return"]) {
         if (timer) {
           clearTimeout(timer);
         }
@@ -53,37 +54,24 @@ var Select = function Select(_ref) {
       }
     }
   });
-  return /*#__PURE__*/ _react['default'].createElement(
-    _ink.Box,
-    props,
-    /*#__PURE__*/ _react['default'].createElement(
-      _ink.Box,
-      {
-        width: '2',
-      },
-      /*#__PURE__*/ _react['default'].createElement(_ink.Text, null, isFocused ? '●' : '○'),
-    ),
-    /*#__PURE__*/ _react['default'].createElement(
-      _ink.Text,
-      {
-        inverse: isFocused,
-        bold: isFocused,
-        dimColor: disabled,
-      },
-      children,
-    ),
-  );
+  return /*#__PURE__*/_react["default"].createElement(_ink.Box, props, /*#__PURE__*/_react["default"].createElement(_ink.Box, {
+    width: "2"
+  }, /*#__PURE__*/_react["default"].createElement(_ink.Text, null, isFocused ? '●' : '○')), /*#__PURE__*/_react["default"].createElement(_ink.Text, {
+    inverse: isFocused,
+    bold: isFocused,
+    dimColor: disabled
+  }, children));
 };
 
 Select.propTypes = {
-  onBlur: _propTypes['default'].func,
-  wait: _propTypes['default'].oneOfType([_propTypes['default'].string, _propTypes['default'].number]),
-  disabled: _propTypes['default'].bool,
+  onBlur: _propTypes["default"].func,
+  wait: _propTypes["default"].oneOfType([_propTypes["default"].string, _propTypes["default"].number]),
+  disabled: _propTypes["default"].bool
 };
 Select.defaultProps = {
   onBlur: function onBlur() {},
   wait: 600,
-  disabled: false,
+  disabled: false
 };
 var _default = Select;
-exports['default'] = _default;
+exports["default"] = _default;

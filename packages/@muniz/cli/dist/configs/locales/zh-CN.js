@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, '__esModule', {
-  value: true,
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
-exports['default'] = void 0;
+exports["default"] = void 0;
 var zhCN = {
   zh_cn: '中文',
   en_us: '英文',
@@ -22,7 +22,7 @@ var zhCN = {
   check_node_version_tips: '您正在使用Node {version}，但是此{id}版本需要{wanted} Node。 n请升级您的Node版本。',
   command_options_help_tips: '显示帮助文档',
   command_options_version_tips: '显示版本号',
-  run_command_select_tips: '检查到多个指令，请问执行哪一个',
+  run_command_select_tips: '检查到多个指令，请问执行哪一个'
 };
 var _default = zhCN;
-exports['default'] = _default;
+exports["default"] = _default;

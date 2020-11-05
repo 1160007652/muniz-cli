@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 'use strict';
 
-var _interopRequireDefault = require('@babel/runtime/helpers/interopRequireDefault');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _ink = require('ink');
+var _ink = require("ink");
 
-var _CommandApp = require('../core/CommandApp');
+var _CommandApp = require("../core/CommandApp");
 
-var _locales = _interopRequireDefault(require('../configs/locales'));
+var _locales = _interopRequireDefault(require("../configs/locales"));
 
-var _cliI18n = _interopRequireDefault(require('@muniz/cli-i18n'));
+var _cliI18n = _interopRequireDefault(require("@muniz/cli-i18n"));
 
 var semver = require('semver');
 
@@ -17,12 +17,12 @@ var requiredVersion = require('../../package.json').engines.node;
 
 var MunizConfig = require('../configs/system.json');
 
-_cliI18n['default'].setLocale({
-  locale: MunizConfig.languageLocale,
+_cliI18n["default"].setLocale({
+  locale: MunizConfig.languageLocale
 });
 
-_cliI18n['default'].setlanguages({
-  languages: _locales['default'],
+_cliI18n["default"].setlanguages({
+  languages: _locales["default"]
 });
 /**
  *
@@ -33,15 +33,14 @@ _cliI18n['default'].setlanguages({
  *
  */
 
+
 function checkNodeVersion(wanted, id) {
   if (!semver.satisfies(process.version, wanted)) {
-    console.log(
-      _cliI18n['default'].getLocale('check_node_version_tips', {
-        version: process.version,
-        id: id,
-        wanted: wanted,
-      }),
-    );
+    console.log(_cliI18n["default"].getLocale('check_node_version_tips', {
+      version: process.version,
+      id: id,
+      wanted: wanted
+    }));
     process.exit(1);
   }
 }
@@ -50,7 +49,7 @@ checkNodeVersion(requiredVersion, '@muniz/cli'); // 初始化 命令行 框架
 
 var commandApp = new _CommandApp.CommandApp({
   argv: process.argv.slice(2),
-  render: _ink.render,
+  render: _ink.render
 }); // 中间件 => 格式化命令
 
 commandApp.use(_CommandApp.formatArgv); // 中间件 => 判断是否存在命令

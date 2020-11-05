@@ -1,4 +1,6 @@
 import { lowdbAction } from '../../lib/lowdb.js';
+
+const MunizConfig = require('../../configs/system.json');
 const execa = require('execa');
 const os = require('os');
 const ora = require('ora');
@@ -8,58 +10,68 @@ const ora = require('ora');
  * @type function
  * @description help_add_desc
  */
-const Add = ({ input }) => {
-  const spinner = ora('安装中，等待...');
+const Add = async ({ input }) => {
   if (input.length < 0) {
-    console.log('不能为空');
+    console.log('请输入要安装的插件');
   }
-  const plugins = input.map((item) => {
+  const pluginCorrectList = []; // 正确的待安装插件列表
+  const pluginFail = []; // 失败的插件列表， {tips: '这里存放了错误的原因提示'}
+  const pluginSucced = []; // 成功的插件列表
+
+  [...new Set(input)].forEach((item) => {
     let shortName = item.match(/.*?muniz-plugin-(.*?)$/);
     shortName = shortName?.length > 1 ? shortName[1] : '';
     if (!shortName) {
-      console.log(`输入的 “${item}” 不是「 Muniz 」 脚手架插件`);
-      process.exit();
+      pluginFail.push({ shortName, pkgName: item, tips: '不是「 Muniz CLI 」 脚手架插件' });
     } else {
-      return { shortName, pkgName: item };
+      pluginCorrectList.push({ shortName, pkgName: item });
     }
   });
-  const pluginNames = plugins.map((item) => item.pkgName).join(' ');
-  spinner.start();
-  execa
-    .command(`npm install -g ${pluginNames}`)
-    .then(() => {
-      // 向系统配置文件中，保存安装插件记录
-      plugins.forEach((item) => {
-        lowdbAction.addPluginPkg(item);
-      });
 
-      // 只在 MAC 系统下 启动（插件立即执行）功能
-      if (os.type === 'Darwin') {
-        const pluginModule = require(pkgList.pkgName).default();
+  const spinner = ora();
 
-        if (pluginModule.isStart) {
-          //生成自启动脚本
-          const osascriptContent = `
-            tell application "Terminal"
-              activate
-              do script "muniz ${pkgList.shortName}"
-            end tell
-          `;
-          execa.commandSync(`osascript -e '${osascriptContent}'`, {
-            shell: true,
-          });
+  spinner.start('正在安装中，请稍等片刻');
+  for (const { shortName, pkgName } of pluginCorrectList) {
+    await execa
+      .command(`npm install -g ${pkgName}`)
+      .then(() => {
+        // 向系统配置文件中，保存安装插件记录
+        lowdbAction.addPluginPkg({ shortName, pkgName });
+        pluginSucced.push({ shortName, pkgName });
+
+        // 在 MAC 系统中，检查自动执行事件
+        if (os.type() === 'Darwin') {
+          const pluginModule = require(pkgName).default({ locale: MunizConfig.languageLocale });
+          if (pluginModule?.isStart) {
+            const osascriptContent = `
+                  tell application "Terminal"
+                    activate
+                    do script "muniz ${shortName}"
+                  end tell
+                `;
+            execa.commandSync(`osascript -e '${osascriptContent}'`, {
+              shell: true,
+            });
+          }
         }
-      }
-      spinner.succeed('安装成功');
-    })
-    .catch((_) => {
-      spinner.fail('安装失败, 请检查 npm 镜像，是否存在本次安装的插件包！');
-    })
-    .finally(() => {
-      setTimeout(() => {
-        process.exit();
-      }, 100);
-    });
+      })
+      .catch(() => {
+        pluginFail.push({ shortName, pkgName, tips: '请检查 npm 镜像，是否存在该插件包！' });
+      });
+  }
+
+  spinner.succeed('安装结束');
+  console.log('---------------------------------\n');
+
+  pluginSucced.length > 0 && console.log('- 列表·安装成功\n');
+  pluginSucced.forEach((_plugin) => {
+    console.log(`【${_plugin.pkgName}】插件，使用命令 muniz ${_plugin.shortName}`);
+  });
+
+  pluginFail.length > 0 && console.log('\n- 列表·安装失败\n');
+  pluginFail.forEach((_plugin) => {
+    console.log(`【${_plugin.pkgName}】原因：${_plugin.tips}`);
+  });
 };
 
 export default Add;

@@ -1,90 +1,68 @@
-'use strict';
+"use strict";
 
-var _interopRequireDefault = require('@babel/runtime/helpers/interopRequireDefault');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-Object.defineProperty(exports, '__esModule', {
-  value: true,
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
-exports['default'] = void 0;
+exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require('react'));
+var _react = _interopRequireDefault(require("react"));
 
-var _ink = require('ink');
+var _ink = require("ink");
 
-var _cliI18n = _interopRequireDefault(require('@muniz/cli-i18n'));
+var _cliI18n = _interopRequireDefault(require("@muniz/cli-i18n"));
 
-var _CommandTextList = _interopRequireDefault(require('../Components/CommandTextList'));
+var _CommandTextList = _interopRequireDefault(require("../Components/CommandTextList"));
 
-var _locales = _interopRequireDefault(require('../configs/locales'));
+var _locales = _interopRequireDefault(require("../configs/locales"));
 
 var Help = function Help(_ref) {
   var _commands$options;
 
   var data = _ref.data,
-    show = _ref.show,
-    _ref$locale = _ref.locale,
-    locale = _ref$locale === void 0 ? 'zhCN' : _ref$locale;
+      show = _ref.show,
+      _ref$locale = _ref.locale,
+      locale = _ref$locale === void 0 ? 'zhCN' : _ref$locale;
   var usage = data.usage,
-    commands = data.commands,
-    otherOptions = data.otherOptions,
-    footer = data.footer;
+      commands = data.commands,
+      otherOptions = data.otherOptions,
+      footer = data.footer;
 
-  _cliI18n['default'].setLocale({
-    locale: locale,
+  _cliI18n["default"].setLocale({
+    locale: locale
   });
 
-  _cliI18n['default'].setlanguages({
-    languages: _locales['default'],
+  _cliI18n["default"].setlanguages({
+    languages: _locales["default"]
   });
 
-  return /*#__PURE__*/ _react['default'].createElement(
-    _ink.Box,
-    {
-      flexDirection: 'column',
-      paddingTop: 1,
-    },
-    show === 'options' &&
-      /*#__PURE__*/ _react['default'].createElement(
-        _ink.Box,
-        {
-          marginLeft: 2,
-          flexDirection: 'column',
-        },
-        /*#__PURE__*/ _react['default'].createElement(_ink.Text, null, commands.description),
-      ),
-    /*#__PURE__*/ _react['default'].createElement(_CommandTextList['default'], {
-      data: [usage],
-      label: 'help_usage',
-      labelColor: 'blue',
-    }),
-    show === 'command' &&
-      commands.length > 0 &&
-      /*#__PURE__*/ _react['default'].createElement(_CommandTextList['default'], {
-        data: commands,
-        label: 'help_command',
-        labelColor: 'blue',
-      }),
-    show === 'options' &&
-      (commands === null || commands === void 0
-        ? void 0
-        : (_commands$options = commands.options) === null || _commands$options === void 0
-        ? void 0
-        : _commands$options.length) > 0 &&
-      /*#__PURE__*/ _react['default'].createElement(_CommandTextList['default'], {
-        data: commands.options,
-        label: 'help_options',
-        labelColor: '#73C991',
-      }),
-    /*#__PURE__*/ _react['default'].createElement(_CommandTextList['default'], {
-      data: otherOptions,
-      label: 'help_other_options',
-      labelColor: '#73C991',
-    }),
-    /*#__PURE__*/ _react['default'].createElement(_ink.Box, {
-      marginBottom: 1,
-    }),
-  );
+  return /*#__PURE__*/_react["default"].createElement(_ink.Box, {
+    flexDirection: "column",
+    paddingTop: 1
+  }, show === 'options' && /*#__PURE__*/_react["default"].createElement(_ink.Box, {
+    marginLeft: 2,
+    flexDirection: "column"
+  }, /*#__PURE__*/_react["default"].createElement(_ink.Text, null, commands.description)), /*#__PURE__*/_react["default"].createElement(_CommandTextList["default"], {
+    data: [usage],
+    label: "help_usage",
+    labelColor: "blue"
+  }), show === 'command' && commands.length > 0 && /*#__PURE__*/_react["default"].createElement(_CommandTextList["default"], {
+    data: commands,
+    label: "help_command",
+    labelColor: "blue"
+  }), show === 'options' && (commands === null || commands === void 0 ? void 0 : (_commands$options = commands.options) === null || _commands$options === void 0 ? void 0 : _commands$options.length) > 0 && /*#__PURE__*/_react["default"].createElement(_CommandTextList["default"], {
+    data: commands.options,
+    label: "help_options",
+    labelColor: "#73C991"
+  }), /*#__PURE__*/_react["default"].createElement(_CommandTextList["default"], {
+    data: otherOptions,
+    label: "help_other_options",
+    labelColor: "#73C991"
+  }), /*#__PURE__*/_react["default"].createElement(_ink.Box, {
+    marginBottom: 1
+  }));
 };
 
 var _default = Help;
-exports['default'] = _default;
+exports["default"] = _default;

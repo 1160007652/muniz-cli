@@ -34,6 +34,7 @@
     "@muniz/cli-i18n": "1.0.16",
     "@muniz/ink-ui": "^1.0.15",
     "@muniz/servers": "^1.0.15",
+    "cli-spinners": "^2.5.0",
     "execa": "^4.1.0",
     "fs-extra": "^9.0.1",
     "ink": "^3.0.8",

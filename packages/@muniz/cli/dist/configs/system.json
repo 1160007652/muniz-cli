@@ -5,15 +5,15 @@
   "plugins": [
     {
       "shortName": "create",
+      "pkgName": "@muniz/muniz-plugin-create"
+    },
+    {
+      "shortName": "create",
       "pkgName": "@test/muniz-plugin-create"
     },
     {
       "shortName": "create",
       "pkgName": "muniz-plugin-create"
-    },
-    {
-      "shortName": "create",
-      "pkgName": "@muniz/muniz-plugin-create"
     }
   ]
 }

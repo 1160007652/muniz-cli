@@ -1,52 +1,25 @@
-'use strict';
+"use strict";
 
-var _interopRequireDefault = require('@babel/runtime/helpers/interopRequireDefault');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-Object.defineProperty(exports, '__esModule', {
-  value: true,
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
 exports.lowdb = exports.lowdbAction = void 0;
 
-var _toConsumableArray2 = _interopRequireDefault(require('@babel/runtime/helpers/toConsumableArray'));
+var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
 
-var _regenerator = _interopRequireDefault(require('@babel/runtime/regenerator'));
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
-var _defineProperty2 = _interopRequireDefault(require('@babel/runtime/helpers/defineProperty'));
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
-var _asyncToGenerator2 = _interopRequireDefault(require('@babel/runtime/helpers/asyncToGenerator'));
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
-var _cliI18n = _interopRequireDefault(require('@muniz/cli-i18n'));
+var _cliI18n = _interopRequireDefault(require("@muniz/cli-i18n"));
 
-function ownKeys(object, enumerableOnly) {
-  var keys = Object.keys(object);
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    if (enumerableOnly)
-      symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      });
-    keys.push.apply(keys, symbols);
-  }
-  return keys;
-}
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-    if (i % 2) {
-      ownKeys(Object(source), true).forEach(function (key) {
-        (0, _defineProperty2['default'])(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys(Object(source)).forEach(function (key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
-  }
-  return target;
-}
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var path = require('path');
 
@@ -63,7 +36,7 @@ exports.lowdb = lowdb;
 var defaultSystemData = {
   MUNIZ_CLI_DEBUG: false,
   MUNIZ_PLUGIN_DEV: false,
-  plugins: [],
+  plugins: []
 };
 lowdb.defaults(defaultSystemData).write();
 var lowdbAction = {
@@ -74,90 +47,68 @@ var lowdbAction = {
    *
    */
   getPluginPkgName: function getPluginPkgName(_ref) {
-    return (0, _asyncToGenerator2['default'])(
-      /*#__PURE__*/ _regenerator['default'].mark(function _callee() {
-        var shortName, _ref$isReact, isReact, pkgNameList, promptList, answers;
+    return (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
+      var shortName, pkgNameList, promptList, answers;
+      return _regenerator["default"].wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              shortName = _ref.shortName;
+              pkgNameList = lowdb.get('plugins').filter({
+                shortName: shortName
+              }).map(function (item) {
+                return _objectSpread({
+                  value: item.pkgName
+                }, item);
+              }).value(); // 如果 = 0 表示 没有这个 插件
 
-        return _regenerator['default'].wrap(function _callee$(_context) {
-          while (1) {
-            switch ((_context.prev = _context.next)) {
-              case 0:
-                (shortName = _ref.shortName),
-                  (_ref$isReact = _ref.isReact),
-                  (isReact = _ref$isReact === void 0 ? false : _ref$isReact);
-                pkgNameList = lowdb
-                  .get('plugins')
-                  .filter({
-                    shortName: shortName,
-                  })
-                  .map(function (item) {
-                    return _objectSpread(
-                      {
-                        value: item.pkgName,
-                      },
-                      item,
-                    );
-                  })
-                  .value(); // 如果是react 交互， 直接返回
+              if (!(pkgNameList.length === 0)) {
+                _context.next = 4;
+                break;
+              }
 
-                if (!isReact) {
-                  _context.next = 4;
-                  break;
-                }
+              return _context.abrupt("return", '');
 
-                return _context.abrupt('return', pkgNameList);
+            case 4:
+              if (!(pkgNameList.length === 1)) {
+                _context.next = 7;
+                break;
+              }
 
-              case 4:
-                if (!(pkgNameList.length === 0)) {
-                  _context.next = 6;
-                  break;
-                }
+              // 清除控制台内容
+              console.clear();
+              return _context.abrupt("return", pkgNameList[0].pkgName);
 
-                return _context.abrupt('return', '');
+            case 7:
+              if (!(pkgNameList.length > 1)) {
+                _context.next = 14;
+                break;
+              }
 
-              case 6:
-                if (!(pkgNameList.length === 1)) {
-                  _context.next = 9;
-                  break;
-                }
+              // 非react 交互
+              promptList = [{
+                type: 'list',
+                message: _cliI18n["default"].getLocale('run_command_select_tips'),
+                name: 'pkgName',
+                "default": '',
+                choices: pkgNameList
+              }];
+              _context.next = 11;
+              return inquirer.prompt(promptList);
 
-                // 清除控制台内容
-                console.clear();
-                return _context.abrupt('return', pkgNameList[0].pkgName);
+            case 11:
+              answers = _context.sent;
+              // 清除控制台内容
+              console.clear();
+              return _context.abrupt("return", answers.pkgName);
 
-              case 9:
-                if (!(pkgNameList.length > 1)) {
-                  _context.next = 16;
-                  break;
-                }
-
-                // 非react 交互
-                promptList = [
-                  {
-                    type: 'list',
-                    message: _cliI18n['default'].getLocale('run_command_select_tips'),
-                    name: 'pkgName',
-                    default: '',
-                    choices: pkgNameList,
-                  },
-                ];
-                _context.next = 13;
-                return inquirer.prompt(promptList);
-
-              case 13:
-                answers = _context.sent;
-                // 清除控制台内容
-                console.clear();
-                return _context.abrupt('return', answers.pkgName);
-
-              case 16:
-              case 'end':
-                return _context.stop();
-            }
+            case 14:
+            case "end":
+              return _context.stop();
           }
-        }, _callee);
-      }),
-    )();
+        }
+      }, _callee);
+    }))();
   },
 
   /**
@@ -168,22 +119,16 @@ var lowdbAction = {
    */
   addPluginPkg: function addPluginPkg(_ref2) {
     var shortName = _ref2.shortName,
-      pkgName = _ref2.pkgName;
+        pkgName = _ref2.pkgName;
     // 先根据 全量 pkg 包名删除
-    lowdb
-      .get('plugins')
-      .remove({
-        pkgName: pkgName,
-      })
-      .write(); // 删除完，再进行安装
+    lowdb.get('plugins').remove({
+      pkgName: pkgName
+    }).write(); // 删除完，再进行安装
 
-    lowdb
-      .get('plugins')
-      .push({
-        shortName: shortName,
-        pkgName: pkgName,
-      })
-      .write();
+    lowdb.get('plugins').push({
+      shortName: shortName,
+      pkgName: pkgName
+    }).write();
   },
 
   /**
@@ -192,12 +137,9 @@ var lowdbAction = {
    * @returns 返回插件列表
    */
   getPluginPkgList: function getPluginPkgList() {
-    var result = lowdb
-      .get('plugins')
-      .map(function (item, index) {
-        return [index + 1].concat((0, _toConsumableArray2['default'])(Object.values(item)));
-      })
-      .value();
+    var result = lowdb.get('plugins').map(function (item, index) {
+      return [index + 1].concat((0, _toConsumableArray2["default"])(Object.values(item)));
+    }).value();
     return result;
   },
 
@@ -206,13 +148,10 @@ var lowdbAction = {
    */
   removePluginPkg: function removePluginPkg(_ref3) {
     var shortName = _ref3.shortName,
-      pkgName = _ref3.pkgName;
-    lowdb
-      .get('plugins')
-      .remove({
-        pkgName: pkgName,
-      })
-      .write();
+        pkgName = _ref3.pkgName;
+    lowdb.get('plugins').remove({
+      pkgName: pkgName
+    }).write();
   },
 
   /**
@@ -223,6 +162,6 @@ var lowdbAction = {
   setLanguageLocale: function setLanguageLocale(_ref4) {
     var language = _ref4.language;
     lowdb.set('languageLocale', language).write();
-  },
+  }
 };
 exports.lowdbAction = lowdbAction;
