@@ -1,5 +1,5 @@
 import { lowdbAction } from '../../lib/lowdb.js';
-
+import i18n from '../../lib/i18n';
 const execa = require('execa');
 const ora = require('ora');
 
@@ -10,14 +10,14 @@ const ora = require('ora');
  */
 const Remove = async ({ input }) => {
   if (!input.join('').trim()) {
-    console.log('请输入要删除的插件');
+    console.log(i18n.getLocale('remove_command_empty_tips'));
     process.exit();
   }
 
   const spinner = ora();
 
   const pkgName = await lowdbAction.getPluginPkgName({ shortName: input.join('').trim() });
-  spinner.start('正在删除中，请稍等片刻');
+  spinner.start(i18n.getLocale('remove_command_removeing'));
 
   if (pkgName) {
     await execa
@@ -25,13 +25,13 @@ const Remove = async ({ input }) => {
       .then(async () => {
         // 向系统配置文件中，删除安装插件记录
         await lowdbAction.removePluginPkg({ pkgName });
-        spinner.fail('删除成功');
+        spinner.fail(i18n.getLocale('remove_command_success'));
       })
       .catch(() => {
-        spinner.fail('删除失败，请执行 muniz list 命令，查看是否存在该插件！');
+        spinner.fail(i18n.getLocale('remove_command_fail'));
       });
   } else {
-    spinner.fail('删除失败，请执行 muniz list 命令，查看是否存在该插件！');
+    spinner.fail(i18n.getLocale('remove_command_fail'));
   }
 };
 

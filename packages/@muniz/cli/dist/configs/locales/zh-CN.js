@@ -36,7 +36,11 @@ var zhCN = {
   list_command_table_head2: '命令',
   list_command_table_head3: '插件名称',
   list_command_title: 'Muniz 脚手架，已安装 {count} 个插件',
-  list_command_empty_tips: '还未安装插件扩展，请执行 muniz add 命令，添加需要的插件'
+  list_command_empty_tips: '还未安装插件扩展，请执行 muniz add 命令，添加需要的插件',
+  remove_command_empty_tips: '请输入要删除的插件',
+  remove_command_removeing: '正在删除中，请稍等片刻',
+  remove_command_success: '删除成功',
+  remove_command_fail: '删除失败，请执行 muniz list 命令，查看是否存在该插件！'
 };
 var _default = zhCN;
 exports["default"] = _default;

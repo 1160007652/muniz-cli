@@ -33,6 +33,10 @@ const enUS = {
   list_command_title: 'Muniz scaffolding, {count} plugins installed',
   list_command_empty_tips:
     'The plug-in extension has not been installed, please execute the muniz add command to add the required plug-in',
+  remove_command_empty_tips: 'Please enter the plugin to delete',
+  remove_command_removeing: 'Deleting, please wait a moment',
+  remove_command_success: 'Successfully Deleted',
+  remove_command_fail: 'The deletion failed, please execute the muniz list command to check if the plug-in exists!',
 };
 
 export default enUS;

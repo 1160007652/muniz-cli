@@ -52,9 +52,10 @@ const isCommand = async (ctx, next) => {
        */
 
       // 如果是 插件开发状态，返回 空字符串， 否则 进行插件库 判断
-      const pluginPkgName = MunizConfig.MUNIZ_PLUGIN_DEV
-        ? ''
-        : await lowdbAction.getPluginPkgName({ shortName: argv.command[0] });
+      let pluginPkgName = '';
+      if (!MunizConfig.MUNIZ_PLUGIN_DEV) {
+        pluginPkgName = await lowdbAction.getPluginPkgName({ shortName: argv.command[0] });
+      }
 
       /**
        * 没有安装对应的插件, 结束执行

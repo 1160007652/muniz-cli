@@ -13,6 +13,8 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _lowdb = require("../../lib/lowdb.js");
 
+var _i18n = _interopRequireDefault(require("../../lib/i18n"));
+
 var execa = require('execa');
 
 var ora = require('ora');
@@ -33,7 +35,7 @@ var Remove = /*#__PURE__*/function () {
             input = _ref.input;
 
             if (!input.join('').trim()) {
-              console.log('请输入要删除的插件');
+              console.log(_i18n["default"].getLocale('remove_command_empty_tips'));
               process.exit();
             }
 
@@ -45,7 +47,7 @@ var Remove = /*#__PURE__*/function () {
 
           case 5:
             pkgName = _context2.sent;
-            spinner.start('正在删除中，请稍等片刻');
+            spinner.start(_i18n["default"].getLocale('remove_command_removeing'));
 
             if (!pkgName) {
               _context2.next = 12;
@@ -64,7 +66,7 @@ var Remove = /*#__PURE__*/function () {
                       });
 
                     case 2:
-                      spinner.fail('删除成功');
+                      spinner.fail(_i18n["default"].getLocale('remove_command_success'));
 
                     case 3:
                     case "end":
@@ -73,7 +75,7 @@ var Remove = /*#__PURE__*/function () {
                 }
               }, _callee);
             })))["catch"](function () {
-              spinner.fail('删除失败，请执行 muniz list 命令，查看是否存在该插件！');
+              spinner.fail(_i18n["default"].getLocale('remove_command_fail'));
             });
 
           case 10:
@@ -81,7 +83,7 @@ var Remove = /*#__PURE__*/function () {
             break;
 
           case 12:
-            spinner.fail('删除失败，请执行 muniz list 命令，查看是否存在该插件！');
+            spinner.fail(_i18n["default"].getLocale('remove_command_fail'));
 
           case 13:
           case "end":

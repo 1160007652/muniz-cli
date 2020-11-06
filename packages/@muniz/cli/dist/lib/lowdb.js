@@ -71,17 +71,15 @@ var lowdbAction = {
 
             case 4:
               if (!(pkgNameList.length === 1)) {
-                _context.next = 7;
+                _context.next = 6;
                 break;
               }
 
-              // 清除控制台内容
-              console.clear();
               return _context.abrupt("return", pkgNameList[0].pkgName);
 
-            case 7:
+            case 6:
               if (!(pkgNameList.length > 1)) {
-                _context.next = 14;
+                _context.next = 13;
                 break;
               }
 
@@ -93,16 +91,17 @@ var lowdbAction = {
                 "default": '',
                 choices: pkgNameList
               }];
-              _context.next = 11;
+              _context.next = 10;
               return inquirer.prompt(promptList);
 
-            case 11:
+            case 10:
               answers = _context.sent;
-              // 清除控制台内容
+
+              /** 清空 */
               console.clear();
               return _context.abrupt("return", answers.pkgName);
 
-            case 14:
+            case 13:
             case "end":
               return _context.stop();
           }

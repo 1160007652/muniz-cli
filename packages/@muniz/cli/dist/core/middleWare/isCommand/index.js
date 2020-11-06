@@ -64,7 +64,7 @@ var isCommand = /*#__PURE__*/function () {
 
           case 11:
             if (!(argv.command.length > 0)) {
-              _context.next = 37;
+              _context.next = 34;
               break;
             }
 
@@ -79,7 +79,7 @@ var isCommand = /*#__PURE__*/function () {
             }); // 执行 非内置命令 =》 插件命令
 
             if (isCliCommand) {
-              _context.next = 33;
+              _context.next = 30;
               break;
             }
 
@@ -95,27 +95,22 @@ var isCommand = /*#__PURE__*/function () {
              */
             // 如果是 插件开发状态，返回 空字符串， 否则 进行插件库 判断
 
-            if (!MunizConfig.MUNIZ_PLUGIN_DEV) {
-              _context.next = 20;
+            pluginPkgName = '';
+
+            if (MunizConfig.MUNIZ_PLUGIN_DEV) {
+              _context.next = 21;
               break;
             }
 
-            _context.t0 = '';
-            _context.next = 23;
-            break;
-
-          case 20:
-            _context.next = 22;
+            _context.next = 20;
             return _lowdb.lowdbAction.getPluginPkgName({
               shortName: argv.command[0]
             });
 
-          case 22:
-            _context.t0 = _context.sent;
+          case 20:
+            pluginPkgName = _context.sent;
 
-          case 23:
-            pluginPkgName = _context.t0;
-
+          case 21:
             /**
              * 没有安装对应的插件, 结束执行
              * 如果是在开发插件的状态，打开脚手架插件开发通道时，跳过此处检查
@@ -164,20 +159,20 @@ var isCommand = /*#__PURE__*/function () {
               }
             }
 
-            _context.next = 34;
+            _context.next = 31;
             break;
 
-          case 33:
+          case 30:
             if (argv.command.length > 1) {
               argv.input.unshift(argv.command.pop());
             }
 
-          case 34:
+          case 31:
             next();
-            _context.next = 39;
+            _context.next = 36;
             break;
 
-          case 37:
+          case 34:
             /**
              *
              * 如果 argv.input === 0, 且 argv.options === 0 时, 置入 argv.options.help = true , 走 打印中间件 显示“帮助”命令
@@ -191,7 +186,7 @@ var isCommand = /*#__PURE__*/function () {
 
             next();
 
-          case 39:
+          case 36:
           case "end":
             return _context.stop();
         }
