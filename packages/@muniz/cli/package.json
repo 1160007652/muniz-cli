@@ -1,6 +1,6 @@
 {
   "name": "@muniz/cli",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "muniz脚手架,核心插件,命令行工具,可扩展插件模型",
   "footer": "底部描述信息",
   "bin": {
@@ -31,8 +31,8 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@muniz/cli-i18n": "^1.0.17",
-    "@muniz/ink-ui": "^1.0.17",
+    "@muniz/cli-i18n": "^1.0.18",
+    "@muniz/ink-ui": "^1.0.18",
     "@muniz/servers": "^1.0.17",
     "cli-spinners": "^2.5.0",
     "execa": "^4.1.0",
