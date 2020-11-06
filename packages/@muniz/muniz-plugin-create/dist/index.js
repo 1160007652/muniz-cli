@@ -52,7 +52,7 @@ var pluginCommand = function pluginCommand(_ref) {
   var _command = require("./command/".concat(commandPath))["default"];
 
   if (commandType === 'function') {
-    _command(commandModuleProps);
+    _command(data);
   } else {
     (0, _ink.render)( /*#__PURE__*/_react["default"].createElement(_command, data));
   }

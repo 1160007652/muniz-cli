@@ -42,11 +42,19 @@ const runCommand = async (ctx, next) => {
     } else {
       // 当前执行插件是否是 走 开发状态 通道
       if (MunizConfig.MUNIZ_PLUGIN_DEV) {
-        const { pluginCommand } = require(path.join(ctx.pkgPath, '/dist/index.js'));
-        pluginCommand({ commandPath: _astCommands[0].path, data: commandModuleProps });
+        const { pluginCommand } = require(path.join(ctx.pkgPath));
+        pluginCommand({
+          commandPath: _astCommands[0].path,
+          commandType: _astCommands[0].commandType,
+          data: commandModuleProps,
+        });
       } else {
         const { pluginCommand } = require(`${ctx.pkgName}`);
-        pluginCommand({ commandPath: _astCommands[0].path, data: commandModuleProps });
+        pluginCommand({
+          commandPath: _astCommands[0].path,
+          commandType: _astCommands[0].commandType,
+          data: commandModuleProps,
+        });
       }
     }
   }

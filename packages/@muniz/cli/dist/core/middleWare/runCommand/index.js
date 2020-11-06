@@ -85,9 +85,10 @@ var runCommand = /*#__PURE__*/function () {
               } else {
                 // 当前执行插件是否是 走 开发状态 通道
                 if (MunizConfig.MUNIZ_PLUGIN_DEV) {
-                  _require = require(path.join(ctx.pkgPath, '/dist/index.js')), pluginCommand = _require.pluginCommand;
+                  _require = require(path.join(ctx.pkgPath)), pluginCommand = _require.pluginCommand;
                   pluginCommand({
                     commandPath: _astCommands[0].path,
+                    commandType: _astCommands[0].commandType,
                     data: commandModuleProps
                   });
                 } else {
@@ -95,6 +96,7 @@ var runCommand = /*#__PURE__*/function () {
 
                   _pluginCommand({
                     commandPath: _astCommands[0].path,
+                    commandType: _astCommands[0].commandType,
                     data: commandModuleProps
                   });
                 }

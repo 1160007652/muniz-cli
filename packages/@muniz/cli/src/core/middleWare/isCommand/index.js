@@ -91,16 +91,9 @@ const isCommand = async (ctx, next) => {
 
       ctx.pkg = require(path.join(ctx.pkgPath, '/package.json'));
       // 读取命令AST信息
-      if (MunizConfig.MUNIZ_CLI_DEBUG) {
-        ctx.astCommands = await generateCommand(
-          path.join(ctx.pkgPath, '/src/command'),
-          path.join(ctx.pkgPath, '/src/command'),
-        );
-      } else {
-        ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/configs/commandHelp.json'))[
-          MunizConfig.languageLocale
-        ];
-      }
+      ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/configs/commandHelp.json'))[
+        MunizConfig.languageLocale
+      ];
 
       // 读取插件配置信息
       const pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js')).default({

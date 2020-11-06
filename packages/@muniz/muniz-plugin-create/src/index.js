@@ -27,7 +27,7 @@ export default (props) => {
 export const pluginCommand = ({ commandType, commandPath, data }) => {
   const _command = require(`./command/${commandPath}`).default;
   if (commandType === 'function') {
-    _command(commandModuleProps);
+    _command(data);
   } else {
     render(React.createElement(_command, data));
   }

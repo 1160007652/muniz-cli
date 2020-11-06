@@ -64,7 +64,7 @@ var isCommand = /*#__PURE__*/function () {
 
           case 11:
             if (!(argv.command.length > 0)) {
-              _context.next = 43;
+              _context.next = 37;
               break;
             }
 
@@ -79,7 +79,7 @@ var isCommand = /*#__PURE__*/function () {
             }); // 执行 非内置命令 =》 插件命令
 
             if (isCliCommand) {
-              _context.next = 39;
+              _context.next = 33;
               break;
             }
 
@@ -151,24 +151,8 @@ var isCommand = /*#__PURE__*/function () {
 
             ctx.pkg = require(path.join(ctx.pkgPath, '/package.json')); // 读取命令AST信息
 
-            if (!MunizConfig.MUNIZ_CLI_DEBUG) {
-              _context.next = 34;
-              break;
-            }
+            ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/configs/commandHelp.json'))[MunizConfig.languageLocale]; // 读取插件配置信息
 
-            _context.next = 31;
-            return (0, _servers.generateCommand)(path.join(ctx.pkgPath, '/src/command'), path.join(ctx.pkgPath, '/src/command'));
-
-          case 31:
-            ctx.astCommands = _context.sent;
-            _context.next = 35;
-            break;
-
-          case 34:
-            ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/configs/commandHelp.json'))[MunizConfig.languageLocale];
-
-          case 35:
-            // 读取插件配置信息
             pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js'))["default"]({
               locale: MunizConfig.languageLocale
             });
@@ -180,20 +164,20 @@ var isCommand = /*#__PURE__*/function () {
               }
             }
 
-            _context.next = 40;
+            _context.next = 34;
             break;
 
-          case 39:
+          case 33:
             if (argv.command.length > 1) {
               argv.input.unshift(argv.command.pop());
             }
 
-          case 40:
+          case 34:
             next();
-            _context.next = 45;
+            _context.next = 39;
             break;
 
-          case 43:
+          case 37:
             /**
              *
              * 如果 argv.input === 0, 且 argv.options === 0 时, 置入 argv.options.help = true , 走 打印中间件 显示“帮助”命令
@@ -207,7 +191,7 @@ var isCommand = /*#__PURE__*/function () {
 
             next();
 
-          case 45:
+          case 39:
           case "end":
             return _context.stop();
         }
