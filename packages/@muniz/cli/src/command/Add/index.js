@@ -1,6 +1,5 @@
 import { lowdbAction } from '../../lib/lowdb.js';
-import i18n from '@muniz/cli-i18n';
-const MunizConfig = require('../../configs/system.json');
+import i18n from '../../lib/i18n';
 const execa = require('execa');
 const os = require('os');
 const ora = require('ora');
@@ -38,23 +37,25 @@ const Add = async ({ input }) => {
       // 向系统配置文件中，保存安装插件记录
       await lowdbAction.addPluginPkg({ shortName, pkgName });
       pluginSucced.push({ shortName, pkgName });
+
       // 在 MAC 系统中，检查自动执行事件
+      (() => {
+        if (os.type() === 'Darwin') {
+          const pluginModule = require(pkgName).default({ locale: i18n.currentLocale });
 
-      if (os.type() === 'Darwin') {
-        const pluginModule = require(pkgName).default({ locale: MunizConfig.languageLocale });
-
-        if (pluginModule?.isStart) {
-          const osascriptContent = `
+          if (pluginModule?.isStart) {
+            const osascriptContent = `
                 tell application "Terminal"
                   activate
                   do script "muniz ${shortName}"
                 end tell
               `;
-          execa.commandSync(`osascript -e '${osascriptContent}'`, {
-            shell: true,
-          });
+            execa.commandSync(`osascript -e '${osascriptContent}'`, {
+              shell: true,
+            });
+          }
         }
-      }
+      })();
     } catch {
       pluginFail.push({ shortName, pkgName, tips: i18n.getLocale('add_command_check_npm_tips') });
     }

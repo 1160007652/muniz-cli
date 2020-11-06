@@ -11,9 +11,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _inkUi = require("@muniz/ink-ui");
 
-var _cliI18n = _interopRequireDefault(require("@muniz/cli-i18n"));
-
-var _locales = _interopRequireDefault(require("../../../configs/locales"));
+var _i18n = _interopRequireDefault(require("../../../lib/i18n"));
 
 /**
  * 使用帮助命令
@@ -25,21 +23,17 @@ var helpCommand = function helpCommand(ctx, next) {
       render = ctx.render,
       astCommands = ctx.astCommands;
 
-  _cliI18n["default"].setlanguages({
-    languages: _locales["default"]
-  });
-
   if ((_argv$options = argv.options) === null || _argv$options === void 0 ? void 0 : _argv$options.help) {
     // 组合帮助文档数据
     var helpData = {
       otherOptions: [{
         key: 'help',
         alias: 'h',
-        description: _cliI18n["default"].getLocale('command_options_help_tips')
+        description: _i18n["default"].getLocale('command_options_help_tips')
       }, {
         key: 'version',
         alias: 'v',
-        description: _cliI18n["default"].getLocale('command_options_version_tips')
+        description: _i18n["default"].getLocale('command_options_version_tips')
       }],
       commands: astCommands,
       usage: {
@@ -55,7 +49,7 @@ var helpCommand = function helpCommand(ctx, next) {
             data: helpData,
             show: "command",
             usage: "",
-            locale: _cliI18n["default"].locale
+            locale: _i18n["default"].currentLocale
           }));
           break;
         }
@@ -73,14 +67,14 @@ var helpCommand = function helpCommand(ctx, next) {
             render( /*#__PURE__*/_react["default"].createElement(_inkUi.Help, {
               data: helpData,
               show: "options",
-              locale: _cliI18n["default"].locale
+              locale: _i18n["default"].currentLocale
             }));
           } else {
             render( /*#__PURE__*/_react["default"].createElement(_inkUi.Help, {
               data: helpData,
               show: "command",
               usage: "",
-              locale: _cliI18n["default"].locale
+              locale: _i18n["default"].currentLocale
             }));
           }
 
@@ -98,7 +92,8 @@ var helpCommand = function helpCommand(ctx, next) {
           };
           render( /*#__PURE__*/_react["default"].createElement(_inkUi.Help, {
             data: helpData,
-            show: "options"
+            show: "options",
+            locale: _i18n["default"].currentLocale
           }));
           break;
         }

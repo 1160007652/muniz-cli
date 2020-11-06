@@ -60,6 +60,8 @@ Object.defineProperty(exports, "NotCommand", {
   }
 });
 
+var _i18n = _interopRequireDefault(require("./configs/i18n"));
+
 var _TextInput = _interopRequireDefault(require("./components/TextInput"));
 
 var _Button = _interopRequireDefault(require("./components/Button"));
@@ -77,3 +79,5 @@ var _Help = _interopRequireDefault(require("./Help"));
 var _Version = _interopRequireDefault(require("./Version"));
 
 var _NotCommand = _interopRequireDefault(require("./NotCommand"));
+
+_i18n["default"].initI18n();

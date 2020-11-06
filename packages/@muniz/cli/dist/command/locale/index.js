@@ -13,11 +13,9 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _lowdb = require("../../lib/lowdb.js");
 
-var _cliI18n = _interopRequireDefault(require("@muniz/cli-i18n"));
+var _i18n = _interopRequireDefault(require("../../lib/i18n"));
 
 var inquirer = require('inquirer');
-
-var MunizConfig = require('../../configs/system.json');
 
 /**
  * @muniz
@@ -34,17 +32,17 @@ var Locale = /*#__PURE__*/function () {
             // 非react 交互
             promptList = [{
               type: 'list',
-              message: _cliI18n["default"].getLocale('command_locale_tips', {
+              message: _i18n["default"].getLocale('command_locale_tips', {
                 count: 2
               }),
               name: 'language',
-              "default": MunizConfig.languageLocale,
+              "default": _i18n["default"].currentLocale,
               choices: [{
                 value: 'zhCN',
-                name: _cliI18n["default"].getLocale('zh_cn')
+                name: _i18n["default"].getLocale('zh_cn')
               }, {
                 value: 'enUS',
-                name: _cliI18n["default"].getLocale('en_us')
+                name: _i18n["default"].getLocale('en_us')
               }]
             }];
             _context.next = 3;

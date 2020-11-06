@@ -17,7 +17,7 @@ var _lowdb = require("../../../../lib/lowdb.js");
 
 var _servers = require("@muniz/servers");
 
-var _cliI18n = _interopRequireDefault(require("@muniz/cli-i18n"));
+var _i18n = _interopRequireDefault(require("../../../../lib/i18n"));
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -77,9 +77,9 @@ var pro = /*#__PURE__*/function () {
             if (((_argv$options2 = argv.options) === null || _argv$options2 === void 0 ? void 0 : _argv$options2.type) === 'plugin') {
               _lowdb.lowdb.set('MUNIZ_PLUGIN_DEV', false).write();
 
-              console.log("\n ".concat(_cliI18n["default"].getLocale('mode_pro_plugin_tips')));
+              console.log("\n ".concat(_i18n["default"].getLocale('mode_pro_plugin_tips')));
             } else {
-              console.log(_cliI18n["default"].getLocale('mode_pro_tips'));
+              console.log(_i18n["default"].getLocale('mode_pro_tips'));
             }
 
           case 14:

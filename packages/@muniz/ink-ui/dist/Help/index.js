@@ -2,20 +2,20 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _ink = require("ink");
 
-var _cliI18n = _interopRequireDefault(require("@muniz/cli-i18n"));
+var _i18n = _interopRequireDefault(require("../configs/i18n"));
 
 var _CommandTextList = _interopRequireDefault(require("../Components/CommandTextList"));
-
-var _locales = _interopRequireDefault(require("../configs/locales"));
 
 var Help = function Help(_ref) {
   var _commands$options;
@@ -26,15 +26,10 @@ var Help = function Help(_ref) {
       locale = _ref$locale === void 0 ? 'zhCN' : _ref$locale;
   var usage = data.usage,
       commands = data.commands,
-      otherOptions = data.otherOptions,
-      footer = data.footer;
+      otherOptions = data.otherOptions;
 
-  _cliI18n["default"].setLocale({
+  _i18n["default"].setLocale({
     locale: locale
-  });
-
-  _cliI18n["default"].setlanguages({
-    languages: _locales["default"]
   });
 
   return /*#__PURE__*/_react["default"].createElement(_ink.Box, {

@@ -31,7 +31,12 @@ var zhCN = {
   add_command_plugin_success_list: '列表·安装成功',
   add_command_plugin_success_tips: '【{pkgName}】插件，使用命令 muniz {shortName}',
   add_command_plugin_fail_list: '列表·安装失败',
-  add_command_plugin_fail_tips: '【{pkgName}】原因：{tips}'
+  add_command_plugin_fail_tips: '【{pkgName}】原因：{tips}',
+  list_command_table_head1: '序号',
+  list_command_table_head2: '命令',
+  list_command_table_head3: '插件名称',
+  list_command_title: 'Muniz 脚手架，已安装 {count} 个插件',
+  list_command_empty_tips: '还未安装插件扩展，请执行 muniz add 命令，添加需要的插件'
 };
 var _default = zhCN;
 exports["default"] = _default;

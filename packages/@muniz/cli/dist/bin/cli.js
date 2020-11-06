@@ -7,23 +7,15 @@ var _ink = require("ink");
 
 var _CommandApp = require("../core/CommandApp");
 
-var _locales = _interopRequireDefault(require("../configs/locales"));
-
-var _cliI18n = _interopRequireDefault(require("@muniz/cli-i18n"));
+var _i18n = _interopRequireDefault(require("../lib/i18n"));
 
 var semver = require('semver');
 
-var requiredVersion = require('../../package.json').engines.node;
+var pkgInfo = require('../../package.json');
 
-var MunizConfig = require('../configs/system.json');
+var requiredVersion = pkgInfo.engines.node;
 
-_cliI18n["default"].setLocale({
-  locale: MunizConfig.languageLocale
-});
-
-_cliI18n["default"].setlanguages({
-  languages: _locales["default"]
-});
+_i18n["default"].initI18n();
 /**
  *
  * @param {String} wanted 设定的最小兼容版本号
@@ -36,7 +28,7 @@ _cliI18n["default"].setlanguages({
 
 function checkNodeVersion(wanted, id) {
   if (!semver.satisfies(process.version, wanted)) {
-    console.log(_cliI18n["default"].getLocale('check_node_version_tips', {
+    console.log(_i18n["default"].getLocale('check_node_version_tips', {
       version: process.version,
       id: id,
       wanted: wanted

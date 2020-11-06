@@ -1,12 +1,10 @@
 import React from 'react';
 import { Box, Text } from 'ink';
-import languages from '../configs/locales';
-import i18n from '@muniz/cli-i18n';
+import i18n from '../configs/i18n';
 
 const NotCommand = (props) => {
   const { argv, env, isExistPlugin = false, locale = 'zhCN' } = props;
   i18n.setLocale({ locale });
-  i18n.setlanguages({ languages });
 
   /**
    * 可以在这里做 命令 推荐

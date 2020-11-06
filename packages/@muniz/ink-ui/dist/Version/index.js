@@ -11,9 +11,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _ink = require("ink");
 
-var _locales = _interopRequireDefault(require("../configs/locales"));
-
-var _cliI18n = _interopRequireDefault(require("@muniz/cli-i18n"));
+var _i18n = _interopRequireDefault(require("../configs/i18n"));
 
 var Version = function Version(_ref) {
   var pkg = _ref.pkg,
@@ -23,18 +21,14 @@ var Version = function Version(_ref) {
       homepage = pkg.homepage,
       name = pkg.name;
 
-  _cliI18n["default"].setLocale({
+  _i18n["default"].setLocale({
     locale: locale
-  });
-
-  _cliI18n["default"].setlanguages({
-    languages: _locales["default"]
   });
 
   return /*#__PURE__*/_react["default"].createElement(_ink.Box, {
     flexDirection: "column",
     paddingTop: 1
-  }, /*#__PURE__*/_react["default"].createElement(_ink.Text, null, "".concat(_cliI18n["default"].getLocale('version_plugin_name'), ": ").concat(name)), /*#__PURE__*/_react["default"].createElement(_ink.Text, null, "".concat(_cliI18n["default"].getLocale('version_current'), ": ").concat(version)), /*#__PURE__*/_react["default"].createElement(_ink.Text, null, "Git\uFF1A", homepage));
+  }, /*#__PURE__*/_react["default"].createElement(_ink.Text, null, "".concat(_i18n["default"].getLocale('version_plugin_name'), ": ").concat(name)), /*#__PURE__*/_react["default"].createElement(_ink.Text, null, "".concat(_i18n["default"].getLocale('version_current'), ": ").concat(version)), /*#__PURE__*/_react["default"].createElement(_ink.Text, null, "Git\uFF1A", homepage));
 };
 
 var _default = Version;

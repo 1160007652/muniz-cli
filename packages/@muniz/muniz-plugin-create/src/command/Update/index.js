@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, Box, useFocus } from 'ink';
-import i18n from '@muniz/cli-i18n';
+import { Text, Box } from 'ink';
+import i18n from '../../configs/i18n';
 
 /**
  * @muniz

@@ -15,7 +15,7 @@ var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/de
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
-var _cliI18n = _interopRequireDefault(require("@muniz/cli-i18n"));
+var _i18n = _interopRequireDefault(require("../lib/i18n"));
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -88,7 +88,7 @@ var lowdbAction = {
               // 非react 交互
               promptList = [{
                 type: 'list',
-                message: _cliI18n["default"].getLocale('run_command_select_tips'),
+                message: _i18n["default"].getLocale('run_command_select_tips'),
                 name: 'pkgName',
                 "default": '',
                 choices: pkgNameList

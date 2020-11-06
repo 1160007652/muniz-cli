@@ -26,26 +26,28 @@ var Locale = /*#__PURE__*/function () {
 
   (0, _createClass2["default"])(Locale, [{
     key: "getLocale",
-    value: function getLocale(name, options) {
-      var text = this.languages[this.locale][name];
+    value: function getLocale(scope) {
+      var _this = this;
 
-      if (!text) {
-        return this.getLocale('language_not_found', {
-          name: name,
-          locale: this.locale
-        });
-      }
+      return function (name, options) {
+        var text = _this.languages[scope][_this.locale][name];
 
-      var localText = text;
+        if (!text) {
+          // return this.getLocale('language_not_found', { name, locale: this.locale });
+          return "\u627E\u4E0D\u5230\u5BF9\u5E94\u7684\u6587\u6848 - ".concat(name);
+        }
 
-      if (/{.*?}/.test(localText)) {
-        Object.keys(options || {}).forEach(function (key) {
-          var reg = new RegExp("{".concat(key, "}"), 'g');
-          localText = localText.replace(reg, options[key]);
-        });
-      }
+        var localText = text;
 
-      return localText;
+        if (/{.*?}/.test(localText)) {
+          Object.keys(options || {}).forEach(function (key) {
+            var reg = new RegExp("{".concat(key, "}"), 'g');
+            localText = localText.replace(reg, options[key]);
+          });
+        }
+
+        return localText;
+      };
     }
     /**
      * 设置多语言
@@ -68,8 +70,9 @@ var Locale = /*#__PURE__*/function () {
   }, {
     key: "setlanguages",
     value: function setlanguages(_ref2) {
-      var languages = _ref2.languages;
-      this.languages = languages;
+      var languages = _ref2.languages,
+          scope = _ref2.scope;
+      this.languages[scope] = languages;
     }
   }]);
   return Locale;

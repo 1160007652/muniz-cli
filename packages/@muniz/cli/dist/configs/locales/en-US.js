@@ -31,7 +31,12 @@ var enUS = {
   add_command_plugin_success_list: 'List · Installation Successful',
   add_command_plugin_success_tips: '[{pkgName}] Plug-in, use the command muniz {shortName}',
   add_command_plugin_fail_list: 'List · Installation Failed',
-  add_command_plugin_fail_tips: '[{pkgName}] Reason: {tips}'
+  add_command_plugin_fail_tips: '[{pkgName}] Reason: {tips}',
+  list_command_table_head1: 'Number',
+  list_command_table_head2: 'Command',
+  list_command_table_head3: 'Plug-in Name',
+  list_command_title: 'Muniz scaffolding, {count} plugins installed',
+  list_command_empty_tips: 'The plug-in extension has not been installed, please execute the muniz add command to add the required plug-in'
 };
 var _default = enUS;
 exports["default"] = _default;

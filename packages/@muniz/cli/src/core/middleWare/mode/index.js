@@ -1,6 +1,6 @@
 import pro from './pro';
 import dev from './dev';
-import i18n from '@muniz/cli-i18n';
+import i18n from '../../../lib/i18n';
 
 /**
  * 开发模式命令

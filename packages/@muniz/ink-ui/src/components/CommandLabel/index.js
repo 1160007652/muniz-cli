@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text, Spacer } from 'ink';
+import { Box, Text } from 'ink';
 
 const CommandLabel = ({ color, children }) => {
   return (

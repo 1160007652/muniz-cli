@@ -13,9 +13,9 @@ var _ink = require("ink");
 
 var _react = _interopRequireDefault(require("react"));
 
-var _cliI18n = _interopRequireDefault(require("@muniz/cli-i18n"));
+var _i18n = _interopRequireDefault(require("./configs/i18n"));
 
-var _locales = _interopRequireDefault(require("./configs/locales"));
+_i18n["default"].initI18n();
 
 var Life = function Life() {
   (0, _classCallCheck2["default"])(this, Life);
@@ -27,12 +27,8 @@ var Life = function Life() {
 var _default = function _default(props) {
   var locale = props.locale; // 初始化多语言
 
-  _cliI18n["default"].setLocale({
+  _i18n["default"].setLocale({
     locale: locale
-  });
-
-  _cliI18n["default"].setlanguages({
-    languages: _locales["default"]
   });
 
   return new Life();

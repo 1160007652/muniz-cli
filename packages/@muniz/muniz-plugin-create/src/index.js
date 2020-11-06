@@ -1,7 +1,7 @@
 import { render } from 'ink';
 import React from 'react';
-import i18n from '@muniz/cli-i18n';
-import languages from './configs/locales';
+import i18n from './configs/i18n';
+i18n.initI18n();
 
 class Life {
   constructor() {
@@ -14,7 +14,6 @@ export default (props) => {
   const { locale } = props;
   // 初始化多语言
   i18n.setLocale({ locale });
-  i18n.setlanguages({ languages });
   return new Life();
 };
 

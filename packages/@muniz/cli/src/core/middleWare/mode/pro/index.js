@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs-extra');
 import { lowdb } from '../../../../lib/lowdb.js';
 import { generateCommand } from '@muniz/servers';
-import i18n from '@muniz/cli-i18n';
+import i18n from '../../../../lib/i18n';
 
 const pro = async ({ argv, pkgPath }) => {
   if (argv.options?.type === 'desc') {

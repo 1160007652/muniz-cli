@@ -13,7 +13,7 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _ink = require("ink");
 
-var _cliI18n = _interopRequireDefault(require("@muniz/cli-i18n"));
+var _i18n = _interopRequireDefault(require("../../configs/i18n"));
 
 /**
  * @muniz
@@ -24,7 +24,7 @@ var Update = function Update() {
   return /*#__PURE__*/_react["default"].createElement(_ink.Box, {
     flexDirection: "column",
     padding: 1
-  }, /*#__PURE__*/_react["default"].createElement(_ink.Text, null, _cliI18n["default"].getLocale('command_update_title')));
+  }, /*#__PURE__*/_react["default"].createElement(_ink.Text, null, _i18n["default"].getLocale('command_update_title')));
 };
 
 Update.propTypes = {

@@ -1,13 +1,11 @@
-import React from 'react';
-import { Box, Text, Newline } from 'ink';
-import i18n from '@muniz/cli-i18n';
+import React, { useEffect } from 'react';
+import { Box, Text } from 'ink';
+import i18n from '../configs/i18n';
 import CommandTextList from '../Components/CommandTextList';
-import languages from '../configs/locales';
 
 const Help = ({ data, show, locale = 'zhCN' }) => {
-  const { usage, commands, otherOptions, footer } = data;
+  const { usage, commands, otherOptions } = data;
   i18n.setLocale({ locale });
-  i18n.setlanguages({ languages });
 
   return (
     <Box flexDirection="column" paddingTop={1}>

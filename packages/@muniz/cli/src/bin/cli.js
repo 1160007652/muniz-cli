@@ -2,7 +2,8 @@
 'use strict';
 
 const semver = require('semver');
-const requiredVersion = require('../../package.json').engines.node;
+const pkgInfo = require('../../package.json');
+const requiredVersion = pkgInfo.engines.node;
 
 import { render } from 'ink';
 import {
@@ -16,12 +17,8 @@ import {
   mode,
 } from '../core/CommandApp';
 
-const MunizConfig = require('../configs/system.json');
-import languages from '../configs/locales';
-import i18n from '@muniz/cli-i18n';
-
-i18n.setLocale({ locale: MunizConfig.languageLocale });
-i18n.setlanguages({ languages });
+import i18n from '../lib/i18n';
+i18n.initI18n();
 
 /**
  *

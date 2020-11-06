@@ -2,14 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 
 var _ink = require("ink");
 
@@ -17,7 +15,7 @@ var _CommandText = _interopRequireDefault(require("../CommandText"));
 
 var _CommandLabel = _interopRequireDefault(require("../CommandLabel"));
 
-var _cliI18n = _interopRequireDefault(require("@muniz/cli-i18n"));
+var _i18n = _interopRequireDefault(require("../../configs/i18n"));
 
 var CommandTextList = function CommandTextList(_ref) {
   var data = _ref.data,
@@ -57,7 +55,7 @@ var CommandTextList = function CommandTextList(_ref) {
     flexDirection: "column"
   }, /*#__PURE__*/_react["default"].createElement(_CommandLabel["default"], {
     color: labelColor
-  }, _cliI18n["default"].getLocale(label)), data.map(function (item, index) {
+  }, _i18n["default"].getLocale(label)), data.map(function (item, index) {
     return /*#__PURE__*/_react["default"].createElement(_CommandText["default"], {
       key: index,
       data: item,

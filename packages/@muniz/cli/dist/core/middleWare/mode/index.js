@@ -15,7 +15,7 @@ var _pro = _interopRequireDefault(require("./pro"));
 
 var _dev = _interopRequireDefault(require("./dev"));
 
-var _cliI18n = _interopRequireDefault(require("@muniz/cli-i18n"));
+var _i18n = _interopRequireDefault(require("../../../lib/i18n"));
 
 /**
  * 开发模式命令
@@ -59,8 +59,8 @@ var modePro = /*#__PURE__*/function () {
             break;
 
           case 11:
-            console.log(_cliI18n["default"].getLocale('mode_switch_tips'));
-            console.log(_cliI18n["default"].getLocale('mode_switch_supported'));
+            console.log(_i18n["default"].getLocale('mode_switch_tips'));
+            console.log(_i18n["default"].getLocale('mode_switch_supported'));
 
           case 13:
             process.exit();

@@ -1,14 +1,12 @@
 import React from 'react';
 import { Help } from '@muniz/ink-ui';
-import i18n from '@muniz/cli-i18n';
-import languages from '../../../configs/locales';
+import i18n from '../../../lib/i18n';
 
 /**
  * 使用帮助命令
  */
 const helpCommand = (ctx, next) => {
   const { argv, render, astCommands } = ctx;
-  i18n.setlanguages({ languages });
 
   if (argv.options?.help) {
     // 组合帮助文档数据
@@ -30,7 +28,7 @@ const helpCommand = (ctx, next) => {
     };
     switch (argv.command.length) {
       case 0: {
-        render(<Help data={helpData} show="command" usage={``} locale={i18n.locale} />);
+        render(<Help data={helpData} show="command" usage={``} locale={i18n.currentLocale} />);
         break;
       }
       case 1: {
@@ -38,16 +36,16 @@ const helpCommand = (ctx, next) => {
           helpData.commands = astCommands.filter((item) => item.key === argv.command[0])[0];
           helpData.usage = { key: `$ muniz ${argv.command[0]} [options]`, description: '' };
 
-          render(<Help data={helpData} show="options" locale={i18n.locale} />);
+          render(<Help data={helpData} show="options" locale={i18n.currentLocale} />);
         } else {
-          render(<Help data={helpData} show="command" usage={``} locale={i18n.locale} />);
+          render(<Help data={helpData} show="command" usage={``} locale={i18n.currentLocale} />);
         }
         break;
       }
       default: {
         helpData.commands = astCommands.filter((item) => item.key === argv.command[1])[0];
         helpData.usage = { key: `$ muniz ${argv.command[1]} [options]`, description: '' };
-        render(<Help data={helpData} show="options" />);
+        render(<Help data={helpData} show="options" locale={i18n.currentLocale} />);
         break;
       }
     }

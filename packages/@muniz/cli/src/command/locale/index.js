@@ -1,7 +1,6 @@
 const inquirer = require('inquirer');
-const MunizConfig = require('../../configs/system.json');
 import { lowdbAction } from '../../lib/lowdb.js';
-import i18n from '@muniz/cli-i18n';
+import i18n from '../../lib/i18n';
 
 /**
  * @muniz
@@ -15,7 +14,7 @@ const Locale = async (props) => {
       type: 'list',
       message: i18n.getLocale('command_locale_tips', { count: 2 }),
       name: 'language',
-      default: MunizConfig.languageLocale,
+      default: i18n.currentLocale,
       choices: [
         {
           value: 'zhCN',

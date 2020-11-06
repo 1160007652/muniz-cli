@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Box, Text } from 'ink';
+import React from 'react';
+import { Box } from 'ink';
 import CommandText from '../CommandText';
 import CommandLabel from '../CommandLabel';
-import i18n from '@muniz/cli-i18n';
+import i18n from '../../configs/i18n';
 
 const CommandTextList = ({ data, labelColor, label }) => {
   const commandWidth = Math.max.apply(
