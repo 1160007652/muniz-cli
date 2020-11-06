@@ -50,7 +50,6 @@ const runCommand = async (ctx, next) => {
       }
     }
   }
-
   next();
 };
 

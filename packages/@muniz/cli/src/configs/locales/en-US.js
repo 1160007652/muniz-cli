@@ -18,6 +18,15 @@ const enUS = {
   command_options_help_tips: 'Show helps',
   command_options_version_tips: 'Show Version',
   run_command_select_tips: 'Check multiple instructions, which one to execute',
+  add_command_empty_tips: 'Please enter the plugin to be installed',
+  add_command_no_plugin1: 'Not a "Muniz CLI" scaffolding plugin',
+  add_command_installing: 'Installing, please wait a moment',
+  add_command_check_npm_tips: 'Please check the npm mirror to see if the plugin package exists!',
+  add_command_installed: 'End of installation',
+  add_command_plugin_success_list: 'List · Installation Successful',
+  add_command_plugin_success_tips: '[{pkgName}] Plug-in, use the command muniz {shortName}',
+  add_command_plugin_fail_list: 'List · Installation Failed',
+  add_command_plugin_fail_tips: '[{pkgName}] Reason: {tips}',
 };
 
 export default enUS;

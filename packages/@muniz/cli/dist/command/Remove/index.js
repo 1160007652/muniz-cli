@@ -34,6 +34,7 @@ var Remove = /*#__PURE__*/function () {
 
             if (!input.join('').trim()) {
               console.log('请输入要删除的插件');
+              process.exit();
             }
 
             spinner = ora();

@@ -11,6 +11,7 @@ const ora = require('ora');
 const Remove = async ({ input }) => {
   if (!input.join('').trim()) {
     console.log('请输入要删除的插件');
+    process.exit();
   }
 
   const spinner = ora();

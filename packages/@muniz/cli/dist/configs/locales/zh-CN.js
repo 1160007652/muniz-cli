@@ -22,7 +22,16 @@ var zhCN = {
   check_node_version_tips: '您正在使用Node {version}，但是此{id}版本需要{wanted} Node。 n请升级您的Node版本。',
   command_options_help_tips: '显示帮助文档',
   command_options_version_tips: '显示版本号',
-  run_command_select_tips: '检查到多个指令，请问执行哪一个'
+  run_command_select_tips: '检查到多个指令，请问执行哪一个',
+  add_command_empty_tips: '请输入要安装的插件',
+  add_command_no_plugin1: '不是「 Muniz CLI 」 脚手架插件',
+  add_command_installing: '正在安装中，请稍等片刻',
+  add_command_check_npm_tips: '请检查 npm 镜像，是否存在该插件包！',
+  add_command_installed: '安装结束',
+  add_command_plugin_success_list: '列表·安装成功',
+  add_command_plugin_success_tips: '【{pkgName}】插件，使用命令 muniz {shortName}',
+  add_command_plugin_fail_list: '列表·安装失败',
+  add_command_plugin_fail_tips: '【{pkgName}】原因：{tips}'
 };
 var _default = zhCN;
 exports["default"] = _default;
