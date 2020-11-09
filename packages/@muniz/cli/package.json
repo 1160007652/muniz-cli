@@ -23,7 +23,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=10.22.0"
+    "node": ">=v12.18.3"
   },
   "scripts": {
     "dev": "babel --root-mode upward src -d dist",
