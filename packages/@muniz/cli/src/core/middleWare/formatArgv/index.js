@@ -3,13 +3,13 @@
  */
 
 import cleanArgv from './cleanArgv';
+const minimist = require('minimist');
 /**
  * 中间价：清晰数据
  */
 const formatArgv = (ctx, next) => {
   const { argv } = ctx;
-  ctx.argv = cleanArgv(argv);
-
+  ctx.argv = cleanArgv(minimist(argv));
   next();
 };
 

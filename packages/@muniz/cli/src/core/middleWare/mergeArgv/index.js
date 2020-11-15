@@ -48,7 +48,7 @@ const mergeArgv = async (ctx, next) => {
           if (_options.type === 'boolean') {
             newOptions[_options.key] = true; // 如果逻辑型参数，那么只要输入就表示 True 否则默认不输入 为 False
           } else if (_options.type === 'number') {
-            newOptions[_options.key] = Number(optionsValue);
+            newOptions[_options.key] = isNaN(Number(optionsValue)) ? _options.default : Number(optionsValue);
           } else {
             newOptions[_options.key] = optionsValue;
           }

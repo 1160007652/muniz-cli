@@ -18,22 +18,22 @@ export default function cleanArgv(argv) {
     input: [],
     options: {},
   };
-  argv.forEach((item, index) => {
-    if (!/^\-{1,2}/.test(item)) {
-      if (index < 2) {
-        newArgv.command.push(item);
-      } else {
-        newArgv.input.push(item);
-      }
-    } else {
-      let temp = item.split('=');
-      temp[0] = temp[0].replace(/^\-{1,2}/, '');
-      temp[0] = temp[0].replace(/-(\w)/g, (_, c) => (c ? c.toUpperCase() : ''));
 
-      if (['help', 'version', 'h', 'v'].includes(temp[0])) {
-        newArgv.options[temp[0]] = true;
+  argv._.forEach((item, index) => {
+    if (index < 2) {
+      newArgv.command.push(item);
+    } else {
+      newArgv.input.push(item);
+    }
+  });
+
+  Object.keys(argv).forEach((item) => {
+    if (item !== '_') {
+      const tempKey = item.replace(/-(\w)/g, (_, c) => (c ? c.toUpperCase() : ''));
+      if (['help', 'version', 'h', 'v'].includes(tempKey)) {
+        newArgv.options[tempKey] = true;
       } else {
-        newArgv.options[temp[0]] = temp[1];
+        newArgv.options[tempKey] = argv[item];
       }
     }
   });

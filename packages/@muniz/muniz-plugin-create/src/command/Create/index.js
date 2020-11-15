@@ -19,6 +19,7 @@ const schema = yup.object().shape({
  * @description 创建指令
  * */
 const Create = (props) => {
+  console.log(props);
   const { focusNext } = useFocusManager();
   const { exit } = useApp();
   // 执行步骤
