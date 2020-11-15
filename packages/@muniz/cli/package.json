@@ -1,6 +1,6 @@
 {
   "name": "@muniz/cli",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "muniz脚手架,核心插件,命令行工具,可扩展插件模型",
   "footer": "底部描述信息",
   "bin": {
@@ -23,7 +23,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=10.22.0"
+    "node": ">=v12.18.3"
   },
   "scripts": {
     "dev": "babel --root-mode upward src -d dist",
