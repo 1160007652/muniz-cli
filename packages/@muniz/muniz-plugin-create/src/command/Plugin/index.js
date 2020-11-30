@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+import prompts from './prompts';
+
 /**
  * @muniz
  * @type function
  * @description 创建脚手架插件模版
  * */
-function Plugin(props) {
+async function Plugin(props) {
+  const anwser = await prompts();
+  console.log(anwser);
   console.log('创建 脚手架 Muniz plugin 开发模版');
 }
 

@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+import prompts from './prompts';
+
 /**
  * @muniz
  * @type function
  * @description 创建PC端开发模版
  * */
-function Pc(props) {
+async function Pc(props) {
+  const anwser = await prompts();
+  console.log(anwser);
   console.log('创建 PC React 开发模版');
 }
 

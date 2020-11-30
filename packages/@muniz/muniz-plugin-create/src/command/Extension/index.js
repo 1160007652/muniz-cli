@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+import prompts from './prompts';
+
 /**
  * @muniz
  * @type function
  * @description 创建Chrome插件扩展
  * */
-function Extension(props) {
+async function Extension(props) {
+  const anwser = await prompts();
+  console.log(anwser);
   console.log('创建 Chrome extensions 扩展插件 React 开发模版 ， 暂未接入脚手架');
 }
 

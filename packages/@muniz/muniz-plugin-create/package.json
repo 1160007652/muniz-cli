@@ -33,6 +33,8 @@
   },
   "dependencies": {
     "@muniz/cli-i18n": "^1.0.18",
+    "chalk": "^4.1.0",
+    "fs-extra": "^9.0.1",
     "react": "^17.0.1",
     "react-intl-universal": "^2.4.1"
   },
