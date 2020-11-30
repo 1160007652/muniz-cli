@@ -15,13 +15,14 @@ const runCommand = async (ctx, next) => {
     const pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js')).default({
       locale: MunizConfig.languageLocale,
     });
-    if (argv.command.length < 2) {
-      if (pluginConfig?.defaultCommand && !['', 'function', 'undefined'].includes(pluginConfig?.defaultCommand)) {
-        _astCommands = astCommands.filter((item) => item.key === pluginConfig.defaultCommand);
-      }
-    } else {
-      _astCommands = astCommands.filter((item) => item.key === argv.command[1]);
-    }
+    // if (argv.command.length < 2) {
+    //   if (pluginConfig?.defaultCommand && !['', 'function', 'undefined'].includes(pluginConfig?.defaultCommand)) {
+    //     _astCommands = astCommands.filter((item) => item.key === pluginConfig.defaultCommand);
+    //   }
+    // } else {
+    //   _astCommands = astCommands.filter((item) => item.key === argv.command[1]);
+    // }
+    _astCommands = astCommands.filter((item) => item.key === argv.command[1]);
   }
 
   if (_astCommands.length === 0) {

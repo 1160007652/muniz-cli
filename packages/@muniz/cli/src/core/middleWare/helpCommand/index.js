@@ -24,7 +24,7 @@ const helpCommand = (ctx, next) => {
         },
       ],
       commands: astCommands,
-      usage: { key: '$ muniz <command> [options]', description: '' },
+      usage: { key: `$ muniz <${i18n.getLocale('command')}> [${i18n.getLocale('options')}]`, description: '' },
     };
     switch (argv.command.length) {
       case 0: {
@@ -34,17 +34,21 @@ const helpCommand = (ctx, next) => {
       case 1: {
         if (ctx.env.command === 'cli') {
           helpData.commands = astCommands.filter((item) => item.key === argv.command[0])[0];
-          helpData.usage = { key: `$ muniz ${argv.command[0]} [options]`, description: '' };
+          helpData.usage = { key: `$ muniz ${argv.command[0]} [${i18n.getLocale('options')}]`, description: '' };
 
           render(<Help data={helpData} show="options" locale={i18n.currentLocale} />);
         } else {
+          helpData.usage = {
+            key: `$ muniz ${argv.command[0]} <${i18n.getLocale('command')}> [${i18n.getLocale('options')}]`,
+            description: '',
+          };
           render(<Help data={helpData} show="command" usage={``} locale={i18n.currentLocale} />);
         }
         break;
       }
       default: {
         helpData.commands = astCommands.filter((item) => item.key === argv.command[1])[0];
-        helpData.usage = { key: `$ muniz ${argv.command[1]} [options]`, description: '' };
+        helpData.usage = { key: `$ muniz ${argv.command[1]} [${i18n.getLocale('options')}]`, description: '' };
         render(<Help data={helpData} show="options" locale={i18n.currentLocale} />);
         break;
       }

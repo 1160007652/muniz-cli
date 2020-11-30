@@ -32,7 +32,7 @@ var MunizConfig = require('../../../configs/system.json');
  */
 var isCommand = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(ctx, next) {
-    var argv, render, isCliCommand, pluginPkgName, _tempPkgPath, pluginConfig, _argv$options, _argv$options2, _argv$options3;
+    var argv, render, isCliCommand, _argv$options, pluginPkgName, _tempPkgPath, pluginConfig, _argv$options2, _argv$options3, _argv$options4;
 
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
@@ -152,11 +152,14 @@ var isCommand = /*#__PURE__*/function () {
               locale: MunizConfig.languageLocale
             });
 
-            if (argv.command.length < 2) {
-              if ((pluginConfig === null || pluginConfig === void 0 ? void 0 : pluginConfig.defaultCommand) && !['', 'function', 'undefined'].includes(pluginConfig === null || pluginConfig === void 0 ? void 0 : pluginConfig.defaultCommand)) {// argv.command.push(pluginConfig.defaultCommand);
-              } else {
-                argv.options['help'] = true;
-              }
+            if (argv.command.length < 2 && !((_argv$options = argv.options) === null || _argv$options === void 0 ? void 0 : _argv$options.help)) {
+              // if (pluginConfig?.defaultCommand && !['', 'function', 'undefined'].includes(pluginConfig?.defaultCommand)) {
+              //   argv.command.push(pluginConfig.defaultCommand);
+              //   console.log(argv);
+              // } else {
+              //   argv.options['help'] = true;
+              // }
+              argv.options['help'] = true;
             }
 
             _context.next = 31;
@@ -180,7 +183,7 @@ var isCommand = /*#__PURE__*/function () {
              * 如果是 --version，-V 参数，放行 next()
              *
              */
-            if (Object.keys(argv.options).length >= 0 && !(((_argv$options = argv.options) === null || _argv$options === void 0 ? void 0 : _argv$options.version) || ((_argv$options2 = argv.options) === null || _argv$options2 === void 0 ? void 0 : _argv$options2.v) || ((_argv$options3 = argv.options) === null || _argv$options3 === void 0 ? void 0 : _argv$options3.mode))) {
+            if (Object.keys(argv.options).length >= 0 && !(((_argv$options2 = argv.options) === null || _argv$options2 === void 0 ? void 0 : _argv$options2.version) || ((_argv$options3 = argv.options) === null || _argv$options3 === void 0 ? void 0 : _argv$options3.v) || ((_argv$options4 = argv.options) === null || _argv$options4 === void 0 ? void 0 : _argv$options4.mode))) {
               argv.options['help'] = true;
             }
 

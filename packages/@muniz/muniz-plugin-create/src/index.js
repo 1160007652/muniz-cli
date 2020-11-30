@@ -6,8 +6,10 @@ i18n.initI18n();
 class Life {
   constructor() {
     this.isStart = true; // 安装成功后是否立即执行
-    this.defaultCommand = 'create'; // 插件默认执行命令, 以 muniz 插件名 运行时，执行那条命令，无配置 为 cli 打印 help 命令
+    this.autoUpgrade = false; // 是否动态感知最新版本，以实现自动升级
+    // this.defaultCommand = 'create'; // 插件默认执行命令, 以 muniz 插件名 运行时，执行那条命令，无配置 为 cli 打印 help 命令
   }
+  //
 }
 
 export default (props) => {

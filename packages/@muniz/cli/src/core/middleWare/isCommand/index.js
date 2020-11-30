@@ -101,12 +101,14 @@ const isCommand = async (ctx, next) => {
         locale: MunizConfig.languageLocale,
       });
 
-      if (argv.command.length < 2) {
-        if (pluginConfig?.defaultCommand && !['', 'function', 'undefined'].includes(pluginConfig?.defaultCommand)) {
-          // argv.command.push(pluginConfig.defaultCommand);
-        } else {
-          argv.options['help'] = true;
-        }
+      if (argv.command.length < 2 && !argv.options?.help) {
+        // if (pluginConfig?.defaultCommand && !['', 'function', 'undefined'].includes(pluginConfig?.defaultCommand)) {
+        //   argv.command.push(pluginConfig.defaultCommand);
+        //   console.log(argv);
+        // } else {
+        //   argv.options['help'] = true;
+        // }
+        argv.options['help'] = true;
       }
     } else {
       if (argv.command.length > 1) {
