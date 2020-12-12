@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, '__esModule', {
-  value: true,
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
-exports['default'] = cleanArgv;
+exports["default"] = cleanArgv;
 
 /**
  * 输入格式，如下
@@ -23,7 +23,7 @@ function cleanArgv(argv) {
   var newArgv = {
     command: [],
     input: [],
-    options: {},
+    options: {}
   };
 
   argv._.forEach(function (item, index) {

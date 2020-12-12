@@ -32,14 +32,15 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@hookform/resolvers": "^1.0.0",
     "@muniz/cli-i18n": "^1.0.18",
     "@muniz/ink-ui": "^1.0.18",
+    "execa": "^4.1.0",
+    "fs-extra": "^9.0.1",
     "ink": "^3.0.8",
+    "inquirer": "^7.3.3",
+    "ora": "^5.1.0",
     "react": "^17.0.1",
-    "react-hook-form": "^6.9.6",
-    "react-intl-universal": "^2.4.1",
-    "yup": "^0.29.3"
+    "semver": "^7.3.2"
   },
   "gitHead": "391b557ac73fcecb98af872ed0f0d642eb9ae60e"
 }
