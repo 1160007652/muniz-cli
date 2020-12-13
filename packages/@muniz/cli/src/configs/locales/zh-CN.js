@@ -1,6 +1,8 @@
 const zhCN = {
   zh_cn: '中文',
   en_us: '英文',
+  command: '命令',
+  options: '选项',
   language_not_found: '>> 未找到 {name} 对应的 {locale} 文案 <<',
   help_add_desc: '添加插件',
   help_list_desc: '查看插件列表',

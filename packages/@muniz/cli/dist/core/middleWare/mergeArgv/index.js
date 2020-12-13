@@ -42,19 +42,17 @@ var mergeArgv = /*#__PURE__*/function () {
             } else {
               pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js'))["default"]({
                 locale: MunizConfig.languageLocale
-              });
+              }); // if (argv.command.length < 2) {
+              //   if (pluginConfig?.defaultCommand && !['', 'function', 'undefined'].includes(pluginConfig?.defaultCommand)) {
+              //     _astCommands = astCommands.filter((item) => item.key === pluginConfig.defaultCommand);
+              //   }
+              // } else {
+              //   _astCommands = astCommands.filter((item) => item.key === argv.command[1]);
+              // }
 
-              if (argv.command.length < 2) {
-                if ((pluginConfig === null || pluginConfig === void 0 ? void 0 : pluginConfig.defaultCommand) && !['', 'function', 'undefined'].includes(pluginConfig === null || pluginConfig === void 0 ? void 0 : pluginConfig.defaultCommand)) {
-                  _astCommands = astCommands.filter(function (item) {
-                    return item.key === pluginConfig.defaultCommand;
-                  });
-                }
-              } else {
-                _astCommands = astCommands.filter(function (item) {
-                  return item.key === argv.command[1];
-                });
-              }
+              _astCommands = astCommands.filter(function (item) {
+                return item.key === argv.command[1];
+              });
             }
 
             if (Object.keys(argv.options).length > 0) {

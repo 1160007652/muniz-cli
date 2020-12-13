@@ -1,21 +1,20 @@
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import prompts from './lib/prompts';
+import prompts from './prompts';
 
 /**
  * @muniz
  * @type function
- * @description 创建指令
+ * @description 创建脚手架插件模版
  * */
-const Create = async (props) => {
-  const originPath = '/Users/mac/NodeProjects/muniz-tpl/muniz-tpl-pc'; // 源工程模版
-  console.log(props);
-  // 获取前置预设
-  const answers = await prompts();
-  console.log(answers);
-};
+async function Plugin(props) {
+  const anwser = await prompts();
+  console.log(anwser);
+  console.log('创建 脚手架 Muniz plugin 开发模版');
+}
 
-Create.propTypes = {
+Plugin.propTypes = {
   /**
    * @muniz
    * @description falgs哈哈
@@ -34,10 +33,10 @@ Create.propTypes = {
   isGit: PropTypes.bool,
 };
 
-Create.defaultProps = {
+Plugin.defaultProps = {
   flags: 'wowowoowqqqqqqq',
   isGit: false,
   count: 1,
 };
 
-export default Create;
+export default Plugin;

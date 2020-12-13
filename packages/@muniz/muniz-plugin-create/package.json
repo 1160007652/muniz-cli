@@ -33,14 +33,13 @@
   },
   "dependencies": {
     "@muniz/cli-i18n": "^1.0.18",
-    "@muniz/ink-ui": "^1.0.18",
-    "execa": "^4.1.0",
+    "chalk": "^4.1.0",
+    "download-git-repo": "^3.0.2",
     "fs-extra": "^9.0.1",
-    "ink": "^3.0.8",
-    "inquirer": "^7.3.3",
     "ora": "^5.1.0",
     "react": "^17.0.1",
-    "semver": "^7.3.2"
+    "react-intl-universal": "^2.4.1",
+    "shell-exec": "^1.0.2"
   },
   "gitHead": "391b557ac73fcecb98af872ed0f0d642eb9ae60e"
 }

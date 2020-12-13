@@ -37,7 +37,7 @@ var helpCommand = function helpCommand(ctx, next) {
       }],
       commands: astCommands,
       usage: {
-        key: '$ muniz <command> [options]',
+        key: "$ muniz <".concat(_i18n["default"].getLocale('command'), "> [").concat(_i18n["default"].getLocale('options'), "]"),
         description: ''
       }
     };
@@ -61,7 +61,7 @@ var helpCommand = function helpCommand(ctx, next) {
               return item.key === argv.command[0];
             })[0];
             helpData.usage = {
-              key: "$ muniz ".concat(argv.command[0], " [options]"),
+              key: "$ muniz ".concat(argv.command[0], " [").concat(_i18n["default"].getLocale('options'), "]"),
               description: ''
             };
             render( /*#__PURE__*/_react["default"].createElement(_inkUi.Help, {
@@ -70,6 +70,10 @@ var helpCommand = function helpCommand(ctx, next) {
               locale: _i18n["default"].currentLocale
             }));
           } else {
+            helpData.usage = {
+              key: "$ muniz ".concat(argv.command[0], " <").concat(_i18n["default"].getLocale('command'), "> [").concat(_i18n["default"].getLocale('options'), "]"),
+              description: ''
+            };
             render( /*#__PURE__*/_react["default"].createElement(_inkUi.Help, {
               data: helpData,
               show: "command",
@@ -87,7 +91,7 @@ var helpCommand = function helpCommand(ctx, next) {
             return item.key === argv.command[1];
           })[0];
           helpData.usage = {
-            key: "$ muniz ".concat(argv.command[1], " [options]"),
+            key: "$ muniz ".concat(argv.command[1], " [").concat(_i18n["default"].getLocale('options'), "]"),
             description: ''
           };
           render( /*#__PURE__*/_react["default"].createElement(_inkUi.Help, {

@@ -7,6 +7,8 @@ exports["default"] = void 0;
 var enUS = {
   zh_cn: 'Chinese',
   en_us: 'English',
+  command: 'command',
+  options: 'options',
   language_not_found: '>> The {locale} copy corresponding to the {name} Key was not found <<',
   help_add_desc: 'add plugin',
   help_list_desc: 'View the list of plugins',
