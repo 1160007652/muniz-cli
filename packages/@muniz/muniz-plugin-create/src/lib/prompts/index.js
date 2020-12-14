@@ -55,3 +55,11 @@ export const extensionShortName = {
   name: 'extensionShortName',
   default: '',
 };
+
+// 4、chrome 扩展短名称
+export const extensionAuthor = {
+  type: 'input',
+  message: i18n.getLocale('extensionAuthor'),
+  name: 'extensionAuthor',
+  default: '',
+};

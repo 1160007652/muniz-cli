@@ -8,11 +8,10 @@ export default {
     typescript: '',
   },
   extension: {
-    main: '',
-    typescript: '',
+    main: '1160007652/chrome-extensions-tpl#main',
+    typescript: '1160007652/chrome-extensions-tpl#typescript',
   },
   plugin: {
-    main: '',
-    typescript: '',
+    main: '1160007652/muniz-plugin-tpl#main',
   },
 };

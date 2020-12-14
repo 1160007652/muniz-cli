@@ -21,6 +21,11 @@ import i18n from '../lib/i18n';
 i18n.initI18n();
 
 /**
+ * const USER_HOME = process.env.HOME || process.env.USERPROFILE;
+ * 用户目录
+ **/
+
+/**
  *
  * @param {String} wanted 设定的最小兼容版本号
  * @param {String} id npm包名称

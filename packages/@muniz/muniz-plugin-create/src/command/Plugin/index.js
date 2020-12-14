@@ -1,42 +1,42 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-
+const path = require('path');
+const ora = require('ora');
 import prompts from './prompts';
+import project from '../../lib/project';
+import pkgManger from '../../lib/pkgManger';
+import i18n from '../../configs/i18n';
 
 /**
  * @muniz
  * @type function
- * @description 创建脚手架插件模版
+ * @description command_plugin_desc
  * */
 async function Plugin(props) {
-  const anwser = await prompts();
-  console.log(anwser);
-  console.log('创建 脚手架 Muniz plugin 开发模版');
+  let anwser = await prompts(props);
+  anwser = {
+    ...anwser,
+    branch: 'main', // anwser.isTypeScript ? 'typescript' :
+    destDir: path.resolve(process.cwd(), `muniz-plugin-${anwser.projectName}` || '.'),
+  };
+
+  // 同步代码
+  await project.syncRemoteProject({ type: 'plugin', anwser });
+
+  // 替换信息
+  await pkgManger.replacePkgInfo({ anwser });
+
+  // 安装依赖
+  const spinner = ora(i18n.getLocale('project_install_npm'));
+  spinner.start();
+  try {
+    await pkgManger.runCommand('npm install', { cwd: anwser.destDir });
+    spinner.succeed(i18n.getLocale('project_install_npm_success'));
+  } catch (err) {
+    spinner.fail(i18n.getLocale('project_install_npm_fail'));
+    throw err;
+  }
+
+  // 初始化Git
+  await project.initGit(anwser);
 }
-
-Plugin.propTypes = {
-  /**
-   * @muniz
-   * @description falgs哈哈
-   */
-  flags: PropTypes.string,
-  /**
-   * @muniz
-   * @description Number类型转换
-   */
-  count: PropTypes.number,
-  /**
-   * @muniz
-   * @description 生成项目的名称
-   * @alias n
-   */
-  isGit: PropTypes.bool,
-};
-
-Plugin.defaultProps = {
-  flags: 'wowowoowqqqqqqq',
-  isGit: false,
-  count: 1,
-};
 
 export default Plugin;

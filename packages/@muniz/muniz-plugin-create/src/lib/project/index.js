@@ -6,6 +6,7 @@
 
 const GitDownLoad = require('download-git-repo');
 const ora = require('ora');
+import pkgManger from '../pkgManger';
 import i18n from '../../configs/i18n';
 import gitRepo from '../../configs/gitRepo';
 
@@ -42,4 +43,20 @@ function downTplLoad(gitRepoUrl, destDir) {
   });
 }
 
-export default syncRemoteProject;
+/**
+ * 初始化Git
+ * @param {obj} anwser
+ */
+async function initGit(anwser) {
+  if (anwser.isGit) {
+    try {
+      await pkgManger.runCommand('git init -b main', { cwd: anwser.destDir });
+      await pkgManger.runCommand('git add .', { cwd: anwser.destDir });
+      await pkgManger.runCommand(`git commit -m "${i18n.getLocale('git_commit_content')}"`, { cwd: anwser.destDir });
+    } catch (err) {
+      throw err;
+    }
+  }
+}
+
+export default { syncRemoteProject, initGit };

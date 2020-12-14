@@ -11,6 +11,7 @@
   "scripts": {
     "dev": "nodemon --exec ./scripts/dev.sh",
     "build": "./scripts/build.sh",
+    "clear": "./scripts/clear.sh",
     "commit": "git-cz"
   },
   "config": {

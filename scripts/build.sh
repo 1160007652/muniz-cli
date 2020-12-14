@@ -1,4 +1,4 @@
-# 开发启动脚本
+# 生产环境脚本
 
 # 首次启动时删除之前构建出的“dist”文件夹
 rm -rf ./packages/@muniz/*/dist
