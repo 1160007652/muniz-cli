@@ -64,7 +64,7 @@ var isCommand = /*#__PURE__*/function () {
 
           case 11:
             if (!(argv.command.length > 0)) {
-              _context.next = 34;
+              _context.next = 35;
               break;
             }
 
@@ -171,11 +171,14 @@ var isCommand = /*#__PURE__*/function () {
             }
 
           case 31:
-            next();
-            _context.next = 36;
+            _context.next = 33;
+            return next();
+
+          case 33:
+            _context.next = 38;
             break;
 
-          case 34:
+          case 35:
             /**
              *
              * 如果 argv.input === 0, 且 argv.options === 0 时, 置入 argv.options.help = true , 走 打印中间件 显示“帮助”命令
@@ -187,9 +190,10 @@ var isCommand = /*#__PURE__*/function () {
               argv.options['help'] = true;
             }
 
-            next();
+            _context.next = 38;
+            return next();
 
-          case 36:
+          case 38:
           case "end":
             return _context.stop();
         }

@@ -64,13 +64,14 @@ var modePro = /*#__PURE__*/function () {
 
           case 13:
             process.exit();
-            _context.next = 17;
+            _context.next = 18;
             break;
 
           case 16:
-            next();
+            _context.next = 18;
+            return next();
 
-          case 17:
+          case 18:
           case "end":
             return _context.stop();
         }

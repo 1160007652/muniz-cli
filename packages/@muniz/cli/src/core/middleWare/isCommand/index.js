@@ -115,7 +115,7 @@ const isCommand = async (ctx, next) => {
         argv.input.unshift(argv.command.pop());
       }
     }
-    next();
+    await next();
   } else {
     /**
      *
@@ -127,7 +127,7 @@ const isCommand = async (ctx, next) => {
     if (Object.keys(argv.options).length >= 0 && !(argv.options?.version || argv.options?.v || argv.options?.mode)) {
       argv.options['help'] = true;
     }
-    next();
+    await next();
   }
 };
 

@@ -26,11 +26,11 @@ export default (props) => {
  * @param {string} param.commandPath 执行命令路径
  * @param {object} param.data 插件命令数据
  */
-export const pluginCommand = ({ commandType, commandPath, data }) => {
+export const pluginCommand = async ({ commandType, commandPath, data }) => {
   const _command = require(`./command/${commandPath}`).default;
   if (commandType === 'function') {
-    _command(data);
+    await _command(data);
   } else {
-    render(React.createElement(_command, data));
+    await render(React.createElement(_command, data));
   }
 };

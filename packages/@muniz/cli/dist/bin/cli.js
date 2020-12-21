@@ -40,14 +40,17 @@ function checkNodeVersion(wanted, id) {
     }));
     process.exit(1);
   }
-}
+} // 检查运行的 node 版本
+
 
 checkNodeVersion(requiredVersion, '@muniz/cli'); // 初始化 命令行 框架
 
 var commandApp = new _CommandApp.CommandApp({
   argv: process.argv.slice(2),
   render: _ink.render
-}); // 中间件 => 格式化命令
+}); // 中间件 => 统一捕捉错误信息
+
+commandApp.use(_CommandApp.errorExpand); // 中间件 => 格式化命令
 
 commandApp.use(_CommandApp.formatArgv); // 中间件 => 判断是否存在命令
 

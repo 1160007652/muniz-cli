@@ -24,7 +24,7 @@ const modePro = async (ctx, next) => {
 
     process.exit();
   } else {
-    next();
+    await next();
   }
 };
 

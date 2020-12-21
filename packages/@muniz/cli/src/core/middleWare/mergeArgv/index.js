@@ -77,7 +77,7 @@ const mergeArgv = async (ctx, next) => {
 
   argv.options = newOptions;
 
-  next();
+  await next();
 };
 
 export default mergeArgv;

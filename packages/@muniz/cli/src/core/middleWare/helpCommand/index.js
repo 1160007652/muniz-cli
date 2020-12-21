@@ -5,7 +5,7 @@ import i18n from '../../../lib/i18n';
 /**
  * 使用帮助命令
  */
-const helpCommand = (ctx, next) => {
+const helpCommand = async (ctx, next) => {
   const { argv, render, astCommands } = ctx;
 
   if (argv.options?.help) {
@@ -55,7 +55,7 @@ const helpCommand = (ctx, next) => {
     }
     process.exit();
   } else {
-    next();
+    await next();
   }
 };
 

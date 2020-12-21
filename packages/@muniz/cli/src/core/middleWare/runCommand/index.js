@@ -41,17 +41,17 @@ const runCommand = async (ctx, next) => {
         render(React.createElement(commandModule, commandModuleProps));
       }
     } else {
-      // 当前执行插件是否是 走 开发状态 通道
+      // 当前执行插件, 是否是 走 开发状态 通道
       if (MunizConfig.MUNIZ_PLUGIN_DEV) {
         const { pluginCommand } = require(path.join(ctx.pkgPath));
-        pluginCommand({
+        await pluginCommand({
           commandPath: _astCommands[0].path,
           commandType: _astCommands[0].commandType,
           data: commandModuleProps,
         });
       } else {
         const { pluginCommand } = require(`${ctx.pkgName}`);
-        pluginCommand({
+        await pluginCommand({
           commandPath: _astCommands[0].path,
           commandType: _astCommands[0].commandType,
           data: commandModuleProps,
@@ -59,7 +59,7 @@ const runCommand = async (ctx, next) => {
       }
     }
   }
-  next();
+  await next();
 };
 
 export default runCommand;

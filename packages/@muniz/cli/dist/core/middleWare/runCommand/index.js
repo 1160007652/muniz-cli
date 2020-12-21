@@ -62,48 +62,71 @@ var runCommand = /*#__PURE__*/function () {
               });
             }
 
-            if (_astCommands.length === 0) {
-              render( /*#__PURE__*/_react["default"].createElement(_inkUi.NotCommand, (0, _extends2["default"])({}, ctx, {
-                isExistPlugin: true,
-                locale: MunizConfig.languageLocale
-              })));
-            } else {
-              commandModuleProps = _objectSpread(_objectSpread({}, argv.options), {}, {
-                input: argv.input
-              });
-
-              if (env.command === 'cli') {
-                commandModule = require("".concat(ctx.pkgPath, "/dist/command/").concat(_astCommands[0].path))["default"];
-
-                if (_astCommands[0].commandType === 'function') {
-                  commandModule(commandModuleProps);
-                } else {
-                  render( /*#__PURE__*/_react["default"].createElement(commandModule, commandModuleProps));
-                }
-              } else {
-                // 当前执行插件是否是 走 开发状态 通道
-                if (MunizConfig.MUNIZ_PLUGIN_DEV) {
-                  _require = require(path.join(ctx.pkgPath)), pluginCommand = _require.pluginCommand;
-                  pluginCommand({
-                    commandPath: _astCommands[0].path,
-                    commandType: _astCommands[0].commandType,
-                    data: commandModuleProps
-                  });
-                } else {
-                  _require2 = require("".concat(ctx.pkgName)), _pluginCommand = _require2.pluginCommand;
-
-                  _pluginCommand({
-                    commandPath: _astCommands[0].path,
-                    commandType: _astCommands[0].commandType,
-                    data: commandModuleProps
-                  });
-                }
-              }
+            if (!(_astCommands.length === 0)) {
+              _context.next = 7;
+              break;
             }
 
-            next();
+            render( /*#__PURE__*/_react["default"].createElement(_inkUi.NotCommand, (0, _extends2["default"])({}, ctx, {
+              isExistPlugin: true,
+              locale: MunizConfig.languageLocale
+            })));
+            _context.next = 22;
+            break;
 
-          case 5:
+          case 7:
+            commandModuleProps = _objectSpread(_objectSpread({}, argv.options), {}, {
+              input: argv.input
+            });
+
+            if (!(env.command === 'cli')) {
+              _context.next = 13;
+              break;
+            }
+
+            commandModule = require("".concat(ctx.pkgPath, "/dist/command/").concat(_astCommands[0].path))["default"];
+
+            if (_astCommands[0].commandType === 'function') {
+              commandModule(commandModuleProps);
+            } else {
+              render( /*#__PURE__*/_react["default"].createElement(commandModule, commandModuleProps));
+            }
+
+            _context.next = 22;
+            break;
+
+          case 13:
+            if (!MunizConfig.MUNIZ_PLUGIN_DEV) {
+              _context.next = 19;
+              break;
+            }
+
+            _require = require(path.join(ctx.pkgPath)), pluginCommand = _require.pluginCommand;
+            _context.next = 17;
+            return pluginCommand({
+              commandPath: _astCommands[0].path,
+              commandType: _astCommands[0].commandType,
+              data: commandModuleProps
+            });
+
+          case 17:
+            _context.next = 22;
+            break;
+
+          case 19:
+            _require2 = require("".concat(ctx.pkgName)), _pluginCommand = _require2.pluginCommand;
+            _context.next = 22;
+            return _pluginCommand({
+              commandPath: _astCommands[0].path,
+              commandType: _astCommands[0].commandType,
+              data: commandModuleProps
+            });
+
+          case 22:
+            _context.next = 24;
+            return next();
+
+          case 24:
           case "end":
             return _context.stop();
         }

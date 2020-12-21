@@ -47,6 +47,12 @@ Object.defineProperty(exports, "mode", {
     return _mode["default"];
   }
 });
+Object.defineProperty(exports, "errorExpand", {
+  enumerable: true,
+  get: function get() {
+    return _errorExpand["default"];
+  }
+});
 
 var _formatArgv = _interopRequireDefault(require("./formatArgv"));
 
@@ -61,3 +67,5 @@ var _versionCommand = _interopRequireDefault(require("./versionCommand"));
 var _runCommand = _interopRequireDefault(require("./runCommand"));
 
 var _mode = _interopRequireDefault(require("./mode"));
+
+var _errorExpand = _interopRequireDefault(require("./errorExpand"));

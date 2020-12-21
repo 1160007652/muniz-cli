@@ -105,9 +105,10 @@ var mergeArgv = /*#__PURE__*/function () {
             }
 
             argv.options = newOptions;
-            next();
+            _context.next = 7;
+            return next();
 
-          case 6:
+          case 7:
           case "end":
             return _context.stop();
         }

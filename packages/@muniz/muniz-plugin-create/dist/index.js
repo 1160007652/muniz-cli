@@ -7,6 +7,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.pluginCommand = exports["default"] = void 0;
 
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
 var _ink = require("ink");
@@ -46,18 +50,44 @@ var _default = function _default(props) {
 
 exports["default"] = _default;
 
-var pluginCommand = function pluginCommand(_ref) {
-  var commandType = _ref.commandType,
-      commandPath = _ref.commandPath,
-      data = _ref.data;
+var pluginCommand = /*#__PURE__*/function () {
+  var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_ref) {
+    var commandType, commandPath, data, _command;
 
-  var _command = require("./command/".concat(commandPath))["default"];
+    return _regenerator["default"].wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            commandType = _ref.commandType, commandPath = _ref.commandPath, data = _ref.data;
+            _command = require("./command/".concat(commandPath))["default"];
 
-  if (commandType === 'function') {
-    _command(data);
-  } else {
-    (0, _ink.render)( /*#__PURE__*/_react["default"].createElement(_command, data));
-  }
-};
+            if (!(commandType === 'function')) {
+              _context.next = 7;
+              break;
+            }
+
+            _context.next = 5;
+            return _command(data);
+
+          case 5:
+            _context.next = 9;
+            break;
+
+          case 7:
+            _context.next = 9;
+            return (0, _ink.render)( /*#__PURE__*/_react["default"].createElement(_command, data));
+
+          case 9:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function pluginCommand(_x) {
+    return _ref2.apply(this, arguments);
+  };
+}();
 
 exports.pluginCommand = pluginCommand;

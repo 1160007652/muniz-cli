@@ -15,6 +15,7 @@ import {
   isCommand,
   runCommand,
   mode,
+  errorExpand,
 } from '../core/CommandApp';
 
 import i18n from '../lib/i18n';
@@ -40,10 +41,14 @@ function checkNodeVersion(wanted, id) {
   }
 }
 
+// 检查运行的 node 版本
 checkNodeVersion(requiredVersion, '@muniz/cli');
 
 // 初始化 命令行 框架
 const commandApp = new CommandApp({ argv: process.argv.slice(2), render });
+
+// 中间件 => 统一捕捉错误信息
+commandApp.use(errorExpand);
 
 // 中间件 => 格式化命令
 commandApp.use(formatArgv);
