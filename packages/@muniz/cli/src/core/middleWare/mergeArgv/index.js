@@ -14,9 +14,9 @@ const mergeArgv = async (ctx, next) => {
   if (env.command === 'cli') {
     _astCommands = astCommands.filter((item) => item.key === argv.command[0]);
   } else {
-    const pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js')).default({
-      locale: MunizConfig.languageLocale,
-    });
+    // const pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js')).default({
+    //   locale: MunizConfig.languageLocale,
+    // });
 
     // if (argv.command.length < 2) {
     //   if (pluginConfig?.defaultCommand && !['', 'function', 'undefined'].includes(pluginConfig?.defaultCommand)) {

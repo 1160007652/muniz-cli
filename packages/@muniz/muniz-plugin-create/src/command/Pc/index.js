@@ -17,7 +17,6 @@ async function Pc(props) {
     branch: anwser.isTypeScript ? 'typescript' : 'main',
     destDir: path.resolve(process.cwd(), anwser.projectName || '.'),
   };
-  throw new Error('muniz-plugin-create 插件 错误');
 
   // 同步代码
   await project.syncRemoteProject({ type: 'pc', anwser });

@@ -33,7 +33,7 @@ var MunizConfig = require('../../../configs/system.json');
 
 var runCommand = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(ctx, next) {
-    var argv, astCommands, render, env, _astCommands, pluginConfig, commandModuleProps, commandModule, _require, pluginCommand, _require2, _pluginCommand;
+    var argv, astCommands, render, env, _astCommands, commandModuleProps, commandModule, _require, pluginCommand, _require2, _pluginCommand;
 
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
@@ -47,16 +47,16 @@ var runCommand = /*#__PURE__*/function () {
                 return item.key === argv.command[0];
               });
             } else {
-              pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js'))["default"]({
-                locale: MunizConfig.languageLocale
-              }); // if (argv.command.length < 2) {
+              // const pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js')).default({
+              //   locale: MunizConfig.languageLocale,
+              // });
+              // if (argv.command.length < 2) {
               //   if (pluginConfig?.defaultCommand && !['', 'function', 'undefined'].includes(pluginConfig?.defaultCommand)) {
               //     _astCommands = astCommands.filter((item) => item.key === pluginConfig.defaultCommand);
               //   }
               // } else {
               //   _astCommands = astCommands.filter((item) => item.key === argv.command[1]);
               // }
-
               _astCommands = astCommands.filter(function (item) {
                 return item.key === argv.command[1];
               });

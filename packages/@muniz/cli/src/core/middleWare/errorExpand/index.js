@@ -10,7 +10,7 @@ const errorExpand = async (ctx, next) => {
   } catch (error) {
     if (MunizConfig.MUNIZ_CLI_DEBUG) {
       console.log('打印错误信息');
-      console.log(error.msage);
+      console.log(error);
     } else {
       console.dir(error.message);
     }
