@@ -81,7 +81,7 @@ var Add = /*#__PURE__*/function () {
                       _pluginCorrectList$_i = _pluginCorrectList[_i], shortName = _pluginCorrectList$_i.shortName, pkgName = _pluginCorrectList$_i.pkgName;
                       _context.prev = 1;
                       _context.next = 4;
-                      return execa.command("npm install ".concat(pkgName), {
+                      return execa.command("npm install -g ".concat(pkgName), {
                         shell: true
                       });
 

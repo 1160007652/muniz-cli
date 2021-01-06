@@ -33,7 +33,7 @@ const Add = async ({ input }) => {
   spinner.start(i18n.getLocale('add_command_installing'));
   for (const { shortName, pkgName } of pluginCorrectList) {
     try {
-      await execa.command(`npm install ${pkgName}`, { shell: true });
+      await execa.command(`npm install -g ${pkgName}`, { shell: true });
       // 向系统配置文件中，保存安装插件记录
       await lowdbAction.addPluginPkg({ shortName, pkgName });
 
