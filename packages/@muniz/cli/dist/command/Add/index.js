@@ -81,7 +81,7 @@ var Add = /*#__PURE__*/function () {
                       _pluginCorrectList$_i = _pluginCorrectList[_i], shortName = _pluginCorrectList$_i.shortName, pkgName = _pluginCorrectList$_i.pkgName;
                       _context.prev = 1;
                       _context.next = 4;
-                      return execa.command("npm install -g ".concat(pkgName), {
+                      return execa.command("npm install ".concat(pkgName), {
                         shell: true
                       });
 
@@ -100,7 +100,7 @@ var Add = /*#__PURE__*/function () {
 
                       (function () {
                         if (os.type() === 'Darwin') {
-                          var pluginModule = require(pkgName)["default"]({
+                          var pluginModule = require("".concat(pkgName))["default"]({
                             locale: _i18n["default"].currentLocale
                           });
 
@@ -113,19 +113,20 @@ var Add = /*#__PURE__*/function () {
                         }
                       })();
 
-                      _context.next = 13;
+                      _context.next = 14;
                       break;
 
                     case 10:
                       _context.prev = 10;
                       _context.t0 = _context["catch"](1);
+                      console.log(_context.t0);
                       pluginFail.push({
                         shortName: shortName,
                         pkgName: pkgName,
                         tips: _i18n["default"].getLocale('add_command_check_npm_tips')
                       });
 
-                    case 13:
+                    case 14:
                     case "end":
                       return _context.stop();
                   }

@@ -33,15 +33,16 @@ const Add = async ({ input }) => {
   spinner.start(i18n.getLocale('add_command_installing'));
   for (const { shortName, pkgName } of pluginCorrectList) {
     try {
-      await execa.command(`npm install -g ${pkgName}`, { shell: true });
+      await execa.command(`npm install ${pkgName}`, { shell: true });
       // 向系统配置文件中，保存安装插件记录
       await lowdbAction.addPluginPkg({ shortName, pkgName });
+
       pluginSucced.push({ shortName, pkgName });
 
       // 在 MAC 系统中，检查自动执行事件
       (() => {
         if (os.type() === 'Darwin') {
-          const pluginModule = require(pkgName).default({ locale: i18n.currentLocale });
+          const pluginModule = require(`${pkgName}`).default({ locale: i18n.currentLocale });
 
           if (pluginModule?.isStart) {
             const osascriptContent = `
@@ -56,7 +57,8 @@ const Add = async ({ input }) => {
           }
         }
       })();
-    } catch {
+    } catch (e) {
+      console.log(e);
       pluginFail.push({ shortName, pkgName, tips: i18n.getLocale('add_command_check_npm_tips') });
     }
   }
