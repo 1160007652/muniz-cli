@@ -1,6 +1,6 @@
 {
   "name": "@muniz/cli",
-  "version": "1.0.28",
+  "version": "1.0.29",
   "description": "muniz脚手架,核心插件,命令行工具,可扩展插件模型",
   "footer": "底部描述信息",
   "bin": {
