@@ -23,6 +23,7 @@ const enUS = {
   command_plugin_desc: 'Create a Scaffolding-Plugin development template',
   command_extension_desc: 'Create a Chrome-Extension development template',
   command_h5_desc: 'Create a H5 development template',
+  command_electron_desc: 'Create a Electron development template',
 };
 
 export default enUS;

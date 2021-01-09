@@ -27,6 +27,6 @@ var enUS = (_enUS = {
   project_install_npm_success: 'Install Success',
   project_install_npm_fail: 'Install Fail',
   git_commit_content: 'Initialize project engineering'
-}, (0, _defineProperty2["default"])(_enUS, "command_pc_desc", 'Create a PC development template'), (0, _defineProperty2["default"])(_enUS, "command_plugin_desc", 'Create a Scaffolding-Plugin development template'), (0, _defineProperty2["default"])(_enUS, "command_extension_desc", 'Create a Chrome-Extension development template'), (0, _defineProperty2["default"])(_enUS, "command_h5_desc", 'Create a H5 development template'), _enUS);
+}, (0, _defineProperty2["default"])(_enUS, "command_pc_desc", 'Create a PC development template'), (0, _defineProperty2["default"])(_enUS, "command_plugin_desc", 'Create a Scaffolding-Plugin development template'), (0, _defineProperty2["default"])(_enUS, "command_extension_desc", 'Create a Chrome-Extension development template'), (0, _defineProperty2["default"])(_enUS, "command_h5_desc", 'Create a H5 development template'), (0, _defineProperty2["default"])(_enUS, "command_electron_desc", 'Create a Electron development template'), _enUS);
 var _default = enUS;
 exports["default"] = _default;

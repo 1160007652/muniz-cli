@@ -27,6 +27,6 @@ var zhCN = (_zhCN = {
   project_install_npm_success: '安装成功',
   project_install_npm_fail: '安装失败',
   git_commit_content: '初始化项目工程'
-}, (0, _defineProperty2["default"])(_zhCN, "command_pc_desc", '创建PC开发模版'), (0, _defineProperty2["default"])(_zhCN, "command_plugin_desc", '创建脚手架插件开发模版'), (0, _defineProperty2["default"])(_zhCN, "command_extension_desc", '创建Chrome扩展开发模版'), (0, _defineProperty2["default"])(_zhCN, "command_h5_desc", '创建H5开发模版'), _zhCN);
+}, (0, _defineProperty2["default"])(_zhCN, "command_pc_desc", '创建PC开发模版'), (0, _defineProperty2["default"])(_zhCN, "command_plugin_desc", '创建脚手架插件开发模版'), (0, _defineProperty2["default"])(_zhCN, "command_extension_desc", '创建Chrome扩展开发模版'), (0, _defineProperty2["default"])(_zhCN, "command_h5_desc", '创建H5开发模版'), (0, _defineProperty2["default"])(_zhCN, "command_electron_desc", '创建Electron开发模版'), _zhCN);
 var _default = zhCN;
 exports["default"] = _default;

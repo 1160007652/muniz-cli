@@ -23,6 +23,7 @@ const zhCN = {
   command_plugin_desc: '创建脚手架插件开发模版',
   command_extension_desc: '创建Chrome扩展开发模版',
   command_h5_desc: '创建H5开发模版',
+  command_electron_desc: '创建Electron开发模版',
 };
 
 export default zhCN;

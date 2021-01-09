@@ -50,10 +50,12 @@ function downTplLoad(gitRepoUrl, destDir) {
 async function initGit(anwser) {
   if (anwser.isGit) {
     try {
-      await pkgManger.runCommand('git init -b main', { cwd: anwser.destDir });
+      await pkgManger.runCommand('git init', { cwd: anwser.destDir });
       await pkgManger.runCommand('git add .', { cwd: anwser.destDir });
       await pkgManger.runCommand(`git commit -m "${i18n.getLocale('git_commit_content')}"`, { cwd: anwser.destDir });
+      await pkgManger.runCommand('git branch -M main', { cwd: anwser.destDir });
     } catch (err) {
+      console.log(err);
       throw err;
     }
   }

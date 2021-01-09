@@ -8,9 +8,9 @@ import i18n from '../../configs/i18n';
 /**
  * @muniz
  * @type function
- * @description command_pc_desc
+ * @description command_electron_desc
  * */
-async function Pc(props) {
+async function Electron(props) {
   let anwser = await prompts(props);
   anwser = {
     ...anwser,
@@ -19,7 +19,7 @@ async function Pc(props) {
   };
 
   // 同步代码
-  await project.syncRemoteProject({ type: 'pc', anwser });
+  await project.syncRemoteProject({ type: 'electron', anwser });
 
   // 替换信息
   await pkgManger.replacePkgInfo({ anwser });
@@ -39,4 +39,4 @@ async function Pc(props) {
   }
 }
 
-export default Pc;
+export default Electron;

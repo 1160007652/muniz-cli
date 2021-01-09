@@ -25,6 +25,9 @@ async function Extension(props) {
   await pkgManger.replacePkgInfo({ anwser });
   await pkgManger.replaceManifestInfo({ anwser });
 
+  // 初始化Git
+  await project.initGit(anwser);
+
   // 安装依赖
   const spinner = ora(i18n.getLocale('project_install_npm'));
   spinner.start();
@@ -35,9 +38,6 @@ async function Extension(props) {
     spinner.fail(i18n.getLocale('project_install_npm_fail'));
     throw err;
   }
-
-  // 初始化Git
-  await project.initGit(anwser);
 }
 
 export default Extension;
