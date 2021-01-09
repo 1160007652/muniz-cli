@@ -1,6 +1,6 @@
 {
   "name": "@muniz/muniz-plugin-create",
-  "version": "1.0.31",
+  "version": "1.0.30",
   "description": "创建项目工程模版插件",
   "keywords": [
     "@muniz/muniz-plugin-create"
@@ -42,6 +42,5 @@
     "ora": "^5.1.0",
     "react": "^17.0.1",
     "shell-exec": "^1.0.2"
-  },
-  "gitHead": "bf3cb9a22febe7b68e1b18b7a45812112c2e4035"
+  }
 }
