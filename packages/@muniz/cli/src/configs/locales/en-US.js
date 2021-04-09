@@ -19,7 +19,7 @@ const enUS = {
   mode_pro_plugin_tips: '「 Scaffolding Plug-in 」 Production Mode-Successfully opened',
   command_locale_tips: 'Multi-language switching, currently only {count} languages',
   check_node_version_tips:
-    'You are using Node {version} , but this version of {id}requires Node {wanted}.\nPlease upgrade your Node version.',
+    'You are using Node {version} , but this version of【{id}】requires Node.js {wanted}.\nPlease upgrade your Node version.',
   command_options_help_tips: 'Show helps',
   command_options_version_tips: 'Show Version',
   run_command_select_tips: 'Check multiple instructions, which one to execute',

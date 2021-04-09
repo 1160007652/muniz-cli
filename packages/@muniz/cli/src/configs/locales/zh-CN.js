@@ -18,7 +18,7 @@ const zhCN = {
   mode_dev_plugin_tips: '「 脚手架插件 」开发者模式 - 开启成功',
   mode_pro_plugin_tips: '「 脚手架插件 」生产模式 - 开启成功',
   command_locale_tips: '多语言切换，目前只有 {count} 种语言',
-  check_node_version_tips: '您正在使用Node {version}，但是此{id}版本需要{wanted} Node。 n请升级您的Node版本。',
+  check_node_version_tips: '您正在使用Node {version}，但是此【{id}】版本需要 {wanted} Node.js。\n请升级您的Node版本。',
   command_options_help_tips: '显示帮助文档',
   command_options_version_tips: '显示版本号',
   run_command_select_tips: '检查到多个指令，请问执行哪一个',
