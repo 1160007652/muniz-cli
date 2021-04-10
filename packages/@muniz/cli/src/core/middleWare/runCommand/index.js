@@ -33,7 +33,7 @@ const runCommand = async (ctx, next) => {
       input: argv.input,
     };
     if (env.command === 'cli') {
-      const commandModule = require(`${ctx.pkgPath}/dist/command/${_astCommands[0].path}`).default;
+      const commandModule = require(`${ctx.pkgPath}/src/command/${_astCommands[0].path}`).default;
 
       if (_astCommands[0].commandType === 'function') {
         commandModule(commandModuleProps);

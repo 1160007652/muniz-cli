@@ -9,7 +9,8 @@
     "packages/@muniz/server*"
   ],
   "scripts": {
-    "dev": "nodemon --exec ./scripts/dev.sh",
+    "muniz": "babel-node packages/@muniz/cli/src/bin/cli.js",
+    "dev": "./scripts/dev.sh",
     "build": "./scripts/build.sh",
     "clear": "./scripts/clear.sh",
     "commit": "git-cz"
@@ -37,10 +38,10 @@
     "@babel/cli": "^7.11.6",
     "@babel/core": "^7.11.6",
     "@babel/node": "^7.10.5",
+    "@babel/plugin-syntax-top-level-await": "^7.10.4",
     "@babel/plugin-transform-runtime": "^7.11.5",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
-    "@babel/plugin-syntax-top-level-await": "^7.10.4",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "commitizen": "^4.2.1",
@@ -56,10 +57,10 @@
     "husky": "^4.3.0",
     "lerna": "^3.22.1",
     "lint-staged": "^10.4.0",
+    "nodemon": "^2.0.4",
     "prettier": "^2.1.2",
     "prop-types": "^15.7.2",
-    "standard": "^14.3.4",
-    "nodemon": "^2.0.4"
+    "standard": "^14.3.4"
   },
   "publishConfig": {
     "access": "public"

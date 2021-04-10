@@ -4,6 +4,7 @@ const DataSource = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 import i18n from '../lib/i18n';
 const adapter = new FileSync(path.resolve(__dirname, '../configs/system.json'));
+
 const lowdb = DataSource(adapter);
 
 // 默认脚手架 配置数据

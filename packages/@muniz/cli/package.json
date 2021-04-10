@@ -26,7 +26,8 @@
     "node": ">=v12.18.3"
   },
   "scripts": {
-    "dev": "babel --root-mode upward src -d dist",
+    "dev:debug": "babel-node ./src/bin/cli.js",
+    "dev": "babel --root-mode upward src -d dist --watch",
     "generateCommandDesc": "muniz --mode=pro --type=desc",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },

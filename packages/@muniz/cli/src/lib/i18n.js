@@ -1,5 +1,6 @@
 const pkgInfo = require('../../package.json');
 const MunizConfig = require('../configs/system.json');
+
 import languages from '../configs/locales';
 import i18n from '@muniz/cli-i18n';
 
