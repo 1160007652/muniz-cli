@@ -14,8 +14,10 @@
       "restart": true,
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
-      "env": {},
-      "args": ["locale"]
+      "env": {
+        "CLI_ENV": "development" // development(开发环境 + 调试环境) production(生产环境)
+      },
+      "args": ["locale"] // 参数
     }
   ]
 }

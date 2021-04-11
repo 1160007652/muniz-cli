@@ -9,7 +9,7 @@
     "packages/@muniz/server*"
   ],
   "scripts": {
-    "muniz": "babel-node packages/@muniz/cli/src/bin/cli.js",
+    "muniz": "CLI_ENV=development babel-node packages/@muniz/cli/src/bin/cli.js",
     "dev": "./scripts/dev.sh",
     "build": "./scripts/build.sh",
     "clear": "./scripts/clear.sh",

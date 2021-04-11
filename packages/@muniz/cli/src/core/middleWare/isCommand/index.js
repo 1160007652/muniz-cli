@@ -2,9 +2,9 @@ const path = require('path');
 const fs = require('fs-extra');
 import React from 'react';
 import { NotCommand } from '@muniz/ink-ui';
-import { generateCommand } from '@muniz/servers';
 const MunizConfig = require('../../../configs/system.json');
 import { lowdbAction } from '../../../lib/lowdb.js';
+import i18nCommand from '../../../lib/i18nCommand';
 
 /**
  * 是否是内置命令
@@ -13,20 +13,20 @@ const isCommand = async (ctx, next) => {
   const { argv, render } = ctx;
   // 初始化执行内置框架命令
   ctx.pkgName = '@muniz/cli';
-  ctx.pkgPath = __filename.replace(new RegExp('@muniz(.*?)$', 'ig'), (_, c) => path.join(ctx.pkgName));
-  ctx.pkg = require(path.join(ctx.pkgPath, '/package.json'));
 
-  // 读取命令AST信息
-  if (MunizConfig.MUNIZ_CLI_DEBUG) {
-    ctx.astCommands = await generateCommand(
-      path.join(ctx.pkgPath, '/src/command'),
-      path.join(ctx.pkgPath, '/src/command'),
-    );
+  ctx.pkgPath = __filename.replace(new RegExp('@muniz(.*?)$', 'ig'), (_, c) => path.join(ctx.pkgName));
+
+  if (process.env.CLI_ENV === 'development') {
+    ctx.pkgPath = path.join(ctx.pkgPath, '/src');
+
+    const _astCommands = await i18nCommand({ pkgPath: ctx.pkgPath });
+    ctx.astCommands = _astCommands[MunizConfig.languageLocale];
   } else {
-    ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/configs/commandHelp.json'))[
-      MunizConfig.languageLocale
-    ];
+    ctx.pkgPath = path.join(ctx.pkgPath, '/dist');
+    ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/configs/commandHelp.json'))[MunizConfig.languageLocale];
   }
+
+  ctx.pkg = require(path.join(ctx.pkgPath, '../package.json'));
 
   // 如果 argv.input > 0, 表示输入了执行命令， 开始执行输入的命令
   if (argv.command.length > 0) {
@@ -90,14 +90,14 @@ const isCommand = async (ctx, next) => {
         }
       }
 
-      ctx.pkg = require(path.join(ctx.pkgPath, '/package.json'));
+      ctx.pkg = require(path.resolve(ctx.pkgPath, '../package.json'));
       // 读取命令AST信息
-      ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/dist/configs/commandHelp.json'))[
+      ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/configs/commandHelp.json'))[
         MunizConfig.languageLocale
       ];
 
       // 读取插件配置信息
-      const pluginConfig = require(path.join(ctx.pkgPath, '/dist/index.js')).default({
+      const pluginConfig = require(path.join(ctx.pkgPath, '/index.js')).default({
         locale: MunizConfig.languageLocale,
       });
 

@@ -16,7 +16,13 @@ const modePro = async (ctx, next) => {
     if (options.mode in _mode) {
       argv.input = argv.input.concat(argv.command);
       argv.command = [];
-      await _mode[options.mode]({ argv, pkgPath: process.cwd() });
+      let cwdPath = process.cwd();
+      if (process.env.CLI_ENV === 'development') {
+        cwdPath += '/src';
+      } else {
+        cwdPath += '/dist';
+      }
+      await _mode[options.mode]({ argv, pkgPath: cwdPath });
     } else {
       console.log(i18n.getLocale('mode_switch_tips'));
       console.log(i18n.getLocale('mode_switch_supported'));
