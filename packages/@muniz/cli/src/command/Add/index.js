@@ -10,8 +10,6 @@ const ora = require('ora');
  * @description help_add_desc
  */
 const Add = async ({ input }) => {
-  throw new Error('ssss');
-
   if (input.length < 1) {
     console.log(i18n.getLocale('add_command_empty_tips'));
     process.exit();

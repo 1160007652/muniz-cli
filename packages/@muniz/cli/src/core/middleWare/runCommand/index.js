@@ -1,6 +1,6 @@
 import React from 'react';
-import { NotCommand } from '@muniz/ink-ui';
-const MunizConfig = require('../../../configs/system.json');
+import ErrorExceptionType from '../../../configs/errorExceptionType';
+
 /**
  * 执行 命令
  */
@@ -14,7 +14,8 @@ const runCommand = async (ctx, next) => {
   }
 
   if (!_astCommands) {
-    render(<NotCommand {...ctx} isExistPlugin locale={MunizConfig.languageLocale} />);
+    // 检查到插件存在, 但是插件中不存在 准备 执行的命令
+    throw new Error(ErrorExceptionType.PLUGIN_NOT_COMMAND);
   } else {
     const commandModuleProps = {
       ...argv.options,
@@ -27,7 +28,7 @@ const runCommand = async (ctx, next) => {
         if (_astCommands.commandType === 'function') {
           await commandModule(commandModuleProps);
         } else {
-          render(React.createElement(commandModule, commandModuleProps));
+          await render(React.createElement(commandModule, commandModuleProps));
         }
       } else {
         // 当前执行插件, 是否是 走 开发状态 通道
@@ -48,11 +49,7 @@ const runCommand = async (ctx, next) => {
         }
       }
     } catch (error) {
-      if (process.env.CLI_ENV === '1development') {
-        console.log(error);
-      } else {
-        console.log(error.message);
-      }
+      throw error;
     }
   }
   await next();

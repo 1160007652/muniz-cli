@@ -1,16 +1,15 @@
 const path = require('path');
 const fs = require('fs-extra');
-import React from 'react';
-import { NotCommand } from '@muniz/ink-ui';
 const MunizConfig = require('../../../configs/system.json');
 import { lowdbAction } from '../../../lib/lowdb.js';
 import i18nCommand from '../../../lib/i18nCommand';
+import ErrorExceptionType from '../../../configs/errorExceptionType';
 
 /**
  * 是否是内置命令
  */
 const isCommand = async (ctx, next) => {
-  const { argv, render } = ctx;
+  const { argv } = ctx;
   // 初始化执行内置框架命令
   ctx.pkgName = '@muniz/cli';
 
@@ -51,30 +50,19 @@ const isCommand = async (ctx, next) => {
        *
        */
 
-      // 如果是 插件开发状态，返回 空字符串
-      let pluginPkgName = '';
-
-      // 如果不是插件开发状态，获取当前执行命令对应的插件 包名称
+      // 如果不是插件开发状态，获取当前执行命令对应的 “插件-包名称”
       if (process.env.EXTERNAL_PLUGIN_ENV !== 'development') {
-        pluginPkgName = await lowdbAction.getPluginPkgName({ shortName: argv.command[0] });
+        ctx.pkgName = await lowdbAction.getPluginPkgName({ shortName: argv.command[0] });
       }
 
       /**
-       * 没有安装对应的插件, 结束执行
+       * 如果插件状态设置了 EXTERNAL_PLUGIN_ENV === development (表示，在外置的项目中进行开发，非当前项目)
        *
-       * 如果是在开发插件的状态，打开脚手架插件开发通道时，跳过此处检查
+       * 说明 pkgPath 路径为当前执行命令所在的路径
+       *
+       * EXTERNAL_PLUGIN_ENV === production (表示 内在项目、或生产环境中，直接通过 包名进行加载获取路径)，
+       * 巧妙的使用 require.resolve（）方法, 判断是否存在插件包，由近到远，从本地node_modules到全局node_modules进行查找
        */
-      if (pluginPkgName === '' && process.env.EXTERNAL_PLUGIN_ENV !== 'development') {
-        ctx.pkgPath = '';
-        ctx.pkg = {};
-        render(<NotCommand {...ctx} locale={MunizConfig.languageLocale} />);
-
-        process.exit();
-      }
-
-      ctx.pkgName = pluginPkgName;
-
-      // 当前执行插件是否是 走 开发状态 通道
       if (process.env.EXTERNAL_PLUGIN_ENV === 'development') {
         ctx.pkgPath = process.cwd();
       } else {
@@ -85,11 +73,8 @@ const isCommand = async (ctx, next) => {
             (_, c) => ctx.pkgName,
           );
         } catch {
-          ctx.pkgPath = '';
-          ctx.pkg = {};
-          render(<NotCommand {...ctx} locale={MunizConfig.languageLocale} />);
-
-          process.exit();
+          // 检查到插件不存在，提示
+          throw new Error(ErrorExceptionType.CLI_NOT_COMMAND);
         }
       }
 
