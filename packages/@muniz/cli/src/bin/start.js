@@ -56,7 +56,5 @@ commandApp.use(versionCommand);
 // 中间件 => 执行命令
 commandApp.use(runCommand);
 
-module.exports = () => {
-  // 启动
-  commandApp.start();
-};
+// 启动命令行程序
+commandApp.start();

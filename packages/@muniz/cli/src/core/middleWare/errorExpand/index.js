@@ -6,8 +6,7 @@ const errorExpand = async (ctx, next) => {
     await next();
   } catch (error) {
     if (process.env.CLI_ENV === 'development') {
-      console.log(error.message);
-      // console.log(error);
+      console.log(error);
     } else {
       console.log(error.message);
     }

@@ -35,7 +35,7 @@ class CommandApp {
    */
   compose(middleware) {
     // compose方法返回值是一个函数，这个函数返回值是一个promise对象
-    return (ctx) => {
+    return async (ctx) => {
       const dispatch = (i) => {
         // 取出中间件函数
         const _middlewareFn = middleware[i];

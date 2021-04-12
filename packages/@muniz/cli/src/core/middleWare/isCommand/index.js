@@ -107,7 +107,8 @@ const isCommand = async (ctx, next) => {
 
       ctx.pkg = require(path.resolve(ctx.pkgPath, '../package.json'));
 
-      if (Object.keys(argv.options).length === 0) {
+      // 如果没有属性，打印 帮助文档
+      if (argv.command.length < 2 && Object.keys(argv.options).length === 0) {
         argv.options['help'] = true;
       }
     } else {
