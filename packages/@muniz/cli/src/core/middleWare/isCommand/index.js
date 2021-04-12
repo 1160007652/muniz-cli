@@ -51,17 +51,20 @@ const isCommand = async (ctx, next) => {
        *
        */
 
-      // 如果是 插件开发状态，返回 空字符串， 否则 进行插件库 判断
+      // 如果是 插件开发状态，返回 空字符串
       let pluginPkgName = '';
-      if (!MunizConfig.MUNIZ_PLUGIN_DEV) {
+
+      // 如果不是插件开发状态，获取当前执行命令对应的插件 包名称
+      if (process.env.EXTERNAL_PLUGIN_ENV !== 'development') {
         pluginPkgName = await lowdbAction.getPluginPkgName({ shortName: argv.command[0] });
       }
 
       /**
        * 没有安装对应的插件, 结束执行
+       *
        * 如果是在开发插件的状态，打开脚手架插件开发通道时，跳过此处检查
        */
-      if (pluginPkgName === '' && !MunizConfig.MUNIZ_PLUGIN_DEV) {
+      if (pluginPkgName === '' && process.env.EXTERNAL_PLUGIN_ENV !== 'development') {
         ctx.pkgPath = '';
         ctx.pkg = {};
         render(<NotCommand {...ctx} locale={MunizConfig.languageLocale} />);
@@ -72,7 +75,7 @@ const isCommand = async (ctx, next) => {
       ctx.pkgName = pluginPkgName;
 
       // 当前执行插件是否是 走 开发状态 通道
-      if (MunizConfig.MUNIZ_PLUGIN_DEV) {
+      if (process.env.EXTERNAL_PLUGIN_ENV === 'development') {
         ctx.pkgPath = process.cwd();
       } else {
         try {
@@ -90,24 +93,21 @@ const isCommand = async (ctx, next) => {
         }
       }
 
+      if (process.env.CLI_ENV === 'development') {
+        ctx.pkgPath = path.join(ctx.pkgPath, '/src');
+
+        const _astCommands = await i18nCommand({ pkgPath: ctx.pkgPath });
+        ctx.astCommands = _astCommands[MunizConfig.languageLocale];
+      } else {
+        ctx.pkgPath = path.join(ctx.pkgPath, '/dist');
+        ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/configs/commandHelp.json'))[
+          MunizConfig.languageLocale
+        ];
+      }
+
       ctx.pkg = require(path.resolve(ctx.pkgPath, '../package.json'));
-      // 读取命令AST信息
-      ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/configs/commandHelp.json'))[
-        MunizConfig.languageLocale
-      ];
 
-      // 读取插件配置信息
-      const pluginConfig = require(path.join(ctx.pkgPath, '/index.js')).default({
-        locale: MunizConfig.languageLocale,
-      });
-
-      if (argv.command.length < 2 && !argv.options?.help) {
-        // if (pluginConfig?.defaultCommand && !['', 'function', 'undefined'].includes(pluginConfig?.defaultCommand)) {
-        //   argv.command.push(pluginConfig.defaultCommand);
-        //   console.log(argv);
-        // } else {
-        //   argv.options['help'] = true;
-        // }
+      if (Object.keys(argv.options).length === 0) {
         argv.options['help'] = true;
       }
     } else {

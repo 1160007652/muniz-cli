@@ -9,6 +9,7 @@ async function i18nCommand({ pkgPath }) {
 
   const astCommands = await generateCommand(descPath, descPath);
   const languageList = Object.keys(localesModule); // 遍历出 keys
+
   // 生成 多语言 国际化 帮助文档
   const astCommandsLanguages = {};
   languageList.forEach((language) => {
@@ -23,4 +24,5 @@ async function i18nCommand({ pkgPath }) {
 
   return astCommandsLanguages;
 }
+
 export default i18nCommand;

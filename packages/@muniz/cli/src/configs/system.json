@@ -1,6 +1,4 @@
 {
-  "MUNIZ_CLI_DEBUG": true,
-  "MUNIZ_PLUGIN_DEV": false,
   "languageLocale": "zhCN",
   "plugins": [
     {

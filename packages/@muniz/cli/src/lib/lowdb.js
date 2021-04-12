@@ -9,8 +9,6 @@ const lowdb = DataSource(adapter);
 
 // 默认脚手架 配置数据
 const defaultSystemData = {
-  MUNIZ_CLI_DEBUG: false,
-  MUNIZ_PLUGIN_DEV: false,
   plugins: [],
 };
 

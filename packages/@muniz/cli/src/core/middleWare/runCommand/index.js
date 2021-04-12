@@ -8,14 +8,14 @@ const MunizConfig = require('../../../configs/system.json');
 const runCommand = async (ctx, next) => {
   const { argv, astCommands, render, env } = ctx;
 
-  let _astCommands = [];
+  let _astCommands = null;
   if (env.command === 'cli') {
-    _astCommands = astCommands.filter((item) => item.key === argv.command[0]);
+    _astCommands = astCommands.find((item) => item.key === argv.command[0]);
   } else {
-    _astCommands = astCommands.filter((item) => item.key === argv.command[1]);
+    _astCommands = astCommands.find((item) => item.key === argv.command[1]);
   }
 
-  if (_astCommands.length === 0) {
+  if (!_astCommands) {
     render(<NotCommand {...ctx} isExistPlugin locale={MunizConfig.languageLocale} />);
   } else {
     const commandModuleProps = {
@@ -23,20 +23,20 @@ const runCommand = async (ctx, next) => {
       input: argv.input,
     };
     if (env.command === 'cli') {
-      const commandModule = require(`${ctx.pkgPath}/command/${_astCommands[0].path}`).default;
+      const commandModule = require(`${ctx.pkgPath}/command/${_astCommands.path}`).default;
 
-      if (_astCommands[0].commandType === 'function') {
+      if (_astCommands.commandType === 'function') {
         commandModule(commandModuleProps);
       } else {
         render(React.createElement(commandModule, commandModuleProps));
       }
     } else {
       // 当前执行插件, 是否是 走 开发状态 通道
-      if (MunizConfig.MUNIZ_PLUGIN_DEV) {
-        const { pluginCommand } = require(path.join(ctx.pkgPath));
+      if (process.env.EXTERNAL_PLUGIN_ENV !== 'development') {
+        const { pluginCommand } = require(ctx.pkgPath);
         await pluginCommand({
-          commandPath: _astCommands[0].path,
-          commandType: _astCommands[0].commandType,
+          commandPath: _astCommands.path,
+          commandType: _astCommands.commandType,
           data: commandModuleProps,
         });
       } else {
