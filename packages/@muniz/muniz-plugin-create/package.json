@@ -27,8 +27,8 @@
     "url": "https://github.com/1160007652/muniz-cli/issues"
   },
   "scripts": {
-    "dev": "babel --root-mode upward src --out-dir dist",
-    "generateCommandDesc": "muniz --mode=pro --type=desc ",
+    "build": "babel --root-mode upward src --out-dir dist",
+    "generateCommandDesc": "CLI_ENV=production EXTERNAL_PLUGIN_ENV=development node ../cli/dist/bin/cli.js --mode=pro --type=desc",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {

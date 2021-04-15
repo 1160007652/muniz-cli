@@ -25,7 +25,7 @@
     "url": "git+https://github.com/1160007652/muniz-cli.git"
   },
   "scripts": {
-    "dev": "babel --root-mode upward src -d dist",
+    "build": "babel --root-mode upward src -d dist",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {

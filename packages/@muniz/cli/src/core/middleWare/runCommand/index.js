@@ -32,7 +32,7 @@ const runCommand = async (ctx, next) => {
         }
       } else {
         // 当前执行插件, 是否是 走 开发状态 通道
-        if (process.env.EXTERNAL_PLUGIN_ENV !== 'development') {
+        if (process.env.EXTERNAL_PLUGIN_ENV === 'production') {
           const { pluginCommand } = require(ctx.pkgPath);
           pluginCommand({
             commandPath: _astCommands.path,

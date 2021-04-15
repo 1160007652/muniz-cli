@@ -26,8 +26,8 @@
     "node": ">=v12.18.3"
   },
   "scripts": {
-    "dev": "babel --root-mode upward src -d dist",
-    "generateCommandDesc": "muniz --mode=pro --type=desc",
+    "build": "babel --root-mode upward src -d dist",
+    "generateCommandDesc": "CLI_ENV=production EXTERNAL_PLUGIN_ENV=development node ./dist/bin/cli.js --mode=pro --type=desc ",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {

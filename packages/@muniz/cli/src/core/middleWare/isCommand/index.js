@@ -20,8 +20,14 @@ const isCommand = async (ctx, next) => {
 
     const _astCommands = await i18nCommand({ pkgPath: ctx.pkgPath });
     ctx.astCommands = _astCommands[MunizConfig.languageLocale];
+  } else if (process.env.EXTERNAL_PLUGIN_ENV === 'development') {
+    ctx.pkgPath = path.join(ctx.pkgPath, '/dist');
+    console.log(ctx.pkgPath);
+    const _astCommands = await i18nCommand({ pkgPath: ctx.pkgPath });
+    ctx.astCommands = _astCommands[MunizConfig.languageLocale];
   } else {
     ctx.pkgPath = path.join(ctx.pkgPath, '/dist');
+    console.log(ctx.pkgPath);
     ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/configs/commandHelp.json'))[MunizConfig.languageLocale];
   }
 
@@ -51,7 +57,7 @@ const isCommand = async (ctx, next) => {
        */
 
       // 如果不是插件开发状态，获取当前执行命令对应的 “插件-包名称”
-      if (process.env.EXTERNAL_PLUGIN_ENV !== 'development') {
+      if (process.env.EXTERNAL_PLUGIN_ENV === 'production') {
         ctx.pkgName = await lowdbAction.getPluginPkgName({ shortName: argv.command[0] });
       }
 
@@ -80,6 +86,11 @@ const isCommand = async (ctx, next) => {
 
       if (process.env.CLI_ENV === 'development') {
         ctx.pkgPath = path.join(ctx.pkgPath, '/src');
+
+        const _astCommands = await i18nCommand({ pkgPath: ctx.pkgPath });
+        ctx.astCommands = _astCommands[MunizConfig.languageLocale];
+      } else if (process.env.EXTERNAL_PLUGIN_ENV === 'development') {
+        ctx.pkgPath = path.join(ctx.pkgPath, '/dist');
 
         const _astCommands = await i18nCommand({ pkgPath: ctx.pkgPath });
         ctx.astCommands = _astCommands[MunizConfig.languageLocale];
