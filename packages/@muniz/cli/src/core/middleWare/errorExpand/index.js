@@ -28,20 +28,30 @@ const errorExpand = async (ctx, next) => {
           };
         })
         .concat(astCommands);
-      console.log(`不存在[${argv.command[0]} 命令]、[${argv.command[0]} 插件]`);
 
-      console.log(`是否要执行该命令: muniz ${didyoumean(argv.command[0], commandList, 'key')}`);
-      // render(<NotCommand {...ctx} isExistPlugin locale={MunizConfig.languageLocale} />);
+      render(
+        <NotCommand
+          type="cli"
+          {...ctx}
+          recommand={didyoumean(argv.command[0], commandList, 'key')}
+          locale={MunizConfig.languageLocale}
+        />,
+      );
       process.exit();
     }
 
     if (errorString === ErrorExceptionType.PLUGIN_NOT_COMMAND) {
       ctx.pkgPath = '';
       ctx.pkg = {};
-      console.log(`${argv.command[0]} 插件中不存在 [${argv.command[1]} 命令]`);
-      console.log(`是否要执行该命令: muniz ${argv.command[0]} ${didyoumean(argv.command[1], astCommands, 'key')}`);
 
-      // render(<NotCommand {...ctx} isExistPlugin locale={MunizConfig.languageLocale} />);
+      render(
+        <NotCommand
+          type="cli-plugin"
+          {...ctx}
+          recommand={didyoumean(argv.command[1], astCommands, 'key')}
+          locale={MunizConfig.languageLocale}
+        />,
+      );
       process.exit();
     }
 

@@ -13,6 +13,7 @@
     "dev": "./scripts/dev.sh",
     "build": "./scripts/build.sh",
     "clear": "./scripts/clear.sh",
+    "publish": "lerna publish",
     "commit": "git-cz"
   },
   "config": {
