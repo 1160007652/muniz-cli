@@ -15,8 +15,8 @@
     "test": "__tests__"
   },
   "files": [
-    "dist",
-    "./index.js"
+    "index.js",
+    "dist"
   ],
   "publishConfig": {
     "access": "public"
