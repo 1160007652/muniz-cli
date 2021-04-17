@@ -1,6 +1,6 @@
 {
   "name": "@muniz/ink-ui",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "ink 组件库, 适用于ink cli 渲染",
   "keywords": [
     "ink",
@@ -33,7 +33,7 @@
     "url": "https://github.com/1160007652/muniz-cli/issues"
   },
   "dependencies": {
-    "@muniz/cli-i18n": "^1.1.2",
+    "@muniz/cli-i18n": "^1.1.3",
     "cli-spinners": "^2.5.0",
     "ora": "^5.1.0",
     "react": "^17.0.1",
