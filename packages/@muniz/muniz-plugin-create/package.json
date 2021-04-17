@@ -28,7 +28,7 @@
   },
   "scripts": {
     "build": "babel --root-mode upward src --out-dir dist",
-    "generateCommandDesc": "CLI_ENV=production EXTERNAL_PLUGIN_ENV=development node ../cli/dist/bin/cli.js --mode=pro --type=desc",
+    "generateCommandDesc": "CLI_ENV=production node ../cli/dist/bin/cli.js --mode=pro --type=desc",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {

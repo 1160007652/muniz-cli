@@ -1,5 +1,6 @@
 import React from 'react';
 import ErrorExceptionType from '../../../configs/errorExceptionType';
+import i18n from '../../../lib/i18n';
 
 /**
  * 执行 命令
@@ -32,18 +33,20 @@ const runCommand = async (ctx, next) => {
         }
       } else {
         // 当前执行插件, 是否是 走 开发状态 通道
-        if (process.env.EXTERNAL_PLUGIN_ENV === 'production') {
-          const { pluginCommand } = require(ctx.pkgPath);
+        if (process.env.EXTERNAL_PLUGIN_ENV === 'development') {
+          const { pluginLife, pluginCommand } = require(ctx.pkgPath);
+          pluginLife({ locale: i18n.currentLocale });
           pluginCommand({
             commandPath: _astCommands.path,
             commandType: _astCommands.commandType,
             data: commandModuleProps,
           });
         } else {
-          const { pluginCommand } = require(`${ctx.pkgName}`);
+          const { pluginLife, pluginCommand } = require(`${ctx.pkgName}`);
+          pluginLife({ locale: i18n.currentLocale });
           pluginCommand({
-            commandPath: _astCommands[0].path,
-            commandType: _astCommands[0].commandType,
+            commandPath: _astCommands.path,
+            commandType: _astCommands.commandType,
             data: commandModuleProps,
           });
         }

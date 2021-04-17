@@ -18,7 +18,7 @@
         "CLI_ENV": "development", // development(开发环境 + 调试环境) production(生产环境)
         "EXTERNAL_PLUGIN_ENV": "production" // development(外部插件开发环境 - 【通过 “命令执行路径” 加载模块】) production(生产环境 + 内部开发环境 - 【通过 “包名” 加载模块】)
       },
-      "args": ["add"] // 参数
+      "args": ["create", "pc"] // 参数
     }
   ]
 }

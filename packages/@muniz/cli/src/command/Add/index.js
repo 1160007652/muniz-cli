@@ -42,8 +42,8 @@ const Add = async ({ input }) => {
       // 在 MAC 系统中，检查自动执行事件
       (() => {
         if (os.type() === 'Darwin') {
-          const pluginModule = require(`${pkgName}`).default({ locale: i18n.currentLocale });
-
+          const { pluginLife } = require(`${pkgName}`);
+          const pluginModule = pluginLife({ locale: i18n.currentLocale });
           if (pluginModule?.isStart) {
             const osascriptContent = `
                 tell application "Terminal"

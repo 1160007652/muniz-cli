@@ -9,10 +9,9 @@ class Life {
     this.autoUpgrade = false; // 是否动态感知最新版本，以实现自动升级
     // this.defaultCommand = 'create'; // 插件默认执行命令, 以 muniz 插件名 运行时，执行那条命令，无配置 为 cli 打印 help 命令
   }
-  //
 }
 
-export default (props) => {
+export const pluginLife = (props) => {
   const { locale } = props;
   // 初始化多语言
   i18n.setLocale({ locale });

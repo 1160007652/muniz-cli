@@ -20,15 +20,20 @@ const isCommand = async (ctx, next) => {
 
     const _astCommands = await i18nCommand({ pkgPath: ctx.pkgPath });
     ctx.astCommands = _astCommands[MunizConfig.languageLocale];
-  } else if (process.env.EXTERNAL_PLUGIN_ENV === 'development') {
-    ctx.pkgPath = path.join(ctx.pkgPath, '/dist');
-    console.log(ctx.pkgPath);
-    const _astCommands = await i18nCommand({ pkgPath: ctx.pkgPath });
-    ctx.astCommands = _astCommands[MunizConfig.languageLocale];
   } else {
     ctx.pkgPath = path.join(ctx.pkgPath, '/dist');
-    console.log(ctx.pkgPath);
-    ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/configs/commandHelp.json'))[MunizConfig.languageLocale];
+
+    // 是否存在，帮助文档命令，优先读取帮助文档，不存在时意味着是开发环境，实时编译读取
+    const isExistsCommandhelpFile = fs.existsSync(path.join(ctx.pkgPath, '/configs/commandHelp.json'));
+
+    if (isExistsCommandhelpFile) {
+      ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/configs/commandHelp.json'))[
+        MunizConfig.languageLocale
+      ];
+    } else {
+      const _astCommands = await i18nCommand({ pkgPath: ctx.pkgPath });
+      ctx.astCommands = _astCommands[MunizConfig.languageLocale];
+    }
   }
 
   ctx.pkg = require(path.join(ctx.pkgPath, '../package.json'));
@@ -57,7 +62,7 @@ const isCommand = async (ctx, next) => {
        */
 
       // 如果不是插件开发状态，获取当前执行命令对应的 “插件-包名称”
-      if (process.env.EXTERNAL_PLUGIN_ENV === 'production') {
+      if (process.env.EXTERNAL_PLUGIN_ENV !== 'development') {
         ctx.pkgName = await lowdbAction.getPluginPkgName({ shortName: argv.command[0] });
       }
 
@@ -89,16 +94,20 @@ const isCommand = async (ctx, next) => {
 
         const _astCommands = await i18nCommand({ pkgPath: ctx.pkgPath });
         ctx.astCommands = _astCommands[MunizConfig.languageLocale];
-      } else if (process.env.EXTERNAL_PLUGIN_ENV === 'development') {
-        ctx.pkgPath = path.join(ctx.pkgPath, '/dist');
-
-        const _astCommands = await i18nCommand({ pkgPath: ctx.pkgPath });
-        ctx.astCommands = _astCommands[MunizConfig.languageLocale];
       } else {
         ctx.pkgPath = path.join(ctx.pkgPath, '/dist');
-        ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/configs/commandHelp.json'))[
-          MunizConfig.languageLocale
-        ];
+
+        // 是否存在，帮助文档命令，优先读取帮助文档，不存在时意味着是开发环境，实时编译读取
+        const isExistsCommandhelpFile = fs.existsSync(path.join(ctx.pkgPath, '/configs/commandHelp.json'));
+
+        if (isExistsCommandhelpFile) {
+          ctx.astCommands = fs.readJsonSync(path.join(ctx.pkgPath, '/configs/commandHelp.json'))[
+            MunizConfig.languageLocale
+          ];
+        } else {
+          const _astCommands = await i18nCommand({ pkgPath: ctx.pkgPath });
+          ctx.astCommands = _astCommands[MunizConfig.languageLocale];
+        }
       }
 
       ctx.pkg = require(path.resolve(ctx.pkgPath, '../package.json'));
