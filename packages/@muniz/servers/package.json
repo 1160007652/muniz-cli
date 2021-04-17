@@ -16,7 +16,7 @@
   },
   "files": [
     "dist",
-    "index.js"
+    "./index.js"
   ],
   "publishConfig": {
     "access": "public"
