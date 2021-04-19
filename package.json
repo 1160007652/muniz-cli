@@ -9,7 +9,7 @@
     "packages/@muniz/server*"
   ],
   "scripts": {
-    "muniz": "CLI_ENV=development EXTERNAL_PLUGIN_ENV=production babel-node packages/@muniz/cli/src/bin/cli.js",
+    "muniz": "CLI_ENV=development babel-node packages/@muniz/cli/src/bin/cli.js",
     "build": "./scripts/build.sh",
     "clear": "./scripts/clear.sh",
     "build:publish": "./scripts/publish.sh",
