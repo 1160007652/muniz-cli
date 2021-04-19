@@ -3,7 +3,6 @@
 
 // 检查执行用户权限，Root 权限会进行降级
 require('root-check')();
-
 import { render } from 'ink';
 
 // 初始化多语言
@@ -20,6 +19,7 @@ import {
   runCommand,
   mode,
   errorExpand,
+  updatePkg,
 } from '../core/CommandApp';
 
 // 检查 Node.js 版本号
@@ -36,6 +36,9 @@ commandApp.use(formatArgv);
 
 // 中间件 => 判断是否存在命令
 commandApp.use(isCommand);
+
+// 中间件 => 升级检查
+commandApp.use(updatePkg);
 
 /**
  * 中间件

@@ -34,17 +34,17 @@ const runCommand = async (ctx, next) => {
       } else {
         // 当前执行插件, 是否是 走 开发状态 通道
         if (process.env.EXTERNAL_PLUGIN_ENV === 'development') {
-          const { pluginLife, pluginCommand } = require(ctx.pkgPath);
-          pluginLife({ locale: i18n.currentLocale });
-          pluginCommand({
+          const PluginRoot = require(ctx.pkgPath).default({ locale: i18n.currentLocale });
+
+          PluginRoot.runPluginCommand({
             commandPath: _astCommands.path,
             commandType: _astCommands.commandType,
             data: commandModuleProps,
           });
         } else {
-          const { pluginLife, pluginCommand } = require(`${ctx.pkgName}`);
-          pluginLife({ locale: i18n.currentLocale });
-          pluginCommand({
+          const PluginRoot = require(`${ctx.pkgName}`).default({ locale: i18n.currentLocale });
+
+          PluginRoot.runPluginCommand({
             commandPath: _astCommands.path,
             commandType: _astCommands.commandType,
             data: commandModuleProps,

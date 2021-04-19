@@ -43,5 +43,11 @@
     "ora": "^5.1.0",
     "react": "^17.0.1",
     "shell-exec": "^1.0.2"
+  },
+  "munizConfig": {
+    "plugin": {
+      "isStart": true,
+      "autoUpgrade": true
+    }
   }
 }

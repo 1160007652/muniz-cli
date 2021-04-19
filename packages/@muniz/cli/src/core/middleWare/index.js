@@ -6,3 +6,4 @@ export { default as versionCommand } from './versionCommand';
 export { default as runCommand } from './runCommand';
 export { default as mode } from './mode';
 export { default as errorExpand } from './errorExpand';
+export { default as updatePkg } from './updatePkg';

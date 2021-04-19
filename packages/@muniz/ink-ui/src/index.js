@@ -11,3 +11,4 @@ export { default as Select } from './components/Select';
 export { default as Help } from './Help';
 export { default as Version } from './Version';
 export { default as NotCommand } from './NotCommand';
+export { default as UpdateTips } from './UpdateTips';

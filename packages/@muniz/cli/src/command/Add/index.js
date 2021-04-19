@@ -42,9 +42,8 @@ const Add = async ({ input }) => {
       // 在 MAC 系统中，检查自动执行事件
       (() => {
         if (os.type() === 'Darwin') {
-          const { pluginLife } = require(`${pkgName}`);
-          const pluginModule = pluginLife({ locale: i18n.currentLocale });
-          if (pluginModule?.isStart) {
+          const { munizConfig } = require(`${pkgName}/package.json`);
+          if (munizConfig?.plugin?.isStart) {
             const osascriptContent = `
                 tell application "Terminal"
                   activate
@@ -58,7 +57,6 @@ const Add = async ({ input }) => {
         }
       })();
     } catch (e) {
-      console.log(e);
       pluginFail.push({ shortName, pkgName, tips: i18n.getLocale('add_command_check_npm_tips') });
     }
   }

@@ -13,6 +13,8 @@ const enUS = {
   not_command_exec_command_2: 'Install plugin: {command}',
   not_command_plugin_title: 'Problem: {plugin} does not exist in the plugin [{command} command]',
   not_command_plugin_sub_title: 'There is no {command} command in this {plugin} plugin',
+  update_available: 'Update available',
+  update_run_label: 'Run',
 };
 
 export default enUS;

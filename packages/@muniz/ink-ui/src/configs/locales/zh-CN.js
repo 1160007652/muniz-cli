@@ -12,6 +12,8 @@ const zhCN = {
   not_command_exec_command_2: '安装插件: {command}',
   not_command_plugin_title: '问题: {plugin} 插件中不存在 [ {command} 命令]',
   not_command_plugin_sub_title: '该 {plugin} 插件中, 不存在{command}命令。',
+  update_available: '可用更新',
+  update_run_label: '运行',
 };
 
 export default zhCN;
