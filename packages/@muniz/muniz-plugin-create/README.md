@@ -1,11 +1,32 @@
 # `@muniz/muniz-plugin-create`
 
-> TODO: description
+> Create project template plug-in
 
 ## Usage
 
-```
-const munizPluginCreate = require('@muniz/muniz-plugin-create');
+> muniz create help command document
 
-// TODO: DEMONSTRATE API
+```
+  Usage
+
+    $ muniz create <command> [options]
+
+  Command
+
+    electron      Create a Electron development template
+    extension     Create a Chrome-Extension development template
+    pc            Create a PC development template
+    plugin        Create a Scaffolding-Plugin development template
+    h5            Create a H5 development template
+
+  Other Options
+
+    --help, -h           Show helps
+    --version, -v        Show Version
+```
+
+> create pc project
+
+```bash
+muniz create pc
 ```
